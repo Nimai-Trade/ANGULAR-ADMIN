@@ -1,0 +1,131 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+
+<mat-card [formGroup]="kycForm">
+  <mat-dialog-content>
+    <div formArrayName="kycData" *ngFor="let item of kycForm.get('kycData')['controls']; let i = index;">
+      <ng-container [formGroupName]="i">
+        <div class="popupcontent">
+          <div class="tab-content" id="tab1" style="overflow-y: auto;">
+            <div class="tab-pane active" id="pill1">
+              <table class="table noneborder">
+                <tbody>
+                  <tr>
+                    <td>User id</td>
+                    <td>
+                      <input value="{{userId}}" readonly="true">
+                    </td>
+                  </tr>
+                  <tr *ngIf="item.controls['kycType'].value === 'Personal'">
+                    <th colspan="2">Personal Details</th>
+                  </tr>
+                  <tr *ngIf="item.controls['kycType'].value === 'Business'">
+                    <th colspan="2">Business KYC</th>
+                  </tr>
+                  <tr>
+                    <td>Country</td>
+                    <td>
+                      <input matInput formControlName="country" readonly="true">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Document</td>
+                    <td>
+                      <input matInput formControlName="docName" readonly="true" placeholder="">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                     <a style="color: blue; text-decoration: underline; cursor: pointer;" (click)="showImage(item.controls['encodedFileContent'].value)" >View Document</a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Current Status</td>
+                    <td>
+                      <input matInput formControlName="kycStatus" readonly="true" placeholder="">
+                    </td>
+                  </tr>
+                  <tr *ngIf="(item.controls['kycStatus'].value === 'Approved' || item.controls['kycStatus'].value === 'Rejected') && myRights.includes('KYC_APPROVE')">
+                    <td>Maker Comment</td>
+                    <td>
+                      <textarea readonly="true" formControlName="makerComment"></textarea>
+                    </td> 
+                </tr>
+                <tr *ngIf="(item.controls['kycStatus'].value === 'Approved' || item.controls['kycStatus'].value === 'Rejected' )&& myRights.includes('KYC_APPROVE')">
+                    <td>Checker Comment</td>
+                    <td>
+                      <textarea readonly="true" formControlName="checkerComment"></textarea>
+                    </td> 
+                </tr>
+                  <tr *ngIf="item.controls['kycStatus'].value === 'Pending' && myRights.includes('KYC_APPROVE')">
+                    <td>Comments</td>
+                    <td>
+                      <textarea formControlName="reason" matInput placeholder="" autocomplete="off" required
+                        maxlength="50">
+                    </textarea>
+                      <mat-error
+                        *ngIf="item.controls['reason'].touched && item.controls['reason'].hasError('required')">
+                        Please enter kyc approve/reject comments.
+                      </mat-error>
+                    </td>
+                  </tr>
+                  <tr *ngIf="item.controls['kycStatus'].value === 'Pending' && myRights.includes('KYC_APPROVE')">
+                    <td></td>
+                    <td>
+                      <button [disabled]="item.invalid" class="btn btn-info" id="btnapprove"
+                        (click)="kycAction('Approved', item)">Approve</button>&nbsp;&nbsp;
+                      <button  [disabled]="item.invalid" class="btn btn-info" id="btnreject" (click)="kycAction('Rejected', item)">Reject</button>
+                    </td>
+                  </tr>
+
+                  <!-- <tr>
+                  <td>Country</td>
+                  <td>
+                    <input matInput value={{item.subscriptionAmount}} readonly="true" placeholder="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Document</td>
+                  <td>
+                    <input matInput value={{item.mobileNumber}} readonly="true" placeholder="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Current Status</td>
+                  <td>
+                    <input matInput value={{item.kycStatus}} readonly="true" placeholder="">
+                  </td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td>
+                    <a href="#" class="btn btn-info" id="btnapprove">Approve</a>&nbsp;&nbsp;
+                    <a href="#" class="btn btn-info" id="btnreject">Reject</a>
+                  </td>
+                </tr> -->
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </mat-dialog-content>
+
+</mat-card>

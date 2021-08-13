@@ -1,0 +1,113 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fa fa-cubes"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Role
+              <ul class="pull-right list-unstyled list-inline statusbar">
+                <li>
+                  <a (click)="openRoleDialog('Add Role', null);" class="btn btn-info pull-right handle marzero">+ New
+                    Role</a>
+                </li>
+              </ul>
+            </h4>
+            <div>
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <!-- <div>
+                <div fxLayout="row">
+                  <div fxLayout="row" fxFlex="100%;">
+                    <div fxLayout="column" fxFlex="15%;">
+                      <div fxLayout="row">
+                        <button style="width: 160px;" mat-raised-button color="primary"
+                          (click)="openRoleDialog('Add Role', null);" mat-stroked-button>Add Role
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <div class="dataTables_scrollBody">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                  multiTemplateDataRows>
+
+                  <ng-container matColumnDef="roleName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Role Name </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.roleName}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="roleShortName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Role Short Name </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.roleShortName}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="createdBy">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Role Created By
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.createdBy}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="createdDate">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Role Created Date
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.createdDate | date : "dd-MM-y"}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="roleStatus">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Status </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.roleStatus}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="myHeader"> Actions
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <div fxLayout="row">
+                        <button mat-button class="action-btn" matTooltip="Edit"
+                          (click)="openRoleDialog('Edit Role', element.roleId);">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button class="action-btn" matTooltip="Show Details"
+                          (click)="onPreview(element.roleId);">
+                          <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-button class="action-btn"
+                          (click)="confirmDialog(element.roleStatus, element.roleId)">
+                          <mat-icon *ngIf="element.roleStatus === 'INACTIVE'" [ngStyle]="{'color':'red'}"
+                            matTooltip="Inactive">
+                            block</mat-icon>
+                          <mat-icon *ngIf="element.roleStatus === 'ACTIVE'" [ngStyle]="{'color':'green'}"
+                            matTooltip="Active">done
+                          </mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                </table>
+              </div>
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

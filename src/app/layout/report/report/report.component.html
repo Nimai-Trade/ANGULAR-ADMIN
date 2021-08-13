@@ -1,0 +1,66 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fa fa-file"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Reports</h4>
+            <!-- <form> -->
+            <!-- <label style="font-size: 15px;color: #000;">Select Report</label> -->
+            <div class="row" [formGroup]="reportSearchForm">
+              <div class="col-md-4">
+                <div class="inputDiv">
+                  <div fxLayout="row">
+                    <!-- <mat-select [formControl]="report" (selectionChange)="onSelect()" placeholder="Select"
+                    disableOptionCentering class="reprtselct">
+                    <mat-option *ngFor="let reports of reportNames" [value]="reports">{{reports}}</mat-option>
+                  </mat-select> -->
+
+                    <mat-select formControlName="report" placeholder="Select Report" (selectionChange)="onSelect()"
+                      disableOptionCentering class="roleselect">
+                      <mat-option [value]="">Select</mat-option>
+                      <mat-option *ngFor="let reports of reportNames" [value]="reports">{{reports}}</mat-option>
+                    </mat-select>
+                  </div>
+                  <mat-error
+                  *ngIf="reportSearchForm.controls['report'].touched && reportSearchForm.controls['report'].hasError('required')">
+                  Please select Report
+                </mat-error>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="inputDiv">
+                  <input matInput formControlName="userId" *ngIf="!isDisabled" >
+                  <label> Enter User ID ,if report of paricular User is required</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="inputDiv">
+                  <!-- <label>LC Issuing a range</label> -->
+                  <ejs-daterangepicker placeholder='Reports Range'  format='dd-MM-yyyy' matInput id='daterangepicker'
+                    formControlName="startDate" [startDate]='start' [endDate]='end' class="dateRange_mobile"></ejs-daterangepicker>
+                    
+                  <!-- <div class="input-box-container"> -->
+                  <!-- <input class="input-box" placeholder="Click to select a date" angular-mydatepicker name="mydate"
+                    (click)="dp.toggleCalendar()" [(ngModel)]="model" [options]="myDpOptions"
+                    #dp="angular-mydatepicker" /> -->
+                  <!-- </div> -->
+                  <mat-error
+                    *ngIf="reportSearchForm.controls['startDate'].touched && reportSearchForm.controls['startDate'].hasError('required')">
+                    Please select Date Range
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+            <a (click)="dwnldExcel();" class="btn btn-info pull-center">Download</a>
+            <div class="clearfix"></div>
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,179 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fa fa-handshake-o"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Assign RM
+              <ul class="pull-right list-unstyled list-inline statusbar">
+                <li>
+                  <!-- <a href="#" class="btn btn-info pull-right handle marzero">+ New User</a> -->
+                  <div fxLayout="row" fxFlex="100%;" [formGroup]="assignRmForm" style="width: 233px;" class="select_rm">
+                    <div fxLayout="column" fxFlex="100%;">
+                      <div fxLayout="row">
+                        <mat-form-field fxFlex="100%">
+                          <mat-select formControlName="userType" placeholder="User Type"
+                            (selectionChange)="onChangeType(assignRmForm.controls['userType'].value)"
+                            disableOptionCentering>
+                            <mat-option [value]="">Select</mat-option>
+                            <mat-option *ngFor="let item of userTypeList" [value]="item.code">{{item.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </h4>
+
+            <div>
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <!-- <div>
+                <div fxLayout="row">
+                  <div fxLayout="row" fxFlex="100%;" [formGroup]="assignRmForm">
+                    <div fxLayout="column" fxFlex="20%;">
+                      <div fxLayout="row">
+                        <mat-form-field fxFlex="90%">
+                          <mat-select formControlName="userType" placeholder="User Type"
+                            (selectionChange)="onChangeType(assignRmForm.controls['userType'].value)"
+                            disableOptionCentering>
+                            <mat-option [value]="">Select</mat-option>
+                            <mat-option *ngFor="let item of userTypeList" [value]="item.code">{{item.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <div class="dataTables_scrollBody">
+              <table  mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                multiTemplateDataRows>
+
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef > # </th>
+                  <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="userid">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> User ID </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.userid}}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="insertedDate">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Date & Time </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.insertedDate | date :'dd-MM-y HH:mm:ss z'}}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="subscriberType">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> User Type
+                  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.subscriberType}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="companyName">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Company/Bank
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.subscriberType =='REFERRER' || element.subscriberType =='CUSTOMER'">
+                      {{element.companyName}}
+                    </ng-container>
+                    <ng-container *ngIf="element.subscriberType =='BANK'">
+                      {{element.bankName}}
+                    </ng-container>
+                   </td>
+                </ng-container>
+
+                <ng-container matColumnDef="countryName">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Country
+                  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.countryName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="firstName">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> First Name
+                  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="lastName">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef> Last Name
+                  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="kyc">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> KYC
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdDate | date : "dd-MM-y"}} </td>
+    </ng-container> -->
+
+                <ng-container matColumnDef="relationshipManager">
+                  <th mat-header-cell *matHeaderCellDef> Select RM
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div *ngIf="element.subscriberType === 'BANK'">
+                      <mat-select [(ngModel)]="element.relationshipManager" class="selectRm_mobile">
+                        <mat-option [value]="">Select</mat-option>
+                        <mat-option [value]="relationshipManager"
+                          *ngFor="let relationshipManager of bankRmList[element.countryName] ">
+                          <mat-option [value]="relationshipManager"
+                            *ngFor="let relationshipManager of rmList[element.countryName] "></mat-option>
+                          {{ relationshipManager.value }} ({{relationshipManager.code}})
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                    <div *ngIf="element.subscriberType === 'CUSTOMER' || element.subscriberType === 'REFERRER'">
+                      <mat-select [(ngModel)]="element.relationshipManager" class="selectRm_mobile">
+                        <mat-option [value]="">Select</mat-option>
+                        <mat-option [value]="relationshipManager"
+                          *ngFor="let relationshipManager of customerRmList[element.countryName] ">
+                          <mat-option [value]="relationshipManager"
+                            *ngFor="let relationshipManager of rmList[element.countryName] "></mat-option>
+                          {{ relationshipManager.value }} ({{relationshipManager.code}})
+                        </mat-option>
+                      </mat-select>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef> Actions
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <div fxLayout="row">
+                      <button class="tablebtn" mat-raised-button color="primary"
+                        (click)="confirmDialog(element.userid, element.relationshipManager);" mat-stroked-button>
+                        Assign
+                      </button>
+                    </div>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+              </table>
+              </div>
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

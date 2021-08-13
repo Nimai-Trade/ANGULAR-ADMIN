@@ -1,0 +1,22 @@
+<h1 mat-dialog-title class="pophead">
+  {{title}}
+  <a href="javascript:void(0);" (click)="onDismiss()">
+      <mat-icon style="color: white;float: left;margin-top: 5px;">close</mat-icon>
+    </a>
+</h1>
+
+<div style="padding: 0% 2%;">
+  <div mat-dialog-content class="comment_dialog">
+    <p>{{message}}</p>
+  </div>
+
+  <h5>Leave a Comment</h5>
+  <div>
+    <textarea class="form-control textarea_comment" rows="3" [(ngModel)]="comment" placeholder="  Your Comment"></textarea>
+  </div>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="flex-end">
+  <button mat-button (click)="onDismiss()" class="btn btn-danger">No</button>
+  <button mat-raised-button color="primary" class="btn btn-success" [disabled]="comment === ''" (click)="OnSubmit()">Yes</button>
+</div>

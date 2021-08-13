@@ -1,0 +1,543 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("./assets/css/bootstrap.min.css");
+@import url("./assets/css/style.css");
+@import url("./assets/css/material-dashboard.css");
+@import url("./assets/css/demo.css");
+@import url("./assets/css/textinput.css");
+@import url("./assets/css/font.css");
+@import url("./assets/css/fontAwesome.min.css");
+@import url("./assets/css/googleFonts.css");
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::ng-deep .mat-input-element {
+    caret-color: #00b5de;
+}
+
+/* Rahul CSS Changes - Login */
+.logininput .mat-form-field-suffix.ng-tns-c3-1.ng-star-inserted {
+    position: absolute !important;
+    right: -13px;
+    top: 9px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .loginPopup .mat-dialog-title {
+    font: 500 16px/22px Roboto,"Helvetica Neue",sans-serif !important;
+    padding: 0;
+    margin: 0 !important;
+}
+  
+   
+.logininput .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+    margin-top: 5px !important;
+    top: 35px !important;
+  }
+   .logininput .mat-form-field-flex {
+    display: block !important;
+    align-items: stretch;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.logininput .mat-form-field-suffix { 
+    position: absolute !important;
+    right: -12px !important;
+    top: 9px !important;
+    font-size: 13px;
+}
+/* Login CSS */
+
+
+/* Management Dashboard */
+.test .mat-form-field-infix {
+    width: 160px !important;
+  }
+
+  
+.test .mat-form-field-suffix {
+    position: absolute !important;
+    right: 3px;
+    top: 2px;
+    font-size: 15px;
+  }
+
+  .test .mat-form-field-appearance-legacy .mat-form-field-label{
+    display: block;
+    font-size: 13px;
+    margin-top: 4px;
+    margin-left: 5px;
+  }
+
+  .test .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+      padding: 0;
+  }
+/* Management Dashboard */
+  /* Common CSS */
+.mat-form-field-infix{
+    border: 0 !important;
+}
+
+.mat-paginator-page-size {
+    display: flex;
+    align-items: baseline;
+    margin-right: 8px;
+    margin-top: 5px;
+}
+
+table{
+    box-shadow: none !important;
+}
+
+table tr td a{
+    cursor: pointer;
+}
+  
+.mat-paginator-range-label {
+    margin: 8px 20px 0 24px  !important;
+    font-size: 14px !important;
+
+    font-family: 'Roboto';
+}
+
+.mat-paginator-page-size-label {
+    margin: 0 4px;
+    font-size: 13px;
+    font-family: 'Roboto';
+}
+
+span.mat-button-wrapper {
+    font-size: 13px;
+}
+
+.mat-dialog-title {
+  font: 500 19px/32px Roboto,"Helvetica Neue",sans-serif;
+}
+
+.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+  font-size: 12px !important; 
+}
+
+.mat-sort-header-container {
+  display: block !important;
+  cursor: pointer !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mat-sort-header-button {
+  color: #333 !important;
+  margin: 0px; 
+  font-family: Roboto !important;
+  position: relative;
+  left: 0;
+  display: inline-block !important;
+  text-transform: none;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.mat-sort-header-arrow{
+  display: inline-block !important;
+  opacity: 1 !important;    transform: translateY(25%) !important;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding: 4px 8px !important; 
+  font-size: 13px !important;
+  font-family: 'Roboto';
+  font-weight: 400;
+  color: #404040;
+  /* border: 1px solid #f2f2f2 !important; */
+}
+
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{
+  padding-left: 8px !important;    
+}
+
+th.myHeader .mat-sort-header-container{
+  width: auto !important;
+  min-width: 80px !important;
+}
+th.mat-header-cell {
+  color: #333 !important;
+  font-size: 13px !important; 
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #404040;
+  /* border: 1px solid #f2f2f2 !important; */
+}
+
+
+table tr td a {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 12px !important;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.mat-form-field-type-mat-select .mat-form-field-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  left: 6px;
+  color: lightslategray;
+  top: 12px !important;
+}
+
+
+.mat-form-field-type-mat-select .mat-form-field-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  left: 8px;
+  color: lightslategray;
+  top: 17px !important;
+}
+.mat-select-trigger {
+  display: inline-table;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box; 
+}
+
+.mat-select-arrow-wrapper {
+  display: table-cell;
+  vertical-align: top;
+}
+ 
+.mat-select-value{
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  line-height: 13px;
+  position: relative;
+  top: 0px !important;
+} 
+
+.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+ 
+  top: 9px;
+}
+
+.mat-select-value-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px 0px !important;
+  display: block;
+}
+
+.mat-dialog-title {
+  margin: 0;
+  display: block;
+  font-size: 16px !important;
+  font-family: Roboto;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.nav-pills>li>a {
+  line-height: 24px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 100px;
+  text-align: center;
+  color: #555555;
+  transition: all .3s;
+  font-family: 'Roboto';
+  letter-spacing: 0.2px;
+}
+
+span.mat-button-wrapper { 
+  font-size: 13px !important;
+  font-family: Roboto;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+.mat-paginator-page-size-label, .mat-paginator-range-label{
+  font-size: 12px !important;
+  font-family: Roboto;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  color: #333 !important;
+}
+
+.card .card-title{
+  font-size: 18px !important;
+  font-family: Roboto;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+
+
+.mat-radio-label-content {
+  display: inline-block;
+  order: 0;
+  line-height: inherit;
+  padding-left: 8px;
+  padding-right: 0;
+  font-weight: 500;
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: #333;
+}
+
+.mat-radio-outer-circle{
+  width: 17px !important;
+  height: 17px !important;
+  top: 3px !important;
+}
+
+.mat-radio-inner-circle{
+  width: 17px !important; 
+  height: 19px !important;
+  top: 2px !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #b8b8b8 !important;
+}
+
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #545454;
+}
+
+.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background: rgb(255 255 255 / 12%);
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #545454;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label, .mat-form-field .mat-select.mat-select-invalid .mat-select-arrow{
+  color: #545454;
+}
+
+.mat-paginator .mat-select {
+  border-bottom: 0px solid #D2D2D2;
+  text-align: center;
+}
+
+
+::ng-deep .mat-select {
+  border: 0 !important; 
+   
+}
+
+
+.roleselct, .mat-select, .e-dropdownlist { 
+	padding: 4px 8px;
+	font-size: 11.5px;
+	vertical-align: top;
+	border: 0px solid #ccc;
+	width: 100%;
+	border-radius: 6px;
+	box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725);
+} 
+
+.e-dropdownlist{
+  height: 31px;
+  padding: 0px 8px;
+  margin-top: 3px;
+}
+
+.e-dropdownlist span { 
+  border: 0 !important;
+  margin: 0 !important;
+  height: 30px;
+  font-size: 12px;
+}
+
+.maindash { 
+  padding: 9px 6px 7px 11px !important; 
+}
+
+.maindash ul{
+  display: block;
+  width: 100%;
+}
+
+
+.e-input-group, .e-input-group.e-control-wrapper, .e-daterangepicker {
+  font-size: 12px;
+  font-weight: 400;
+}
+.mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  top: 12px !important;
+  left: 3px !important;
+  font-size: 15px !important;
+  font-family: 'Roboto';
+  font-weight: 400 !important;
+  color: #464646;
+}
+
+.loginPopup .mat-form-field-type-mat-select .mat-form-field-label {
+  top: 13px !important;
+}
+
+
+.statusbar .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,
+.statusbar .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+  top: 17px !important;
+}
+
+.mat-paginator .mat-form-field-flex{
+  vertical-align: middle;
+}
+
+.e-popup {
+  font-size: 12px !important;
+  font-family: 'Roboto' !important;
+  font-weight: 400 !important;
+}
+
+.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after {
+  background: #14bace;
+}
+
+.marzero{
+  margin-top: 3px;
+  margin-right: 0;
+}
+
+.mat-radio-label-content { 
+  padding-left: 2px !important;
+  padding-right: 0 !important;
+  font-size: 12px !important;
+  padding-top: 5px !important;
+  font-weight: 500 !important;
+}
+
+::-webkit-input-placeholder {
+  font-size:  12px !important;    font-family: 'Roboto';
+  color: #353535 !important;font-weight: 400 !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+     font-size: 12px !important;    font-family: 'Roboto';font-weight: 400 !important;
+     color: #353535 !important;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+     font-size: 12px !important;    font-family: 'Roboto';font-weight: 400 !important;
+     color: #353535 !important;
+}
+
+.e-date-range-wrapper.e-input-group:not(.e-disabled) .e-input-group-icon.e-active:active, .e-date-range-wrapper .e-input-group-icon.e-icons.e-active {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.e-calendar .e-content td.e-selected span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected span.e-day {
+  background-color: #15bbcf;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.e-calendar .e-content td.e-today span.e-day, .e-calendar .e-content td.e-focused-date.e-today span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-today span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-focused-date.e-today span.e-day {
+  background: none;
+  border: 1px solid #15bbcf;
+  border-radius: 50%;
+  color: #15bbcf;
+}
+
+.e-calendar .e-content td.e-selected span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected span.e-day {
+  background-color: #15bbcf;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.e-calendar .e-content td.e-today.e-selected:hover span.e-day, .e-calendar .e-content td.e-selected:hover span.e-day, .e-calendar .e-content td.e-selected.e-focused-date span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-today.e-selected:hover span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected:hover span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected.e-focused-date span.e-day {
+  background-color: #15bbcf;
+  color: #fff;
+}
+
+.e-daterangepicker.e-popup .e-calendar .e-end-date.e-selected.e-range-hover span.e-day, .e-daterangepicker.e-popup .e-calendar .e-start-date.e-selected.e-range-hover span.e-day, .e-bigger.e-small .e-daterangepicker.e-popup .e-calendar .e-end-date.e-selected.e-range-hover span.e-day, .e-bigger.e-small .e-daterangepicker.e-popup .e-calendar .e-start-date.e-selected.e-range-hover span.e-day {
+  background-color: #15bbcf;
+  color: #fff;
+}
+
+.e-daterangepicker.e-popup .e-calendar .e-end-date.e-selected.e-range-hover span.e-day, .e-daterangepicker.e-popup .e-calendar .e-start-date.e-selected.e-range-hover span.e-day, .e-bigger.e-small .e-daterangepicker.e-popup .e-calendar .e-end-date.e-selected.e-range-hover span.e-day, .e-bigger.e-small .e-daterangepicker.e-popup .e-calendar .e-start-date.e-selected.e-range-hover span.e-day {
+  background-color: #15bbcf;
+  color: #fff;
+}
+
+
+.e-btn.e-flat .e-ripple-element,
+.e-css.e-btn.e-flat .e-ripple-element {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.e-btn.e-flat.e-primary,
+.e-css.e-btn.e-flat.e-primary {
+  background-color: transparent;
+  border-color: transparent;
+  color: #15bbcf;
+}
+
+.e-btn.e-flat.e-primary:hover,
+.e-css.e-btn.e-flat.e-primary:hover {
+  background-color: rgb(21 187 207 / 10%);
+  border-color: transparent;
+  color: #15bbcf;
+}
+
+.e-btn.e-flat.e-primary:focus,
+.e-css.e-btn.e-flat.e-primary:focus {
+  background-color: rgb(21 187 207 / 10%);
+  border-color: transparent;
+  color: #15bbcf;
+}
+
+.e-btn.e-flat.e-primary:active, .e-btn.e-flat.e-primary.e-active,
+.e-css.e-btn.e-flat.e-primary:active,
+.e-css.e-btn.e-flat.e-primary.e-active {
+  background-color:rgb(21 187 207 / 10%);
+  border-color: transparent;
+  color: #15bbcf;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: rgba(0,0,0,.54);
+}
+
+.e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover {
+  background-color: #eee;
+  border-color: #fff;
+  color: #00bcd4 !important;
+}
+
+.sidebar .nav li>a[data-toggle="collapse"]{ 
+      background: #5f5f5f59;
+      box-shadow: 0 0 15px #0000007a;
+
+}
+
+.mat-error {
+  color: #f44336;
+  text-align: left;
+  font-size: 12px;
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+.e-input-group:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after{
+  height: 0;
+}
+/* Common CSS */

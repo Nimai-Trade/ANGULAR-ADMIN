@@ -1,0 +1,54 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>Right Name</td>
+                <td>
+                  <input matInput value={{rightData.rightName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Right Short Name</td>
+                <td>
+                  <input matInput value={{rightData.rightShortName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Right Status</td>
+                <td>
+                  <input matInput value={{rightData.rightStatus}} readonly="true" placeholder="">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+</mat-card>
+
+<!-- <mat-dialog-actions fxLayoutAlign="center">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50%">
+      <button (click)="closeDialog()" style="width: 100px;" mat-raised-button color="primary">Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions> -->

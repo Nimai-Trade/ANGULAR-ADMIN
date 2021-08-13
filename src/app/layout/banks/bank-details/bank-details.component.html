@@ -1,0 +1,303 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <th>User ID</th>
+                <td>
+                  <input matInput value={{customerData.userid}} readonly="true">
+                </td>
+              </tr>
+              <tr>
+                <th colspan="2">Personal Details</th>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <input matInput value={{customerData.firstName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input matInput value={{customerData.lastName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Email </td>
+                <td>
+                  <input matInput value={{customerData.emailAddress}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Mobile No.</td>
+                <td>
+                  <input matInput value={{customerData.mobileNumber}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Landline No.</td>
+                <td>
+                  <input matInput value={{customerData.landline}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Country</td>
+                <td>
+                  <input matInput value={{customerData.countryName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Min. Value Of LC</td>
+                <td>
+                  <input matInput value={{customerData.minValueofLc}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr *ngIf="customerData.currencyCode">
+                <td>Currency</td>
+                <td>
+                  <input matInput value={{customerData.currencyCode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Black Listed Goods</td>
+                <td>
+                  <input matInput value={{customerData.blkGoods}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Countries Interested</td>
+                <td>
+                  <input matInput class="countryInterested" value={{customerData.intCountries}} readonly="true" placeholder="">
+                  
+                </td>
+                <!-- <a href="javascript:void(0);" class="viewMore" *ngIf="viewMoreFlag">View More</a> -->
+              </tr>
+              <!-- <div *ngFor="let country of countryInterested">
+                {{country}}
+              </div>   -->
+              <tr>
+                <th colspan="2">Additional Email ID's</th>
+              </tr>
+              <tr>
+                <td>Email 1 </td>
+                <td>
+                  <input matInput value={{customerData.additionalEmail1}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Email 2</td>
+                <td>
+                  <input matInput value={{customerData.additionalEmail2}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Email 3</td>
+                <td>
+                  <input matInput value={{customerData.additionalEmail3}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <th colspan="2">Business Details</th>
+              </tr>
+
+              <tr>
+                <td>Bank Name</td>
+                <td>
+                  <input matInput value={{customerData.bankName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Designation</td>
+                <td>
+                  <input matInput value={{customerData.designation}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Branch Name</td>
+                <td>
+                  <input matInput value={{customerData.branchName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Swift Code</td>
+                <td>
+                  <input matInput value={{customerData.swiftCode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+     
+              <tr>
+                <th colspan="2">Registration Address Details</th>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td>
+                  <input matInput value={{customerData.registeredCountry}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>State</td>
+                <td>
+                  <input matInput value={{customerData.provincename}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>City</td>
+                <td>
+                  <input matInput value={{customerData.city}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Address Line 1</td>
+                <td>
+                  <input matInput value={{customerData.address1}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Address Line 2</td>
+                <td>
+                  <input matInput value={{customerData.address2}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Address Line 3</td>
+                <td>
+                  <input matInput value={{customerData.address3}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Pincode/Zipcode</td>
+                <td>
+                  <input matInput value={{customerData.pincode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Telephone</td>
+                <td>
+                  <input matInput value={{customerData.telephone}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <!-- <tr>
+                <th colspan="2">Referred By</th>
+              </tr> -->
+              <!-- <tr>
+                <td>First Name</td>
+                <td>
+                  <input matInput value={{customerData.referredFirstName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input matInput value={{customerData.referredLastName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Company Name</td>
+                <td>
+                  <input matInput value={{customerData.referredCompanyName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>User ID</td>
+                <td>
+                  <input matInput value={{customerData.referredUserId}} readonly="true" placeholder="">
+                </td>
+              </tr> -->
+
+              <tr>
+                <th colspan="2">RM Details</th>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <input matInput value={{customerData.rmFirstName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input matInput value={{customerData.rmLastName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Designation</td>
+                <td>
+                  <input matInput value={{customerData.rmDesignation}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <th colspan="2">Associated Accounts</th>
+              </tr>
+              <tr style="border: 1px solid #bdbdbd;">
+                <td>User Id</td>
+                <td>Name</td>
+                <td>Status</td>
+              </tr>
+              <tr *ngFor="let sub of customerData.subsidiary"style="border: 1px solid #bdbdbd;">
+                <td>{{sub.userId}}</td>
+                <td style="padding-left: 5%;">{{sub.name}}</td>
+                <td *ngIf="sub.status==='ACTIVE'">
+                  <a style="color: red" *ngIf="sub.status==='ACTIVE' && myRights.includes('REMOVE_SUBSIDIARY')" matTooltip="Remove Account"
+                    (click)="confirmDialog('Remove Associated Account ', sub.userId)" > Active                   
+                  </a>
+                </td>
+                <td *ngIf="sub.status==='PENDING'">
+                 <a  matTooltip="PENDING USER" style="color: red;cursor: auto;">
+                  Pending
+                </a>
+                </td>
+                <td *ngIf="sub.status==='INACTIVE'">
+                  <a  matTooltip="INACTIVE USER" style="color: red" (click)="confirmDialog('Activate Associated Account ', sub)" >
+                    INACTIVE
+                  </a>              
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+</mat-card>
+
+<!-- <mat-dialog-actions fxLayoutAlign="center">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50%">
+      <button (click)="closeDialog()" style="width: 100px;" mat-raised-button color="primary">Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions> -->

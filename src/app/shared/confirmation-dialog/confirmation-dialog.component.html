@@ -1,0 +1,16 @@
+<h1 mat-dialog-title class="pophead">
+  {{title}}
+  <a href="javascript:void(0);" (click)="onDismiss()">
+    <mat-icon style="color: white;float: left;margin-top: 5px;">close</mat-icon>
+  </a>
+</h1>
+
+
+<div mat-dialog-content>
+  <p>{{message}}</p>
+</div>
+
+<div mat-dialog-actions fxLayoutAlign="flex-end">
+  <button mat-button (click)="onDismiss()" class="btn btn-danger">No</button>
+  <button mat-raised-button color="primary"  class="btn btn-success" (click)="onConfirm()">Yes</button>
+</div>

@@ -1,0 +1,226 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+  
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <ng-container *ngFor="let item of paymentData; let i = index;">
+      <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <th>User Id</th>
+                <td>
+                  <input matInput value={{item.userid}} readonly="true">
+                </td>
+              </tr>
+              <tr>
+                <th colspan="2">Subscription Details</th>
+              </tr>
+              <tr>
+                <th>Plan</th>
+                <td>
+                  <input matInput value={{item.subscriptionName}} readonly="true">
+                </td>
+              </tr>
+              
+              <tr>
+                <td>Status</td>
+                <td>
+                  <input matInput value={{item.status}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Benefits</td>
+                <td>
+                  <input matInput value={{item.lcCount}}  readonly="true" placeholder="">
+                  <input *ngIf="showSubsidiary" matInput value={{item.subsidiaries}} readonly="true" placeholder="" >
+                  <input matInput value={{item.customerSupport}} readonly="true" placeholder="">
+                  <input matInput value={{item.subscriptionValidity}} readonly="true" placeholder="">
+                  <input matInput value={{item.relationshipManager}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Subcription Price </td>
+                <td>
+                  <input matInput value={{item.subscriptionAmount}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr *ngIf="item.makerComment">
+                <td>Maker Comment</td>
+                <td>
+                  <textarea matInput readonly="true" class="comment" value={{item.makerComment}}></textarea>
+                </td> 
+            </tr>
+            <tr *ngIf="item.checkerComment">
+                <td>Checker Comment</td>
+                <td>
+                  <textarea matInput readonly="true" class="comment" value={{item.checkerComment}}></textarea>
+                </td> 
+            </tr>
+              <tr>
+                <th>Vas Plan</th>
+                <td>
+                  <input matInput value={{item.vasPlan}} readonly="true">
+                </td>
+              </tr>
+              
+              <tr>
+                <td>Status</td>
+                <td>
+                  <input matInput value={{item.vasStatus}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Benefits</td>
+                <td>
+                  <input matInput value={{item.vasBenefits}}  readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>VAS Plan Price </td>
+                <td>
+                  <input matInput value= {{item.vasAmount}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr *ngIf="item.vasMakerComment">
+                <td>Maker Comment</td>
+                <td>
+                  <textarea matInput readonly="true" class="comment" value={{item.vasMakerComment}}></textarea>
+                </td> 
+            </tr>
+            <tr *ngIf="item.vasCheckerComment">
+                <td>Checker Comment</td>
+                <td>
+                  <textarea matInput readonly="true" class="comment" value={{item.vasCheckerComment}}></textarea>
+                </td> 
+            </tr>
+              <tr>
+                <td>Payment Status</td>
+                <td>
+                  <input matInput value={{item.vasPaymentStatus}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr *ngIf="item.vasPlanPaymentMode">
+                <td>Payment Mode</td>
+                <td>
+                  <input matInput value={{item.vasPlanPaymentMode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr *ngIf="item.vasStatus === 'Active' && item.vasPlanPaymentMode === 'Wire' && item.vasPaymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
+                <td colspan="2" style="text-align: right;">
+                  <button  class="btn btn-info" id="btnapprove"
+                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
+                  <button   class="btn btn-info" id="btnreject" 
+                    (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
+                </td>
+              </tr>
+
+              <tr>
+                <th colspan="2">Payment Details</th>
+              </tr>
+
+              <tr>
+                <td>Total Price </td>
+                <td>
+                  <input matInput value={{item.totalAmount}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Coupon Code</td>
+                <td>
+                  <input matInput value={{item.couponCode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Discount</td>
+                <td>
+                  <input matInput value={{item.discount}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Amount Paid</td>
+                <td>
+                  <input matInput value={{item.amountPaid}} readonly="true" placeholder="">
+                </td>
+              </tr>
+                          
+              <tr>
+                <td>Payment Mode</td>
+                <td>
+                  <input matInput value={{item.paymentMode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Payment Status</td>
+                <td>
+                  <input matInput value={{item.paymentStatus}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr *ngIf="item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+                 
+                <td colspan="2" style="text-align: right;">
+                  <button  class="btn btn-info" id="btnapprove"
+                    (click)="paymentAction('Approved', item,'paymentAction')">Approve</button>&nbsp;&nbsp;
+                  <button   class="btn btn-info" id="btnreject" 
+                    (click)="paymentAction('Rejected', item,'paymentAction')">Reject</button>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Date and Time of Trxn</td>
+                <td>
+                  <input matInput value="{{item.insertedDate  | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Payment Trxn ID</td>
+                <td>
+                  <input matInput value={{item.transactionId}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Subscription Start Date</td>
+                <!-- <td>{{item.splanStartDate | date : "dd-MM-y"}} -->
+                  <td>  
+                    <input matInput value="{{item.splanStartDate | date : 'dd-MM-y'}}" readonly="true" placeholder="">
+                  <!-- <input matInput value="{{item.splanStartDate | date : 'dd-MM-y'}}" readonly="true" placeholder=""> -->
+                </td>
+              </tr>
+
+              <tr>
+                <td>Subscription End Date</td>
+                <td>
+                <!-- <td>{{item.splanEndDate | date : "dd-MM-y"}} -->
+                  <input matInput value="{{item.splanEndDate | date : 'dd-MM-y'}}" readonly="true" placeholder="">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </ng-container>
+  </mat-dialog-content>
+
+</mat-card>

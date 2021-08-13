@@ -1,0 +1,112 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-people-arrows"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title"> <span id="changetext"> Referrer Details </span>
+              <ul class="pull-right list-unstyled list-inline statusbar">
+                <li>
+                  <!-- <div fxLayout="row" fxFlex="100%;" [formGroup]="customerListForm">
+                    <div fxLayout="column" fxFlex="100%;">
+                      <div fxLayout="row">
+                        <mat-form-field fxFlex="90%">
+                          <mat-select formControlName="txtStatus" placeholder="Kyc Status"
+                            (selectionChange)="onChangeType(customerListForm.controls['txtStatus'].value)"
+                            disableOptionCentering class="roleselect">
+                            <mat-option [value]="">Select</mat-option>
+                            <mat-option *ngFor="let item of kycStatusList" [value]="item.code">{{item.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div> -->
+                </li>
+              </ul>
+              <a [routerLink]="['/app/referrer/referrer-list']" class="backbtn pull-right" id="backbtn"><span
+                  class="fas fa-long-arrow-alt-left"></span>
+                Back</a>
+            </h4>
+
+            <div>
+              <div class="dataTables_scrollBody">
+
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                  multiTemplateDataRows>
+
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef > # </th>
+                    <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="mobileNo">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Mobile
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.mobileNumber}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="emailAddress">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Email
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.emailAddress}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="companyName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Company 
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.companyName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="countryName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Country
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.countryName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="firstName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> First Name </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.firstName}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="lastName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Last Name
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.lastName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Account Status
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.accountStatus}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="myHeader"> Actions
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <div fxLayout="row" style="cursor: pointer;">
+                        <a (click)="onPreview(element.referId)" class="backbtn pull-right" id="backbtn">
+                          Details</a>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                </table>
+              </div>
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

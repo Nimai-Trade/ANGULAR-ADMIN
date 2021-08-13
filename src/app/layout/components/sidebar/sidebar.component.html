@@ -1,0 +1,271 @@
+<div class="sidebar"   [ngClass]="{'navbar-fixed': isFixedNavbar}"  data-active-color="blue" data-background-color="black" data-image="assets/images/sidebar-1.jpg">
+    <!--
+         Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | blue"
+         Tip 2: you can also add an image using data-image tag
+         Tip 3: you can change the color of the sidebar with data-background-color="white | black"
+         -->
+    <div class="logo">
+        <img src="assets/images/360TF-3.jpg" height="54" width="215" style="margin-left: 15px;">
+    </div>
+    <div class="sidebar-wrapper">
+        <div class="user">
+            <div class="role"> {{ role }}</div>
+            <div class="photo iconWrapper">
+              <i class="fas fa-user-circle" aria-hidden="true"></i>
+              <!-- <img src="../../assets/img/faces/avatar.jpg" /> -->
+            </div>
+            <div class="info">
+               
+              <a
+                data-toggle="collapse"
+                href="#collapseExample"
+                class=""
+                aria-expanded="false"
+              >
+                <span>
+                  &nbsp; {{ userInfo }} &nbsp;
+                  <b class="caret"></b>
+                </span>
+              </a>
+              <div class="clearfix"></div>
+              <div class="clearfix"></div>
+              <div
+                class="collapse"
+                id="collapseExample"
+                aria-expanded="true"
+              >
+                <ul class="nav">
+
+                  <li>
+                    <a [routerLink]="['change-password']">
+                      <!-- <span class="sidebar-mini"> CP </span> -->
+                      <span class="sidebar-normal"> Change Password </span>
+                    </a>
+                  </li>
+                
+                  <li>
+                    <a
+                      href="javascript:void(0);"
+                      id="btnLogin"
+                      (click)="onLoggedout()">                     
+                      <span class="sidebar-normal"> Logout </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <ul class="nav">
+            <li>
+                <div class="collapse in" id="pagesExamples">
+                    <ul class="nav">
+                        <li [routerLinkActive]="['active']">
+                            <a [routerLink]="['/app/dashboard']">
+                                <i class="fa fa-tachometer"></i>
+                                <p> Dashboard </p>
+                            </a>
+                        </li>  
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("TRANSACTIONS")'>
+                            <a [routerLink]="['/app/transactions']">
+                                <i class="fa fa-exchange"></i>
+                                <p> Transactions </p>
+                            </a>
+                        </li> 
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("CUSTOMERS")'>
+                            <a [routerLink]="['/app/customer']">
+                                <i class="fas fa-users"></i>
+                                <p> Customers </p>
+                            </a>
+                        </li>    
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("BANKS")'>
+                            <a [routerLink]="['/app/bank']">
+                                <i class="fas fa-university"></i>
+                                <p> Banks </p>
+                            </a>
+                        </li>   
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("REFERRER")'>
+                            <a [routerLink]="['/app/referrer']">
+                                <i class="fas fa-people-arrows"></i>
+                                <p> Referrer </p>
+                            </a>
+                        </li>   
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("KYC_GRANT")'>
+                            <a [routerLink]="['/app/grantkyc']">
+                                <i class="fa fa-check-square-o"></i>
+                                <p> Grant KYC </p>
+                            </a>
+                        </li> 
+                        
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("PAYMENT_APPROVAL")'>
+                            <a [routerLink]="['/app/payment-approval']">
+                                <i class="fas fa-money-check-alt"></i>
+                                <p>Grant Payment</p>
+                            </a>
+                        </li>
+                 
+                        <li *ngIf='myRights.includes("CREATE_USER") || myRights.includes("CREATE_USER_GRANT") || myRights.includes("ROLE_MGMT") || myRights.includes("RIGHTS_MGMT") || myRights.includes("ROLE_RIGHTS_MAPPING")'>
+                            <a data-toggle="collapse" href="#accountPages" [attr.aria-expanded]="areaExpandedacc" >
+                                <i class="fa fa-users"></i>
+                                <p>User Management
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="accountPages" [ngClass]="accountPages">
+                                <ul class="nav">
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("CREATE_USER")'>
+                                        <a [routerLink]="['/app/masters/employee']">
+                                            <i class="fa fa-user-plus"></i>
+                                            <p> Users </p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("CREATE_USER_GRANT")'>
+                                        <a [routerLink]="['/app/masters/employeeGrant']">
+                                            <i class="fa fa-check-square"></i>
+                                            <p>Approve/ Reject User</p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='user === "CLOVER"'>
+                                        <a [routerLink]="['/app/masters/role']">
+                                            <i class="fa fa-cubes"></i>
+                                            <p> Role Management </p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='user === "CLOVER"'>
+                                        <a [routerLink]="['/app/masters/rights']" >
+                                            <i class="fa fa-gavel"></i>
+                                            <p> Rights Management </p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='user === "CLOVER"'>
+                                        <a [routerLink]="['/app/masters/roleRightsMapping']">
+                                            <i class="fa fa-map-signs"></i>
+                                            <p> Role Rights Mapping </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li *ngIf='myRights.includes("SUBSCRIPTION_MGMT_VIEW") || myRights.includes("SUBSCRIPTION_MGMT_CREATE") || myRights.includes("SUBSCRIPTION_MGMT_GRANT") || myRights.includes("VALUE_ADDED_SERVICES_VIEW") || myRights.includes("VALUE_ADDED_SERVICES_CREATE") || myRights.includes("VALUE_ADDED_SERVICES_GRANT") '>
+                            <a data-toggle="collapse" href="#transactionPages" [attr.aria-expanded]="areaExpandedtra">
+                                <i class="fa fa-money"></i>
+                                <p>Subscription Management
+                                    <b class="caret"></b>
+                                </p>
+                            </a>
+                            <div class="collapse" id="transactionPages" [ngClass]="transactionpages">
+                                <ul class="nav">                                   
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("SUBSCRIPTION_MGMT_VIEW") || myRights.includes("SUBSCRIPTION_MGMT_CREATE")'>
+                                        <a [routerLink]="['/app/subscription/plan']">
+                                            <i class="fa fa-credit-card"></i>
+                                            <p> Subscription Plans</p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("SUBSCRIPTION_MGMT_GRANT")'> 
+                                        <a [routerLink]="['/app/subscription/plan-action']">
+                                            <i class="fa fa-check-square-o"></i>
+                                            <p>Approve/Reject Subscription</p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("VALUE_ADDED_SERVICES_VIEW") || myRights.includes("VALUE_ADDED_SERVICES_CREATE")'>
+                                        <a [routerLink]="['/app/subscription/vas']">
+                                            <i class="fa fa-ticket"></i>
+                                            <p> VAS Plans </p>
+                                        </a>
+                                    </li>
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("VALUE_ADDED_SERVICES_GRANT")'>
+                                        <a [routerLink]="['/app/subscription/vas-action']">
+                                            <i class="fa fa-list-alt"></i>
+                                            <p>Approve/Reject VAS </p>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li *ngIf='myRights.includes("DISCOUNT_MGMT_CREATE") || myRights.includes("DISCOUNT_MGMT_VIEW") || myRights.includes("DISCOUNT_MGMT_GRANT")'>
+                            <a data-toggle="collapse" href="#discountPages" [attr.aria-expanded]="areaExpandedtra">
+                            <i class="fas fa-tags"></i>
+                            <p>Discount Management
+                                <b class="caret"></b>
+                            </p>
+                            </a>
+                            <div class="collapse" id="discountPages" [ngClass]="discountPages">
+                                <ul class="nav">  
+                                    <li [routerLinkActive]="['active']" *ngIf='myRights.includes("DISCOUNT_MGMT_CREATE") || myRights.includes("DISCOUNT_MGMT_VIEW")'>
+                                        <a [routerLink]="['/app/discount-mgmt/discount']">
+                                            <i class="fas fa-user-tag"></i>
+                                            <p>Discount Coupons</p>
+                                        </a>
+                                    </li>                                 
+                                   <li [routerLinkActive]="['active']" *ngIf='myRights.includes("DISCOUNT_MGMT_GRANT")'>
+                                        <a [routerLink]="['/app/discount-mgmt/discount-mgmt-action']">
+                                            <i class="fas fa-check-double"></i>
+                                            <p>Approve/Reject Coupons</p>
+                                        </a>
+                                    </li>    
+                                </ul>
+                            </div>
+                        </li>
+
+                       <!-- <li [routerLinkActive]="['active']" *ngIf='myRights.includes("DISCOUNT_MGMT_CREATE") || myRights.includes("DISCOUNT_MGMT_VIEW")'>
+                            <a [routerLink]="['/app/discount-mgmt/discount']">
+                                <i class="fa fa-money"></i>
+                                <p>Discount mgmt</p>
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("DISCOUNT_MGMT_GRANT")'>
+                            <a [routerLink]="['/app/discount-mgmt/discount-mgmt-action']">
+                                <i class="fa fa-money"></i>
+                                <p>Coupon Approve/Reject</p>
+                            </a>
+                        </li> -->
+
+                      
+
+                        <!-- <li [routerLinkActive]="['active']">
+                            <a [routerLink]="['/app/display-feature']">
+                                <i class="fa fa-exchange"></i>
+                                <p> Display Feature </p>
+                            </a>
+                        </li> -->
+
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("ASSIGN_RMS") || myRights.includes("GRANT_RMS")'>
+                            <a [routerLink]="['/app/assignRm']">
+                                <i class="fa fa-handshake-o"></i>
+                                <p> Assign RM </p>
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("GRANT_RMS") || myRights.includes("GRANT_RMS")'>
+                            <a [routerLink]="['/app/grant-rm']">
+                                <i class="fas fa-check-double"></i>
+                                <p> Grant RM </p>
+                            </a>
+                        </li>
+
+                        <!-- <li [routerLinkActive]="['active']" *ngIf='myRights.includes("DISPLAY_UPLOAD_STATISTICS")'>
+                            <a [routerLink]="['/app/display-feature']">
+                                <i class="fa fa-desktop"></i>
+                                <p> Display Feature </p>
+                            </a>
+                        </li> -->
+                        <!-- <li [routerLinkActive]="['active']" *ngIf='myRights.includes("REPORTS_DOWNLOADS")'> -->
+                        <li [routerLinkActive]="['active']">
+                            <a [routerLink]="['/app/report']">
+                                <i class="fa fa-file"></i>
+                                <p> Report </p>
+                            </a>
+                        </li>
+                        <!-- <li [routerLinkActive]="['active']">
+                            <a [routerLink]="['/app/refund_credit']">
+                                <i class="fa fa-money"></i>
+                                <p> Refund Credit </p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

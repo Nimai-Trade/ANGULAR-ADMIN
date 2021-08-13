@@ -1,0 +1,112 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>EMP ID</td>
+                <td>
+                  <input matInput value={{employeeData.empCode}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <input matInput value={{employeeData.firstName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input matInput value={{employeeData.lastName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Employee Email
+                </td>
+                <td>
+                  <mat-form-field fxFlex="95%">
+                    <input matInput value={{employeeData.empEmail}} readonly="true" placeholder="">
+                  </mat-form-field>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Employee Mobile</td>
+                <td>
+                  <input matInput value={{employeeData.countryExt}}-{{employeeData.empMobile}} readonly="true"
+                    placeholder="">
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>Department</td>
+                <td>
+                  <input matInput value={{employeeData.department}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Designation</td>
+                <td>
+                  <input matInput value={{employeeData.designation}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Reporting Manager</td>
+                <td>
+                  <input matInput value={{employeeData.reportingManager}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>Region Allocated</td>
+                <td>
+                  <input matInput value={{employeeData.country}} readonly="true" placeholder="Region Allocated">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Role</td>
+                <td>
+                  <input matInput value="{{roleSelection}}" readonly="true" placeholder="Role">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+</mat-card>
+
+<!-- <mat-dialog-actions fxLayoutAlign="center">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50%">
+      <button (click)="closeDialog()" style="width: 100px;" mat-raised-button color="primary">Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions> -->

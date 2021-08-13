@@ -1,0 +1,87 @@
+// .dept-header {
+//   display: flex;
+//   justify-content: space-between;
+// }
+// .select-dept {
+//   display: flex;
+// }
+// .dept-btn {
+//   display: flex;
+//   justify-content: flex-end;
+//   margin-top: 20px;
+// }
+
+
+.pophead{
+  font-size: 17px;
+  font-weight: 500;
+  padding: 10px 15px;
+  margin: 0 0 20px;
+  background: #00bcd4;
+  color: #fff;
+}
+
+.mat-dialog-title {
+  margin: 0;
+  display: block;
+}
+
+.popupcontent .tab-content{
+  padding: 0 20px;
+  height: 80vh;
+ }
+  
+
+.dropdown_content {
+  padding: 0 20% !important;
+}
+ 
+.dropdown_content button{
+  background: #00bcd4;
+  color: #fff;
+  border: 0;
+  padding: 5px 15px;
+  border-radius: 4px;
+  float: right;
+  margin: 0;
+}
+
+.dropdown_content .mat-form-field{
+  width: 100%;
+}
+ 
+::ng-deep .mat-select {
+  border: 0 !important; 
+  // border-bottom: 1px solid #ccc !important;
+}
+
+
+.roleselct { 
+	padding: 4px 8px;
+	font-size: 11.5px;
+	vertical-align: top;
+	border: 0px solid #ccc;
+	width: 100%;
+	border-radius: 6px;
+	box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725);
+} 
+
+::ng-deep .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, ::ng-deep .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  margin-top: 1px !important;
+}
+@media (max-width: 767px) { 
+  ::ng-deep .mat-dialog-container{
+       margin:0;
+       width: 100%;
+       max-width:100%;     
+   }
+
+   ::ng-deep .cdk-overlay-pane{
+       width:84% !important;
+       max-width:100% !important;
+   }
+
+   ::ng-deep .popupcontent input:read-only{
+       width:160px;
+   }
+}

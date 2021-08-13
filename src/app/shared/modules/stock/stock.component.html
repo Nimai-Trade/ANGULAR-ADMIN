@@ -1,0 +1,44 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="column">
+    <h2 mat-dialog-title>Available {{data.title}} stock in Gms</h2>
+  </div>
+  <div fxLayout="column">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div>
+</div>
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="metalType">
+        <th mat-header-cell *matHeaderCellDef> Metal Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.metalType}} </td>
+      </ng-container>
+      <ng-container matColumnDef="metalStandard">
+        <th mat-header-cell *matHeaderCellDef> Metal Standard </th>
+        <td mat-cell *matCellDef="let element"> {{element.metalStandard}} </td>
+      </ng-container>
+      <ng-container matColumnDef="metalColor">
+        <th mat-header-cell *matHeaderCellDef> Metal Color </th>
+        <td mat-cell *matCellDef="let element"> {{element.metalColor}} </td>
+      </ng-container>
+      <ng-container matColumnDef="metalWeight">
+        <th mat-header-cell *matHeaderCellDef> Weight (Gms)</th>
+        <td mat-cell *matCellDef="let element"> {{element.metalWeight}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="column">
+
+  </div>
+  <div fxLayout="column">
+    <button (click)="closeDialog()" style="width: 100px;" mat-raised-button>Close
+    </button>
+  </div>
+</div>

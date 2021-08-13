@@ -1,0 +1,176 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+
+<mat-card [formGroup]="subscriptionForm">
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>
+
+                </td>
+                <td>
+                  <mat-radio-group formControlName="customerType" [disabled]="data && data.id ? true : false"  (change)="onChange($event)"> 
+                    <span style="margin-right: 30px;"></span>
+                    <mat-radio-button value="CUSTOMER">Customer
+                    </mat-radio-button>
+                    <span style="margin-right: 20px;"></span>
+                    <mat-radio-button value="BANK">Bank
+                    </mat-radio-button>
+                    <span style="margin-right: 20px;"></span>
+                    <mat-radio-button value="BANK AS CUSTOMER">Bank as Customer
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td nowrap="">Country</td>
+                <td>
+                  <!-- <mat-select formControlName="countryName" class="roleselct" disableOptionCentering>
+                    <mat-option [value]="">Select</mat-option>
+                    <mat-option *ngFor="let item of countryList" [value]="item.country">
+                      {{item.country}}
+                    </mat-option>
+                  </mat-select> -->
+                  <ejs-dropdownlist formControlName="countryName" class="popupddl1" style="width:100%!important;border: 0px solid #ccc!important;border-radius: 6px!important;box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725)!important;" [dataSource]='countryData' [allowFiltering]='true' [ignoreAccent]='true'
+                  placeholder='Select country' filterBarPlaceholder=''>
+                  </ejs-dropdownlist> 
+                  <!-- <ejs-dropdownlist formControlName="countryName" id='diacritics'  [(value)]='countryName' 
+                      [dataSource]='countryData' [allowFiltering]='true' [ignoreAccent]='true'          
+                      placeholder='Select a value' filterBarPlaceholder=''>
+                  </ejs-dropdownlist>  -->
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['countryName'].touched && subscriptionForm.controls['countryName'].hasError('required')">
+                    Please select Country
+                  </mat-error>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Plan Name</td>
+                <td>
+                  <input formControlName="planName" matInput placeholder="" autocomplete="off" required maxlength="30">
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['planName'].touched && subscriptionForm.controls['planName'].hasError('required')">
+                    Please enter Plan Name
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>Credits</td>
+                <td>
+                  <input formControlName="credits" matInput placeholder="" autocomplete="off" required  onKeyPress="if(this.value.length==30) return false;" type="number"  min="0" oninput="this.value = 
+                  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['credits'].touched && subscriptionForm.controls['credits'].hasError('required')">
+                    Please enter Credits
+                  </mat-error>
+
+                </td>
+              </tr>
+              <tr *ngIf="subscriptionForm.controls['customerType'].value != 'BANK AS CUSTOMER'">
+                <td *ngIf="subscriptionForm.controls['customerType'].value == 'CUSTOMER'">Subsidiaries</td>
+                <td *ngIf="subscriptionForm.controls['customerType'].value == 'BANK'">Additional user </td>
+                <td>
+                  <input formControlName="subsidiaries" matInput placeholder="" autocomplete="off" required
+                    maxlength="50">
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['subsidiaries'].touched && subscriptionForm.controls['subsidiaries'].hasError('required')">
+                    Please enter Additional Users
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>Customer Support</td>
+                <td>
+                  <input formControlName="customerSupport" matInput placeholder="" autocomplete="off" maxlength="50">
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['customerSupport'].touched && subscriptionForm.controls['customerSupport'].hasError('required')">
+                    Please enter Customer Support Details
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>Relationship Manager</td>
+                <td>
+                  <mat-select formControlName="rm" class="roleselct" disableOptionCentering>
+                    <mat-option [value]="">Select</mat-option>
+                    <mat-option *ngFor="let item of rmList" [value]="item.code">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['rm'].touched && subscriptionForm.controls['rm'].hasError('required')">
+                    Select Relationship Manager
+                  </mat-error>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Pricing</td>
+                <td>
+                  <div class="halfleft" style="    padding: 0;">
+                  <input matInput formControlName="countryCurrency" class="" readonly>
+                </div>
+                <div class="halfright">
+                  <input formControlName="pricing" class="" matInput placeholder="" autocomplete="off"
+                    weightDirective required maxlength="50">
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['pricing'].touched && subscriptionForm.controls['pricing'].hasError('required')">
+                    Please enter Price
+                  </mat-error>
+                </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Validity</td>
+                <td>
+                  <mat-select formControlName="validity" class="roleselct" disableOptionCentering>
+                    <mat-option [value]="">Select Months</mat-option>
+                    <mat-option *ngFor="let item of monthList" [value]="item.code">
+                      {{item.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="subscriptionForm.controls['validity'].touched && subscriptionForm.controls['validity'].hasError('required')">
+                    Select Month of Validity.
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>Remark</td>
+                <td>
+                  <input formControlName="remark" matInput autocomplete="off" maxlength="50">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="posfix">
+            <button type="submit" class="btn btn-info pull-right" id="btnCreate" (click)="onSubmitPlan()"
+              style="width: 100px;" mat-raised-button color="primary">
+              Create
+              <div class="ripple-container"></div>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+</mat-card>

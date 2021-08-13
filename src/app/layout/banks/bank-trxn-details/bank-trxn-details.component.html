@@ -1,0 +1,387 @@
+<!-- <div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div> -->
+
+<mat-card>
+  <mat-dialog-content>
+    <div id="menubarDetail">
+      <div class="popupcontent">
+        <div class="card">
+          <div class="card-content">
+            <ul class="nav nav-pills nav-pills-info" style="    margin: 0;
+                  padding: 10px 15px 0;">
+                  <a href="javascript:void(0);" (click)="closeDialog()" class="popup_close">
+                    <mat-icon style="margin-left: -40px;">close</mat-icon>
+                  </a>
+              <li class="active"><a href="#detailtab1" data-toggle="tab" aria-expanded="false">Transaction Details</a>
+              </li>
+              <li><a href="#detailtab2" data-toggle="tab" aria-expanded="true">Customer Details</a></li>
+            </ul>
+            <div class="tab-content" style="height: 477px;overflow: auto;">
+
+              <div class="tab-pane active" id="detailtab1">
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Transaction ID</th>
+                          <td>
+                            <input matInput value={{transactionData.transactionId}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th colspan="2">LC Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="width: 50%;">Issuing Bank(IB)</td>
+                          <td>
+                            <input matInput value={{transactionData.issuingBank}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Branch </td>
+                          <td>
+                            <input matInput value={{transactionData.branch}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Swift Code</td>
+                          <td>
+                            <input matInput value={{transactionData.swiftCode}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Country</td>
+                          <td>
+                            <input matInput value={{transactionData.lcCountry}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Requirement</td>
+                          <td>
+                            <input matInput value={{transactionData.requirement}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Amount</td>
+                          <td>
+                            <input matInput value={{transactionData.amount}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Issuing Date</td>
+                          <td>
+                            <!-- {{transactionData.issuingDate | "dd-MM-y HH:mm:ss z"}} -->
+                            <input matInput value="{{transactionData.issuingDate | date : 'dd-MM-y HH:mm:ss z'}}"
+                              readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Last Shipment Date(LSD)</td>
+                          <td>
+                            <input matInput value="{{transactionData.lastShipmentDate | date : 'dd-MM-y HH:mm:ss z'}}"
+                              readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Negotiation Date</td>
+                          <td>
+                            <input matInput value="{{transactionData.negotiationDate | date : 'dd-MM-y HH:mm:ss z'}}"
+                              readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Goods</td>
+                          <td>
+                            <input matInput value={{transactionData.goods}} readonly="true">
+                          </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th colspan="2">Tenor </th>
+                        </tr>
+                        <tr>
+                          <td style="width: 50%;">Usansce (Days)</td>
+                          <td>
+                            <input matInput value={{transactionData.usansce}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Payment terms to seller as per LC</td>
+                          <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Remarks</td>
+                          <td><input matInput value={{transactionData.remarks}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-12">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th colspan="2">Applicant</th>
+                        </tr>
+                        <tr>
+                          <td style="width: 50%;">Applicant</td>
+                          <td><input matInput value={{transactionData.applicant}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Country</td>
+                          <td><input matInput value={{transactionData.applicantCountry}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th colspan="2">Beneficiary</th>
+                        </tr>
+                        <tr>
+                          <td>Beneficiary </td>
+                          <td><input matInput value={{transactionData.beneficiary}} readonly="true"></td>
+                        </tr>
+                        <tr>
+                          <td style="width: 50%;">Bank</td>
+                          <td><input matInput value={{transactionData.beneficiaryBank}} readonly="true"></td>
+                        </tr>
+                        <tr>
+                          <td>Swift Code</td>
+                          <td>
+                            <input matInput value={{transactionData.beneficiarySwiftCode}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Bank Country</td>
+                          <td>
+                            <input matInput value={{transactionData.beneficiaryBankCountry}} readonly="true">
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th colspan="2">Others</th>
+                        </tr>
+                        <tr>
+                          <td style="width: 50%;">Port of Loading </td>
+                          <td>
+                            <input matInput value={{transactionData.portofLoading}} readonly="true">
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td>Port of Discharge</td>
+                          <td><input matInput value={{transactionData.portofDischarge}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Charges are on</td>
+                          <td><input matInput value={{transactionData.chargesAreOn}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Validity</td>
+                          <td><input matInput value="{{transactionData.validity | date : 'dd-MM-y'}}" readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Pro Forma</td>
+                          <!-- <td>
+                            <a style="color: blue; text-decoration: underline; cursor: pointer;"
+                              (click)="showImage(transactionData.proForma)">View Document</a>
+                          </td> -->
+                          <td *ngIf="transactionData.proForma" style="padding-left: 32px!important;">
+                            <a style="color: blue; text-decoration: underline; cursor: pointer;" (click)="showImage(transactionData.proForma)" >View Document</a>
+                          </td>
+                          <td *ngIf="!transactionData.proForma" style="padding-left: 32px!important;">
+                            <a style="color: blue; text-decoration: none;pointer-events: none ;">No such document attached</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="detailtab2">
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Transaction ID</th>
+                          <td><input matInput value={{transactionData.transactionId}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th colspan="2">Personal Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>User ID</td>
+                          <td> <input matInput value={{transactionData.userID}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>First Name</td>
+                          <td><input matInput value={{transactionData.firstName}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Last Name</td>
+                          <td><input matInput value={{transactionData.lastName}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Email ID</td>
+                          <td><input matInput value={{transactionData.emailID}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Mobile No. </td>
+                          <td><input matInput value={{transactionData.mobileNo}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Country</td>
+                          <td><input matInput value={{transactionData.custCountry}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="form-group"></div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th colspan="2">Business Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Registration Type</td>
+                          <td><input matInput value={{transactionData.registrationType}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Company Name</td>
+                          <td><input matInput value={{transactionData.companyName}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="form-group"></div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th colspan="2">Registered Address</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Country</td>
+                          <td><input matInput value={{transactionData.addressCountry}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>State/Province</td>
+                          <td> <input matInput value={{transactionData.stateProvince}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>City</td>
+                          <td><input matInput value={{transactionData.city}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>PIN/ZIP Code</td>
+                          <td><input matInput value={{transactionData.pin}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Address Line 1</td>
+                          <td><input matInput value={{transactionData.addressline1}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Address Line 2</td>
+                          <td><input matInput value={{transactionData.addressline2}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Address Line 3</td>
+                          <td><input matInput value={{transactionData.addressline3}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Telephone</td>
+                          <td><input matInput value={{transactionData.telephone}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="form-group"></div>
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th colspan="2">RM Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>First Name</td>
+                          <td> <input matInput value={{transactionData.rmFirstName}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Last Name</td>
+                          <td><input matInput value={{transactionData.rmLastName}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Designation</td>
+                          <td><input matInput value={{transactionData.rmDesignation}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+</mat-card>
+
+<mat-dialog-actions fxLayoutAlign="center" style="padding: 51px 0!important;">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50%">
+      <button (click)="closeDialog()" style="width: 100px;" mat-raised-button color="primary">Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>

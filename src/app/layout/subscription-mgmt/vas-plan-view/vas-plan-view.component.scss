@@ -1,0 +1,42 @@
+.pophead{
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin: 0 0 20px;
+    background: #00bcd4;
+    color: #fff;
+}
+
+.mat-dialog-title {
+    margin: 0;
+    display: block;
+}
+
+.popupcontent .tab-content{
+    padding: 0 20px;
+    height: 100vh;
+   }
+
+   .statusbar.list-inline>li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;  
+    width: 233px;
+  }
+  @media (max-width: 767px) { 
+    ::ng-deep .mat-dialog-container{
+         margin:0;
+         width: 100%;
+         max-width:100%;    
+     }
+ 
+     ::ng-deep .cdk-overlay-pane{
+         width:100% !important;
+         max-width:100% !important;
+     }
+ 
+     ::ng-deep .popupcontent input:read-only{
+         width:160px;
+     }
+ }
+ 

@@ -1,0 +1,69 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Fontil Sans";
+}
+
+.main-container {
+  position: absolute;
+  top: 64px;
+  left: 200px;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+* {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Nunito Sans", sans-serif;
+  body {
+    margin: inherit;
+    padding: inherit;
+    font-family: "Nunito Sans", sans-serif;
+    height: 100%;
+  }
+  .req {
+    color: red; // red;
+  }
+}
+
+
+// @keyframes spinner{
+//   to {transform: rotate(360deg);}
+// }
+
+// .spinner:before{
+// content: '';
+// border: border-box;
+// position: absolute;
+// top: 50%;
+// left: 50%;
+// width: 50px;
+// height: 50px;
+// margin-top: -10px;
+// margin-left: -10px;
+// border-radius: 50%;
+// border: 2px solid rgb(0, 41, 221);
+// border-top-color: #000000;
+// animation: spinner .8s linear infinite;
+
+// }
+
+// .control-label.required:after { 
+//   color: #d00;
+//   content: "*";
+//   position: absolute;
+//   margin-left: 5px;
+//   top:7px;
+// }

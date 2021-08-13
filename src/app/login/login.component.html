@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>360tf </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+    <div class="loginbody">
+        <div _ngcontent-idl-c2="" class="logo" style="padding: 8px;">
+            <img _ngcontent-idl-c2="" height="54" src="assets/images/360TF-3.jpg" width="215">
+        </div>
+        <div class="content-a" style="margin-top: -44px!important;">
+            <div class="content-b">
+                <div class="container-fluid">
+                    <div class="">
+                        <div class="col-md-8 col-md-offset-2 maindiv left-panel-active" id="container">
+
+                            <div class="form-container sign-in-container">
+                                <form [formGroup]="loginForm" id="logindiv" (ngSubmit)="submit();">
+                                    <div class="content-a">
+                                        <div class="content-b">
+                                            <div>
+                                                <h1>Login</h1>
+                                                <span></span>
+                                                <div class="inputDiv logininput">
+                                                    <!-- <div fxFlexFill> -->
+                                                    <mat-form-field>
+                                                        <input matInput oninput="this.value = this.value.toUpperCase()"
+                                                            formControlName="userName"  maxlength="20" autocomplete="off">
+                                                        <label>User ID</label> 
+                                                        <img src="assets/images/user.png" />                                                       
+                                                        <mat-error
+                                                            *ngIf="loginForm.controls['userName'].touched && loginForm.controls['userName'].hasError('required')"
+                                                            style="background-color: transparent !important;">
+                                                            Please Enter Username
+                                                        </mat-error>
+                                                        
+                                                    </mat-form-field>
+                                                    <!-- </div> -->
+                                                    <!-- <input oninput="this.value = this.value.toUpperCase()" type="text"
+                                                        maxlength="8" class="has-value" formControlName="userName"
+                                                        [ngClass]="{ 'is-invalid': submitted && lf.userName.errors }"
+                                                        (input)="validate()">
+                                                    <label>User ID</label>
+                                                    <img src="assets/images/user.png" />
+                                                    <div *ngIf="submitted && lf.userName.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="lf.userName.errors.required">
+                                                            UserID is required
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="inputDiv logininput">
+                                                    <!-- <div fxFlexFill> -->
+                                                    <mat-form-field>
+                                                        <input matInput  formControlName="password"
+                                                            type="password" [type]="hide ? 'password' : 'text'" required maxlength="20">
+                                                        <label>Password</label>
+                                                        <i aria-hidden="true" class="fas fa-unlock-alt passicon"></i>
+                                                        <mat-icon matSuffix (click)="hide = !hide" style="color:#18b3cc!important;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                        <mat-error
+                                                            *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('required')"
+                                                            style="background-color: transparent !important;">
+                                                            Please Enter Password
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('invalidCred')"
+                                                            style="background-color: transparent !important;">
+                                                            {{loginMsg}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <!-- </div> -->
+                                                    <!-- <input type="Password" class="has-value" maxlength="16"
+                                                        formControlName="password"
+                                                        [ngClass]="{ 'is-invalid': submitted && lf.password.errors }"
+                                                        (input)="validate()">
+                                                    <label>Password</label>
+                                                    <div *ngIf="submitted && lf.password.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="lf.password.errors.required">
+                                                            Password field is required
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="inputDiv logininput"  class="recaptcha_div">                                               
+                                                    <re-captcha  (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
+                                                    </re-captcha>
+                                                    <mat-error *ngIf="loginForm.controls['recaptchaReactive'].touched && loginForm.controls['recaptchaReactive'].hasError('required')"
+                                                        style="background-color: transparent !important;">
+                                                        Please verify Google Recaptcha.
+                                                    </mat-error>
+                                                 </div> 
+                                                <button type="submit" class="btnclass">Login</button>
+                                                <div class="text-center">
+                                                <a (click)="forgotPasswordLink()" id="btnForgot"
+                                                    class="extralink">Forgot your password?</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form [formGroup]="forgotPasswordForm" id="ForgotPassworddiv"
+                                    (ngSubmit)="forgotPassword();">
+                                    <div class="content-a">
+                                        <div class="content-b">
+                                            <div>
+                                                <h1>Forgot Password</h1>
+                                                <div class="form-group"></div>
+                                                <!-- <div class="inputDiv logininput">
+                                                    <input matInput type="email" formControlName="email"  oninput="this.value = this.value.toLowerCase()" (keydown.space)="$event.preventDefault()">
+                                                    <label>Email</label>
+                                                    <img src="assets/images/user.png" /> 
+                                                    <mat-error
+                                                            *ngIf="forgotPasswordForm.controls['email'].touched && forgotPasswordForm.controls['email'].hasError('required')"
+                                                            style="background-color: transparent !important;">
+                                                            Please Enter email Id
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="forgotPasswordForm.controls['email'].touched && forgotPasswordForm.controls['email'].hasError('invalidEmail')"
+                                                            style="background-color: transparent !important;">
+                                                            Please Enter Valid email Id
+                                                        </mat-error>
+                                                </div> -->
+                                                <div class="inputDiv logininput">
+                                                        <input matInput type="text" formControlName="empCode" autocomplete="off" oninput="this.value = this.value.toLowerCase()" (keydown.space)="$event.preventDefault()">
+                                                        <label>Employee Code</label>
+                                                        <img src="assets/images/user.png" /> 
+                                                        <mat-error
+                                                                *ngIf="forgotPasswordForm.controls['empCode'].touched && forgotPasswordForm.controls['empCode'].hasError('required')"
+                                                                style="background-color: transparent !important;">
+                                                                Please Enter employee Code
+                                                            </mat-error>
+                                                      
+                                                    </div>
+                                                    <div class="inputDiv logininput" style="padding-left: 40px!important;">                                                      
+                                                        <re-captcha (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
+                                                        </re-captcha>
+                                                        <mat-error *ngIf="forgPassSubmitted && forgotPasswordForm.controls['recaptchaReactive'].hasError('required')"
+                                                            style="background-color: transparent !important;">
+                                                            Please verify Google Recaptcha.
+                                                        </mat-error>
+                                                        <mat-error *ngIf="captchaError">Recaptcha not verified.</mat-error>
+                                                    </div>     
+                                                <button class="btnclass">Submit</button>
+                                                <div class="text-center">
+                                                <a (click)="returnToLogin()" class="extralink"
+                                                    id="btnLogin" >Return to Login</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="overlay-container">
+                                <div class="overlay">
+                                    <!-- <div class="overlay-panel overlay-left">
+                              <h1>Welcome Back!</h1>
+                              <p>To keep connected with us please login with your personal info</p>
+
+                           </div> -->
+                                    <div class="overlay-panel overlay-right">
+                                        <h1>Hello, Friend!</h1>
+                                        <p>Welcome Back! To 360tf Admin Portal</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</body>
+
+</html>

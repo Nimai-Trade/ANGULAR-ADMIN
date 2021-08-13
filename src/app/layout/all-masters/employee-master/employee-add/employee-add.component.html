@@ -1,0 +1,243 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card [formGroup]="employeeForm">
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>EMP ID</td>
+                <td>
+                  <input type="text" formControlName="empCode" oninput="this.value = this.value.toUpperCase()" matInput
+                    placeholder="" [readonly]="data && data.id ? true : false" autocomplete="off" required
+                    maxlength="20" (blur)="checkAlreadyExists(employeeForm.controls['empCode'].value)">
+                  <mat-error
+                    *ngIf="employeeForm.controls['empCode'].touched && employeeForm.controls['empCode'].hasError('required')">
+                    Please enter Emp ID
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['empCode'].touched && employeeForm.controls['empCode'].hasError('isExits')">
+                    Emp ID is already exist.
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <input formControlName="firstName" matInput placeholder="" autocomplete="off" required maxlength="30"
+                    pattern="[a-zA-Z ]*">
+                  <mat-error
+                    *ngIf="employeeForm.controls['firstName'].touched && employeeForm.controls['firstName'].hasError('required')">
+                    Please enter First Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['firstName'].touched && employeeForm.controls['firstName'].hasError('pattern')">
+                    Please enter valid First Name
+                  </mat-error>
+
+                </td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input formControlName="lastName" matInput placeholder="" autocomplete="off" required maxlength="30"
+                    pattern="[a-zA-Z ]*">
+                  <mat-error
+                    *ngIf="employeeForm.controls['lastName'].touched && employeeForm.controls['lastName'].hasError('required')">
+                    Please enter Last Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['lastName'].touched && employeeForm.controls['lastName'].hasError('pattern')">
+                    Please enter valid Last Name
+                  </mat-error>
+
+                </td>
+              </tr>
+              <tr>
+                <td>Email ID</td>
+                <td>
+                  <!-- <input formControlName="empEmail" matInput placeholder="" autocomplete="disabled" required maxlength="50"> -->
+                  <input formControlName="empEmail" [readonly]="data && data.id ? true : false" type="email" oninput="this.value = this.value.toLowerCase()" (keydown.space)="$event.preventDefault()" maxlength="50" autocomplete="off">
+                  <mat-error
+                    *ngIf="submitted && employeeForm.controls['empEmail'].hasError('required')">
+                    Please enter Email ID
+                  </mat-error>
+                  <mat-error
+                    *ngIf="submitted && employeeForm.controls['empEmail'].hasError('pattern')">
+                    Enter valid Email ID
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td nowrap="">Mobile Number</td>
+                <td>
+                  <div style="float: left;width: 40%;position:relative;" class="countryCode_mobile">
+                    <ejs-dropdownlist formControlName="countryExt" id='diacritics' class="popupddl" [dataSource]='countryCode' [allowFiltering]='true' [ignoreAccent]='true'
+                    placeholder='Select a Country Code' filterBarPlaceholder=''>
+                  </ejs-dropdownlist> 
+                  <mat-error
+                    *ngIf="employeeForm.controls['countryExt'].touched && employeeForm.controls['countryExt'].hasError('required')">
+                    Please select Country Code
+                  </mat-error>
+
+                  </div>
+                  <div style="float: right;width: 58%;"  class="mobNumber_mobile">
+                    <input formControlName="empMobile" class="" autocomplete="off" matInput placeholder=""
+                    maxlength="15" minlength="7" required numberDirective />
+                  <mat-error
+                    *ngIf="employeeForm.controls['empMobile'].touched && employeeForm.controls['empMobile'].hasError('required')">
+                    Please enter Mobile Number
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['empMobile'].touched && employeeForm.controls['empMobile'].hasError('minlength')">
+                    Please enter valid Mobile Number
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['empMobile'].touched && employeeForm.controls['empMobile'].hasError('pattern')">
+                    Please enter valid Mobile Number
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['empMobile'].touched && employeeForm.controls['empMobile'].hasError('isNumberExist')">
+                    Mobile Number is already exist.
+                  </mat-error>
+                </div>
+                 
+                  <!-- <mat-select formControlName="countryExt" disableOptionCentering class="halfleft"
+                    style="color: #333 !important;">
+                    <mat-option [value]="">Select</mat-option>
+                    <mat-option *ngFor="let item of countryList" [value]="item.code">{{item.code}}
+                    </mat-option>
+                  </mat-select> -->
+                 
+                  
+                </td>
+              </tr>
+              <tr>
+                <td>Department</td>
+                <td>
+                  <input formControlName="department" matInput autocomplete="off" placeholder="" required maxlength="50"
+                    pattern="[a-zA-Z ]*">
+                  <mat-error
+                    *ngIf="employeeForm.controls['department'].touched && employeeForm.controls['department'].hasError('required')">
+                    Please enter Department
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['department'].touched && employeeForm.controls['department'].hasError('pattern')">
+                    Enter valid Department
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td nowrap="">Designation</td>
+                <td>
+                  <input formControlName="designation" matInput autocomplete="off" placeholder="" maxlength="50"
+                    required pattern="[a-zA-Z ]*" />
+                  <mat-error
+                    *ngIf="employeeForm.controls['designation'].touched && employeeForm.controls['designation'].hasError('required')">
+                    Please enter Designation
+                  </mat-error>
+                  <mat-error
+                    *ngIf="employeeForm.controls['designation'].touched && employeeForm.controls['designation'].hasError('pattern')">
+                    Enter valid Designation
+                  </mat-error>
+                </td>
+              </tr>
+
+              <tr>
+                <td nowrap="">Reporting Manager</td>
+                <td>
+                  <input formControlName="reportingManager" matInput placeholder="" maxlength="50" autocomplete="off"/>
+                  <!-- <mat-error
+                    *ngIf="employeeForm.controls['reportingManager'].touched && employeeForm.controls['reportingManager'].hasError('required')">
+                    Please enter Reporting Manager
+                  </mat-error> -->
+                  <mat-error
+                    *ngIf="employeeForm.controls['reportingManager'].touched && employeeForm.controls['reportingManager'].hasError('pattern')">
+                    Enter valid Reporting Manager
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td nowrap="">Region Allocated</td>
+                <td class="multiselectClass">
+                  <!-- <mat-select formControlName="country" class="roleselct" multiple disableOptionCentering>
+                    <mat-option *ngFor="let item of countryList" [value]="item.country">{{item.country}}
+                    </mat-option>
+                  </mat-select> -->
+
+                  <!-- <ejs-dropdownlist id='diacritics' [dataSource]='country' [allowFiltering]='true' [ignoreAccent]='true'
+                    placeholder='Select a value' filterBarPlaceholder='e.g: gul'>
+                  </ejs-dropdownlist> -->
+
+                  <!-- <ejs-multiselect  cssClass="custom"  (select)="onItemSelect($event)" formControlName="country" id='multiselectelement' #sample 
+                  [dataSource]='country' [showDropDownIcon]='true' [fields]='localFields' 
+                  [placeholder]='localWaterMark' [hideSelectedItem] = 'false' 
+                  [value]='country' autocomplete="disabled"> 
+                  </ejs-multiselect>
+                  <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
+                  (click)="closeNone()">&times;</button> -->
+                  <ng-multiselect-dropdown-angular7 autocomplete="disabled" [placeholder]="'Select Country'" [data]="countryList" formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                  (onDeSelect)="onItemDeSelect($event)">
+                  </ng-multiselect-dropdown-angular7>
+                  <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
+                  (click)="closeNone()">&times;</button> 
+                  <!-- <mat-select formControlName="country"  class="roleselct" [multiple]="true">
+                    <mat-select-search [formControl]="bankMultiFilterCtrl"></mat-select-search>
+                    <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
+                      {{bank.name}}
+                    </mat-option>
+                  </mat-select> -->
+                  <mat-error
+                    *ngIf="employeeForm.controls['country'].touched && employeeForm.controls['country'].hasError('required')">
+                    Please select Region Allocated
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>Role</td>
+                <td>
+                  <!-- <ejs-dropdownlist formControlName="empRole" id='diacritics' 
+                  [dataSource]='roleList' [allowFiltering]='true' 
+                  [ignoreAccent]='true'  [value]="item.roleId"
+                  placeholder='Select a value' filterBarPlaceholder=''>
+                </ejs-dropdownlist>  -->
+
+                  <mat-select formControlName="empRole" autocomplete="off" placeholder="" multiple [(ngModel)]="roleSelection" disableOptionCentering class="roleselct">
+                    <!-- <mat-option [value]="">Select</mat-option> -->
+                    <mat-option *ngFor="let item of roleList" [value]="item.roleId">{{item.roleShortName}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="employeeForm.controls['empRole'].touched && employeeForm.controls['empRole'].hasError('required')">
+                    Please select Role
+                  </mat-error>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="posfix">
+            <button type="submit" class="btn btn-info pull-right" id="btnCreate" (click)="onSubmitEmployee()"
+              style="width: 100px;" mat-raised-button color="primary" [class.spinner]="loading" [disabled]="loading">
+              Save
+              <div class="ripple-container"></div>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+</mat-card>

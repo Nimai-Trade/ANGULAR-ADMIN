@@ -1,0 +1,108 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-desktop"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title"><span id="changetext"> Display Feature </span>
+              <ul class="pull-right list-unstyled list-inline statusbar">
+                <li>
+                  <div fxLayout="row" fxFlex="100%;" [formGroup]="displayListForm" style="width: 233px;">
+                    <div fxLayout="column" fxFlex="100%;">
+                      <div fxLayout="row">
+                        <mat-form-field fxFlex="100%">
+                          <mat-select formControlName="country" placeholder="Select a Country"
+                            (selectionChange)="onChangeType(displayListForm.controls['country'].value)"
+                            disableOptionCentering class="roleselect">
+                            <mat-option [value]="">Select</mat-option>
+                            <mat-option [value]="">All</mat-option>
+                            <mat-option *ngFor="let item of countryList" [value]="item">{{item}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </h4>
+
+<br>
+            <label class="btn btn-default">
+              <input type="file" (change)="selectFile($event)" />
+            </label>
+
+            <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+              Upload
+            </button>
+
+            <button class="linkbtn" (click)="downloadSample()">
+              Download Sample
+            </button>
+            <button mat-button class="action-btn" matTooltip="Update"
+            (click)="loadDisplayFeatureList()">                            
+              <mat-icon [ngStyle]="{'color':'green'}">update</mat-icon>
+            </button>
+            <div *ngIf="edited" class="alert alert-success box-msg" role="alert">
+              <strong>{{message}}</strong>
+            </div>
+
+            <div fxLayout="row" style="margin-bottom: 10px;">
+            </div>
+            <div fxLayout="row" style="margin-bottom: 10px;">
+            </div>
+            <div class="dataTables_scrollBody">
+              <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                multiTemplateDataRows>
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> # </th>
+                  <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                </ng-container>
+                <ng-container matColumnDef="createdDate">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Date
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="myCell">
+                    <div class="row">{{element.createdDate | date :'dd-MM-y HH:mm:ss z'}} </div>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="avgAmount">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Amount</th>
+                  <td mat-cell *matCellDef="let element" class="myCell">
+                    {{element.avgAmount}}
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="country">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Country
+                  </th>
+                  <td mat-cell *matCellDef="let element" class="myCell"> {{element.country}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ccy">
+                  <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Currency</th>
+                  <td mat-cell *matCellDef="let element" class="myCell">
+                    {{element.ccy}}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+              </table>
+            </div>
+            <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+              <h3 style="text-align:center"> No Data </h3>
+            </mat-card>
+            <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+              [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+            </mat-paginator>
+          </div>
+          <div class="clearfix"></div>
+          <!-- </form> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

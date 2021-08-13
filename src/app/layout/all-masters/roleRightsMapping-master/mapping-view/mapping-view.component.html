@@ -1,0 +1,47 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="column">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+  <div fxLayout="column">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div fxLayout="row" style="margin-bottom: 10px;">
+      <!-- <span class="border-b">
+        Role Details
+      </span> -->
+    </div>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="50%">
+        <div fxLayout="row">
+          <mat-form-field fxFlex="90%">
+            <input matInput value={{roleData.roleName}} readonly="true" placeholder="Role Name">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="50%">
+        <div fxLayout="row">
+          <mat-form-field fxFlex="95%">
+            <input matInput value={{roleData.roleStatus}} readonly="true" placeholder="Role Status">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+</mat-card>
+
+<!-- <mat-dialog-actions fxLayoutAlign="end">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50%">
+      <button (click)="closeDialog()" style="width: 100px;" mat-raised-button color="primary">Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions> -->

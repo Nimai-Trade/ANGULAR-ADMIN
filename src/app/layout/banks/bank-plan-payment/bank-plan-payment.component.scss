@@ -1,0 +1,55 @@
+.pophead{
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin: 0 0 20px;
+    background: #00bcd4;
+    color: #fff;
+}
+
+.mat-dialog-title {
+    margin: 0;
+    display: block;
+}
+// .popupcontent .tab-content{
+//     padding: 0 20px;
+//     height: 100vh;
+//    }
+
+::ng-deep .mat-dialog-content {
+    display: block;
+    margin: 0 0;
+    padding: 0 20px 0 15px;
+
+}
+// textarea.mat-input-element{
+//     margin-left: 27px!important;
+// }
+.mat-dialog-content{
+    margin: 0 0px;
+    overflow: scroll!important;
+    max-height: 90vh !important;
+}
+.mat-dialog-container{
+    overflow: hidden!important;
+}
+.comment{
+    background: #eee!important;
+}
+@media (max-width: 767px) { 
+    ::ng-deep .mat-dialog-container{
+         margin:0;
+         width: 100%;
+         max-width:100%;    
+     }
+ 
+     ::ng-deep .cdk-overlay-pane{
+         width:100% !important;
+         max-width:100% !important;
+     }
+ 
+     ::ng-deep .popupcontent input:read-only{
+         width:160px;
+     }
+ }
+ 

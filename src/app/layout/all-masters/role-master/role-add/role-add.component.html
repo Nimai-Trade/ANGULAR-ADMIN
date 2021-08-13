@@ -1,0 +1,85 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card [formGroup]="roleForm">
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>Role Name</td>
+                <td>
+                  <input formControlName="roleName" matInput placeholder="" required maxlength="30"
+                    pattern="[a-zA-z ]*">
+                  <mat-error
+                    *ngIf="roleForm.controls['roleName'].touched && roleForm.controls['roleName'].hasError('required')">
+                    Please enter Role Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="roleForm.controls['roleName'].touched && roleForm.controls['roleName'].hasError('pattern')">
+                    Please enter valid Role Name
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>Role Short Name</td>
+                <td>
+                  <input formControlName="roleShortName" matInput placeholder="" required maxlength="30" [readonly]="data && data.id ? true : false"
+                    pattern="[a-zA-Z_-]*" (blur)="checkRoleExists(roleForm.controls['roleShortName'].value)">
+                  <mat-error
+                    *ngIf="roleForm.controls['roleShortName'].touched && roleForm.controls['roleShortName'].hasError('required')">
+                    Please enter Role Short Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="roleForm.controls['roleShortName'].touched && roleForm.controls['roleShortName'].hasError('pattern')">
+                    Please enter valid Role Short Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="roleForm.controls['roleShortName'].touched && roleForm.controls['roleShortName'].hasError('isRoleExist')">
+                    Role Short Name Already Exist In System.
+                  </mat-error>
+
+                </td>
+              </tr>
+              <tr>
+                <td>Role Status</td>
+                <td>
+                  <mat-select formControlName="roleStatus" placeholder="" disableOptionCentering class="roleselct">
+                    <mat-option *ngFor="let item of statusList" [value]="item.code">{{item.name}}
+                    </mat-option>
+                  </mat-select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" style="margin-bottom: 10px;">
+
+    </div>
+
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="60%">
+        <div fxLayout="row" fxLayoutAlign="end">
+          <button (click)="onSubmitRole()" style="width: 100px;" mat-raised-button color="primary"
+            [class.spinner]="loading" [disabled]="loading">Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+</mat-card>

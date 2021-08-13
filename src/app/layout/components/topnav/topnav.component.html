@@ -1,0 +1,40 @@
+<mat-toolbar class="fix-nav">
+
+    <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span class="logo"><img src="assets/images/card-3.jpg" width="45"></span>
+    <span class="logo"></span>
+    <div class="nav-brand">
+        360tf Admin
+    </div>
+    <span class="nav-spacer"></span>
+    <div class="userInfo">
+        {{role}}
+    </div>
+    <mat-icon>account_circle</mat-icon>
+    <div class="userInfo">
+        {{userInfo}}
+    </div>
+    <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="profile">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #profile="matMenu">
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Change Password</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Set Profile Picture</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>inbox</mat-icon>
+            <span>Contact Support</span>
+        </button>
+        <button mat-menu-item (click)="onLoggedout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

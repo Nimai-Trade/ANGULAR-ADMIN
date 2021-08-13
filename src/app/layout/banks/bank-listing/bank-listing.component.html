@@ -1,0 +1,156 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title"> <span id="changetext"> Banks </span>
+              <ul class="pull-right list-unstyled list-inline statusbar">
+                <li>
+                  <div fxLayout="row" fxFlex="100%;" [formGroup]="bankListForm">
+                    <div fxLayout="column" fxFlex="100%;">
+                      <div fxLayout="row">
+                        <mat-form-field fxFlex="90%">
+                          <mat-select formControlName="txtStatus" placeholder="Kyc Status"
+                            (selectionChange)="onChangeType(bankListForm.controls['txtStatus'].value)"
+                            disableOptionCentering class="roleselect">
+                            <mat-option [value]="">Select</mat-option>
+                            <mat-option *ngFor="let item of kycStatusList" [value]="item.code">{{item.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <!-- <a [routerLink]="['/app/transactions']" class="backbtn pull-right" id="backbtn"><span
+                  class="fas fa-long-arrow-alt-left"></span>
+                Back</a> -->
+            </h4>
+
+            <div>
+              <div class="dataTables_scrollBody">
+
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                  multiTemplateDataRows>
+
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef > # </th>
+                    <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="userid">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> User ID </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.userid}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="firstName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> First Name </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.firstName}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="lastName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Last Name
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.lastName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="landline">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Landline No. 
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.landline}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="emailAddress">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Email
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.emailAddress}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="registeredCountry">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Business Country
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.registeredCountry}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="bankName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Bank
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.bankName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="modeOfPayment">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Plan and Payment
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;"  *ngIf="element.planOfPayments !== 'No Active Plan'">
+                        <a (click)="showPayment(element.userid)" class="backbtn pull-right" id="backbtn">
+                          {{element.planOfPayments}}</a>
+                      </div>
+                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;"  *ngIf="element.planOfPayments === 'No Active Plan'">
+                        <a class="backbtn pull-right" id="backbtn">
+                          {{element.planOfPayments}}</a>
+                      </div>
+                    </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="totalTxn">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Total Quotes
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <div fxLayout="row" style="padding-left: 40px; cursor: pointer;">
+                        <a (click)="getQuotes(element.userid)" class="backbtn pull-right" id="backbtn">
+                          {{element.totalQuotes}}</a>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="kycStatus">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Kyc
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;" *ngIf="element.kyc !== null" >
+                        <a (click)="showKyc(element.userid)" class="backbtn pull-right" id="backbtn">
+                          {{element.kyc}}</a>
+                      </div>
+                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;" *ngIf="element.kyc === null || element.kyc === ''" >
+                        <a  class="backbtn pull-right" id="backbtn">
+                          Not Uploaded</a>
+                      </div>
+                    </td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="myHeader"> Action
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <div fxLayout="row" style="cursor: pointer;" >
+                        <a (click)="onPreview(element.userid)" class="backbtn pull-right" id="backbtn">
+                          Details</a>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                </table>
+              </div>
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

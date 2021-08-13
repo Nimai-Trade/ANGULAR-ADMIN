@@ -1,0 +1,31 @@
+<!-- <div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="80%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div> -->
+
+<h1 mat-dialog-title class="pophead">
+  <button type="button" (click)="onDismiss()" class="close" aria-label="Close" style="width: 20px;height: 10px;float:left;margin-right: 15px;">
+    <span aria-hidden="true">x</span>
+  </button>
+  {{data.title}}
+  
+</h1>
+
+
+
+<div mat-dialog-content style="padding-left: 20px;height: 300px;" *ngIf="imgData">
+  <img src={{imgData}} width="400" />
+</div>
+
+<div mat-dialog-content style="padding-left: 50%;padding-top: 4%;" *ngIf="otherImgTypeData">
+  <a style="color: blue; text-decoration: underline; cursor: pointer;" (click)="downloadImage(otherImgTypeData,mimeType)" >Download</a>
+</div>
+<div class="center">
+  <a (click)="onDismiss()" class="btn btn-info pull-right handle marzero">Close</a>
+</div>

@@ -1,0 +1,189 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-money-check-alt"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Grant Payment
+              <ul class="pull-right list-unstyled list-inline statusbar">
+                <li>
+                  <!-- <a href="#" class="btn btn-info pull-right handle marzero">+ New User</a> -->
+                  <div fxLayout="row" fxFlex="100%;" [formGroup]="paymentApprovalForm">
+                    <div fxLayout="column" fxFlex="50%;" >
+                      <div fxLayout="row">
+                        <mat-radio-group formControlName="paymentType"  style="display: flex;margin-right: 156px;" (change)="onGrantPaymentChange($event)">
+                          <span style="margin-top: 11px;
+                          display: inline-block;
+                          margin-right: 8px;"></span>
+                          <mat-radio-button value="grantPayment" [checked]='true'>Grant Payment
+                          </mat-radio-button>
+                          <span style="margin-right: 20px;"></span>
+                          <mat-radio-button value="grantVasPayment">Grant VAS Payment
+                          </mat-radio-button>                        
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                    <div fxLayout="column" fxFlex="50%;">
+                      <div fxLayout="row">                      
+                        <ejs-dropdownlist formControlName="country" id='diacritics' [dataSource]='countryData'
+                          [allowFiltering]='true' [ignoreAccent]='true'
+                          (change)="onChangeType(paymentApprovalForm.controls['country'].value)"
+                          placeholder='Select a Country' filterBarPlaceholder='' [(value)]='countryVal'>
+                        </ejs-dropdownlist>
+                      </div>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+            </h4>
+
+            <div>
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <!-- <div>
+                <div fxLayout="row">
+                  <div fxLayout="row" fxFlex="100%;" [formGroup]="assignRmForm">
+                    <div fxLayout="column" fxFlex="20%;">
+                      <div fxLayout="row">
+                        <mat-form-field fxFlex="90%">
+                          <mat-select formControlName="userType" placeholder="User Type"
+                            (selectionChange)="onChangeType(assignRmForm.controls['userType'].value)"
+                            disableOptionCentering>
+                            <mat-option [value]="">Select</mat-option>
+                            <mat-option *ngFor="let item of userTypeList" [value]="item.code">{{item.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                  multiTemplateDataRows>
+
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="userid">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> User ID </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{element.userid}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="firstName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> First Name
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="lastName">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Last Name
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="emailAddress">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Email
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="mobileNumber">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Mobile
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="nimaiSubscriptionDetailsList">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Plan and Payment
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.planOfPayments}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="registeredCountry">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Business Country
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.registeredCountry}} </td>
+                  </ng-container>
+
+                  <!-- <ng-container matColumnDef="makerComment">
+                    <th mat-header-cell *matHeaderCellDef> Maker Comment
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.makerComment}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="checkerComment">
+                    <th mat-header-cell *matHeaderCellDef> Checker Comment
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.checkerComment}} </td>
+                  </ng-container> -->
+
+                  <ng-container matColumnDef="paymentStatus">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef> Status
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div fxLayout="row">
+                        <div *ngIf="element.status === 'Maker Approved' && element.paymentApprovedBy != user">
+                          <button mat-button class="action-btn" matTooltip="Approve"
+                            (click)="paymentAction(element, 'Approved');">
+                            <mat-icon [ngStyle]="{'color':'green'}">verified_user</mat-icon>
+                          </button>
+                        </div>
+                        <div *ngIf="element.status== 'Success'">
+                          <button mat-button class="action-btn">
+                            <mat-icon [ngStyle]="{'color':'green'}"
+                            matTooltip="Approved">done
+                          </mat-icon>
+                          </button>
+                        </div>
+                        <div *ngIf="element.status === 'Maker Approved' && element.paymentApprovedBy != user">
+                          <button mat-button class="action-btn" matTooltip="Reject"
+                            (click)="paymentAction(element, 'Rejected');">
+                            <mat-icon [ngStyle]="{'color':'red'}">cancel</mat-icon>
+                          </button>
+                        </div>
+                        <div *ngIf="element.status === 'Maker Approved' && element.paymentApprovedBy === user">
+                          <button mat-button class="action-btn"
+                            matTooltip="You are not authorized to perform this action.">
+                            <mat-icon [ngStyle]="{'color':'green'}">lock</mat-icon>
+                          </button>
+                        </div>
+                        <div></div>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                </table>
+              </div>
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

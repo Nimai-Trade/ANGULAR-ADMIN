@@ -1,0 +1,85 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card [formGroup]="rightForm">
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content">
+        <div class="tab-pane active">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>
+                  Right Name
+                </td>
+                <td>
+                  <input formControlName="rightName" matInput placeholder="" required maxlength="30"
+                    pattern="[a-zA-Z ]*">
+                  <mat-error
+                    *ngIf="rightForm.controls['rightName'].touched && rightForm.controls['rightName'].hasError('required')">
+                    Please enter Right Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="rightForm.controls['rightName'].touched && rightForm.controls['rightName'].hasError('pattern')">
+                    Please enter valid Right Name
+                  </mat-error>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Right Short Name
+                </td>
+                <td>
+                  <input formControlName="rightShortName" matInput placeholder="" required maxlength="30"
+                    pattern="[a-zA-Z_-]*" (blur)="checkRightExists(rightForm.controls['rightShortName'].value)">
+                  <mat-error
+                    *ngIf="rightForm.controls['rightShortName'].touched && rightForm.controls['rightShortName'].hasError('required')">
+                    Please enter Right Short Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="rightForm.controls['rightShortName'].touched && rightForm.controls['rightShortName'].hasError('pattern')">
+                    Please enter valid Right Short Name
+                  </mat-error>
+                  <mat-error
+                    *ngIf="rightForm.controls['rightShortName'].touched && rightForm.controls['rightShortName'].hasError('isRightExist')">
+                    Right Short Name Already Exist In System.
+                  </mat-error>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Right Status
+                </td>
+                <td>
+                  <mat-select formControlName="rightStatus" placeholder="" disableOptionCentering class="roleselct">
+                    <mat-option *ngFor="let item of statusList" [value]="item.code">{{item.name}}
+                    </mat-option>
+                  </mat-select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="60%">
+        <div fxLayout="row" fxLayoutAlign="end">
+          <button (click)="onSubmitRight()" style="width: 100px;" mat-raised-button color="primary"
+            [class.spinner]="loading" [disabled]="loading">Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>

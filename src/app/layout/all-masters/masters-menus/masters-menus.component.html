@@ -1,0 +1,17 @@
+<div fxLayout="row">
+  <mat-button-toggle-group class="filterLinkBtn" value="{{activeRoute}}">
+    <mat-button-toggle value="employee" [routerLink]="['employee']">
+      Employee</mat-button-toggle>
+    <span class="mr15"></span>  
+    <mat-button-toggle value="role" [routerLink]="['role']">
+      Role</mat-button-toggle>
+    <span class="mr15"></span>  
+    <mat-button-toggle value="rights" [routerLink]="['rights']">
+      Rights</mat-button-toggle>
+    <span class="mr15"></span>  
+    <mat-button-toggle value="roleRightsMapping" [routerLink]="['roleRightsMapping']">
+      Role Rights Mapping</mat-button-toggle>
+    <span class="mr15"></span> 
+  </mat-button-toggle-group>
+</div>
+<router-outlet></router-outlet>

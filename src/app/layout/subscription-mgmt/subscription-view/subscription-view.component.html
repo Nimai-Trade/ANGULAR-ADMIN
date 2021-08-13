@@ -1,0 +1,116 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>Country</td>
+                <td>
+                  <input matInput value={{subscriptionData.countryName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Type</td>
+                <td>
+                  <input matInput value={{subscriptionData.customerType}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Plan Name</td>
+                <td>
+                  <input matInput value={{subscriptionData.planName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Credits</td>
+                <td>
+                  <input matInput value={{subscriptionData.credits}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Subsidiaries</td>
+                <td>
+                  <input matInput value={{subscriptionData.subsidiaries}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Customer Support</td>
+                <td>
+                  <input matInput value={{subscriptionData.customerSupport}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Relationship Manager</td>
+                <td>
+                  <input matInput value={{subscriptionData.rm}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+             
+              <tr>
+                <td>Pricing</td>
+                <td>
+                  <input matInput value={{subscriptionData.pricing}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Validity</td>
+                <td>
+                  <input matInput value="{{subscriptionData.validity}} Month"  readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Remark</td>
+                <td>
+                  <input matInput value={{subscriptionData.remark}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>Created Date</td>
+                <td>
+                  <input matInput value="{{subscriptionData.createdDate | date:'dd-MM-y HH:mm:ss'}}" readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Status</td>
+                <td>
+                  <input matInput value={{subscriptionData.status}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+
+</mat-card>
+

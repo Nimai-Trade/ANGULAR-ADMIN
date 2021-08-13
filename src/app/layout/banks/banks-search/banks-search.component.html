@@ -1,0 +1,77 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-university"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Banks</h4>
+            <!-- <form> -->
+            <div class="row" [formGroup]="transactionSearchForm">
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="searchTerm" [matAutocomplete]="auto" (keydown.space)="$event.preventDefault()" oninput="this.value = this.value.trim()">
+                  <label> User ID</label>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let userId of userIdSearch" [value]="userId" [disabled]="userId === 'No Record Found'">
+                      {{ userId }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="emailSearchTerm" [matAutocomplete]="auto1" (keydown.space)="$event.preventDefault()" oninput="this.value = this.value.trim()">
+                  <label>Email ID</label>
+                  <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let emailId of emalSearch" [value]="emailId" [disabled]="emailId === 'No Record Found'">
+                      {{ emailId }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="mobileSearchTerm" [matAutocomplete]="auto2" (keydown.space)="$event.preventDefault()" oninput="this.value = this.value.trim()">
+                  <label>Registered Mobile No.</label>
+                  <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let mobileNo of mobileSearch" [value]="mobileNo" [disabled]="mobileNo === 'No Record Found'">
+                      {{ mobileNo }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="companyNameSearchTerm" [matAutocomplete]="auto3" oninput="this.value = this.value.trim()">
+                  <label>Bank Name</label>
+                  <mat-autocomplete #auto3="matAutocomplete">
+                    <mat-option *ngFor="let companyName of companyNameSearch" [value]="companyName" [disabled]="companyName === 'No Record Found'">
+                      {{ companyName }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="countrySearchTerm" [matAutocomplete]="auto4" oninput="this.value = this.value.trim()">
+                  <label>Country</label>
+                  <mat-autocomplete #auto4="matAutocomplete">
+                    <mat-option *ngFor="let counry of countrySearch" [value]="counry" [disabled]="counry === 'No Record Found'">
+                      {{ counry }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+            </div>
+            <a (click)="searchBank();" class="btn btn-info pull-right">Search</a>
+            <div class="clearfix"></div>
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

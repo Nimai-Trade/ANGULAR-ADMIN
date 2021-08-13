@@ -1,0 +1,105 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <td>Country</td>
+                <td>
+                  <input matInput value={{vasData.countryName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                  <td>Customer Type</td>
+                  <td>
+                    <input matInput value={{vasData.customerType}} readonly="true" placeholder="">
+                  </td>
+                </tr>
+              <tr>
+                <td>Plan Name</td>
+                <td>
+                  <input matInput value={{vasData.planName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Description 1</td>
+                <td>
+                  <input matInput value={{vasData.description1}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Description 2</td>
+                <td>
+                  <input matInput value={{vasData.description2}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Description 3</td>
+                <td>
+                  <input matInput value={{vasData.description3}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Description 4</td>
+                <td>
+                  <input matInput value={{vasData.description4}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Description 5</td>
+                <td>
+                  <input matInput value={{vasData.description5}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Pricing</td>
+                <td>
+                  <input matInput value={{vasData.pricing}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Created Date</td>
+                <td>
+                  <input matInput value="{{vasData.createdDate | date:'dd-MM-y HH:mm:ss'}}" readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Status</td>
+                <td>
+                  <input matInput value={{vasData.status}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+
+</mat-card>
+

@@ -1,0 +1,136 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-user-tag"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Discount Coupons
+              <ul class="pull-right list-unstyled list-inline statusbar" style="font-size: small;">
+                Status:  
+                <li style="width:150px;"> 
+                  <div>
+                    <mat-select placeholder="All" disableOptionCentering class="roleselct"
+                      (selectionChange)="getStatusData($event.value)" style="height: 31px;">
+                      <mat-option value="all">All</mat-option>
+                      <mat-option value="Active">Active</mat-option>
+                      <mat-option value="Inactive">Inactive</mat-option>
+                      <mat-option value="Pending">Pending</mat-option>
+                      <mat-option value="Expired">Expired</mat-option>
+                      <mat-option value="Rejected">Rejected</mat-option>
+                      <!-- <mat-option  value="pending">Pending</mat-option> -->
+                    </mat-select>
+                  </div>
+                </li>
+                <li style="width: 160px;">
+                  <div style="display: inline-block;" *ngIf="myRights.includes('DISCOUNT_MGMT_CREATE')">
+                    <a  (click)="openCouponDialog('Create New Coupon', null);"
+                      class="btn btn-info pull-right handle marzero marzero1">+ New Coupon</a>
+                  </div>
+                </li>              
+              </ul>
+            </h4>
+            <div>
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <div fxLayout="row" style="margin-bottom: 10px;">
+              </div>
+              <div class="dataTables_scrollBody">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                  multiTemplateDataRows>
+                  <ng-container matColumnDef="coupon">
+                    <th style="padding-left: 20px !important;" mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Coupon
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell" style="padding-left: 20px !important;">
+                      <div class="row">{{element.couponCode}}</div>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="country">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Country
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell">
+                        <div class="row">{{element.country}}</div>
+                      </td>
+                  </ng-container>
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Status</th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      {{element.status}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="discountType">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Coupon Type
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.discountType}} </td>
+                  </ng-container>
+
+                  <ng-container  matColumnDef="couponDiscount">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Coupon Discount
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.amount}} </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="currency">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Ccy                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.currency}} </td>
+                  </ng-container> -->
+                  <ng-container matColumnDef="couponFor">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Coupon For
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.couponFor}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="subscriptionPlan">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Subscription Plan
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.subscriptionPlan}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="startDate">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Start Date
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.startDate}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="endDate">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">End Date
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.endDate}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader">Remaining Coupon
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell"> {{element.quantity}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="myHeader"> Actions
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="myCell">
+                      <!-- <div fxLayout="row" *ngIf="element.status=='Pending'">
+                        <button mat-button class="action-btn" matTooltip="Edit"
+                          (click)="openCouponDialog('Edit Coupon', element.discountId);">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                      </div> -->
+                      <button mat-button class="action-btn" matTooltip="Show Details"
+                        (click)="onPreview(element.discountId);">
+                        <mat-icon>visibility</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                </table>
+              </div>
+
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

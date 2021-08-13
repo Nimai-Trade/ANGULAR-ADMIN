@@ -1,0 +1,147 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+              <tr>
+                <th>User ID</th>
+                <td>
+                  <input matInput value={{customerData.userid}} readonly="true">
+                </td>
+              </tr>
+              <tr>
+                <td>Account Status </td>
+                <td>
+                  <input matInput value={{customerData.accountStatus}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Date & Time of Refer</td>
+                <td>
+                  <input matInput value="{{customerData.insertedDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Date & Time of Sign Up</td>
+                <td>
+                  <input matInput value="{{customerData.signUpDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true" placeholder="">
+                </td>
+              </tr> 
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <input matInput value={{customerData.firstName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input matInput value={{customerData.lastName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Email </td>
+                <td>
+                  <input matInput value={{customerData.emailAddress}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Mobile No.</td>
+                <td>
+                  <input matInput value={{customerData.mobileNumber}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td>Landline No.</td>
+                <td>
+                  <input matInput value={{customerData.landline}} readonly="true" placeholder="">
+                </td>
+              </tr>                   
+
+              <tr>
+                <td>Company Name</td>
+                <td>
+                  <input matInput value={{customerData.companyName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td>
+                  <input matInput value={{customerData.countryName}} readonly="true" placeholder="">
+                </td>
+              </tr> 
+
+              <tr>
+                <td>Subscription Validity</td>
+                <td>
+                  <input matInput value="" readonly="true" placeholder="">
+                </td>
+              </tr> 
+
+              <tr>
+                <td>Plan</td>
+                <td>
+                  <input matInput value="" readonly="true" placeholder="">
+                </td>
+              </tr> 
+              <tr>
+                <td>Subscription Fee Paid</td>
+                <td>
+                  <input matInput value="" readonly="true" placeholder="">
+                </td>
+              </tr> 
+              <tr>
+                <td>Referrer Earning</td>
+                <td>
+                  <input matInput value="" readonly="true" placeholder="">
+                </td>
+              </tr> 
+              
+              
+              <tr>
+                <th colspan="2">RM Details</th>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  <input matInput value={{customerData.rmFirstName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  <input matInput value={{customerData.rmLastName}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr>
+                <td>Designation</td>
+                <td>
+                  <input matInput value={{customerData.rmDesignation}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+</mat-card>

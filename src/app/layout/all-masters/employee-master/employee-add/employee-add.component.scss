@@ -1,0 +1,192 @@
+.pophead{
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin: 0 0 20px;
+    background: #00bcd4;
+    color: #fff;
+}
+
+.mat-dialog-title {
+    margin: 0;
+    display: block;
+}
+
+.halfleft span {
+    margin: -11px 0 0 0
+}
+
+.halfright {
+    width: 68% !important;
+    float: right;
+    vertical-align: top;
+    margin: 0;
+}
+
+input.mat-input-element {
+    margin-left: 0;
+    box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725)!important;
+}
+
+.e-multiselect{
+
+    height: 28px;
+    padding: 4px 8px;
+    font-size: 11.5px;
+    vertical-align: top;
+    border: 0px solid #ccc;
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725);
+
+}
+
+
+.e-input-group, .e-input-group.e-control-wrapper {
+    margin: -4px 0 0 0;
+    width: 100%;
+    border: 0;
+}
+.e-input-group .e-clear-icon{
+    display: none!important;
+}
+// !-- Rahul Changes 10-11-20
+.halfleft .e-input{
+    line-height: 34px !important; padding: 0px !important;
+}
+
+.halfleft  .e-ddl.e-input-group.e-control-wrapper .e-ddl-icon::before { 
+    margin-top: 11px;
+    margin: 0 0 0 -16px;
+    top: 12px;
+    position: relative;
+    right: -14px;
+}
+
+.halfleft .e-input-group, .e-input-group.e-control-wrapper{
+    display: inline-block;
+}
+
+.halfleft select {
+    padding: 4px 0px !important;
+}
+
+.halfleft .e-input + .e-input-group-icon, .halfleft .e-input-group .e-input + .e-input-group-icon, .halfleft .e-input-group.e-control-wrapper .e-input + .e-input-group-icon {
+    border-left-width: 0;
+    display: inline;
+    top: -2px;
+    position: relative;
+    right: 4px;
+}
+
+td .e-multiselect{
+    padding: 4px 0px;
+}
+
+td .e-multiselect .e-multiselect{
+    width: 100%;
+    padding: 0 6px;
+}
+
+.popupddl {
+    height: 28px !important;
+    margin-top: -1px !important; 
+    padding: 0 0 0 8px;
+
+    input{
+        width: 84%;
+        float: left;
+    }
+
+    span span{
+        width: 11px !important;
+        float: right;
+        height: 25px;
+        display: inline-block;
+        top: -7px;
+        right: 3px;
+    }
+}
+
+::ng-deep .multiselectClass .e-multiselect{
+    padding: 4px 0px 0 !important;
+    height: auto;
+}
+
+::ng-deep .multiselectClass .e-multiselect .e-multiselect{  
+    box-shadow: none;
+    padding: 0px 0px 0 !important;
+}
+
+::ng-deep .multiselectClass .e-multi-select-wrapper {
+    padding: 0 3px 0 6px;
+}
+
+::ng-deep .multiselectClass .e-multi-select-wrapper .e-chips-collection{
+    padding-top: 8px;
+}
+// ::ng-deep .multiselect-item-checkbox input[type=checkbox] + div {
+//     display: none;
+// }
+
+::ng-deep .dropdown-list{
+    // margin-top: -64%!important;
+    position: fixed!important;
+    width: 400px!important;
+    height: 200px!important;
+    overflow: hidden!important;
+}
+.closeBtn{
+        
+    left: 8px;
+    margin-left: 167px;
+    top: -10px;
+    padding-left: 3px;
+    padding-right: 2px;
+    bottom: 0px;
+    margin-bottom: 2px;
+    margin-top: 4px;
+    padding-top: 5px;
+    background: border-box;
+}
+.closeNone {
+    color:gray;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    z-index: 9;
+    margin-left: 82%;
+    border: gray;
+    
+}
+
+::ng-deep .multiselect-dropdown .dropdown-btn .selected-item a{
+    position: fixed;
+    display: contents;
+    margin-top: 0px!important;
+}
+::ng-deep .multiselect-dropdown .dropdown-btn{
+    border: none!important;
+    box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725)!important;
+}
+@media (max-width: 767px) { 
+    ::ng-deep .mat-dialog-container{
+         margin:0;
+         width: 100%;
+         max-width:100%;    
+     }
+ 
+     ::ng-deep .cdk-overlay-pane{
+         width:100% !important;
+         max-width:100% !important;
+     }
+ 
+     ::ng-deep .popupcontent input:read-only{
+         width:160px;
+     }
+     .countryCode_mobile,.mobNumber_mobile{
+        width: 100%!important;
+     }
+ }
+ 

@@ -1,0 +1,100 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent" *ngIf="couponForm">
+      <div class="tab-content" id="tab1">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder" >
+            <tr>
+              <td >Country</td>
+              <td>
+                <input matInput value="{{couponForm.country}}" readonly="true" placeholder="">
+              </td>
+            </tr>
+            <tr>
+              <td>Coupon For</td>
+              <td>
+                <input matInput value="{{couponForm.couponFor}}" readonly="true" placeholder="">
+              </td>
+            </tr>
+            <tr>
+              <td>Subscription Plan</td>
+              <td>
+                <input matInput value="{{couponForm.subscriptionPlan}}" readonly="true" placeholder="">
+              </td>
+            </tr>
+          <tr>
+            <td>Discount Type</td>            
+              <td>
+                <input matInput value="{{couponForm.discountType}}" readonly="true" placeholder="">
+              </td>
+          </tr>
+          <tr *ngIf="!showPecentage">
+            <td nowrap="">Amount</td>
+            <td>
+              <input matInput value="{{couponForm.amount}}" readonly="true" placeholder=""/>
+            </td>
+          </tr>           
+          <tr *ngIf="showPecentage">
+              <td nowrap="">Discount Percentage</td>
+              <td>
+                <input value="{{couponForm.discountPercentage}}" matInput placeholder="" readonly="true"/>
+              </td>
+          </tr>      
+          <tr *ngIf="showPecentage">
+              <td nowrap="">Max Discount</td>
+              <td>
+                <input matInput value="{{couponForm.maxDiscount}}" style="width:83%!important" readonly="true"/> USD 
+              </td>
+          </tr>      
+          <tr>
+            <td nowrap="">Start Date</td>
+            <td>
+                <input matInput value="{{couponForm.startDate}}" readonly="true"/>
+            </td>
+          </tr>
+          <tr>
+            <td nowrap="">Start Time</td>
+            <td>
+                <input matInput value="{{couponForm.startTime}}" readonly="true"/>
+            </td>
+          </tr>
+          <tr> 
+          <td nowrap="">End Date</td>
+            <td>
+                <input matInput value="{{couponForm.endDate}}" readonly="true"/>
+            </td>
+          </tr> 
+          <tr>
+              <td nowrap="">End Time</td>
+              <td>
+                  <input matInput value="{{couponForm.endTime}}" readonly="true"/>
+              </td>
+            </tr>
+            <tr>
+                <td >
+                    Quantity :
+                    <input style="width:100px!important;" type="number" readonly="true" value="{{couponForm.quantity}}">
+                </td>
+                <td>
+                    Coupon Code:
+                    <input type="text" readonly="true" value="{{couponForm.couponCode}}" >
+                </td>
+            </tr>
+        </table>   
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</mat-card>
+

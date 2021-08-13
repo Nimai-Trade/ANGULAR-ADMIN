@@ -1,0 +1,31 @@
+.pophead{
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin: 0 0 20px;
+    background: #00bcd4;
+    color: #fff;
+}
+
+.mat-dialog-title {
+    margin: 0;
+    display: block;
+}
+
+// .form-control {
+
+// }
+.textarea_comment{
+    border: 1px solid gray!important;
+}
+
+::ng-deep .mat-dialog-container {
+overflow: hidden!important;
+}
+::ng-deep .mat-dialog-actions {
+margin-left: 10px!important;
+}
+
+::ng-deep .comment_dialog{
+margin: 11px -24px!important;
+}
