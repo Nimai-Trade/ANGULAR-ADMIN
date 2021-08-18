@@ -180,8 +180,11 @@ td .e-multiselect .e-multiselect{
      ::ng-deep .cdk-overlay-pane{
          width:100% !important;
          max-width:100% !important;
+        
      }
- 
+    ::ng-deep .mat-select-panel {
+        margin-left: 50%!important;
+    }
      ::ng-deep .popupcontent input:read-only{
          width:160px;
      }
@@ -189,4 +192,3 @@ td .e-multiselect .e-multiselect{
         width: 100%!important;
      }
  }
- 

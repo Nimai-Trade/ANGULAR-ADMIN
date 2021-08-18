@@ -28,7 +28,7 @@
                     </div>
                     <div fxLayout="column" fxFlex="50%;">
                       <div fxLayout="row">                      
-                        <ejs-dropdownlist formControlName="country" id='diacritics' [dataSource]='countryData'
+                        <ejs-dropdownlist class="mobile_countryFilter" formControlName="country" id='diacritics' [dataSource]='countryData'
                           [allowFiltering]='true' [ignoreAccent]='true'
                           (change)="onChangeType(paymentApprovalForm.controls['country'].value)"
                           placeholder='Select a Country' filterBarPlaceholder='' [(value)]='countryVal'>

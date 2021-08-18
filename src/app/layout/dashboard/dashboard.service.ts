@@ -113,6 +113,12 @@ export class DashboardService {
     }
     return this.httpClient.post(URLS.getOverAllCustomersCount, param);
   }
+  getOverAllReferrer(subscriberType): Observable<any> {
+    const param = {
+      'subscriberType': subscriberType
+    }
+    return this.httpClient.post(URLS.getOverAllReferrerCount, param);
+  }
   getOverAllBank(subscriberType, bankType): Observable<any> {
     const request = {
       'subscriberType': subscriberType,

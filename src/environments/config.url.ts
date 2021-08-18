@@ -135,6 +135,7 @@ URLS.getBankAsUwRevenue = `${environment.BASE_API_URL}api/dashboard/revenue/bank
 
 URLS.getCountryAnalysis = `${environment.BASE_API_URL}api/dashboard/countryAnalysis`;
 URLS.getOverAllCustomersCount = `${environment.BASE_API_URL}api/dashboard/overall/customers`;
+URLS.getOverAllReferrerCount = `${environment.BASE_API_URL}api/dashboard/customer/referrer`;
 URLS.getOverAllBankCount = `${environment.BASE_API_URL}api/dashboard/overall/bank`;
 URLS.getCustStatTransCount = `${environment.BASE_API_URL}api/dashboard/overall/custTransactStat`;
 URLS.getNewUserStatCount = `${environment.BASE_API_URL}api/dashboard/newUserStats`;

@@ -225,7 +225,7 @@ export class ManagementDashboardComponent implements OnInit {
       })
   }
   getOverAllRef() {
-      this.service.getOverAllCust("Referrer").subscribe((res) => {
+      this.service.getOverAllReferrer("Referrer").subscribe((res) => {
           this.overAllRefCount = res;
       })
   }

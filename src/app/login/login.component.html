@@ -61,7 +61,7 @@
                                                             type="password" [type]="hide ? 'password' : 'text'" required maxlength="20">
                                                         <label>Password</label>
                                                         <i aria-hidden="true" class="fas fa-unlock-alt passicon"></i>
-                                                        <mat-icon matSuffix (click)="hide = !hide" style="color:#18b3cc!important;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                        <mat-icon matSuffix (click)="hide = !hide" style="color:#18b3cc!important;" class="eye_icon">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                                         <mat-error
                                                             *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('required')"
                                                             style="background-color: transparent !important;">
@@ -86,7 +86,7 @@
                                                         </div>
                                                     </div> -->
                                                 </div>
-                                                <div class="inputDiv logininput"  class="recaptcha_div">                                               
+                                                <div class="inputDiv recaptcha_div"  >                                               
                                                     <re-captcha  (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
                                                     </re-captcha>
                                                     <mat-error *ngIf="loginForm.controls['recaptchaReactive'].touched && loginForm.controls['recaptchaReactive'].hasError('required')"
@@ -135,7 +135,7 @@
                                                             </mat-error>
                                                       
                                                     </div>
-                                                    <div class="inputDiv logininput" style="padding-left: 40px!important;">                                                      
+                                                    <div class="inputDiv recaptcha_div">                                                      
                                                         <re-captcha (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
                                                         </re-captcha>
                                                         <mat-error *ngIf="forgPassSubmitted && forgotPasswordForm.controls['recaptchaReactive'].hasError('required')"

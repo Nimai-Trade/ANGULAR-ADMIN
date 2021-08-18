@@ -86,8 +86,6 @@ export class EmployeeAddComponent implements OnInit {
     this.getroleList();
   }
 
-
-
   checkEmailPatter(value) {
   }
 
@@ -230,6 +228,7 @@ export class EmployeeAddComponent implements OnInit {
           if(entry.country!="All")
             this.countryCode.push(entry.code);
         }
+        console.log("")
 
       });
   }

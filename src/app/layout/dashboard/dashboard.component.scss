@@ -397,3 +397,9 @@
 table {
   width: 100%;
 }
+@media (max-width: 767px){
+::ng-deep .mat-paginator-page-size{
+  margin-top: 22px;
+  margin-left: 26px;
+}
+}

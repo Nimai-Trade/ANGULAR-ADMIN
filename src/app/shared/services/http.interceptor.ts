@@ -28,6 +28,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+                    // Authorization: `Bearer ${sessionStorage.getItem('jwtToken')}`
                 }
             });
         }

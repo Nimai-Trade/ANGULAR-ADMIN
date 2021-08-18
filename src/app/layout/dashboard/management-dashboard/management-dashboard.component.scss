@@ -484,7 +484,9 @@ input.mat-input-element {
 	box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725);
 } 
 
-// ::ng-deep .mat-paginator-page-size{
-//   margin-top: -24px!important;
-//   margin-left: 78%!important;
-// }
+@media (max-width: 767px){
+  ::ng-deep .mat-paginator-page-size{
+    margin-top: -49px!important;
+    margin-left: 11px!important;
+  }
+  }

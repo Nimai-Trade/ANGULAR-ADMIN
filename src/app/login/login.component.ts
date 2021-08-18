@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         overLappingIssue();
         localStorage.removeItem('isLoggedin');
         localStorage.removeItem('jwtToken');
+        // sessionStorage.removeItem('jwtToken');
         localStorage.removeItem('userRight');
 
         this.forgotPasswordForm = this.fb.group({
@@ -86,6 +87,7 @@ export class LoginComponent implements OnInit {
                 (res) => {
                     this.Removevalidate();
                     localStorage.setItem('jwtToken', res.accessToken);
+                    // sessionStorage.setItem('jwtToken', res.accessToken);
                     if(res.accessToken){
                         this.service.validateUser(this.loginForm.value.userName).subscribe(
                         (res) => {

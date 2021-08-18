@@ -50,4 +50,11 @@ table {
    ::ng-deep .popupcontent input:read-only{
        width:160px;
    }
+   ul.pull-right.list-unstyled.list-inline.statusbar{
+     float: left!important;
+     margin-top: 70px!important;
+   }
+   ::ng-deep .mat-select-panel{
+    margin-left: 19%!important;
+   }
 }

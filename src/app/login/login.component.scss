@@ -204,28 +204,49 @@
 .loginbody input{
   margin-left: 24px !important;
 }
+.recaptcha_div{
+  padding-left: 40px;
+}
 @media (max-width: 767px) { 
-  .loginbody .maindiv{
-    width: 350px!important;
-  }
-  .loginbody .sign-in-container{
-    left: -21%!important;
-  }
   .loginbody .overlay-right{
     right: -8px!important;
   }
   .loginbody .overlay-panel p, .loginbody .overlay-panel h1{
     display: block!important;
   }
-  .recaptcha_div{
-    width: 296px;
-    padding-left: 60px!important;
-    transform:scale(0.77);
-    -webkit-transform:scale(0.77);
+  #logindiv  .recaptcha_div{
+    transform:scale(0.7);
+    -webkit-transform:scale(0.7);
     transform-origin:0 0;
     -webkit-transform-origin:0 0;
+    padding-left: 29%;
+}
+#ForgotPassworddiv  .recaptcha_div{
+  transform:scale(0.7);
+  -webkit-transform:scale(0.7);
+  transform-origin:0 0;
+  -webkit-transform-origin:0 0;
+  padding-left: 15%;
+}
+.loginbody .sign-in-container{
+  padding: 0 0px!important;
+}
+#logindiv .inputDiv{
+  margin-left: -41px!important;
+}
+#ForgotPassworddiv .inputDiv{
+  margin-left: -37px!important;
+  width: 80%;
+}
+.eye_icon{
+  padding-left: 10%;
+}
+.loginbody h1{
+  font-size: 15px !important;
+}
+.loginbody .overlay-panel p{
+  font-size: 12px !important;
 }
 }
-.recaptcha_div{
-  padding-left: 40px;
-}
+
+
