@@ -36,3 +36,10 @@ input.mat-input-element {
      }
  }
  
+
+ @media (max-width: 767px) {     
+   .reject-btn{
+        bottom: 32px;
+        left: 96px;
+    }
+}

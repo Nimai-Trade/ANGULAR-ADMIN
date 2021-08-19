@@ -86,7 +86,7 @@
                     <td>
                       <button [disabled]="item.invalid" class="btn btn-info" id="btnapprove"
                         (click)="kycAction('Approved', item)">Approve</button>&nbsp;&nbsp;
-                      <button  [disabled]="item.invalid" class="btn btn-info" id="btnreject" (click)="kycAction('Rejected', item)">Reject</button>
+                      <button  [disabled]="item.invalid" class="btn btn-info reject-btn" id="btnreject" (click)="kycAction('Rejected', item)">Reject</button>
                     </td>
                   </tr>
 

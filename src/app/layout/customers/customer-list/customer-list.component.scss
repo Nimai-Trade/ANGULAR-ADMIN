@@ -115,3 +115,16 @@
   padding-left: 5px;
   width: 233px;
 }
+
+@media (max-width: 767px) { 
+.card-title{
+  margin-top: 18px !important;
+}
+}
+
+@media screen and (min-width: 319px) and (max-width: 767px){
+.mat-paginator-page-size {
+    top: 96px !important;
+    left: 18px !important;
+}
+}
