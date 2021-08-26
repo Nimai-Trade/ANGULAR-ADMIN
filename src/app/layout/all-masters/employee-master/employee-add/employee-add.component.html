@@ -83,9 +83,33 @@
                 <td nowrap="">Mobile Number</td>
                 <td>
                   <div style="float: left;width: 40%;position:relative;" class="countryCode_mobile">
-                    <ejs-dropdownlist  popupHeight='200px' popupWidth='250px' formControlName="countryExt" id='diacritics' class="popupddl" [dataSource]='countryCode' [allowFiltering]='true' [ignoreAccent]='true'
+                    <!-- <ejs-dropdownlist  popupHeight='200px' popupWidth='250px' formControlName="countryExt" id='diacritics' class="popupddl" [dataSource]='countryCode' [allowFiltering]='true' [ignoreAccent]='true'
                     placeholder='Select a Country Code' filterBarPlaceholder=''>
-                  </ejs-dropdownlist> 
+                  </ejs-dropdownlist>  -->
+                
+<!-- <select 
+     #selectList formControlName="countryExt"
+     [(ngModel)]="myDropDown" 
+    (ngModelChange)="onChangeofOptions($event)">
+    <option  value="empty"></option>
+    <option  *ngFor="let item of countryCode">         
+        {{item}}
+    </option>    
+</select> -->
+<!-- <p>items {{ items | json }}</p> -->
+                  <!-- <select class="select_extension">
+                    <option formControlName="countryExt" *ngFor="let item of countryList" id='diacritics' class="popupddl"  [value]="item.code"> {{item.code}}</option>
+                  </select> -->
+                  <!-- <mat-select [formControl]="countryExt" >
+                    <mat-option *ngFor="let item of countryList" [value]="item.code">
+                      {{item.code}}
+                    </mat-option>
+                  </mat-select> -->
+                    <mat-select formControlName="countryExt" disableOptionCentering class="roleselect">
+                      <mat-option [value]="">Select</mat-option>
+                      <mat-option *ngFor="let item of countryList" [value]="item.code">{{item.code}}
+                      </mat-option>
+                    </mat-select>
                   <mat-error
                     *ngIf="employeeForm.controls['countryExt'].touched && employeeForm.controls['countryExt'].hasError('required')">
                     Please select Country Code
@@ -198,8 +222,7 @@
                       {{bank.name}}
                     </mat-option>
                   </mat-select> -->
-                  <mat-error
-                    *ngIf="employeeForm.controls['country'].touched && employeeForm.controls['country'].hasError('required')">
+                  <mat-error *ngIf="employeeForm.controls['country'].touched && employeeForm.controls['country'].hasError('required')">
                     Please select Region Allocated
                   </mat-error>
                 </td>

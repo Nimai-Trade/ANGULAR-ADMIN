@@ -132,6 +132,21 @@ span.mat-button-wrapper {
   ::ng-deep .marzero{
    margin-top: 65px!important;
    margin-bottom: 0px!important;
-  }
- 
+  } 
 }
+
+@media (max-width:767px) {
+  ::ng-deep .mat-paginator-page-size {
+    margin-top: 2px !important;
+    margin-left: -3px !important;
+}  
+}
+
+    @media (max-width:767px) {
+     .status {
+        margin-top: 6px !important;
+        margin-bottom: 0px !important;
+    }  
+    }
+
+

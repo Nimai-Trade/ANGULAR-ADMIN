@@ -117,14 +117,22 @@
 }
 
 @media (max-width: 767px) { 
-.card-title{
+  ::ng-deep .card-title{
   margin-top: 18px !important;
 }
 }
 
-@media screen and (min-width: 319px) and (max-width: 767px){
-.mat-paginator-page-size {
-    top: 96px !important;
-    left: 18px !important;
+// @media screen and (min-width: 319px) and (max-width: 767px){
+// .mat-paginator-page-size {
+//     top: 96px !important;
+//     left: 18px !important;
+// }
+// }
+
+
+@media (max-width: 767px){
+  ::ng-deep .mat-paginator-page-size {
+    margin-top: 24px !important;
+    margin-left: 2px !important;
 }
 }

@@ -141,4 +141,10 @@ export class SubscriptionAddComponent implements OnInit {
     });
   }
 
+  onChangeType(country) {
+   
+    //this.subscriptionForm.get('country').setValue(this.countryVal);
+    console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
+   // this.loadSubsriptionList();
+  }
 }

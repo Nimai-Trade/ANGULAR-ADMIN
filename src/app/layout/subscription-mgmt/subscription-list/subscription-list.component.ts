@@ -182,7 +182,7 @@ export class SubscriptionListComponent implements OnInit {
   }
 
   onChangeType(country) {
-    //console.log(this.countryVal);
+   
     this.subscriptionForm.get('country').setValue(this.countryVal);
     //console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
     this.loadSubsriptionList();

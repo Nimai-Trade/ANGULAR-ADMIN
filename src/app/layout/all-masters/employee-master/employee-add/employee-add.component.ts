@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
@@ -11,6 +11,7 @@ import { MultiSelectComponent, DropDownListComponent } from '@syncfusion/ej2-ang
 })
 
 export class EmployeeAddComponent implements OnInit {
+  @ViewChild('selectList') selectList: ElementRef;
   public mulObj: MultiSelectComponent;
   selectedItems: any;
   dropdownSettings = {};
@@ -35,6 +36,7 @@ export class EmployeeAddComponent implements OnInit {
   roleSelection: any = [];
   disabledOther: boolean=false;
   isOptionNone: boolean=false;
+  items: any;
   constructor(private fb: FormBuilder, private service: AllMasterService, public dialogRef: MatDialogRef<EmployeeAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.employeeForm = fb.group({
       empId: [],
@@ -228,11 +230,25 @@ export class EmployeeAddComponent implements OnInit {
           if(entry.country!="All")
             this.countryCode.push(entry.code);
         }
-        console.log("")
+       
 
       });
   }
+  onChangeofOptions(newGov) {
+    console.log(newGov);
+ }
 
+ filterItem(event){
+     if(!event){
+         this.items = this.countryList;
+     } // when nothing has typed*/   
+     if (typeof event === 'string') {
+         this.items = this.countryList.filter(a => a.toLowerCase()
+                                            .startsWith(event.toLowerCase())); 
+     }
+  //   console.log(this.items.length);
+     this.selectList.nativeElement.size = this.items.length + 1 ;       
+  }   
   getroleList() {
     this.service.getRoleDataList().subscribe(
       (res) => {
