@@ -192,12 +192,23 @@
                   <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
                 </table>
               </div>
-              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+              <!-- <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
                 <h3 style="text-align:center"> No Data </h3>
               </mat-card>
               <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
                 [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pagerConfig.pageSizeOptions" (page)="onPageChange($event)">
+              </mat-paginator> -->
+
+
+
+              <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                <h3 style="text-align:center"> No Data </h3>
+              </mat-card>
+              <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
               </mat-paginator>
+
+
             </div>
 
           </div>
