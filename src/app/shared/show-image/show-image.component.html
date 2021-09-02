@@ -24,7 +24,7 @@
 </div>
 
 <div mat-dialog-content style="padding-left: 50%;padding-top: 4%;" *ngIf="otherImgTypeData">
-  <a style="color: blue; text-decoration: underline; cursor: pointer;" (click)="downloadImage(otherImgTypeData,mimeType)" >Download</a>
+  <a style="color: blue; text-decoration: underline; cursor: pointer;" (click)="downloadImage(otherImgTypeData,mimeType)" >{{isDownloadORview}}</a>
 </div>
 <div class="center">
   <a (click)="onDismiss()" class="btn btn-info pull-right handle marzero">Close</a>

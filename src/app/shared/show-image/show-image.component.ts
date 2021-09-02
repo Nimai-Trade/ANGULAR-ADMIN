@@ -14,6 +14,7 @@ export class ShowImageComponent implements OnInit {
   otherImgTypeData:any; 
   mimeType:any;
   extension:any;
+  isDownloadORview: string;
   constructor(private sanitizer: DomSanitizer,public dialogRef: MatDialogRef<ShowImageComponent>,
      @Inject(MAT_DIALOG_DATA) public data) { 
        const base64Content = this.data.image;
@@ -31,6 +32,13 @@ export class ShowImageComponent implements OnInit {
         this.mimeType=mimeType;
        } 
       console.log("mimeType--",this.mimeType)
+if(this.mimeType=='application/pdf')
+{
+  this.isDownloadORview='View';
+}else{
+  this.isDownloadORview='Download';
+
+}
      }
   ngOnInit() {    
   //  this.loadImageDetail();
@@ -60,17 +68,26 @@ export class ShowImageComponent implements OnInit {
         byteArrays.push(byteArray);
     }
     var blob = new Blob(byteArrays, {type: mimeType});
-    if(mimeType=="application/pdf"){
-      this.extension=".pdf"
-    }else if(mimeType=="application/excel" || mimeType=="application/vnd.ms-excel" || mimeType=="application/x-excel" || mimeType=="application/x-msexcel"){
+    if(mimeType=="application/excel" || mimeType=="application/vnd.ms-excel" || mimeType=="application/x-excel" || mimeType=="application/x-msexcel"){
       this.extension=".xls"
     }else if(mimeType=="image/png"){
       this.extension=".png"
     }else if(mimeType=="application/msword"){
       this.extension=".doc"
     }
+
+    if(mimeType=="application/pdf"){
+      this.extension=".pdf"
+      const file = new File([blob], fileName + "_" + new Date().getTime() + '' +this.extension, { type: mimeType });
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+
+    }else{    
     const file = new File([blob], fileName + "_" + new Date().getTime() + '' +this.extension, { type: mimeType });
     saveAs(file);
+    }
+    
+
   }
   
   onConfirm(): void {
