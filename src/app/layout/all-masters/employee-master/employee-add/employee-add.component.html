@@ -105,11 +105,19 @@
                       {{item.code}}
                     </mat-option>
                   </mat-select> -->
-                    <mat-select formControlName="countryExt" disableOptionCentering class="roleselect">
+
+                
+                    <mat-select  formControlName="countryExt" disableOptionCentering class="roleselect">
+                       <input (keyup)="onKey($event.target.value)" class="inputSearch"> 
+                       <mat-option [value]="">Select</mat-option>
+                       <mat-option *ngFor="let item of selectedcountry" [value]="item.code">{{item.code}}</mat-option>
+                    </mat-select>
+                
+                    <!-- <mat-select formControlName="countryExt" disableOptionCentering class="roleselect">
                       <mat-option [value]="">Select</mat-option>
                       <mat-option *ngFor="let item of countryList" [value]="item.code">{{item.code}}
                       </mat-option>
-                    </mat-select>
+                    </mat-select> -->
                   <mat-error
                     *ngIf="employeeForm.controls['countryExt'].touched && employeeForm.controls['countryExt'].hasError('required')">
                     Please select Country Code

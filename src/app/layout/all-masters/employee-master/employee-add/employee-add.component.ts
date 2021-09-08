@@ -37,6 +37,7 @@ export class EmployeeAddComponent implements OnInit {
   disabledOther: boolean=false;
   isOptionNone: boolean=false;
   items: any;
+  selectedcountry: any=[];
   constructor(private fb: FormBuilder, private service: AllMasterService, public dialogRef: MatDialogRef<EmployeeAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.employeeForm = fb.group({
       empId: [],
@@ -222,6 +223,7 @@ export class EmployeeAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         let item = {country: "All", code: "All"}
         // this.countryList.push(item);
         this.countryList.unshift(item);
@@ -237,6 +239,18 @@ export class EmployeeAddComponent implements OnInit {
   onChangeofOptions(newGov) {
     console.log(newGov);
  }
+
+
+
+ onKey(value) { 
+ this.selectedcountry = this.search(value);
+ 
+  }
+  search(value: string) { 
+    let filter = value;
+    return this.countryList.filter(option => option.code.startsWith(filter));
+  }
+
 
  filterItem(event){
      if(!event){

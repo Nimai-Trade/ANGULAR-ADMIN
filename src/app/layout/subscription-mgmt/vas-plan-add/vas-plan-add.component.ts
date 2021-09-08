@@ -14,6 +14,7 @@ export class VasPlanAddComponent implements OnInit {
   countryList: any;
   vasForm: any;
   countryData: any = [];
+  selectedcountry: any=[];
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<VasPlanAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
     this.vasForm = fb.group({
@@ -54,6 +55,7 @@ export class VasPlanAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         for (let entry of this.countryList) {
           this.countryData.push(entry.country);
         }
@@ -113,6 +115,12 @@ export class VasPlanAddComponent implements OnInit {
         });
       });
   }
-
+  onKey(value) { 
+    this.selectedcountry = this.search(value);    
+     }
+     search(value: string) { 
+       let filter = value.toLowerCase();
+       return this.countryList.filter(option => option.country.toLowerCase().startsWith(filter));
+     }
 
 }

@@ -18,6 +18,7 @@ export class SubscriptionAddComponent implements OnInit {
   rmList: any;
   subscriptionData: any;
   countryData: any = [];
+  selectedcountry: any=[];
 
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
@@ -72,6 +73,7 @@ export class SubscriptionAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         for (let entry of this.countryList) {
           this.countryData.push(entry.country);
         }
@@ -147,4 +149,17 @@ export class SubscriptionAddComponent implements OnInit {
     console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
    // this.loadSubsriptionList();
   }
+
+
+
+  
+ onKey(value) { 
+  this.selectedcountry = this.search(value);
+  
+   }
+   search(value: string) { 
+     let filter = value.toLowerCase();
+     return this.countryList.filter(option => option.country.toLowerCase().startsWith(filter));
+   }
+ 
 }

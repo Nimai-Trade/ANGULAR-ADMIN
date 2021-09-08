@@ -40,12 +40,17 @@
               <tr>
                 <td nowrap="">Country</td>
                 <td>
-                  <mat-select formControlName="countryName" class="roleselct" disableOptionCentering>
+                  <mat-select formControlName="countryName"  class="roleselct" disableOptionCentering>
+                    <input (keyup)="onKey($event.target.value)" class="inputSearch"> 
+                   <mat-option [value]="">Select</mat-option>
+                   <mat-option *ngFor="let item of selectedcountry" [value]="item.country">{{item.country}}</mat-option>
+                 </mat-select>
+                  <!-- <mat-select formControlName="countryName" class="roleselct" disableOptionCentering>
                     <mat-option [value]="">Select</mat-option>
                     <mat-option *ngFor="let item of countryList" [value]="item.country">
                       {{item.country}}
                     </mat-option>
-                  </mat-select>
+                  </mat-select> -->
                   <!-- <ejs-dropdownlist formControlName="countryName" class="popupddl1 mobileCountry" [dataSource]='countryData' [allowFiltering]='true' [ignoreAccent]='true'
                   placeholder='Select country' filterBarPlaceholder=''>
                   </ejs-dropdownlist>   working-->

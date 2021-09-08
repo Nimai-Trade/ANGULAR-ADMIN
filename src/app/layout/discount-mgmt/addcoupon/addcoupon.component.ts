@@ -54,6 +54,7 @@ export class AddcouponComponent implements OnInit {
   flag:any;      
   uploadedFile: File[] = [];
   couponDetails:any;
+  selectedcountry: any=[];
   constructor(private fb: FormBuilder, private service: DiscountMgmtService, public dialogRef: MatDialogRef<AddcouponComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
    
   }
@@ -374,6 +375,7 @@ calculateAmount(value){
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         for (let entry of this.countryList) {
           this.country.push(entry.country);
         }
@@ -400,6 +402,13 @@ calculateAmount(value){
     }
     
   }
-
+  onKey(value) { 
+    this.selectedcountry = this.search(value);    
+     }
+     search(value: string) { 
+       let filter = value.toLowerCase();
+       return this.countryList.filter(option => option.country.toLowerCase().startsWith(filter));
+     }
+   
 
 }
