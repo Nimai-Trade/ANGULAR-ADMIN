@@ -89,3 +89,10 @@ table {
 .mb-20 {
   margin-bottom: 20px;
 }
+
+@media(max-width: 767px){
+  ::ng-deep .mat-paginator-page-size {
+    top: 55px !important;
+    left: 28px !important;
+}
+}

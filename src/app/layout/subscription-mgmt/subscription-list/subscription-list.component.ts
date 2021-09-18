@@ -19,6 +19,7 @@ import { DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
 export class SubscriptionListComponent implements OnInit {
 
   // @ViewChild('dropdown')
+  show:boolean=false;
   public dropdownObject: DropDownListComponent;
   subscriptionForm: any;
   public pagerConfig: any;
@@ -38,6 +39,7 @@ export class SubscriptionListComponent implements OnInit {
   countryData: any = [];
   countryVal : any;
   role : any;
+  selectedcountry: any;
 
   constructor(private formBuilder: FormBuilder, private service: SubscriptionService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.subscriptionForm = formBuilder.group({
@@ -129,7 +131,16 @@ export class SubscriptionListComponent implements OnInit {
   }
 
   loadSubsriptionList() {
-    this.service.getSubscriptionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize,  this.pagerConfig.sortBy, this.pagerConfig.direction, this.subscriptionForm.value).subscribe((res) => this.onSuccess(res));
+
+    if(this.subscriptionForm.value.customerType== 'BANK AS CUSTOMER'){
+       
+      this.displayColumns = ['position','customerType','countryName', 'planName', 'credits', 'rm', 'validity', 'pricing', 'status', 'actions'];
+}else{
+  this.displayColumns= ['position','customerType','countryName', 'planName', 'credits', 'subsidiaries', 'rm', 'validity', 'pricing', 'status', 'actions'];
+
+}
+
+this.service.getSubscriptionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize,  this.pagerConfig.sortBy, this.pagerConfig.direction, this.subscriptionForm.value).subscribe((res) => this.onSuccess(res));
   }
   
   onSuccess(res: any) {
@@ -141,6 +152,7 @@ export class SubscriptionListComponent implements OnInit {
       //  console.log(item);
         this.vasList.push(item);
       });
+    
       this.dataSource = new MatTableDataSource(this.vasList);
     }
   }
@@ -175,6 +187,7 @@ export class SubscriptionListComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         for (let entry of this.countryList) {
           this.countryData.push(entry.country);
         }
@@ -182,8 +195,8 @@ export class SubscriptionListComponent implements OnInit {
   }
 
   onChangeType(country) {
-   
-    this.subscriptionForm.get('country').setValue(this.countryVal);
+   console.log(country , this.countryVal)
+    this.subscriptionForm.get('country').setValue(country);
     //console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
     this.loadSubsriptionList();
   }
@@ -192,6 +205,14 @@ export class SubscriptionListComponent implements OnInit {
     this.setPagerConfig();
     this.loadSubsriptionList();
   }
+
+  onKey(value) { 
+    this.selectedcountry = this.search(value);    
+     }
+     search(value: string) { 
+       let filter = value.toLowerCase();
+       return this.countryList.filter(option => option.country.toLowerCase().startsWith(filter));
+     }
 
   // getObject(args) {
   //   var fieldObject = this.dropdownObject.getDataByValue(this.subscriptionForm.controls.country.value);

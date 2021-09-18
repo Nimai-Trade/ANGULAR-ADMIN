@@ -107,13 +107,29 @@ table {
 }
 
 ::ng-deep .mat-paginator-page-size {
-  margin-top: 26px !important;
+  margin-top: 10px !important;
   margin-left: 13px !important;
+}
+@media(max-width: 767px){
+  ::ng-deep .mat-paginator-page-size {
+    margin-top: 18px !important;
+    margin-left: 13px !important;
+  }
 }
 
 .pull-right {
   margin-bottom: 0px !important;
   margin-top: 10px !important;
 }
-
+.inputSearch{
+  border-right-width: 0px;
+  border-left-width: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 1px;
+  padding-right: 251px;
+  border-radius: 5%;
+  border-color: #e4d0d0;
+  font-size: 129%;
+  padding-bottom: 7px;
+}
 

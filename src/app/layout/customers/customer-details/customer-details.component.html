@@ -260,17 +260,17 @@
               <tr *ngFor="let sub of customerData.subsidiary" style="border: 1px solid #bdbdbd;">
                 <td>{{sub.userId}}</td>
                 <td style="padding-left: 5%;">{{sub.name}}</td>
-                <td *ngIf="sub.status==='ACTIVE'">
-                    <a style="color: red" *ngIf="sub.status==='ACTIVE' && myRights.includes('REMOVE_SUBSIDIARY')"  matTooltip="Remove Account"
+                <td *ngIf="(sub.status | lowercase) == 'active'">
+                    <a style="color: red" *ngIf="(sub.status | lowercase) =='active' && myRights.includes('REMOVE_SUBSIDIARY')"  matTooltip="Remove Account"
                     (click)="confirmDialog('Remove Associated Account ', sub)" > Active                   
                   </a>
                 </td>
-                <td *ngIf="sub.status==='PENDING'">
+                <td *ngIf="(sub.status | lowercase) == 'pending'">
                   <a  matTooltip="PENDING USER" style="color: red;cursor: auto;">
                     Pending
                   </a>
               </td>
-              <td *ngIf="sub.status==='INACTIVE'">
+              <td *ngIf="(sub.status | lowercase) == 'inactive'">
                 <a  matTooltip="INACTIVE USER" style="color: red;pointer-events: none;" >
                   INACTIVE
                 </a>

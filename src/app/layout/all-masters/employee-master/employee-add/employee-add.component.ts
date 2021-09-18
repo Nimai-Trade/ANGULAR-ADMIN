@@ -177,6 +177,7 @@ export class EmployeeAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         let item = {country: "All", code: "All"}
         // this.countryList.push(item);
         this.countryList.unshift(item);

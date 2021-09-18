@@ -128,6 +128,7 @@ export class SubscriptionAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        this.selectedcountry=res;
         for (let entry of this.countryList) {
           this.countryData.push(entry.country);
         }

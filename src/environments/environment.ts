@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 
 //DEV SERVER
- //BASE_API_URL: 'http://136.232.244.190:8081/nimaiAdminApi/'
+//  BASE_API_URL: 'http://136.232.244.190:8081/nimaiAdminApi/'
 
  //PROD SERVER
 //BASE_API_URL: 'https://prod.360tf.trade/nimaiAdminApiUat/'

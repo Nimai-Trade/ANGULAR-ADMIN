@@ -170,6 +170,7 @@ export class DisplayFeatureDataComponent implements OnInit {
       (res) => {
         console.log('<<>>'+res);
         this.countryList = res;
+        
       });
   }
 
