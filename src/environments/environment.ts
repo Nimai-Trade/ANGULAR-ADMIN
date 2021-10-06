@@ -12,7 +12,8 @@ export const environment = {
 //BASE_API_URL: 'https://prod.360tf.trade/nimaiAdminApiUat/'
 
  //UAT SERVER
-BASE_API_URL: 'https://uat.360tf.trade/nimaiAdminApiUat/'
+//BASE_API_URL: 'https://uat.360tf.trade/nimaiAdminApiUat/'
+BASE_API_URL:'http://Nimai-Prd-LB-1296056161.ap-south-1.elb.amazonaws.com/nimaiAdminApiUat/'
 
 //BASE_API_URL: 'https://prod.nimaitrade.com/nimaiAdminApiUat/'
 //BASE_API_URL: 'http://nimai-pilot-lb-468660897.me-south-1.elb.amazonaws.com/nimaiAdminApiUat/',

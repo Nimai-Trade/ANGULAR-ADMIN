@@ -22,13 +22,17 @@ import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { CookieService } from 'ngx-cookie-service';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { BnNgIdleService } from 'bn-ng-idle';
+
 import { TimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { LoaderInterceptorService } from './shared/services/interceptors/loader-interceptor.service';
+import { LoaderServiceService } from './shared/services/loader/loader-service.service';
+import { LoaderComponent } from './shared/loader/loader.component';
 export const createTranslateLoader = (http: HttpClient) => {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, SelectDepartmentComponent, ChangePasswordComponent],
+    declarations: [AppComponent, LoginComponent, SelectDepartmentComponent, ChangePasswordComponent,LoaderComponent],
     imports: [
         BrowserModule,
         DateRangePickerModule,
@@ -49,7 +53,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         RecaptchaModule,  //this is the recaptcha main module
         RecaptchaFormsModule, //this is the module for form incase form validation
         TimePickerModule,        
-        Ng4LoadingSpinnerModule.forRoot(),
+         Ng4LoadingSpinnerModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -59,12 +63,15 @@ export const createTranslateLoader = (http: HttpClient) => {
         })
     ],
     entryComponents: [SelectDepartmentComponent],
-    providers: [BnNgIdleService,SharedUtilService, LoginService, CookieService, 
+    providers: [BnNgIdleService,SharedUtilService, LoginService, LoaderServiceService, CookieService, 
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: HttpRequestInterceptor,
+           // useClass: HttpRequestInterceptor,
+           useClass:LoaderInterceptorService,
             multi: true
         },],
+        exports: [LoaderComponent],
+
     bootstrap: [AppComponent]
 })
 export class AppModule { }

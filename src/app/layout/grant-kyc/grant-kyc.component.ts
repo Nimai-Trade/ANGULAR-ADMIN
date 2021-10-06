@@ -7,7 +7,6 @@ import { ConfirmDialogModel, ConfirmationDialogComponent } from 'src/app/shared/
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { ShowImageComponent } from 'src/app/shared/show-image/show-image.component';
 import { GrantkycService } from './grantkyc.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 @Component({
   selector: 'app-grant-kyc',
   templateUrl: './grant-kyc.component.html',
@@ -32,7 +31,7 @@ export class GrantKycComponent implements OnInit {
   loading = false;
   user : any;
   //isHide = false;
-  constructor(private spinnerService: Ng4LoadingSpinnerService,private formBuilder: FormBuilder, private service: GrantkycService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
+  constructor(private formBuilder: FormBuilder, private service: GrantkycService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.kycListForm = formBuilder.group({
       status: 'Maker Approved',
     });

@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { URLS } from 'src/environments/config.url';
@@ -13,7 +12,7 @@ export class GrantkycService {
 
   private headers = new HttpHeaders();
 
-  constructor(private httpClient: HttpClient,private spinnerService: Ng4LoadingSpinnerService) {
+  constructor(private httpClient: HttpClient) {
     this.headers.set('Content-Type', 'application/json');
   }
   
