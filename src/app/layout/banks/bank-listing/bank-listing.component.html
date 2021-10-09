@@ -115,11 +115,12 @@
                     <th mat-header-cell mat-sort-header *matHeaderCellDef class="myHeader"> Kyc
                     </th>
                     <td mat-cell *matCellDef="let element" class="myCell">
-                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;" *ngIf="element.kyc !== null" >
-                        <a (click)="showKyc(element.userid)" class="backbtn pull-right" id="backbtn">
+                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;" *ngIf="element.kyc !== 'Not Uploaded'" >
+                        <a (click)="showKyc(element.userid)" class="backbtn pull-right" id="backbtn" >
                           {{element.kyc}}</a>
                       </div>
-                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;" *ngIf="element.kyc === null || element.kyc === ''" >
+                      <div fxLayout="row" style="padding-left: 30; cursor: pointer;" 
+                      *ngIf="element.kyc === null || element.kyc === 'Not Uploaded' || element.kyc === ''" >
                         <a  class="backbtn pull-right" id="backbtn">
                           Not Uploaded</a>
                       </div>

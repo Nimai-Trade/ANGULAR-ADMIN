@@ -50,7 +50,7 @@ export class BankListingComponent implements OnInit {
       }
     });
     this.bankListForm.controls['role'].patchValue(localStorage.getItem('role'));
-    this.kycStatusList = [{ 'code': 'ALL', 'name': 'ALL' }, { 'code': 'Pending', 'name': 'Pending' }, { 'code': 'Approved', 'name': 'Approved' }, { 'code': 'Rejected', 'name': 'Rejected' }, { 'code': 'null', 'name': 'Not Uploaded' }];
+    this.kycStatusList = [{ 'code': 'ALL', 'name': 'ALL' }, { 'code': 'Pending', 'name': 'Pending' }, { 'code': 'Approved', 'name': 'Approved' }, { 'code': 'Rejected', 'name': 'Rejected' }, { 'code': 'Not Uploaded', 'name': 'Not Uploaded' }];
     this.setPagerConfig();
   }
 
