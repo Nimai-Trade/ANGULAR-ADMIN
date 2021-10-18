@@ -2,10 +2,13 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { TransactionService } from '../transactions.service';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog, MatTableDataSource, MatPaginator, MatSort, MAT_DATE_FORMATS } from '@angular/material';
+
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { SelectionModel } from '@angular/cdk/collections';
 import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
 import { Router } from '@angular/router';
+import { ConfirmationCommentDialogComponent } from 'src/app/shared/confirmation-comment-dialog/confirmation-comment-dialog.component';
+import { ConfirmDialogModel } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 
 export const APP_DATE_FORMATS = {
@@ -44,8 +47,12 @@ export class TransactionsListComponent implements OnInit {
 
   eventStartTime = new Date();
   dateValue: any[];
+  user: string;
+  message: string;
+  result: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private service: TransactionService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private service: TransactionService, private cdr: ChangeDetectorRef, private dialog: MatDialog,
+     public sharedUtilService: SharedUtilService) {
     this.transactionListForm = formBuilder.group({
       txtStatus: [],
       userId: [],
@@ -60,7 +67,9 @@ export class TransactionsListComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
+    this.user = localStorage.getItem('nimaiId');
     // get and parse the saved data from localStorage
     // this.userId = JSON.parse(localStorage.getItem('transactonSearch'));
     const savedData = JSON.parse(localStorage.getItem('transactonSearch'));
@@ -77,7 +86,7 @@ export class TransactionsListComponent implements OnInit {
       this.transactionListForm.controls['dateTo'].patchValue(this.dateValue[1].substr(0, 10));
     }
    // console.log(this.transactionListForm);
-    this.transactionTypeList = [{ 'code': 'ALL', 'name': 'ALL' }, { 'code': 'Active', 'name': 'Active' }, { 'code': 'Accepted', 'name': 'Accepted' }, { 'code': 'Rejected', 'name': 'Rejected' }, { 'code': 'Expired', 'name': 'Expired' }];
+    this.transactionTypeList = [{ 'code': 'ALL', 'name': 'ALL' }, { 'code': 'Active', 'name': 'Active' },{ 'code': 'Pending', 'name': 'Pending' }, { 'code': 'Accepted', 'name': 'Accepted' }, { 'code': 'Rejected', 'name': 'Rejected' }, { 'code': 'Expired', 'name': 'Expired' }];
     this.setPagerConfig();
   }
 
@@ -163,6 +172,61 @@ export class TransactionsListComponent implements OnInit {
       });
       this.dataSource = new MatTableDataSource(this.transactionList);
     }
+  }
+
+  
+  confirmDialog(status, ele) {
+    console.log(ele)
+    // console.log('status ' + status + ' id ' + item.controls['kycid'].value);
+    // console.log(item.controls['reason'].value);
+    if(status=='Maker Approved'){
+      var stat='Approve';
+      this.message = 'Are you sure you want to ' + stat + ' the KYC Document?';
+    }else if(status=='Rejected'){
+      var stat='Reject';
+      this.message = 'Are you sure you want to ' + stat + ' the KYC Document?';
+    }
+    const dialogData = new ConfirmDialogModel('Confirm Action', this.message);
+    const dialogRef = this.dialog.open(ConfirmationCommentDialogComponent, {
+      width: '50%',
+      height: '45%',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      console.log('ll',dialogResult)
+      this.result = dialogResult;
+      let updateStatus = '';
+      if (dialogResult) {
+        const reqData = {
+          // 'kycid': kycid,
+          // 'kycStatus': status,
+          // 'approverName': localStorage.getItem('nimaiId'),
+          // 'approvalReason': this.result['data'],
+          // 'comment': this.result['data'],
+
+          'countryName':null,
+          'transactionId':ele.transactionId,
+          'status':status,
+          'userId':ele.userId,
+          'makerComment':this.result['data'],
+          'checkerComment':this.result['data'],
+          'customerType':null
+
+        };
+        console.log(reqData)
+        this.service.CheckerkycStatusUpdate(reqData).subscribe(
+          (res) => {
+            console.log('res')
+            this.sharedUtilService.showSnackBarMessage(res['message']);
+            this.loadTransactionList();
+          }, (error) => {
+            console.log("res---",error)
+            this.sharedUtilService.showSnackBarMessage(error.error.message);
+        });
+      }
+    });
+
   }
 
   onChangeType(transactionType) {

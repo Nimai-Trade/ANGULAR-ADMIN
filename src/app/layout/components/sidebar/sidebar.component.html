@@ -102,6 +102,12 @@
                                 <p>Grant Payment</p>
                             </a>
                         </li>
+                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("PAYMENT_APPROVAL")'>
+                            <a [routerLink]="['/app/grant-transaction']">
+                                <i class="fas fa-money-check-alt"></i>
+                                <p>Grant Transactions</p>
+                            </a>
+                        </li>
                  
                         <li *ngIf='myRights.includes("CREATE_USER") || myRights.includes("CREATE_USER_GRANT") || myRights.includes("ROLE_MGMT") || myRights.includes("RIGHTS_MGMT") || myRights.includes("ROLE_RIGHTS_MAPPING")'>
                             <a data-toggle="collapse" href="#accountPages" [attr.aria-expanded]="areaExpandedacc" >

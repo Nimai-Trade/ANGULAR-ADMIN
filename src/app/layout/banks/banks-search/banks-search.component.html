@@ -45,7 +45,7 @@
               </div>
               <div class="col-md-3">
                 <div class="inputDiv">
-                  <input matInput [formControl]="companyNameSearchTerm" [matAutocomplete]="auto3" oninput="this.value = this.value.trim()">
+                  <input matInput [formControl]="companyNameSearchTerm" [matAutocomplete]="auto3" >
                   <label>Bank Name</label>
                   <mat-autocomplete #auto3="matAutocomplete">
                     <mat-option *ngFor="let companyName of companyNameSearch" [value]="companyName" [disabled]="companyName === 'No Record Found'">
@@ -56,7 +56,7 @@
               </div>
               <div class="col-md-3">
                 <div class="inputDiv">
-                  <input matInput [formControl]="countrySearchTerm" [matAutocomplete]="auto4" oninput="this.value = this.value.trim()">
+                  <input matInput [formControl]="countrySearchTerm" [matAutocomplete]="auto4" >
                   <label>Country</label>
                   <mat-autocomplete #auto4="matAutocomplete">
                     <mat-option *ngFor="let counry of countrySearch" [value]="counry" [disabled]="counry === 'No Record Found'">

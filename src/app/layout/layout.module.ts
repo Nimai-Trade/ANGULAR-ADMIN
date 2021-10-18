@@ -22,7 +22,8 @@ import { LayoutComponent } from './main-layout/layout.component';
     declarations: [
         LayoutComponent,
         TopnavComponent,
-        SidebarComponent
+        SidebarComponent,
+        
     ],
    
 

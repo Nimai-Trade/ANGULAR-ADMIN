@@ -40,7 +40,7 @@
           <table class="table">
             <tbody>
               <tr
-                *ngIf="quatationData.requirementType === 'Confirmation' || quatationData.requirementType === 'ConfirmAndDiscount'">
+                *ngIf="quatationData.requirementType === 'Confirmation' || quatationData.requirementType === 'BankGuarantee' || quatationData.requirementType === 'ConfirmAndDiscount'">
                 <td>Confirmation Charges p.a.</td>
                 <td>
                   <input type="text" value={{quatationData.confirmationCharges}} readonly="true" placeholder="">
@@ -63,6 +63,22 @@
                   <input type="text" value={{quatationData.confChgsIssuanceToMatur}} readonly="true" placeholder="">
                 </td>
               </tr>
+
+              <tr
+              *ngIf="quatationData.confChgsIssuanceToexp === 'yes' && quatationData.requirementType === 'BankGuarantee' ">
+              <td>Confirmation charges applicable from date of issuance till expiry date </td>
+              <td>
+                <input type="text" value={{quatationData.confChgsIssuanceToexp}} readonly="true" placeholder="">
+              </td>
+            </tr>
+
+            <tr
+              *ngIf="quatationData.confChgsIssuanceToClaimExp === 'yes' && quatationData.requirementType === 'BankGuarantee'">
+              <td>Confirmation charges applicable from date of issuance till claim expiry date</td>
+              <td>
+                <input type="text" value={{quatationData.confChgsIssuanceToClaimExp}} readonly="true" placeholder="">
+              </td>
+            </tr>
 
               <tr *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Refinance' || quatationData.requirementType === 'Banker'">
                 <td>Applicable Benchmark (if any)</td>

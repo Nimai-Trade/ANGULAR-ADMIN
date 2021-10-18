@@ -120,6 +120,13 @@ export class TransactionService {
       })
     );
   }
-
+  CheckerkycStatusUpdate(reqData) {
+    console.log('inside serv')
+    return this.httpClient.post(URLS.getTransactionStatusUpdateUrl, reqData, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 
 }

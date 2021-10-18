@@ -1,7 +1,7 @@
 import { environment } from './environment';
 export const URLS = Object();
-//URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
-URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
+URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
+//URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink='http://Nimai-Prd-LB-1296056161.ap-south-1.elb.amazonaws.com/nimaiEmail/sendAdminSetPasswordLink/';
 //URLS.sendActivationLink = 'https://prod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
@@ -58,6 +58,7 @@ URLS.getQuotationDetailsUrl = environment.BASE_API_URL + 'api/transaction/quotes
 
 URLS.getSearchCustomerListUrl = environment.BASE_API_URL + 'api/customer/searchCustomerList';
 URLS.getCustomerDetailsUrl = environment.BASE_API_URL + 'api/bank/details/';
+URLS.getTransactionStatusUpdateUrl=environment.BASE_API_URL + 'api/bank/transactionStatusUpdate'
 
 
 URLS.getBankSearchListUrl = environment.BASE_API_URL + 'api/bank/searchList';

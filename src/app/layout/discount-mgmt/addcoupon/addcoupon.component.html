@@ -19,7 +19,7 @@
                   <td nowrap="">Country</td>
                   <td>
                     <mat-select formControlName="country" class="roleselct" (selectionChange)="getPlan()" disableOptionCentering>                     
-                      <input (keyup)="onKey($event.target.value)" class="inputSearch" >                 
+                      <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Name" autofocus>                 
                       <mat-option value="">Select Country</mat-option>    
                       <mat-option *ngFor="let item of selectedcountry" [value]="item.country">{{item.country}}
                       </mat-option>

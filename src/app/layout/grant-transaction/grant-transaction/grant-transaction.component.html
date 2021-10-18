@@ -1,0 +1,313 @@
+<div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-icon" data-background-color="blue">
+              <i class="fas fa-money-check-alt"></i>
+            </div>
+            <div class="card-content">
+              <h4 class="card-title">Grant Transaction
+                <!-- <ul class="pull-right list-unstyled list-inline statusbar">
+                  <li>
+                    <div fxLayout="row" fxFlex="100%;" [formGroup]="transactionListForm">
+                   
+                      <div fxLayout="column" fxFlex="100%;">
+                        <div fxLayout="row">                      
+                          <ejs-dropdownlist class="mobile_countryFilter" formControlName="country" id='diacritics' [dataSource]='countryData'
+                            [allowFiltering]='true' [ignoreAccent]='true'
+                            (change)="onChangeTypeCountry(transactionListForm.controls['country'].value)"
+                            placeholder='Select a Country' filterBarPlaceholder='' [(value)]='countryVal'>
+                          </ejs-dropdownlist>
+                        </div>
+                      </div>
+  
+                    </div>
+                  </li>
+                </ul> -->
+              </h4>
+              <div>
+                <div class="dataTables_scrollBody">
+  
+                  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                    multiTemplateDataRows>
+  
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef > # </th>
+                      <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="userId">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> User ID </th>
+                      <td mat-cell *matCellDef="let element" class="myCell">
+                        {{element.userId}}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="mobileNo">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Mobile </th>
+                      <td mat-cell *matCellDef="let element" class="myCell">
+                        {{element.mobileNo}}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="emailId">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Email
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.emailId}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="beneficiry">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Beneficiary
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.beneficiry}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="beneficiryCountry">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Country
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.beneficiryCountry}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="applicant">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Applicant
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.applicant}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="applicantCountry">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Country
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.applicantCountry}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="transactionId">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Txn ID
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.transactionId}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="insertedDate">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Date&Time
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.insertedDate | date : "dd-MM-y HH:mm:ss z"}}
+                      </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="validity">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Trxn Validity
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.txnValidaty | date : "dd-MM-y"}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="lcBank">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> IB
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.lcBank}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="amount">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Amount
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.amount}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="lcValue">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> CCY
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.ccy}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="requirementType">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Requirement
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.requiredment}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="transactionStatus">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Trxn Status
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="myCell"> {{element.trxnStatus}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="nimaiMQuotationList">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Quotes
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row">
+                          <a (click)="getQuotes(element.transactionId)" class="backbtn" id="backbtn">
+                            {{element.quotes}}</a>
+                        </div>
+                      </td>
+                    </ng-container>
+  
+  
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef  class="myHeader" style="width: 170px!important;"> Actions
+                      </th>
+                      <td mat-cell *matCellDef="let element" style="width: 170px!important;" colspan="2">
+                        <div fxLayout="row" style="cursor: pointer;">
+                          <!-- <a (click)="onPreview(element.transactionId)" class="backbtn pull-right" id="backbtn">
+                            Details</a> -->
+                            <!-- <button mat-button class="action-btn" matTooltip="Show Details"
+                            (click)="onPreview(element.transactionId)">
+                            <mat-icon>visibility</mat-icon>
+                          </button> -->
+                            <div>  
+                              <button mat-button class="action-btn" matTooltip="Approve"
+                                  (click)="confirmDialog('Approved', element.kycid)">
+                                  <mat-icon [ngStyle]="{'color':'green'}">verified_user</mat-icon>
+                                </button>
+                              </div>
+                              <div>
+                                <button mat-button class="action-btn" matTooltip="Reject"
+                                  (click)="confirmDialog('Rejected', element.kycid)">
+                                  <mat-icon [ngStyle]="{'color':'red'}">cancel</mat-icon>
+                                </button>
+                              </div> 
+                              <!-- <div *ngIf="element.kycStatus === 'Maker Approved' && element.approverName === user"> -->
+                                <div>
+                                <button mat-button class="action-btn" matTooltip="You are not authorized to perform this action.">                            
+                                  <mat-icon [ngStyle]="{'color':'green'}">lock</mat-icon>
+                                </button>
+                              </div>                
+  
+                        </div>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                  </table>
+                </div>
+                <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                  <h3 style="text-align:center"> No Data </h3>
+                </mat-card>
+                <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                  [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+                </mat-paginator>
+              </div>
+              <!-- <div>
+                <div fxLayout="row" style="margin-bottom: 10px;">
+                </div>
+              
+  
+                <div fxLayout="row" style="margin-bottom: 10px;">
+                </div>
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)"
+                    multiTemplateDataRows>
+  
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> # </th>
+                      <td mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}}</td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="userid">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> User ID </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{element.userid}}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="firstName">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> First Name
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="lastName">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Last Name
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="emailAddress">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Email
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.emailAddress}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="mobileNumber">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Mobile
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="nimaiSubscriptionDetailsList">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Plan and Payment
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.planOfPayments}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="registeredCountry">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Business Country
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.registeredCountry}} </td>
+                    </ng-container>
+  
+                    <!-- <ng-container matColumnDef="makerComment">
+                      <th mat-header-cell *matHeaderCellDef> Maker Comment
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.makerComment}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="checkerComment">
+                      <th mat-header-cell *matHeaderCellDef> Checker Comment
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.checkerComment}} </td>
+                    </ng-container> 
+  
+                    <ng-container matColumnDef="paymentStatus">
+                      <th mat-header-cell mat-sort-header *matHeaderCellDef> Status
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef> Actions
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row">
+                          <div *ngIf="element.status === 'Maker Approved' && element.paymentApprovedBy != user">
+                            <button mat-button class="action-btn" matTooltip="Approve"
+                              (click)="paymentAction(element, 'Approved');">
+                              <mat-icon [ngStyle]="{'color':'green'}">verified_user</mat-icon>
+                            </button>
+                          </div>
+                          <div *ngIf="element.status== 'Success'">
+                            <button mat-button class="action-btn">
+                              <mat-icon [ngStyle]="{'color':'green'}"
+                              matTooltip="Approved">done
+                            </mat-icon>
+                            </button>
+                          </div>
+                          <div *ngIf="element.status === 'Maker Approved' && element.paymentApprovedBy != user">
+                            <button mat-button class="action-btn" matTooltip="Reject"
+                              (click)="paymentAction(element, 'Rejected');">
+                              <mat-icon [ngStyle]="{'color':'red'}">cancel</mat-icon>
+                            </button>
+                          </div>
+                          <div *ngIf="element.status === 'Maker Approved' && element.paymentApprovedBy === user">
+                            <button mat-button class="action-btn"
+                              matTooltip="You are not authorized to perform this action.">
+                              <mat-icon [ngStyle]="{'color':'green'}">lock</mat-icon>
+                            </button>
+                          </div>
+                          <div></div>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+                  </table>
+                </div>
+                <mat-card *ngIf="dataSource.data.length == 0" style="padding:50px;">
+                  <h3 style="text-align:center"> No Data </h3>
+                </mat-card>
+                <mat-paginator #paginator [length]="pagerConfig.totalItems" [pageIndex]="pagerConfig.pageIndex"
+                  [pageSize]="pagerConfig.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
+                </mat-paginator>
+              </div> -->
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

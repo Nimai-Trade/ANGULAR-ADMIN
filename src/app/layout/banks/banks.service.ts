@@ -141,7 +141,7 @@ export class BanksService {
 
   searchBankName(bankName, data) {
     console.log(bankName +'/'+ data)
-    return this.httpClient.get(URLS.getBankNameSearchUrl + bankName +'/'+ data, { headers: this.headers }).pipe(
+    return this.httpClient.get(URLS.getBankNameSearchUrl + bankName, { headers: this.headers }).pipe(
       debounceTime(500),
       map(
         (data: any) => {

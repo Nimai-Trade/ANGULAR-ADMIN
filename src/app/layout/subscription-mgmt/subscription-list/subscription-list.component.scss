@@ -121,13 +121,27 @@ table {
   margin-bottom: 0px !important;
   margin-top: 10px !important;
 }
+
+::placeholder {
+  color: gray !important;
+  opacity: 1; /* Firefox */
+} 
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: gray !important;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: gray !important;
+}
+
+
 .inputSearch{
   border-right-width: 0px;
   border-left-width: 0px;
   border-top-width: 0px;
   border-bottom-width: 1px;
   padding-right: 251px;
-  border-radius: 5%;
+  border-radius: 1%;
+  padding-top: 5px;
   border-color: #e4d0d0;
   font-size: 129%;
   padding-bottom: 7px;

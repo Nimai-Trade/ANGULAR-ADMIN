@@ -87,7 +87,7 @@
                     <mat-select  formControlName="country" id='diacritics' class="roleselect"
                     (selectionChange)="onChangeType(subscriptionForm.controls['country'].value)"
                     placeholder="Select a Country">
-                      <input (keyup)="onKey($event.target.value)" class="inputSearch"> 
+                      <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Name"> 
                       <mat-option [value]="">Select Country</mat-option>
                       <mat-option *ngFor="let item of selectedcountry" [value]="item.country">{{item.country}}</mat-option>
                    </mat-select>

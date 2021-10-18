@@ -173,7 +173,7 @@ export class PaymentApprovalComponent implements OnInit {
       height: '45%',
       data: dialogData
     });
-
+console.log('kjkj')
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
       // console.log(' >>> '+this.result);

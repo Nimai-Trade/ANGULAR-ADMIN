@@ -73,6 +73,10 @@ const routes: Routes = [
                 loadChildren: './payment-approval/payment-approval.module#PaymentApprovalModule'
             },
             {
+                path: 'grant-transaction',
+                loadChildren: './grant-transaction/grant-transaction.module#GrantTransactionModule'
+            },
+            {
                 path:'change-password',
                 loadChildren: './change-password/change-password.module#ChangePasswordModule'
             }

@@ -38,7 +38,7 @@
                           </td>
                         </tr>
                         <tr>
-                          <th colspan="2">LC Details</th>
+                          <th colspan="2">Product Details</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -67,7 +67,7 @@
                           </td>
                         </tr>
                         <tr>
-                          <td>Requirement</td>
+                          <td>Product</td>
                           <td>
                             <input matInput value={{transactionData.requirement}} readonly="true">
                           </td>
@@ -85,19 +85,38 @@
                             <input matInput value="{{transactionData.issuingDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
                           </td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="transactionData.requirement != 'Refinance' && transactionData.requirement !='BankGuarantee'">
                           <td>Last Shipment Date(LSD)</td>
                           <td>
                             <input matInput value="{{transactionData.lastShipmentDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
                           </td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="transactionData.requirement != 'Refinance' && transactionData.requirement !='BankGuarantee'">
                           <td>Negotiation Date</td>
                           <td>
                             <input matInput value="{{transactionData.negotiationDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
                           </td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="transactionData.requirement =='BankGuarantee'">
+                          <td>BG Expiry Date</td>
+                          <td>
+                            <input matInput value="{{transactionData.lCExpiryDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
+                          </td>
+                        </tr> 
+                         <tr *ngIf="transactionData.requirement =='BankGuarantee'">
+                          <td>Claim Expiry Date</td>
+                          <td>
+                            <input matInput value="{{transactionData.claimExpiryDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
+                          </td>
+                        </tr>
+                       
+                   
+                     <tr *ngIf="transactionData.requirement=='BankGuarantee'">
+                         <td>BG Type</td>
+                         <input matInput value={{transactionData.bgType}} readonly="true">
+                     </tr>
+
+                        <tr *ngIf="transactionData.requirement!='BankGuarantee'">
                           <td>Goods</td>
                           <td>
                             <input matInput value={{transactionData.goods}} readonly="true">
