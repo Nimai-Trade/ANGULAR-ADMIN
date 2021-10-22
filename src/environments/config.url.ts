@@ -58,8 +58,9 @@ URLS.getQuotationDetailsUrl = environment.BASE_API_URL + 'api/transaction/quotes
 
 URLS.getSearchCustomerListUrl = environment.BASE_API_URL + 'api/customer/searchCustomerList';
 URLS.getCustomerDetailsUrl = environment.BASE_API_URL + 'api/bank/details/';
-URLS.getTransactionStatusUpdateUrl=environment.BASE_API_URL + 'api/bank/transactionStatusUpdate'
-
+URLS.getTransactionStatusUpdateUrl=environment.BASE_API_URL + 'api/bank/transactionStatusUpdate';
+URLS.getMakerApprovedListUrl=environment.BASE_API_URL + 'api/transaction/makerApprovedList';
+URLS.getmakerTransactionStatusUpdateUrl=environment.BASE_API_URL + 'api/bank/makerTransactionStatusUpdate'
 
 URLS.getBankSearchListUrl = environment.BASE_API_URL + 'api/bank/searchList';
 URLS.getBankDetailsUrl = environment.BASE_API_URL + 'api/bank/details/';

@@ -192,7 +192,7 @@ export class GrantKycComponent implements OnInit {
   
   confirmDialog(status, kycid) {
     // console.log('status ' + status + ' id ' + item.controls['kycid'].value);
-    // console.log(item.controls['reason'].value);
+   console.log("item.controls['reason'].value");
     if(status=='Approved'){
       var stat='Approve';
       this.message = 'Are you sure you want to ' + stat + ' the KYC Document?';

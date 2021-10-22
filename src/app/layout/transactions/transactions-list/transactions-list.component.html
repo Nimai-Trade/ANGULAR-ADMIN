@@ -158,15 +158,15 @@
                           <mat-icon>visibility</mat-icon>
                         </button>
 
-                          <div *ngIf="element.trxnStatus === 'Pending' || element.approverName === user">  
+                          <div *ngIf="element.trxnStatus === 'Pending'">  
                             <button mat-button class="action-btn" matTooltip="Approve"
                                 (click)="confirmDialog('Maker Approved', element)">
                                 <mat-icon [ngStyle]="{'color':'green'}">verified_user</mat-icon>
                               </button>
                             </div>
-                            <div *ngIf="element.trxnStatus === 'Pending' || element.approverName === user">
+                            <div *ngIf="element.trxnStatus === 'Pending'">
                               <button mat-button class="action-btn" matTooltip="Reject"
-                                (click)="confirmDialog('Rejected', element.userId)">
+                                (click)="confirmDialog('Rejected', element)">
                                 <mat-icon [ngStyle]="{'color':'red'}">cancel</mat-icon>
                               </button>
                             </div> 

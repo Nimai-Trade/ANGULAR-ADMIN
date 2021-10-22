@@ -28,12 +28,14 @@ export class GrantTransactionService {
       'mobileNo': fileterObj.mobileNo,
       'companyName': fileterObj.companyName,
       'country': fileterObj.country,
-      'txtStatus': 'Approved',
+      'txtStatus': 'Maker Approved',
       'goodsType': fileterObj.goodsType,
       'dateFrom':fileterObj.dateFrom,
       'dateTo':fileterObj.dateTo
+
+
     };
-    return this.httpClient.post(URLS.getTransactionSearchListUrl, reqData, { headers: this.headers }).pipe(
+    return this.httpClient.post(URLS.getMakerApprovedListUrl, reqData, { headers: this.headers }).pipe(
       map((res) => {
         return res;
       })
@@ -129,7 +131,13 @@ export class GrantTransactionService {
     );
   }
 
-
+  CheckerGrantTrnxStatusUpdate(reqData) {
+    return this.httpClient.post(URLS.getTransactionStatusUpdateUrl, reqData, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 
 }
 

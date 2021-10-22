@@ -127,7 +127,7 @@
                       <td mat-cell *matCellDef="let element" class="myCell"> {{element.trxnStatus}} </td>
                     </ng-container>
   
-                    <ng-container matColumnDef="nimaiMQuotationList">
+                    <!-- <ng-container matColumnDef="nimaiMQuotationList">
                       <th mat-header-cell mat-sort-header *matHeaderCellDef  class="myHeader"> Quotes
                       </th>
                       <td mat-cell *matCellDef="let element">
@@ -136,7 +136,7 @@
                             {{element.quotes}}</a>
                         </div>
                       </td>
-                    </ng-container>
+                    </ng-container> -->
   
   
                     <ng-container matColumnDef="actions">
@@ -150,21 +150,21 @@
                             (click)="onPreview(element.transactionId)">
                             <mat-icon>visibility</mat-icon>
                           </button> -->
-                            <div>  
-                              <button mat-button class="action-btn" matTooltip="Approve"
-                                  (click)="confirmDialog('Approved', element.kycid)">
+                          <div *ngIf="element.trxnStatus === 'Maker Approved' && element.approverName != user">
+                            <button mat-button class="action-btn" matTooltip="Approve"
+                                  (click)="confirmDialog('Approved', element)">
                                   <mat-icon [ngStyle]="{'color':'green'}">verified_user</mat-icon>
                                 </button>
                               </div>
-                              <div>
+                              <div *ngIf="element.trxnStatus === 'Maker Approved' && element.approverName != user">
                                 <button mat-button class="action-btn" matTooltip="Reject"
-                                  (click)="confirmDialog('Rejected', element.kycid)">
+                                  (click)="confirmDialog('Rejected', element)">
                                   <mat-icon [ngStyle]="{'color':'red'}">cancel</mat-icon>
                                 </button>
                               </div> 
                               <!-- <div *ngIf="element.kycStatus === 'Maker Approved' && element.approverName === user"> -->
-                                <div>
-                                <button mat-button class="action-btn" matTooltip="You are not authorized to perform this action.">                            
+                                <div *ngIf="element.trxnStatus === 'Maker Approved' && element.approverName === user">
+                                  <button mat-button class="action-btn" matTooltip="You are not authorized to perform this action.">                            
                                   <mat-icon [ngStyle]="{'color':'green'}">lock</mat-icon>
                                 </button>
                               </div>                

@@ -6,6 +6,8 @@ import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { SelectionModel } from '@angular/cdk/collections';
 // import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
 import { Router } from '@angular/router';
+import { ConfirmDialogModel } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationCommentDialogComponent } from 'src/app/shared/confirmation-comment-dialog/confirmation-comment-dialog.component';
 @Component({
   selector: 'app-grant-transaction',
   templateUrl: './grant-transaction.component.html',
@@ -18,7 +20,7 @@ export class GrantTransactionComponent implements OnInit {
   transactionTypeList: any;
   public pagerConfig: any;
   public pageSizeOptions = [5, 10, 20, 30];
-  displayColumns: string[] = ['position','userId', 'mobileNo', 'emailId', 'beneficiry', 'beneficiryCountry', 'applicant', 'applicantCountry', 'transactionId', 'insertedDate', 'validity', 'lcBank', 'amount', 'lcValue', 'requirementType', 'transactionStatus', 'nimaiMQuotationList', 'actions'];
+  displayColumns: string[] = ['position','userId', 'mobileNo', 'emailId', 'beneficiry', 'beneficiryCountry', 'applicant', 'applicantCountry', 'transactionId', 'insertedDate', 'validity', 'lcBank', 'amount', 'lcValue', 'requirementType', 'transactionStatus', 'actions'];
   public selectedCheckboxes = [];
   dataSource = new MatTableDataSource<Element[]>();
   selection = new SelectionModel<any>(true, []);
@@ -31,7 +33,9 @@ export class GrantTransactionComponent implements OnInit {
   dateValue: any[];
   countryList: any;
   countryData: any = [];
-  user: string;
+  user: any;
+  message: string;
+  result: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private service: GrantTransactionService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.transactionListForm = formBuilder.group({
@@ -50,14 +54,17 @@ export class GrantTransactionComponent implements OnInit {
 
   ngOnInit() {
     this.user = localStorage.getItem('nimaiId');
+    console.log('this-----')
     // get and parse the saved data from localStorage
     // this.userId = JSON.parse(localStorage.getItem('transactonSearch'));
-    const savedData = JSON.parse(localStorage.getItem('transactonSearch'));
-    Object.keys(savedData).forEach(name => {
-      if (this.transactionListForm.controls[name]) {
-        this.transactionListForm.controls[name].patchValue(savedData[name]);
-      }
-    });
+
+    // commmented by johra
+    // const savedData = JSON.parse(localStorage.getItem('transactonSearch'));
+    // Object.keys(savedData).forEach(name => {
+    //   if (this.transactionListForm.controls[name]) {
+    //     this.transactionListForm.controls[name].patchValue(savedData[name]);
+    //   }
+    // });
     if (this.transactionListForm.controls['startDate'].value !== null && this.transactionListForm.controls['startDate'].value !== undefined) {
       this.dateValue = this.transactionListForm.controls['startDate'].value;
      // console.log(this.dateValue[0].substr(0, 10));
@@ -84,6 +91,7 @@ export class GrantTransactionComponent implements OnInit {
       direction: direction || 'desc',
       totalItems: totalItems || 0
     };
+    console.log(this.pagerConfig)
   }
    getCountryList() {
     this.service.getCountryList().subscribe(
@@ -174,6 +182,59 @@ export class GrantTransactionComponent implements OnInit {
       });
       this.dataSource = new MatTableDataSource(this.transactionList);
     }
+  }
+
+
+  
+  confirmDialog(status, ele) {
+    console.log(ele)
+    // console.log('status ' + status + ' id ' + item.controls['kycid'].value);
+    // console.log(item.controls['reason'].value);
+    if(status=='Approved'){
+      var stat='Approve';
+      this.message = 'Are you sure you want to ' + stat + ' the transaction?';
+    }else if(status=='Rejected'){
+      var stat='Reject';
+      this.message = 'Are you sure you want to ' + stat + ' the transaction?';
+    }
+    const dialogData = new ConfirmDialogModel('Confirm Action', this.message);
+    const dialogRef = this.dialog.open(ConfirmationCommentDialogComponent, {
+      width: '50%',
+      height: '45%',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+      let updateStatus = '';
+      if (dialogResult) {
+        const reqData = {
+          // 'kycid': kycid,
+          // 'kycStatus': status,
+          // 'approverName': localStorage.getItem('nimaiId'),
+          // 'approvalReason': this.result['data'],
+          // 'comment': this.result['data'],
+
+          'countryName':null,
+          'transactionId':ele.transactionId,
+          'status':status,
+          'userId':ele.userId,
+          'makerComment':null,
+          'checkerComment':this.result['data'],
+          'customerType':null
+
+        };
+        console.log(reqData)
+        this.service.CheckerGrantTrnxStatusUpdate(reqData).subscribe(
+          (res) => {
+            this.sharedUtilService.showSnackBarMessage(res['message']);
+            this.loadTransactionList();
+          }, (error) => {
+            this.sharedUtilService.showSnackBarMessage(error.error.message);
+        });
+      }
+    });
+
   }
 
   onChangeType(transactionType) {

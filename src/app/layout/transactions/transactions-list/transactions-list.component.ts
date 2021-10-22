@@ -181,10 +181,10 @@ export class TransactionsListComponent implements OnInit {
     // console.log(item.controls['reason'].value);
     if(status=='Maker Approved'){
       var stat='Approve';
-      this.message = 'Are you sure you want to ' + stat + ' the KYC Document?';
+      this.message = 'Are you sure you want to ' + stat + ' the transaction?';
     }else if(status=='Rejected'){
       var stat='Reject';
-      this.message = 'Are you sure you want to ' + stat + ' the KYC Document?';
+      this.message = 'Are you sure you want to ' + stat + ' the transaction?';
     }
     const dialogData = new ConfirmDialogModel('Confirm Action', this.message);
     const dialogRef = this.dialog.open(ConfirmationCommentDialogComponent, {
@@ -210,18 +210,16 @@ export class TransactionsListComponent implements OnInit {
           'status':status,
           'userId':ele.userId,
           'makerComment':this.result['data'],
-          'checkerComment':this.result['data'],
+          'checkerComment':null,
           'customerType':null
 
         };
         console.log(reqData)
-        this.service.CheckerkycStatusUpdate(reqData).subscribe(
+        this.service.CheckerTrnxStatusUpdate(reqData).subscribe(
           (res) => {
-            console.log('res')
             this.sharedUtilService.showSnackBarMessage(res['message']);
             this.loadTransactionList();
           }, (error) => {
-            console.log("res---",error)
             this.sharedUtilService.showSnackBarMessage(error.error.message);
         });
       }
