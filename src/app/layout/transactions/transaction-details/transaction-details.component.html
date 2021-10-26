@@ -193,12 +193,47 @@
                         </tr>
                       </tbody>
                     </table>
-                    <table class="table table-bordered">
+                    <table class="table table-border"  *ngIf="transactionData.requirement=='BankGuarantee'">
                       <tbody>
                         <tr>
                           <th colspan="2">Others</th>
                         </tr>
+                       
                         <tr>
+                          <td>Charges are on</td>
+                          <td class="td-padding"><input matInput value={{transactionData.chargesAreOn}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr >
+                          <td>Validity</td>
+                          <td class="td-padding"><input matInput value="{{transactionData.validity | date : 'dd-MM-y'}}" readonly="true">
+                          </td>
+                        </tr>
+                      
+                        <tr>
+                          <td>Upload BG Text</td>
+                        <!-- <td><input matInput value={{transactionData.transactionId}} readonly="true">
+                          </td> -->
+                          <td *ngIf="transactionData.proForma" class="td-padding">
+                            <a style="color: blue; text-decoration: underline; cursor: pointer;" (click)="showImage(transactionData.proForma)" >View Document</a>
+                          </td>
+                          <td *ngIf="!transactionData.proForma" class="td-padding">
+                            <a style="color: blue; text-decoration: none;pointer-events: none ;">No such document attached</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Comment</td>
+                          <td class="td-padding"><input matInput value={{transactionData.comment}} readonly="true">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="table table-bordered"  *ngIf="transactionData.requirement!='BankGuarantee'">
+                      <tbody>
+                        <tr>
+                          <th colspan="2">Others</th>
+                        </tr>
+                        <tr >
                           <td style="width: 50%;">Port of Loading </td>
                           <td>
                             <input matInput value={{transactionData.portofLoading}} readonly="true">

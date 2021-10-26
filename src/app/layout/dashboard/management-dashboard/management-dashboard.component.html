@@ -246,8 +246,8 @@
                               <td mat-cell *matCellDef="let element"> {{element.totalTrxn}} </td>
                            </ng-container>
                            <ng-container matColumnDef="cumulativeLcValue">
-                              <th mat-header-cell *matHeaderCellDef> Cumulative Lc Value </th>
-                              <td mat-cell *matCellDef="let element"> {{element.cumulativeLcValue}} </td>
+                              <th mat-header-cell *matHeaderCellDef> Cumulative Value (USD) </th>
+                              <td mat-cell *matCellDef="let element"> {{element.cumulativeLcValue | number}} </td>
                            </ng-container>
 
                            <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
