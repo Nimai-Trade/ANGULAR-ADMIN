@@ -1,7 +1,7 @@
 import { environment } from './environment';
 export const URLS = Object();
-URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
-//URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
+//URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
+URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink='http://Nimai-Prd-LB-1296056161.ap-south-1.elb.amazonaws.com/nimaiEmail/sendAdminSetPasswordLink/';
 //URLS.sendActivationLink = 'https://prod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
@@ -137,6 +137,9 @@ URLS.getCustomerRevenue = `${environment.BASE_API_URL}api/dashboard/revenue/cust
 URLS.getBankAsCustRevenue = `${environment.BASE_API_URL}api/dashboard/revenue/bankAsCust`;
 URLS.getBankAsUwRevenue = `${environment.BASE_API_URL}api/dashboard/revenue/bankAsUw`;
 
+URLS.getTotalQReceived = `${environment.BASE_API_URL}api/dashboard/revenue/totalQuoteReceived`;
+URLS.getTotalQAccepted = `${environment.BASE_API_URL}api/dashboard/revenue/totalQuoteAccepted`;
+URLS.getTotalQClosed = `${environment.BASE_API_URL}api/dashboard/revenue/totalQuoteClosed`;
 URLS.getCountryAnalysis = `${environment.BASE_API_URL}api/dashboard/countryAnalysis`;
 URLS.getOverAllCustomersCount = `${environment.BASE_API_URL}api/dashboard/overall/customers`;
 URLS.getOverAllReferrerCount = `${environment.BASE_API_URL}api/dashboard/customer/referrer`;

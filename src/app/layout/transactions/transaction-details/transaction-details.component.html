@@ -221,11 +221,23 @@
                             <a style="color: blue; text-decoration: none;pointer-events: none ;">No such document attached</a>
                           </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <td>Comment</td>
                           <td class="td-padding"><input matInput value={{transactionData.comment}} readonly="true">
                           </td>
-                        </tr>
+                        </tr> -->
+                        <tr >
+                          <td>Maker Comment</td>
+                          <td>
+                            <textarea readonly="true" matInput value={{transactionData.makerComment}}></textarea>
+                          </td> 
+                      </tr>
+                      <tr>
+                          <td>Checker Comment</td>
+                          <td>
+                            <textarea readonly="true" matInput value={{transactionData.checkerComment}}></textarea>
+                          </td> 
+                      </tr>
                       </tbody>
                     </table>
                     <table class="table table-bordered"  *ngIf="transactionData.requirement!='BankGuarantee'">
@@ -257,7 +269,7 @@
                         </tr>
                       
                         <tr>
-                          <td>Pro Forma</td>
+                          <td>Upload Invoice</td>
                         <!-- <td><input matInput value={{transactionData.transactionId}} readonly="true">
                           </td> -->
                           <td *ngIf="transactionData.proForma">
@@ -267,11 +279,23 @@
                             <a style="color: blue; text-decoration: none;pointer-events: none ;">No such document attached</a>
                           </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <td>Comment</td>
                           <td><input matInput value={{transactionData.comment}} readonly="true">
                           </td>
-                        </tr>
+                        </tr> -->
+                        <tr >
+                          <td>Maker Comment</td>
+                          <td>
+                            <textarea readonly="true" matInput value={{transactionData.makerComment}}></textarea>
+                          </td> 
+                      </tr>
+                      <tr>
+                          <td>Checker Comment</td>
+                          <td>
+                            <textarea readonly="true" matInput value={{transactionData.checkerComment}}></textarea>
+                          </td> 
+                      </tr>
                       </tbody>
                     </table>
                   </div>

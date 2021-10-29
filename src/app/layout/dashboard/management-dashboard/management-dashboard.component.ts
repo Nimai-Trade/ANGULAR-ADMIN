@@ -61,7 +61,9 @@ export class ManagementDashboardComponent implements OnInit {
   uwRevenue: any;
   uwSubs: number;
   uwAmount: number;
-
+  tqAccepted:number;
+  tqClosed:number;
+  tqReceived:number;
   subsGrantCount: number;
   vasGrantCount: number;
   disCoupGrantCount: number;
@@ -96,6 +98,12 @@ export class ManagementDashboardComponent implements OnInit {
 
 
   revForm: FormGroup = new FormGroup({});
+    tqcSub: number;
+    tqaSub: number;
+    tqrSub: number;
+    tqrAmount: number;
+    tqaAmount: number;
+    tqcAmount: number;
   
   constructor(private formBuilder: FormBuilder, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) {
       {
@@ -334,7 +342,30 @@ export class ManagementDashboardComponent implements OnInit {
 
           }
       });
+      this.service.getTotalQReceived(dateFrom, dateTo).subscribe((res) => {
+        this.tqReceived = JSON.parse(JSON.stringify(res));
+        for (let key of Object.keys(this.tqReceived)) {
+            this.tqrSub = Number(this.tqReceived['subscription_count']);
+            this.tqrAmount = Number(this.tqReceived['amount']);
 
+        }
+    });
+        this.service.getTotalQAccepted(dateFrom, dateTo).subscribe((res) => {
+          this.tqAccepted = JSON.parse(JSON.stringify(res));
+          for (let key of Object.keys(this.tqAccepted)) {
+              this.tqaSub = Number(this.tqAccepted['subscription_count']);
+             this.tqaAmount = Number(this.tqAccepted['amount']);
+
+          }
+      });
+      this.service.getTotalQClosed(dateFrom, dateTo).subscribe((res) => {
+        this.tqClosed = JSON.parse(JSON.stringify(res));
+        for (let key of Object.keys(this.tqClosed)) {
+            this.tqcSub = Number(this.tqClosed['subscription_count']);
+            this.tqcAmount = Number(this.tqClosed['amount']);
+
+        }
+    });
   }
 
   subsRouteMethod(event) {

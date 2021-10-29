@@ -98,6 +98,39 @@ export class DashboardService {
     );;
   }
 
+  getTotalQReceived(dateFrom, dateTo): Observable<any> {
+    const req = {
+      'dateFrom': dateFrom,
+      'dateTo': dateTo
+    }
+    return this.httpClient.post(URLS.getTotalQReceived, req).pipe(
+      map((res) => {
+        return res;
+      })
+    );;
+  }
+  getTotalQAccepted(dateFrom, dateTo): Observable<any> {
+    const req = {
+      'dateFrom': dateFrom,
+      'dateTo': dateTo
+    }
+    return this.httpClient.post(URLS.getTotalQAccepted, req).pipe(
+      map((res) => {
+        return res;
+      })
+    );;
+  }
+  getTotalQClosed(dateFrom, dateTo): Observable<any> {
+    const req = {
+      'dateFrom': dateFrom,
+      'dateTo': dateTo
+    }
+    return this.httpClient.post(URLS.getTotalQClosed, req).pipe(
+      map((res) => {
+        return res;
+      })
+    );;
+  }
   getSubscriptionGrant(): Observable<any> {
     return this.httpClient.get(URLS.getGrantSubscriptionCount, { headers: this.headers });
   }

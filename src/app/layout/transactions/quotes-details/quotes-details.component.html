@@ -40,14 +40,21 @@
           <table class="table">
             <tbody>
               <tr
-                *ngIf="quatationData.requirementType === 'Confirmation' || quatationData.requirementType === 'BankGuarantee' || quatationData.requirementType === 'ConfirmAndDiscount'">
-                <td>Confirmation Charges p.a.</td>
+                *ngIf="quatationData.requirementType === 'Confirmation' ||  quatationData.requirementType === 'ConfirmAndDiscount'">
+                <td>Confirmation Commission p.a.</td>
                 <td>
                   <input type="text" value={{quatationData.confirmationCharges}} readonly="true" placeholder="">
                   <span class="pull-right percent">%</span>
                 </td>
               </tr>
-
+              <tr
+              *ngIf="quatationData.requirementType === 'BankGuarantee'">
+              <td>BG Commission p.a.</td>
+              <td>
+                <input type="text" value={{quatationData.confirmationCharges}} readonly="true" placeholder="">
+                <span class="pull-right percent">%</span>
+              </td>
+            </tr>
               <tr
                 *ngIf="quatationData.confChgsIssuanceToNegot === 'YES' && quatationData.requirementType === 'Confirmation' || quatationData.requirementType === 'ConfirmAndDiscount'">
                 <td>Confirmation charges applicable from date of issuance till Negotiation date </td>
@@ -66,7 +73,7 @@
 
               <tr
               *ngIf="quatationData.confChgsIssuanceToexp === 'yes' && quatationData.requirementType === 'BankGuarantee' ">
-              <td>Confirmation charges applicable from date of issuance till expiry date </td>
+              <td>Commission charges applicable from date of issuance till expiry date </td>
               <td>
                 <input type="text" value={{quatationData.confChgsIssuanceToexp}} readonly="true" placeholder="">
               </td>
@@ -74,7 +81,7 @@
 
             <tr
               *ngIf="quatationData.confChgsIssuanceToClaimExp === 'yes' && quatationData.requirementType === 'BankGuarantee'">
-              <td>Confirmation charges applicable from date of issuance till claim expiry date</td>
+              <td>Commission charges applicable from date of issuance till claim expiry date</td>
               <td>
                 <input type="text" value={{quatationData.confChgsIssuanceToClaimExp}} readonly="true" placeholder="">
               </td>
