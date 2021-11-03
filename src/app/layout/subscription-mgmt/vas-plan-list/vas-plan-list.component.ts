@@ -32,6 +32,7 @@ export class VasPlanListComponent implements OnInit {
   countryVal : any;
   countryData: any = [];
   role : any;
+  isRole: boolean=false;
 
   constructor(private formBuilder: FormBuilder, private service: SubscriptionService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.vasForm = formBuilder.group({
@@ -43,6 +44,9 @@ export class VasPlanListComponent implements OnInit {
     this.rightList = localStorage.getItem('userRight');
     this.myRights = this.rightList.split(',');
     this.role = localStorage.getItem('role');
+    if(this.role === 'Management' || this.role==='Ops Edit' || this.role === 'Ops Admin'){
+      this.isRole=true;
+    }
     this.getCountryList();  
     this.setPagerConfig();
   }

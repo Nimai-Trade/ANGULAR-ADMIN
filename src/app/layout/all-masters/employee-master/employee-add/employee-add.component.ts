@@ -178,9 +178,9 @@ export class EmployeeAddComponent implements OnInit {
       (res) => {
         this.countryList = res;
         this.selectedcountry=res;
-        let item = {country: "All", code: "All"}
+       // let item = {country: "All", code: "All"}
         // this.countryList.push(item);
-        this.countryList.unshift(item);
+      //  this.countryList.unshift(item);
         for (let entry of this.countryList) {
           this.country.push(entry.country);
           if(entry.country!="All")
@@ -225,9 +225,9 @@ export class EmployeeAddComponent implements OnInit {
       (res) => {
         this.countryList = res;
         this.selectedcountry=res;
-        let item = {country: "All", code: "All"}
+        //let item = {country: "All", code: "All"}
         // this.countryList.push(item);
-        this.countryList.unshift(item);
+     //   this.countryList.unshift(item);
         for (let entry of this.countryList) {
           this.country.push(entry.country);
           if(entry.country!="All")

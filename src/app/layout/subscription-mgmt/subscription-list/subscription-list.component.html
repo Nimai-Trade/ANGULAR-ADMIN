@@ -183,7 +183,7 @@
                     <td mat-cell *matCellDef="let element" class="myCell">
                       <div fxLayout="row">
                        
-                          <button *ngIf="element.status!='Active'" mat-button class="action-btn" matTooltip="Edit"
+                          <button *ngIf="element.status!='Active' && isRole " mat-button class="action-btn" matTooltip="Edit"
                             (click)="openSubDialog('Edit Subscription', element.subscriptionPlanId);">
                             <mat-icon>edit</mat-icon>
                           </button>

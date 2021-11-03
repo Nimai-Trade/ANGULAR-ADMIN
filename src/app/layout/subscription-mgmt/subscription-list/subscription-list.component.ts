@@ -40,6 +40,7 @@ export class SubscriptionListComponent implements OnInit {
   countryVal : any;
   role : any;
   selectedcountry: any;
+  isRole: boolean=false;
 
   constructor(private formBuilder: FormBuilder, private service: SubscriptionService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.subscriptionForm = formBuilder.group({
@@ -55,6 +56,9 @@ export class SubscriptionListComponent implements OnInit {
     this.role = localStorage.getItem('role');
     if(this.role === 'Bank RM'){
       this.subscriptionForm.get('customerType').setValue('BANK');
+      
+    }else if(this.role === 'Management' || this.role==='Ops Edit' || this.role === 'Ops Admin'){
+      this.isRole=true;
     }
     this.getCountryList();  
     this.setPagerConfig();
