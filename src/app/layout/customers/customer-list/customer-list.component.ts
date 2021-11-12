@@ -161,6 +161,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   showTransaction(id) {
+    console.log(id)
     if (id !== undefined) {
       localStorage.setItem('userId', id);
       this.customerListForm.controls['userId'].setValue(id);

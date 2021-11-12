@@ -83,6 +83,7 @@ export class EmployeeAddComponent implements OnInit {
     } else {
       this.employeeData = '';
       this.getCountryList();
+      this.getCode();
     }
 
     // this.countryList = [{ 'code': 'INDIA', 'country': 'INDIA' }, { 'code': 'USA', 'country': 'USA' }];
@@ -177,7 +178,7 @@ export class EmployeeAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
-        this.selectedcountry=res;
+      //  this.selectedcountry=res;
        // let item = {country: "All", code: "All"}
         // this.countryList.push(item);
       //  this.countryList.unshift(item);
@@ -219,22 +220,27 @@ export class EmployeeAddComponent implements OnInit {
           });
       });
   }
+  getCode() {
+    this.service.getCountryList().subscribe(
+      (res) => {
+        this.selectedcountry=res;
+        });
+    }
 
   getCountryList() {
     this.service.getCountryList().subscribe(
       (res) => {
+        
         this.countryList = res;
-        this.selectedcountry=res;
-        //let item = {country: "All", code: "All"}
-        // this.countryList.push(item);
-     //   this.countryList.unshift(item);
+        let item = {country: "All", code: "All"}
+        this.countryList.push(item);
+        this.countryList.unshift(item);
         for (let entry of this.countryList) {
           this.country.push(entry.country);
-          if(entry.country!="All")
-            this.countryCode.push(entry.code);
-        }
+        //   if(entry.country!="All")
+        //     this.countryCode.push(entry.code);
+         }
        
-
       });
   }
   onChangeofOptions(newGov) {

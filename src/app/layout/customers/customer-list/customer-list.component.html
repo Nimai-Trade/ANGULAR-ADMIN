@@ -120,14 +120,14 @@
                       style="width: 130px!important;white-space: nowrap;"> Total Trxn
                     </th>
                     <td mat-cell *matCellDef="let element" class="myCell" style="width: 130px!important;">
-                      <div fxLayout="row" class="tableData" *ngIf = "userRole !== 'Customer RM'">
+                      <div fxLayout="row" class="tableData" >
                         <a (click)="showTransaction(element.userid)" class="backbtn pull-right" id="backbtn">
                           {{element.totalTxn}}</a>
                       </div>
-                      <div fxLayout="row" class="tableData" *ngIf = "userRole === 'Customer RM'">
-                        <a class="backbtn pull-right" id="backbtn">
+                      <!-- <div fxLayout="row" class="tableData" *ngIf = "userRole === 'Customer RM'">
+                        <a  (click)="showTransaction(element.userid)" class="backbtn pull-right" id="backbtn">
                           {{element.totalTxn}}</a>
-                      </div>
+                      </div> -->
                     </td>
                   </ng-container>
 

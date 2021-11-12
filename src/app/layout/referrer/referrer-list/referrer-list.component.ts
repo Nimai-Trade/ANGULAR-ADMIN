@@ -121,7 +121,7 @@ export class ReferrerListComponent implements OnInit {
   }
 
   loadReferrerList() {
-    this.service.getReferrerList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.customerListForm.value).subscribe((res) => this.onSuccess(res));
+    this.service.getReferrerList(localStorage.getItem('role'), this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.customerListForm.value).subscribe((res) => this.onSuccess(res));
   }
 
   onSuccess(res: any) {

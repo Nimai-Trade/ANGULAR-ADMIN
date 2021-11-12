@@ -17,7 +17,7 @@ export class ReferrerService {
   }
 
 
-  getReferrerList(page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
+  getReferrerList(role : string, page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
  
     const reqData = {
       'page': page,
@@ -30,6 +30,7 @@ export class ReferrerService {
       'companyName': fileterObj.companyName,
       'country': fileterObj.country,
       'txtStatus': fileterObj.txtStatus,
+      'role' :role
     };
     return this.httpClient.post(URLS.getReferrerListUrl, reqData, { headers: this.headers }).pipe(
       map((res) => {

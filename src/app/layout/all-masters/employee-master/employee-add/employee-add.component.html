@@ -110,7 +110,7 @@
                     <mat-select  formControlName="countryExt" disableOptionCentering class="roleselect" placeholder="Select code">
                        <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Code"> 
                        <mat-option [value]="">Select</mat-option>
-                       <mat-option *ngFor="let item of selectedcountry" [value]="item.code">{{item.code}}</mat-option>
+                       <mat-option *ngFor="let item of selectedcountry" [value]="item.code" >{{item.code}}</mat-option>
                     </mat-select>
                 
                     <!-- <mat-select formControlName="countryExt" disableOptionCentering class="roleselect">
