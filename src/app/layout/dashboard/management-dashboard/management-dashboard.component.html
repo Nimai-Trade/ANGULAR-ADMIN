@@ -2,12 +2,30 @@
 <div class="content" style="margin-bottom: 20px;">
    <div class="container-fluid">
       <div class="">
+       
+            <div class="row">
+               <div class="col-lg-10 col-md-9 col-sm-10 ">
+                  <h2 class="maindashh">Pending Requests     </h2>
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-2">
+               <div style="width: 123%; margin-left: -54px;">
+                  <mat-label></mat-label>
+                  <mat-select placeholder="All" (selectionChange)="pendingKycCount($event)"
+                     disableOptionCentering class="roleselect">
+                     <mat-option *ngFor="let subs of subsType" [value]="subs">
+                        {{subs}}
+                     </mat-option>
+                  </mat-select>
+               </div>
+               </div>
+               </div>
+         
          <div class="col-md-12">
             <div class="row">
-               <h2 class="maindashh">Pending Requests</h2>
+             
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{payAwaitedCount}}</span>
+                     <span (click)="showKYCApproval('kyc')" style="padding-left: 30; cursor: pointer;">{{payAwaitedCount}}</span>
                      <h3 class="text">Payment Approval</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path
@@ -17,7 +35,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{paymentApprovalCount}}</span>
+                     <span (click)="showKYCApproval('grant-payment')" style="padding-left: 30; cursor: pointer;">{{paymentApprovalCount}}</span>
                      <h3>Grant Payment</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path
@@ -29,7 +47,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{assignRmCOunt}}</span>
+                     <span (click)="showKYCApproval('assign-rm')" style="padding-left: 30; cursor: pointer;">{{assignRmCOunt}}</span>
                      <h3>Assign RM</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                         <path
@@ -41,7 +59,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{grantRmPending}}</span>
+                     <span (click)="showKYCApproval('grant-rm')" style="padding-left: 30; cursor: pointer;">{{grantRmPending}}</span>
                      <h3>Grant RM</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                         <path
@@ -50,10 +68,10 @@
                            d="M228.182 239.795c56.833 0 100.597-54.936 100.597-119.897C328.779 54.907 284.993 0 228.182 0c-56.833 0-100.597 54.936-100.597 119.897 0 64.991 43.787 119.898 100.597 119.898zm0-210.552c39.344 0 71.354 40.667 71.354 90.654s-32.01 90.654-71.354 90.654-71.354-40.667-71.354-90.654 32.01-90.654 71.354-90.654z" />
                      </svg>
                   </div>
-               </div>
+               </div>  
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{grantUserCount}}</span>
+                     <span (click)="showKYCApproval('employeeGrant')" style="padding-left: 30; cursor: pointer;">{{grantUserCount}}</span>
                      <h3>Grant User</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                         <path
@@ -65,8 +83,21 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{pendingKycApprovalCount}}</span>
-                     <h3 class="text">KYC Approval</h3>
+
+                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
+                        <mat-select placeholder="All" (selectionChange)="payPendingCount($event)" disableOptionCentering
+                           class="roleselect">
+                           <mat-option *ngFor="let subs of subsType" [value]="subs">
+                              {{subs}}
+                           </mat-option>
+                        </mat-select>
+
+                     </ul> -->
+
+                     <span (click)="showKYCApproval('kyc')" style="padding-left: 30; cursor: pointer;">{{pendingKycApprovalCount}}</span>
+                     <h3 class="text" >
+                       KYC Approval
+                        </h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.6 367.6">
                         <path
                            d="M328.6 81.6c-.4 0-.4-.4-.8-.8s-.4-.8-.8-1.2L258.2 2.4c-.4-.4-1.2-.8-1.6-1.2-.4 0-.4-.4-.8-.4-.8-.4-2-.8-3.2-.8H83.8C59 0 38.6 20.4 38.6 45.2v277.2c0 24.8 20.4 45.2 45.2 45.2h200c24.8 0 45.2-20.4 45.2-45.2v-238c0-.8-.4-2-.4-2.8zm-68.4-54.4l44.4 50h-44.4v-50zM313.8 322c0 16.8-13.2 30.4-30 30.4h-200c-16.8 0-30-13.6-30-30V44.8c0-16.8 13.6-30 30-30H245v69.6c0 4 3.2 7.6 7.6 7.6h61.2v230z" />
@@ -77,8 +108,8 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span>{{grantKycCount}}</span>
-                     <h3>Grant KYC</h3>
+                     <span (click)="showKYCApproval('grant')" style="padding-left: 30; cursor: pointer;">{{grantKycCount}}</span>
+                     <h3 class="text">Grant KYC</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.6 367.6">
                         <path
                            d="M328.6 81.6c-.4 0-.4-.4-.8-.8s-.4-.8-.8-1.2L258.2 2.4c-.4-.4-1.2-.8-1.6-1.2-.4 0-.4-.4-.8-.4-.8-.4-2-.8-3.2-.8H83.8C59 0 38.6 20.4 38.6 45.2v277.2c0 24.8 20.4 45.2 45.2 45.2h200c24.8 0 45.2-20.4 45.2-45.2v-238c0-.8-.4-2-.4-2.8zm-68.4-54.4l44.4 50h-44.4v-50zM313.8 322c0 16.8-13.2 30.4-30 30.4h-200c-16.8 0-30-13.6-30-30V44.8c0-16.8 13.6-30 30-30H245v69.6c0 4 3.2 7.6 7.6 7.6h61.2v230z" />
@@ -89,7 +120,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
+                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
                         <mat-label></mat-label>
                         <mat-select placeholder="All" (selectionChange)="pendingKycCount($event)"
                            disableOptionCentering class="roleselect">
@@ -97,14 +128,14 @@
                               {{subs}}
                            </mat-option>
                         </mat-select>
-                     </ul>
+                     </ul> -->
                      <span>{{pendingKycDrop}}</span>
                      <h3 class="text" style="height: 32px;">KYC Pending Users</h3>
                   </div>
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3">
                   <div class="maindash">
-                     <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
+                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
                         <mat-label></mat-label>
                         <mat-select placeholder="All" (selectionChange)="subsCount($event)"
                            disableOptionCentering class="roleselect">
@@ -113,14 +144,14 @@
                            </mat-option>
                         </mat-select>
 
-                     </ul>
+                     </ul> -->
                      <span>{{subsExpiryCount}}</span>
                      <h3 class="text">Subscription expiring in next 30 days</h3>
                   </div>
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
+                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
                         <mat-select placeholder="All" (selectionChange)="payPendingCount($event)" disableOptionCentering
                            class="roleselect">
                            <mat-option *ngFor="let subs of subsType" [value]="subs">
@@ -128,7 +159,7 @@
                            </mat-option>
                         </mat-select>
 
-                     </ul>
+                     </ul> -->
                      <span>{{paymenPending}}</span>
                      <h3 class="text" style="height: 32px;">Payment Pending User</h3>
 
@@ -414,7 +445,8 @@
                               <table class="table">
                                  <tr>
                                     <td>
-                                       <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50">
+                                       <img src="assets/images/catalog.png" width="70">
+                                       <!-- <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50"> -->
                                     </td>
                                     <td>
                                        <h5>{{overAllCustCount}}</h5>
@@ -429,7 +461,8 @@
                               <table class="table">
                                  <tr>
                                     <td>
-                                       <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50">
+                                       <img src="assets/images/catalog.png" width="70">
+                                       <!-- <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50"> -->
                                     </td>
                                     <td>
                                        <h5>{{bankAsUwCount}}</h5>
@@ -444,7 +477,8 @@
                               <table class="table">
                                  <tr>
                                     <td>
-                                       <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50">
+                                       <img src="assets/images/catalog.png" width="70">
+                                       <!-- <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50"> -->
                                     </td>
                                     <td>
                                        <h5>{{bankAsCustCount}}</h5>
@@ -459,7 +493,7 @@
                               <table class="table">
                                  <tr>
                                     <td>
-                                       <img src="https://image.flaticon.com/icons/svg/876/876000.svg" width="50">
+                                       <img src="assets/images/catalog.png" width="70">
                                     </td>
                                     <td>
                                        <h5>{{overAllRefCount}}</h5>

@@ -44,6 +44,10 @@ export class BankListingComponent implements OnInit {
 
   ngOnInit() {
     const savedData = JSON.parse(localStorage.getItem('bankSearch'));
+    if(localStorage.getItem('fromDashBoard')){      
+      this.bankListForm.get('txtStatus').setValue("Pending");     
+    }
+    localStorage.removeItem('fromDashBoard') 
     Object.keys(savedData).forEach(name => {
       if (this.bankListForm.controls[name]) {
         this.bankListForm.controls[name].patchValue(savedData[name]);

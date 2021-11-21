@@ -22,9 +22,14 @@ export class CustomerKycComponent implements OnInit {
   userId:any;
   showLink:boolean=false;
   empCode:any;
+  filedId: string;
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
+      "field1":[''],
+    "field2":[''],
+    "field3":[''],
+    "field4":[''],
     });
   }
 
@@ -67,6 +72,22 @@ export class CustomerKycComponent implements OnInit {
 
     //console.log(this.kycData);
       });
+      const data={
+        "userId":this.data.id
+      }
+      this.service.viewFieldData(data).subscribe(
+        (res) => {
+          let data = JSON.parse(JSON.stringify(res)).data;
+          this.filedId=data.filedId;
+          // this.kycForm.get('field1').patchValue(data.field1);       
+          this.kycForm.patchValue({
+           field1: data.field1,
+            field2:data.field2,
+            field3: data.field3,
+            field4: data.field4,
+          });
+     
+    });
   }
 
 
@@ -131,6 +152,25 @@ export class CustomerKycComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // this.loadCustomerList();
     });
+  }
+
+
+  saveFinancial(status){
+
+   const data= {
+      "userId": this.userId,
+    "field1":this.kycForm.get('field1').value,
+    "field2":this.kycForm.get('field2').value,
+    "field3":this.kycForm.get('field3').value,
+    "field4":this.kycForm.get('field4').value,    
+    "filedId":this.filedId  
+  }
+  console.log(data)
+  this.service.saveFieldData(data).subscribe(
+    (res) => {
+
+    });
+
   }
 
 }

@@ -90,6 +90,9 @@
                     </td>
                   </tr>
 
+
+                
+
                   <!-- <tr>
                   <td>Country</td>
                   <td>
@@ -121,11 +124,62 @@
 
                 </tbody>
               </table>
+
+              
+
             </div>
           </div>
         </div>
       </ng-container>
     </div>
+
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+
+    <table class="table noneborder">
+      <tbody>
+
+        <tr>
+          <th>Financials</th>
+        </tr>
+        <tr>
+          <td>Field 1</td>
+          <td>
+            <input matInput formControlName="field1" placeholder="">
+          </td>
+          <td>Field 2</td>
+          <td>
+            <input  formControlName="field2"  placeholder="">
+          </td>
+        </tr>
+     
+          <tr>
+            <td>Field 3</td>
+            <td>
+              <input matInput formControlName="field3" placeholder="">
+            </td>
+            <td>Field 4</td>
+            <td>
+              <input  formControlName="field4"  placeholder="">
+            </td>
+          </tr>
+          <tr>
+             
+            <td></td>       
+            <td>
+
+              <button  class="btn btn-info" (click)="saveFinancial('save')">Save</button>&nbsp;&nbsp;
+              <button  class="btn btn-info" >Cancel</button>
+            </td>
+          </tr>
+
+      </tbody>
+    </table>
+        </div>
+        </div>
+        </div>
+
   </mat-dialog-content>
 
 </mat-card>

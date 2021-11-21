@@ -1,12 +1,29 @@
 <div class="content" style="margin-bottom: 20px;">
   <div class="container-fluid">
     <div class="">
+
+      <div class="row">
+         <div class="col-lg-10 col-md-9 col-sm-10 ">
+            <h2 class="maindashh">Pending Requests     </h2>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-2">
+         <div style="width: 123%; margin-left: -54px;">
+            <mat-label></mat-label>
+            <mat-select placeholder="All" (selectionChange)="pendingKycCount($event)"
+               disableOptionCentering class="roleselect">
+               <mat-option *ngFor="let subs of subsType" [value]="subs">
+                  {{subs}}
+               </mat-option>
+            </mat-select>
+         </div>
+         </div>
+         </div>
+
       <div class="col-md-12">
         <div class="row">
-          <h2 class="maindashh">Pending Requests</h2>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{payAwaitedCount}}</span>
+                    <span (click)="showKYCApproval('')" style="padding-left: 30; cursor: pointer;">{{payAwaitedCount}}</span>
                     <h3 class="text">Payment Confirmation Awaited</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                        <path
@@ -16,7 +33,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{paymentApprovalCount}}</span>
+                    <span (click)="showKYCApproval('grant-payment')" style="padding-left: 30; cursor: pointer;">{{paymentApprovalCount}}</span>
                     <h3>Payment Approval</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                        <path
@@ -28,7 +45,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{assignRmCOunt}}</span>
+                    <span (click)="showKYCApproval('assign-rm')" style="padding-left: 30; cursor: pointer;">{{assignRmCOunt}}</span>
                     <h3>Assign RM</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                        <path
@@ -40,7 +57,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{grantRmPending}}</span>
+                    <span (click)="showKYCApproval('grant-rm')" style="padding-left: 30; cursor: pointer;">{{grantRmPending}}</span>
                     <h3>Grant RM</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                        <path
@@ -52,7 +69,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{grantUserCount}}</span>
+                    <span (click)="showKYCApproval('employeeGrant')" style="padding-left: 30; cursor: pointer;">{{grantUserCount}}</span>
                     <h3>Grant User</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                        <path
@@ -64,7 +81,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{pendingKycApprovalCount}}</span>
+                    <span (click)="showKYCApproval('kyc')" style="padding-left: 30; cursor: pointer;">{{pendingKycApprovalCount}}</span>
                     <h3 class="text">KYC Approval</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.6 367.6">
                        <path
@@ -76,7 +93,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span>{{grantKycCount}}</span>
+                    <span (click)="showKYCApproval('grant')" style="padding-left: 30; cursor: pointer;">{{grantKycCount}}</span>
                     <h3>Grant KYC</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.6 367.6">
                        <path

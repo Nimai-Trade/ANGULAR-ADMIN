@@ -8,6 +8,7 @@ import { DashboardService } from '../dashboard.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { formatDate } from '@angular/common';
 import * as $ from 'src/assets/js/jquery.min';
+import { Router } from '@angular/router';
 declare let google: any;
 @Component({
   selector: 'app-management-dashboard',
@@ -77,7 +78,7 @@ export class ManagementDashboardComponent implements OnInit {
   paymenPending: any;
   pendingKycDrop: any;
 
-  subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter']
+  subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Refferer']
 
 
   userStatType: string[] = ['Customer', 'Bank As Customer', 'Bank As UnderWriter']
@@ -104,8 +105,9 @@ export class ManagementDashboardComponent implements OnInit {
     tqrAmount: number;
     tqaAmount: number;
     tqcAmount: number;
+    role: string;
   
-  constructor(private formBuilder: FormBuilder, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) {
+  constructor(private formBuilder: FormBuilder,private router: Router, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) {
       {
         this.revForm = formBuilder.group({
             startDate: ['', Validators.required],
@@ -116,15 +118,16 @@ export class ManagementDashboardComponent implements OnInit {
   } 
   ngOnInit(): void {
       this.cdr.detectChanges();
-      this.getPaymentConf();
-      this.getPaymentApp();
-      this.getAssignRmCount();
-      this.getGrantRm();
-      this.getGrantUSer();
-      this.getKycApprovalPending();
-      this.getGrantKyc();
-      this.getPendingKyc();
-      this.getSubscripGrant();
+      this.getPendingRequests();
+     this.getPaymentConf();
+     this.getPaymentApp();
+     this.getAssignRmCount();
+     this.getGrantRm();
+     this.getGrantUSer();
+     this.getKycApprovalPending();
+     this.getGrantKyc();
+     this.getPendingKyc();
+     this.getSubscripGrant();
       this.getVasGrant();
       this.getDiscountGrant();
       this.getOverAllCust();
@@ -148,7 +151,7 @@ export class ManagementDashboardComponent implements OnInit {
       this.cdr.detectChanges();
       this.getAverageQuotes(null, null);
   }
-
+ 
   getPaymentConf() {
       this.service.getPayConfAwaited().subscribe(
           (res) => {
@@ -297,6 +300,7 @@ export class ManagementDashboardComponent implements OnInit {
   }
 
   pendingKycCount(subs) {
+      
       if (subs.value == "Bank As Customer") {
           this.subscriberType = "Bank";
           this.bankType = "Customer";
@@ -305,17 +309,33 @@ export class ManagementDashboardComponent implements OnInit {
           this.bankType = "Underwriter";
       } else if (subs.value == "Referrer") {
           this.subscriberType = "Bank";
-          this.bankType = null;
+          this.bankType = "";
       }
       else {
           this.subscriberType = subs.value;
-          this.bankType = null;
+          this.bankType = "";
       }
-      this.service.getPendingKycCount(this.subscriberType, this.bankType).subscribe((res) => {
-          this.pendingKycDrop = res;
-      })
-
+    //   this.service.getPendingKycCount(this.subscriberType, this.bankType).subscribe((res) => {
+    //       this.pendingKycDrop = res;
+    //   })
+    this.getPendingRequests();
   }
+
+  getPendingRequests() {    
+    this.service.getPendingRequests(localStorage.getItem('role'),this.subscriberType,this.bankType).subscribe((res) => {
+        this.payAwaitedCount =res.paymentApproval
+        this.paymentApprovalCount=res.grantPayment
+        this.assignRmCOunt=res.assignRm
+        this.grantRmPending=res.grantRM
+        this.grantUserCount=res.grantUser
+        this.pendingKycApprovalCount=res.kycApproval
+        this.grantKycCount=res.grantKyc
+        this.pendingKycDrop=res.kycPendingUser
+        this.subsExpiryCount=res.subPlanExpiring30Days
+        this.paymenPending=res.paymentPendingUser      
+    })
+}
+
   getCustRevenue(dateFrom, dateTo) {
       this.service.getCustRevenue(dateFrom, dateTo).subscribe((res) => {
 
@@ -653,4 +673,46 @@ export class ManagementDashboardComponent implements OnInit {
         this.reloadStat(this.startDate,this.endDate);
     }   
   }
+  showKYCApproval(status){
+      const data={
+        "userId":null,
+        "emailId":null,
+        "mobileNo":null,
+        "companyName":null,
+        "country":null
+      }
+   if(status=='kyc'){
+      if(this.bankType == "Underwriter"){
+      localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('bankSearch', JSON.stringify(data));
+        this.router.navigate(['app', 'bank', 'bank-list']);
+      }     
+      else if(this.bankType == "" || this.bankType == 'Customer' ){
+        localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('customerSearch' , JSON.stringify(data))
+      this.router.navigate(['app', 'customer', 'customer-list']);
+      }
+      if(this.bankType == "" )
+      localStorage.setItem('fromDashBoardStatus', 'Customer');
+      if( this.bankType == 'Customer')
+      localStorage.setItem('fromDashBoardStatus', 'BankAsCustomer');
+
+   } 
+   
+   if(status=='employeeGrant'){
+    this.router.navigate(['app', 'masters', 'employeeGrant']);
+}
+if(status=='grant'){
+    this.router.navigate(['app', 'grantkyc']);
+}
+if(status=='grant-payment'){
+    this.router.navigate(['app', 'payment-approval']);
+}
+if(status=='assign-rm'){
+    this.router.navigate(['app', 'assignRm']);
+}
+if(status=='grant-rm'){
+    this.router.navigate(['app', 'grant-rm']);
+}
+}
 }

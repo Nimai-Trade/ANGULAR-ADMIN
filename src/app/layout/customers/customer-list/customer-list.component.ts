@@ -32,6 +32,7 @@ export class CustomerListComponent implements OnInit {
   userRole: any;
 
   eventStartTime = new Date();
+  status: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private service: CustomerService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.customerListForm = formBuilder.group({
@@ -48,13 +49,18 @@ export class CustomerListComponent implements OnInit {
   ngOnInit() {
     // get and parse the saved data from localStorage
     const savedData = JSON.parse(localStorage.getItem('customerSearch'));
+    if(localStorage.getItem('fromDashBoard')){      
+      this.customerListForm.get('txtStatus').setValue("Pending");   
+     this.status= localStorage.getItem('fromDashBoardStatus')  
+    }
+    localStorage.removeItem('fromDashBoard') 
     Object.keys(savedData).forEach(name => {
       if (this.customerListForm.controls[name]) {
         this.customerListForm.controls[name].patchValue(savedData[name]);
       }
     });
 
-    // console.log('Role '+localStorage.getItem('role'));
+    console.log('Role '+ localStorage.getItem('fromDashBoardStatus'));
     this.customerListForm.controls['role'].patchValue(localStorage.getItem('role'));
     this.userRole = localStorage.getItem('role');
     this.kycStatusList = [{ 'code': 'ALL', 'name': 'ALL' }, { 'code': 'Pending', 'name': 'Pending' }, { 'code': 'Approved', 'name': 'Approved' }, { 'code': 'Rejected', 'name': 'Rejected' }, { 'code': 'Not Uploaded', 'name': 'Not Uploaded' }];
@@ -129,7 +135,8 @@ export class CustomerListComponent implements OnInit {
   }
 
   loadCustomerList() {
-    this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.customerListForm.value).subscribe((res) => this.onSuccess(res));
+    console.log(this.customerListForm.value)
+    this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.customerListForm.value,this.status).subscribe((res) => this.onSuccess(res));
   }
 
   onSuccess(res: any) {

@@ -113,7 +113,22 @@ export class BanksService {
       })
     );
   }
+  viewFieldData(id) {
 
+    return this.httpClient.post(URLS.getViewFieldData , id, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  
+  saveFieldData(reqData) {
+    return this.httpClient.post(URLS.postSaveFieldData, reqData, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
   kycStatusUpdate(reqData) {
     return this.httpClient.post(URLS.postMakerKycStatusUpdate, reqData, { headers: this.headers }).pipe(
       map((res) => {
