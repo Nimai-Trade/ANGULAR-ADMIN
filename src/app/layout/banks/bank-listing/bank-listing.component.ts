@@ -30,6 +30,7 @@ export class BankListingComponent implements OnInit {
   bankList: any = [];
 
   eventStartTime = new Date();
+  status: string;
   constructor(private formBuilder: FormBuilder, private router: Router, private service: BanksService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.bankListForm = formBuilder.group({
       txtStatus: [],
@@ -45,9 +46,17 @@ export class BankListingComponent implements OnInit {
   ngOnInit() {
     const savedData = JSON.parse(localStorage.getItem('bankSearch'));
     if(localStorage.getItem('fromDashBoard')){      
-      this.bankListForm.get('txtStatus').setValue("Pending");     
+      if( localStorage.getItem('PaymentApproval')){
+        this.bankListForm.get('txtStatus').setValue("PaymentPending");     
+        this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }else{
+      this.bankListForm.get('txtStatus').setValue("Pending");   
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }  
     }
+    localStorage.removeItem('fromDashBoardStatus')
     localStorage.removeItem('fromDashBoard') 
+    localStorage.removeItem('PaymentApproval')
     Object.keys(savedData).forEach(name => {
       if (this.bankListForm.controls[name]) {
         this.bankListForm.controls[name].patchValue(savedData[name]);
@@ -125,7 +134,7 @@ export class BankListingComponent implements OnInit {
   }
 
   loadBankList() {
-    this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.bankListForm.value).subscribe((res) => this.onSuccess(res));
+    this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.bankListForm.value,this.status).subscribe((res) => this.onSuccess(res));
   }
 
   onSuccess(res: any) {

@@ -16,14 +16,23 @@ export class GrantkycService {
     this.headers.set('Content-Type', 'application/json');
   }
   
-  getGrantKycList(page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
+  getGrantKycList(page: number, size: number, sortBy: any, direction: any, fileterObj: any,status): Observable<any> {
+    var str=[];
+    if(status){
+      str= status.split(' ');
+    }else{
+      str=[];
+    }
+
     const reqData = {
       'page': page,
       'size': size,
       'sortBy': sortBy,
       'direction': direction,
       'status': fileterObj.status,
-    };
+      'subscriberType': str[0],
+      'bankType' : str[1]
+       };
     return this.httpClient.post(URLS.getGrantKycListUrl, reqData, { headers: this.headers }).pipe(
       map((res) => {
         return res;

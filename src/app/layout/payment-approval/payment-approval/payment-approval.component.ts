@@ -35,6 +35,7 @@ export class PaymentApprovalComponent implements OnInit {
   eventStartTime = new Date();
   typeOfPayment : any;
   reqData:any;
+  status: string;
   constructor(private formBuilder: FormBuilder, private router: Router, private service: PaymentApprovalService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.paymentApprovalForm = formBuilder.group({
       userId: [],
@@ -47,6 +48,14 @@ export class PaymentApprovalComponent implements OnInit {
 
   ngOnInit() {
     this.user = localStorage.getItem('nimaiId');
+
+    if( localStorage.getItem('PaymentApproval')){
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+    }else{
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+    }
+    localStorage.removeItem('fromDashBoardStatus')
+
     this.getCountryList();
     this.setPagerConfig();
   }
@@ -141,7 +150,7 @@ export class PaymentApprovalComponent implements OnInit {
 
   loadPaymentList() {
    // console.log(this.paymentApprovalForm.controls['country'].value)
-    this.service.getWireTransferList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.paymentApprovalForm.value).subscribe((res) => this.onSuccess(res));
+    this.service.getWireTransferList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.paymentApprovalForm.value,this.status).subscribe((res) => this.onSuccess(res));
   }
   loadVasPaymentList(){
     this.service.getvasWireTransferList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.paymentApprovalForm.value).subscribe((res) => this.onSuccess(res));

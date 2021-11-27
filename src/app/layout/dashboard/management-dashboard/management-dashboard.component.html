@@ -25,7 +25,7 @@
              
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <span (click)="showKYCApproval('kyc')" style="padding-left: 30; cursor: pointer;">{{payAwaitedCount}}</span>
+                     <span (click)="showKYCApproval('payment-approval')" style="padding-left: 30; cursor: pointer;">{{payAwaitedCount}}</span>
                      <h3 class="text">Payment Approval</h3>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path
@@ -129,7 +129,7 @@
                            </mat-option>
                         </mat-select>
                      </ul> -->
-                     <span>{{pendingKycDrop}}</span>
+                     <span (click)="showKYCApproval('kyc-pending-user')" style="padding-left: 30; cursor: pointer;">{{pendingKycDrop}}</span>
                      <h3 class="text" style="height: 32px;">KYC Pending Users</h3>
                   </div>
                </div>

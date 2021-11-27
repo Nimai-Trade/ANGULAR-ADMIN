@@ -49,11 +49,25 @@ export class CustomerListComponent implements OnInit {
   ngOnInit() {
     // get and parse the saved data from localStorage
     const savedData = JSON.parse(localStorage.getItem('customerSearch'));
+    console.log( localStorage.getItem('PaymentApproval'))
     if(localStorage.getItem('fromDashBoard')){      
-      this.customerListForm.get('txtStatus').setValue("Pending");   
-     this.status= localStorage.getItem('fromDashBoardStatus')  
+      if( localStorage.getItem('PaymentApproval')=='PaymentPending'){
+        this.customerListForm.get('txtStatus').setValue("PaymentPending");   
+        this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }
+      else if(localStorage.getItem('PaymentApproval')=='Not Uploaded'){
+        this.customerListForm.get('txtStatus').setValue("Not Uploaded");   
+        this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }
+      else{
+        this.customerListForm.get('txtStatus').setValue("Pending");   
+        this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }
+
     }
+    localStorage.removeItem('fromDashBoardStatus')
     localStorage.removeItem('fromDashBoard') 
+    localStorage.removeItem('PaymentApproval')
     Object.keys(savedData).forEach(name => {
       if (this.customerListForm.controls[name]) {
         this.customerListForm.controls[name].patchValue(savedData[name]);
@@ -135,7 +149,6 @@ export class CustomerListComponent implements OnInit {
   }
 
   loadCustomerList() {
-    console.log(this.customerListForm.value)
     this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.customerListForm.value,this.status).subscribe((res) => this.onSuccess(res));
   }
 

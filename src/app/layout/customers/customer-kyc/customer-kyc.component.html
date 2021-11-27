@@ -133,7 +133,7 @@
       </ng-container>
     </div>
 
-    <div class="popupcontent">
+    <div *ngIf="isCustomer" class="popupcontent">
       <div class="tab-content" id="tab1" style="overflow-y: auto;">
         <div class="tab-pane active" id="pill1">
 
@@ -144,25 +144,33 @@
           <th>Financials</th>
         </tr>
         <tr>
-          <td>Field 1</td>
+          <td>Customer turnover</td>
           <td>
-            <input matInput formControlName="field1" placeholder="">
+            <input matInput formControlName="custTurnover" placeholder="">
           </td>
-          <td>Field 2</td>
+        </tr>
+        <tr>
+          <td>Import Volume</td>
           <td>
-            <input  formControlName="field2"  placeholder="">
+            <input  formControlName="importVolume"  placeholder="">
           </td>
         </tr>
      
           <tr>
-            <td>Field 3</td>
+            <td>Export Volume</td>
             <td>
-              <input matInput formControlName="field3" placeholder="">
+              <input matInput formControlName="exportVolume" placeholder="">
             </td>
-            <td>Field 4</td>
+          </tr>
+              <tr>
+            <td>Estimated yearly LC Volume</td>
             <td>
-              <input  formControlName="field4"  placeholder="">
+              <input  formControlName="yearlyLCVolume"  placeholder="">
             </td>
+          </tr>
+          <tr>
+            <td>Banks used currently for LC issuance</td>
+            <td> <input  formControlName="usedLCIssuance"  placeholder=""></td>
           </tr>
           <tr>
              
@@ -170,7 +178,7 @@
             <td>
 
               <button  class="btn btn-info" (click)="saveFinancial('save')">Save</button>&nbsp;&nbsp;
-              <button  class="btn btn-info" >Cancel</button>
+              <button  class="btn btn-info" (click)="closeDialog()">Cancel</button>
             </td>
           </tr>
 
@@ -183,3 +191,30 @@
   </mat-dialog-content>
 
 </mat-card>
+
+
+<div id="financialSuccess" style="display: none;top: 0%;z-index: 9999;opacity: 1;" class="popupnew modal fade" >
+  <div class="modal-dialog modal-md emaildiv" style="margin-top: 200px;">
+     <!-- Modal content-->
+     <div class="modal-content" style="width: 80%;">
+        <div class="modal-body">
+           <h2>Old Password is incorrect! </h2>
+           <div class="padnew">
+              <div class="row">
+                 <!--<p><strong>Enter Email ID here</strong></p> -->
+                 <div class="col-md-12">
+                    <div class="row">
+                       <div class="col-md-12">
+                          <h5>Kindly check the password and try again!</h5>
+                         
+                       </div>
+                    </div>
+                    <button type="submit" class="handleRefEdit btn btn-info pull-right" >OK</button>
+                  
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
