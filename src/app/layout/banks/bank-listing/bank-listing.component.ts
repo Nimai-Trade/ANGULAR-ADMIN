@@ -44,12 +44,21 @@ export class BankListingComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem('PaymentApproval'))
     const savedData = JSON.parse(localStorage.getItem('bankSearch'));
     if(localStorage.getItem('fromDashBoard')){      
-      if( localStorage.getItem('PaymentApproval')){
+      if( localStorage.getItem('PaymentApproval')=='PaymentPending'){
         this.bankListForm.get('txtStatus').setValue("PaymentPending");     
         this.status= localStorage.getItem('fromDashBoardStatus')  ;
-      }else{
+      }else if(localStorage.getItem('PaymentApproval')=='Not Uploaded'){
+        this.bankListForm.get('txtStatus').setValue("Not Uploaded");   
+       // this.status= localStorage.getItem('fromDashBoardStatus')  ; 
+      }else if(localStorage.getItem('PaymentApproval')=='PaymentPendingUser'){
+        this.bankListForm.get('txtStatus').setValue("PaymentPendingUser");   
+      }else if(localStorage.getItem('PaymentApproval')=='subExpiry'){
+        this.bankListForm.get('txtStatus').setValue("subExpiry");   
+      }
+      else{
       this.bankListForm.get('txtStatus').setValue("Pending");   
       this.status= localStorage.getItem('fromDashBoardStatus')  ;
       }  

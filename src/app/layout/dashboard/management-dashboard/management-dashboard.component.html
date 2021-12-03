@@ -145,7 +145,7 @@
                         </mat-select>
 
                      </ul> -->
-                     <span>{{subsExpiryCount}}</span>
+                     <span (click)="showKYCApproval('sub-expiry')" style="padding-left: 30; cursor: pointer;">{{subsExpiryCount}}</span>
                      <h3 class="text">Subscription expiring in next 30 days</h3>
                   </div>
                </div>
@@ -160,7 +160,7 @@
                         </mat-select>
 
                      </ul> -->
-                     <span>{{paymenPending}}</span>
+                     <span (click)="showKYCApproval('pay-pending-user')" style="padding-left: 30; cursor: pointer;">{{paymenPending}}</span>
                      <h3 class="text" style="height: 32px;">Payment Pending User</h3>
 
                   </div>

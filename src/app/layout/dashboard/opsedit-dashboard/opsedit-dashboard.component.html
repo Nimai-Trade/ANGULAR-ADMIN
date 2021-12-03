@@ -24,7 +24,7 @@
           <!-- <h2 class="maindashh">Pending Requests</h2> -->
           <div class="col-lg-15 col-md-3 col-sm-3 ">
             <div class="maindash">
-              <span>{{payAwaitedCount}}</span>
+              <span (click)="showKYCApproval('kyc')" style="padding-left: 30; cursor: pointer;">{{payAwaitedCount}}</span>
               <h3 class="text">Payment Confirmation Awaited</h3>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path
@@ -44,7 +44,7 @@
               </svg>
             </div>
           </div>
-          <div class="col-lg-15 col-md-3 col-sm-3 ">
+          <!-- <div class="col-lg-15 col-md-3 col-sm-3 ">
             <div class="maindash">
               <span (click)="showKYCApproval('assign-rm')" style="padding-left: 30; cursor: pointer;">{{assignRmCOunt}}</span>
               <h3>Assign RM</h3>
@@ -55,7 +55,7 @@
                   d="M228.182 239.795c56.833 0 100.597-54.936 100.597-119.897C328.779 54.907 284.993 0 228.182 0c-56.833 0-100.597 54.936-100.597 119.897 0 64.991 43.787 119.898 100.597 119.898zm0-210.552c39.344 0 71.354 40.667 71.354 90.654s-32.01 90.654-71.354 90.654-71.354-40.667-71.354-90.654 32.01-90.654 71.354-90.654z" />
               </svg>
             </div>
-          </div>
+          </div> -->
 
 
 
