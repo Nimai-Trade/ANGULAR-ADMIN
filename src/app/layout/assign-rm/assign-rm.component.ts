@@ -44,6 +44,17 @@ export class AssignRmComponent implements OnInit {
     this.getRmList();
     this.userTypeList = [{ 'code': '', 'name': 'ALL' }, { 'code': 'CU', 'name': 'CUSTOMER' }, { 'code': 'BA', 'name': 'BANK' }, { 'code': 'RE', 'name': 'REFERRER' }, { 'code': 'BC', 'name': 'BANK AS CUSTOMER' }];
 
+
+    if(localStorage.getItem('fromDashBoard')){      
+      if( localStorage.getItem('fromDashBoardStatus')=='CU')
+         this.assignRmForm.get('userType').setValue("CU");     
+      if( localStorage.getItem('fromDashBoardStatus')=='BA')
+         this.assignRmForm.get('userType').setValue("BA"); 
+      if( localStorage.getItem('fromDashBoardStatus')=='BC')
+         this.assignRmForm.get('userType').setValue("BC"); 
+      if( localStorage.getItem('fromDashBoardStatus')=='RE')
+         this.assignRmForm.get('userType').setValue("RE"); 
+    }
   }
 
 

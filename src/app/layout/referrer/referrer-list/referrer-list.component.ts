@@ -28,6 +28,7 @@ export class ReferrerListComponent implements OnInit {
   transactionList: any = [];
 
   eventStartTime = new Date();
+  status: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private service: ReferrerService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.customerListForm = formBuilder.group({
@@ -48,6 +49,22 @@ export class ReferrerListComponent implements OnInit {
         this.customerListForm.controls[name].patchValue(savedData[name]);
       }
     });
+
+    if(localStorage.getItem('fromDashBoard')){      
+     if(localStorage.getItem('PaymentApproval')=='Not Uploaded'){
+        this.customerListForm.get('txtStatus').setValue("Not Uploaded");   
+       // this.status= localStorage.getItem('fromDashBoardStatus')  ; 
+      }
+      else{
+      this.customerListForm.get('txtStatus').setValue("Pending");   
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }  
+    }
+    localStorage.removeItem('fromDashBoardStatus')
+    localStorage.removeItem('fromDashBoard') 
+    localStorage.removeItem('PaymentApproval')
+
+
     //console.log(this.customerListForm);
     this.kycStatusList = [{ 'code': 'ALL', 'name': 'ALL' }, { 'code': 'Active', 'name': 'Active' }, { 'code': 'Accepted', 'name': 'Accepted' }, { 'code': 'Rejected', 'name': 'Rejected' }, { 'code': 'Expired', 'name': 'Expired' }];
     this.setPagerConfig();
