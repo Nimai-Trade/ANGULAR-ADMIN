@@ -69,65 +69,70 @@
                   <textarea matInput readonly="true" class="comment" value={{item.checkerComment}}></textarea>
                 </td> 
             </tr>
-              <tr>
+            <ng-container *ngFor="let vasList of item.vasList; let i = index;">
+            <table  class="table noneborder" style="    width: 489%;
+            max-width: 387%;">
+            
+           
+              <tr > 
                 <th>Vas Plan</th>
                 <td>
-                  <input matInput value={{item.vasPlan}} readonly="true">
+                  <input matInput value={{vasList.vasPlan}} readonly="true">
                 </td>
               </tr>
               
               <tr>
                 <td>Status</td>
                 <td>
-                  <input matInput value={{item.vasStatus}} readonly="true" placeholder="">
+                  <input matInput value={{vasList.vasStatus}} readonly="true" placeholder="">
                 </td>
               </tr>
+           
 
-              <tr>
+             <tr>
                 <td>Benefits</td>
                 <td>
-                  <input matInput value={{item.vasBenefits}}  readonly="true" placeholder="">
+                  <input matInput value={{vasList.vasBenefits}}  readonly="true" placeholder="">
                 </td>
               </tr>
               <tr>
                 <td>VAS Plan Price </td>
                 <td>
-                  <input matInput value= {{item.vasAmount}} readonly="true" placeholder="">
+                  <input matInput value= {{vasList.vasAmount}} readonly="true" placeholder="">
                 </td>
               </tr>
-              <tr *ngIf="item.vasMakerComment">
+              <tr *ngIf="vasList.vasMakerComment">
                 <td>Maker Comment</td>
                 <td>
-                  <textarea matInput readonly="true" class="comment" value={{item.vasMakerComment}}></textarea>
+                  <textarea matInput readonly="true" class="comment" value={{vasList.vasMakerComment}}></textarea>
                 </td> 
             </tr>
-            <tr *ngIf="item.vasCheckerComment">
+            <tr *ngIf="vasList.vasCheckerComment">
                 <td>Checker Comment</td>
                 <td>
-                  <textarea matInput readonly="true" class="comment" value={{item.vasCheckerComment}}></textarea>
+                  <textarea matInput readonly="true" class="comment" value={{vasList.vasCheckerComment}}></textarea>
                 </td> 
             </tr>
               <tr>
                 <td>Payment Status</td>
                 <td>
-                  <input matInput value={{item.vasPaymentStatus}} readonly="true" placeholder="">
+                  <input matInput value={{vasList.vasPaymentStatus}} readonly="true" placeholder="">
                 </td>
               </tr>
-              <tr *ngIf="item.vasPlanPaymentMode">
+              <tr *ngIf="vasList.vasPlanPaymentMode">
                 <td>Payment Mode</td>
                 <td>
-                  <input matInput value={{item.vasPlanPaymentMode}} readonly="true" placeholder="">
+                  <input matInput value={{vasList.vasPlanPaymentMode}} readonly="true" placeholder="">
                 </td>
               </tr>
-              <tr *ngIf="item.vasStatus === 'Active' && item.vasPlanPaymentMode === 'Wire' && item.vasPaymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
-                <td colspan="2" style="text-align: right;">
-                  <button  class="btn btn-info" id="btnapprove"
-                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
-                  <button   class="btn btn-info" id="btnreject" 
-                    (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
-                </td>
-              </tr>
-
+              <!-- <tr *ngIf="vasList.vasStatus === 'Active' && vasList.vasPlanPaymentMode === 'Wire' && vasList.vasPaymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0"> -->
+            
+            </table>
+            
+          </ng-container>
+         
+              
+            
               <tr>
                 <th colspan="2">Payment Details</th>
               </tr>
@@ -174,7 +179,26 @@
                 </td>
               </tr>
 
-              <tr *ngIf="item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+              <tr *ngIf="item.isMultipleVasApplied =='1' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
+                <td colspan="2" style="text-align: right;">
+                  <button  class="btn btn-info" id="btnapprove"
+                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
+                  <button   class="btn btn-info" id="btnreject" 
+                    (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
+                </td>
+              </tr> 
+
+              <tr *ngIf="item.isMultipleVasApplied =='1' && item.paymentStatus=='Pending' && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+                 
+                <td colspan="2" style="text-align: right;">
+                  <button  class="btn btn-info" id="btnapprove"
+                    (click)="paymentAction('Approved', item,'paymentVasAction')">Approve</button>&nbsp;&nbsp;
+                  <button   class="btn btn-info" id="btnreject" 
+                    (click)="paymentAction('Rejected', item,'paymentVasAction')">Reject</button>
+                </td>
+              </tr>
+
+              <tr *ngIf="item.vasList==null && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
                  
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"
