@@ -131,6 +131,15 @@
             
           </ng-container>
          
+          <tr *ngIf="item.isMultipleVasApplied =='1' &&  item.paymentStatus=='Approved'  && item.status === 'Active' && item.paymentMode === 'Wire'  && myRights.includes('PAYMENT_MARK_DONE')">
+                 
+            <td colspan="2" style="text-align: right;">
+              <button  class="btn btn-info" id="btnapprove"
+                (click)="paymentAction('Approved', item,'paymentVasAction')">Approve</button>&nbsp;&nbsp;
+              <button   class="btn btn-info" id="btnreject" 
+                (click)="paymentAction('Rejected', item,'paymentVasAction')">Reject</button>
+            </td>
+          </tr>
               
             
               <tr>
@@ -179,16 +188,16 @@
                 </td>
               </tr>
 
-              <tr *ngIf="item.isMultipleVasApplied =='1' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
+              <!-- <tr *ngIf="item.isMultipleVasApplied =='1' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"
                     (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
                   <button   class="btn btn-info" id="btnreject" 
                     (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
                 </td>
-              </tr> 
-
-              <tr *ngIf="item.isMultipleVasApplied =='1' && item.paymentStatus=='Pending' && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+              </tr>  -->
+             
+              <tr *ngIf="item.isMultipleVasApplied =='1' && item.paymentStatus=='Pending' && item.status === 'Active' && item.paymentMode === 'Wire'  && myRights.includes('PAYMENT_MARK_DONE')">
                  
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"

@@ -99,13 +99,13 @@ for(var i=0;i<this.paymentData.length;i++){
       console.log(dialogResult)
       if (dialogResult) {
      this.vasIds=this.vasIds.slice(0,-1);
-        if(action=="vasAction"){
+        if(action=="paymentVasAction"){
           this.reqData = {
             'userId': item.userid,
             'status': status === "Approved" ? 'Maker Approved': status,
             'vasNUmber': this.vasIds,
             'vasMakerComment': this.result['data'],
-            'comment':this.result['data']
+            'comment':this.result['data'],
           };
         }else{
           this.reqData = {
