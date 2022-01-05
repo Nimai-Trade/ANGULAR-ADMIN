@@ -223,7 +223,11 @@
     font-size: 14px !important;
 
 }
-
+.cursors{
+   cursor: pointer;
+}
+.context-menu {
+  cursor: context-menu;}
 .revenuediv{
    background-color: #fff;
     border-top: 1px dashed #ccc;

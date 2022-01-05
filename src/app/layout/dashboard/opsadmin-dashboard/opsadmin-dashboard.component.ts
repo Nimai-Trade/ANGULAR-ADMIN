@@ -26,6 +26,7 @@ export class OpsadminDashboardComponent implements OnInit {
     subsExpiryCount: any;
     paymenPending: any;
     subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Refferer']
+  isAll: boolean=false;
 
 
   constructor(private formBuilder: FormBuilder ,private router: Router, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) { }
@@ -88,7 +89,10 @@ getPendingKyc() {
 
 
 pendingKycCount(subs) {
-      
+  this.isAll=true;
+  if(subs.value=="All"){
+    this.isAll=false;
+  }
     if (subs.value == "Bank As Customer") {
         this.subscriberType = "Bank";
         this.bankType = "Customer";
@@ -125,6 +129,7 @@ pendingKycCount(subs) {
   }
 
   showKYCApproval(status){
+  
     const data={
       "userId":null,
       "emailId":null,
@@ -132,6 +137,9 @@ pendingKycCount(subs) {
       "companyName":null,
       "country":null
     }
+
+  
+
     if(status=="confirmAwaited"){
       if(this.bankType == "Underwriter"){
         localStorage.setItem('fromDashBoard', 'yes');

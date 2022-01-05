@@ -36,6 +36,7 @@ export class OpseditDashboardComponent implements OnInit {
   grantKycCount: any;
   grantUserCount: any;
   subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Refferer']
+  isAll: boolean;
 
   constructor(private formBuilder: FormBuilder,private router: Router, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) { }
 
@@ -67,7 +68,10 @@ getAssignRmCount() {
 
 
 pendingKycCount(subs) {
-      
+  this.isAll=true;
+  if(subs.value=="All"){
+    this.isAll=false;
+  }
   if (subs.value == "Bank As Customer") {
       this.subscriberType = "Bank";
       this.bankType = "Customer";
@@ -105,6 +109,7 @@ this.service.getPendingRequests(localStorage.getItem('role'),this.subscriberType
 }
 
 showKYCApproval(status){
+  
   const data={
     "userId":null,
     "emailId":null,
@@ -112,7 +117,7 @@ showKYCApproval(status){
     "companyName":null,
     "country":null
   }
-  console.log(status)
+ 
 
   if(status=="confirmAwaited"){
     if(this.bankType == "Underwriter"){

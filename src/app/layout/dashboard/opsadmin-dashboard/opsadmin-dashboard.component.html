@@ -23,7 +23,8 @@
         <div class="row">
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('confirmAwaited')" style="padding-left: 30; cursor: pointer;">{{payAwaitedCount}}</span>
+                    <span (click)="showKYCApproval('confirmAwaited')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{payAwaitedCount}}</span>
                     <h3 class="text">Payment Confirmation Awaited</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                        <path
@@ -33,7 +34,8 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('payment-approval')" style="padding-left: 30; cursor: pointer;">{{paymentApprovalCount}}</span>
+                    <span (click)="showKYCApproval('payment-approval')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{paymentApprovalCount}}</span>
                     <h3>Payment Approval</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                        <path
@@ -45,7 +47,8 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('assign-rm')" style="padding-left: 30; cursor: pointer;">{{assignRmCOunt}}</span>
+                    <span (click)="showKYCApproval('assign-rm')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{assignRmCOunt}}</span>
                     <h3>Assign RM</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                        <path
@@ -57,7 +60,8 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('grant-rm')" style="padding-left: 30; cursor: pointer;">{{grantRmPending}}</span>
+                    <span (click)="showKYCApproval('grant-rm')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{grantRmPending}}</span>
                     <h3>Grant RM</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                        <path
@@ -69,7 +73,8 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('employeeGrant')" style="padding-left: 30; cursor: pointer;">{{grantUserCount}}</span>
+                    <span (click)="showKYCApproval('employeeGrant')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{grantUserCount}}</span>
                     <h3>Grant User</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.368 456.368">
                        <path
@@ -81,7 +86,8 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('kyc')" style="padding-left: 30; cursor: pointer;">{{pendingKycApprovalCount}}</span>
+                    <span (click)="showKYCApproval('kyc')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{pendingKycApprovalCount}}</span>
                     <h3 class="text">KYC Approval</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.6 367.6">
                        <path
@@ -93,7 +99,8 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('grant')" style="padding-left: 30; cursor: pointer;">{{grantKycCount}}</span>
+                    <span (click)="showKYCApproval('grant')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                     [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{grantKycCount}}</span>
                     <h3>Grant KYC</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 367.6 367.6">
                        <path

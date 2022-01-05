@@ -106,6 +106,7 @@ export class ManagementDashboardComponent implements OnInit {
     tqaAmount: number;
     tqcAmount: number;
     role: string;
+    isAll: boolean=false;
   
   constructor(private formBuilder: FormBuilder,private router: Router, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) {
       {
@@ -301,8 +302,8 @@ export class ManagementDashboardComponent implements OnInit {
   }
 
   pendingKycCount(subs) {
-      
-      if (subs.value == "Bank As Customer") {
+    this.isAll=true;
+    if (subs.value == "Bank As Customer") {
           this.subscriberType = "Bank";
           this.bankType = "Customer";
       } else if (subs.value == "Bank as UnderWriter") {
@@ -314,7 +315,10 @@ export class ManagementDashboardComponent implements OnInit {
       }
       else {
           this.subscriberType = subs.value;
-          this.bankType = "";
+          this.bankType = "";        
+      }
+      if(subs.value=="All"){
+        this.isAll=false;
       }
     //   this.service.getPendingKycCount(this.subscriberType, this.bankType).subscribe((res) => {
     //       this.pendingKycDrop = res;
