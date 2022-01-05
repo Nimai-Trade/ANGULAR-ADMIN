@@ -70,6 +70,13 @@
                   <textarea matInput readonly="true" class="comment" value={{item.checkerComment}}></textarea>
                 </td> 
             </tr>
+           
+            <ng-container *ngFor="let item of vasLists; let i = index;">
+           
+                  <table class="table noneborder" style="width: 489%;
+                  max-width: 387%;">
+
+
               <tr>
                 <th>Vas Plan</th>
                 <td>
@@ -120,6 +127,8 @@
                   <input matInput value={{item.vasPlanPaymentMode}} readonly="true" placeholder="">
                 </td>
               </tr>
+            </table>
+            </ng-container>
               <tr *ngIf="item.vasStatus === 'Active' && item.vasPlanPaymentMode === 'Wire' && item.vasPaymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"

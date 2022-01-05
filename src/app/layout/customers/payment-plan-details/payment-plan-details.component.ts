@@ -16,7 +16,11 @@ export class PaymentPlanDetailsComponent implements OnInit {
   result = '';
   rightList : any;
   myRights : any;
-  reqData:any;;
+  reqData:any;
+  vasLists: any[]=[];
+  showBtn: boolean;
+  vasIds: any="";
+
   showSubsidiary:boolean=true;
   empCode:any
   constructor(private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<PaymentPlanDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) { }
@@ -37,7 +41,33 @@ export class PaymentPlanDetailsComponent implements OnInit {
     this.service.planOfPaymentDetail(this.data.id).subscribe(
       (res) => {
         this.paymentData = res;
-        console.log("this.paymentData",this.paymentData);
+        //this.vasLists=this.paymentData.vasList;
+        //console.log(this.vasLists)
+
+
+
+for(var i=0;i<this.paymentData.length;i++){
+  for(var j=0;j<this.paymentData[i].vasList.length;j++){
+   
+    this.vasLists.push(this.paymentData[i].vasList[j])
+   
+    if(this.paymentData[i].vasList[j].vasStatus=="Active"){
+      this.vasIds= this.vasIds+ this.paymentData[i].vasList[j].vasId+"-";
+    }   
+    
+    }
+}
+
+      
+        // this.vasLists.forEach(element => {
+        //   if(this.paymentData.isMultipleVasApplied=="1"){
+        //     this.showBtn=true;
+        //     this.vasIds= this.vasIds+element.vasId+"-";
+        //   }          
+         
+      //   });
+
+      console.log("this.vasIds",this.vasIds);
         if(!this.paymentData[0].userid.startsWith('BC')){
           this.showSubsidiary=true;
         }else{
@@ -47,7 +77,8 @@ export class PaymentPlanDetailsComponent implements OnInit {
       });
   }
   paymentAction(status, item , action){
-    //console.log('status ' + status + ' id ' + item.userid);
+  
+  console.log('status ' + status + ' id ' + item.userid);
     let msgStatus=""
     if(status==="Approved"){
       msgStatus="Approve"
@@ -65,13 +96,14 @@ export class PaymentPlanDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
       let updateStatus = '';
+      console.log(dialogResult)
       if (dialogResult) {
-       // console.log("action--",action)
+     this.vasIds=this.vasIds.slice(0,-1);
         if(action=="vasAction"){
           this.reqData = {
             'userId': item.userid,
             'status': status === "Approved" ? 'Maker Approved': status,
-            'vasid': item.vasId,
+            'vasNUmber': this.vasIds,
             'vasMakerComment': this.result['data'],
             'comment':this.result['data']
           };
