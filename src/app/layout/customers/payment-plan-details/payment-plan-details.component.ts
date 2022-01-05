@@ -41,14 +41,10 @@ export class PaymentPlanDetailsComponent implements OnInit {
     this.service.planOfPaymentDetail(this.data.id).subscribe(
       (res) => {
         this.paymentData = res;
-        //this.vasLists=this.paymentData.vasList;
-        //console.log(this.vasLists)
-
-
 
 for(var i=0;i<this.paymentData.length;i++){
   for(var j=0;j<this.paymentData[i].vasList.length;j++){
-   
+   if(this.paymentData[i].isMultipleVasApplied=="1")
     this.vasLists.push(this.paymentData[i].vasList[j])
    
     if(this.paymentData[i].vasList[j].vasStatus=="Active"){

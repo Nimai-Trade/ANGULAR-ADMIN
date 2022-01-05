@@ -251,15 +251,15 @@
                         <div class="row">
                            <div class="revenuediv text-center">
                               <div class="col-md-2 col-sm-6 col-xs-6">
-                                 <h3>USD {{tqReceived | number:'1.2-2'}} <br></h3>
+                                 <h3>USD {{tqReceived/1000000 | number:'1.2-2'}} <br></h3>
                                  <h5>Total flows for quotes received</h5>
                               </div>
                               <div class="col-md-2 col-sm-6 col-xs-6">
-                                 <h3>USD {{tqAccepted | number:'1.2-2'}} <br></h3>
+                                 <h3>USD {{tqAccepted/1000000 | number:'1.2-2'}} <br></h3>
                                  <h5>Total flows for quotes accepted</h5>
                               </div>
                               <div class="col-md-2 col-sm-6 col-xs-6">
-                                 <h3>USD {{tqClosed | number:'1.2-2'}} <br></h3>
+                                 <h3>USD {{tqClosed/1000000 | number:'1.2-2'}} <br></h3>
                                  <h5>Total flows for transaction closed</h5>
                               </div>
                               <div class="col-md-2 col-sm-6 col-xs-6">
