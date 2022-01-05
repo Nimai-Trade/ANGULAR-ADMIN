@@ -37,7 +37,7 @@ export class PaymentPlanDetailsComponent implements OnInit {
     this.service.planOfPaymentDetail(this.data.id).subscribe(
       (res) => {
         this.paymentData = res;
-        //console.log("this.paymentData",this.paymentData);
+        console.log("this.paymentData",this.paymentData);
         if(!this.paymentData[0].userid.startsWith('BC')){
           this.showSubsidiary=true;
         }else{

@@ -35,7 +35,6 @@ export class SidebarComponent implements OnInit {
         // console.log(savedData);
         // this.rightList = savedData;.
         this.myRights = this.rightList.split(',');
-        //console.log(' this.rightList '+ this.myRights);
         this.showMenu = '';
         
         this.user = localStorage.getItem('nimaiId');

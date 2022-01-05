@@ -17,7 +17,15 @@ export class CustomerService {
   }
 
 
-  getTransactionList(page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
+  getTransactionList(page: number, size: number, sortBy: any, direction: any, fileterObj: any,status: string): Observable<any> {
+    var str=[];
+    if(status){
+      str= status.split(' ');
+    }else{
+      str=[];
+    }
+    
+   
     const reqData = {
       'page': page,
       'size': size,
@@ -30,6 +38,8 @@ export class CustomerService {
       'country': fileterObj.country,
       'txtStatus': fileterObj.txtStatus,
       'role': fileterObj.role,
+      'subscriberType': str[0],
+      'bankType' : str[1]
     };
     return this.httpClient.post(URLS.getSearchCustomerListUrl, reqData, { headers: this.headers }).pipe(
       map((res) => {

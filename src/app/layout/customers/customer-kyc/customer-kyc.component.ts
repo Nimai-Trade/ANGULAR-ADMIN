@@ -22,12 +22,19 @@ export class CustomerKycComponent implements OnInit {
   userId:any;
   showLink:boolean=false;
   empCode:any;
+  filedId: string;
+  isCustomer: any;
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
+      "custTurnover":[''],
+    "importVolume":[''],
+    "exportVolume":[''],
+    "yearlyLCVolume":[''],
+    "usedLCIssuance":['']
     });
   }
-
+ 
 
   ngOnInit() {
     this.rightList = localStorage.getItem('userRight');
@@ -44,6 +51,7 @@ export class CustomerKycComponent implements OnInit {
 
   loadKycDetails() {
     this.userId=this.data.id
+  this.isCustomer=this.userId.startsWith('CU');
     this.service.kycDetail(this.data.id).subscribe(
       (res) => {
         this.resData = res;
@@ -67,9 +75,50 @@ export class CustomerKycComponent implements OnInit {
 
     //console.log(this.kycData);
       });
+      if(this.isCustomer){
+     
+      const data={
+        "userId":this.data.id
+      }
+      this.service.viewFieldData(data).subscribe(
+        (res) => {
+          let data = JSON.parse(JSON.stringify(res)).data;
+          this.filedId=data.id;
+          this.kycForm.patchValue({
+            custTurnover: data.custTurnover,
+            importVolume:data.importVolume,
+            exportVolume: data.exportVolume,
+            yearlyLCVolume: data.yearlyLCVolume,
+           usedLCIssuance :data.usedLCIssuance
+          });
+     
+    });
+  }
   }
 
 
+  financialAction() {
+    
+    this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
+    // console.log("userId",this.userId)
+    // let message;
+  
+    //   message = 'you have successfully saved financial data';
+
+    // const dialogData = new ConfirmDialogModel('Financial', message);
+    // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    //   width: '45%',
+    //   height: '30%',
+    //   data: dialogData
+    // });
+
+    // dialogRef.afterClosed().subscribe(dialogResult => {
+    //   this.result = dialogResult;
+     
+     
+    // });
+
+  }
 
   kycAction(status, item) {
     console.log("userId",this.userId)
@@ -131,6 +180,25 @@ export class CustomerKycComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // this.loadCustomerList();
     });
+  }
+           
+
+  saveFinancial(status){
+
+   const data= {
+      "userId": this.userId,
+    "custTurnover":this.kycForm.get('custTurnover').value,
+    "importVolume":this.kycForm.get('importVolume').value,
+    "exportVolume":this.kycForm.get('exportVolume').value,  
+    "yearlyLCVolume":this.kycForm.get('yearlyLCVolume').value,    
+    "usedLCIssuance":this.kycForm.get('usedLCIssuance').value,   
+    "id":this.filedId  
+  }
+  this.service.saveFieldData(data).subscribe(
+    (res) => {
+      this.financialAction();
+    });
+
   }
 
 }

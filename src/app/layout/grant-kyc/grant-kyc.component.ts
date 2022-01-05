@@ -30,6 +30,7 @@ export class GrantKycComponent implements OnInit {
   result = '';
   loading = false;
   user : any;
+  status: string;
   //isHide = false;
   constructor(private formBuilder: FormBuilder, private service: GrantkycService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.kycListForm = formBuilder.group({
@@ -38,6 +39,13 @@ export class GrantKycComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    if( localStorage.getItem('PaymentApproval')){
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+    }else{
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+    }
+    localStorage.removeItem('fromDashBoardStatus')
     this.setPagerConfig();
     this.user = localStorage.getItem('nimaiId');
   }
@@ -118,7 +126,7 @@ export class GrantKycComponent implements OnInit {
 
   loadKycList() {
    // this.spinnerService.show()
-    this.service.getGrantKycList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.kycListForm.value).subscribe((res) => this.onSuccess(res));
+    this.service.getGrantKycList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.kycListForm.value,this.status).subscribe((res) => this.onSuccess(res));
   }
 
   onSuccess(res: any) {

@@ -44,6 +44,16 @@ export class EmployeeGrantComponent implements OnInit {
     this.statusList = [{ 'code': 'ACTIVE', 'name': 'ACTIVE' }, { 'code': 'INACTIVE', 'name': 'INACTIVE' }, { 'code': 'Pending', 'name': 'PENDING' }];
     this.setPagerConfig();   
     this.user = localStorage.getItem('nimaiId');
+
+
+    if(localStorage.getItem('fromDashBoard')){      
+     
+       this.employeeListForm.get('status').setValue("Pending");   
+       
+     }
+     localStorage.removeItem('fromDashBoard') 
+   
+
   }
 
 

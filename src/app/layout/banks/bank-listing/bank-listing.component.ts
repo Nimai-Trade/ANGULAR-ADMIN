@@ -30,6 +30,7 @@ export class BankListingComponent implements OnInit {
   bankList: any = [];
 
   eventStartTime = new Date();
+  status: string;
   constructor(private formBuilder: FormBuilder, private router: Router, private service: BanksService, private cdr: ChangeDetectorRef, private dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.bankListForm = formBuilder.group({
       txtStatus: [],
@@ -43,7 +44,28 @@ export class BankListingComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem('PaymentApproval'))
     const savedData = JSON.parse(localStorage.getItem('bankSearch'));
+    if(localStorage.getItem('fromDashBoard')){      
+      if( localStorage.getItem('PaymentApproval')=='PaymentPending'){
+        this.bankListForm.get('txtStatus').setValue("PaymentPending");     
+        this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }else if(localStorage.getItem('PaymentApproval')=='Not Uploaded'){
+        this.bankListForm.get('txtStatus').setValue("Not Uploaded");   
+       // this.status= localStorage.getItem('fromDashBoardStatus')  ; 
+      }else if(localStorage.getItem('PaymentApproval')=='PaymentPendingUser'){
+        this.bankListForm.get('txtStatus').setValue("PaymentPendingUser");   
+      }else if(localStorage.getItem('PaymentApproval')=='subExpiry'){
+        this.bankListForm.get('txtStatus').setValue("subExpiry");   
+      }
+      else{
+      this.bankListForm.get('txtStatus').setValue("Pending");   
+      this.status= localStorage.getItem('fromDashBoardStatus')  ;
+      }  
+    }
+    localStorage.removeItem('fromDashBoardStatus')
+    localStorage.removeItem('fromDashBoard') 
+    localStorage.removeItem('PaymentApproval')
     Object.keys(savedData).forEach(name => {
       if (this.bankListForm.controls[name]) {
         this.bankListForm.controls[name].patchValue(savedData[name]);
@@ -121,7 +143,7 @@ export class BankListingComponent implements OnInit {
   }
 
   loadBankList() {
-    this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.bankListForm.value).subscribe((res) => this.onSuccess(res));
+    this.service.getTransactionList(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, this.bankListForm.value,this.status).subscribe((res) => this.onSuccess(res));
   }
 
   onSuccess(res: any) {

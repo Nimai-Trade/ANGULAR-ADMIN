@@ -8,6 +8,7 @@ import { DashboardService } from '../dashboard.service';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { formatDate } from '@angular/common';
 import * as $ from 'src/assets/js/jquery.min';
+import { Router } from '@angular/router';
 declare let google: any;
 @Component({
   selector: 'app-management-dashboard',
@@ -77,7 +78,7 @@ export class ManagementDashboardComponent implements OnInit {
   paymenPending: any;
   pendingKycDrop: any;
 
-  subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter']
+  subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Referrer']
 
 
   userStatType: string[] = ['Customer', 'Bank As Customer', 'Bank As UnderWriter']
@@ -104,8 +105,10 @@ export class ManagementDashboardComponent implements OnInit {
     tqrAmount: number;
     tqaAmount: number;
     tqcAmount: number;
+    role: string;
+    isAll: boolean=false;
   
-  constructor(private formBuilder: FormBuilder, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) {
+  constructor(private formBuilder: FormBuilder,private router: Router, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) {
       {
         this.revForm = formBuilder.group({
             startDate: ['', Validators.required],
@@ -116,26 +119,28 @@ export class ManagementDashboardComponent implements OnInit {
   } 
   ngOnInit(): void {
       this.cdr.detectChanges();
-      this.getPaymentConf();
-      this.getPaymentApp();
-      this.getAssignRmCount();
-      this.getGrantRm();
-      this.getGrantUSer();
-      this.getKycApprovalPending();
-      this.getGrantKyc();
-      this.getPendingKyc();
-      this.getSubscripGrant();
+      this.subscriberType="All";
+      this.getPendingRequests();
+    // this.getPaymentConf();
+    // this.getPaymentApp();
+    // this.getAssignRmCount();
+    // this.getGrantRm();
+   //  this.getGrantUSer();
+    // this.getKycApprovalPending();
+    // this.getGrantKyc();
+ //    this.getPendingKyc();
+     this.getSubscripGrant();
       this.getVasGrant();
       this.getDiscountGrant();
       this.getOverAllCust();
       this.getOverAllBnkAsUw();
       this.getOverAllBnkAsCust();
       this.getOverAllRef();
-      this.getSubsExpiry();
+     // this.getSubsExpiry();
       this.getOverAllCustRejectedTran();
       this.getOverAllCustExpiredTran();
       this.getCountryList();
-      this.getPaymentPending();
+     // this.getPaymentPending();
       this.getCustRevenue(null, null);
       
   }
@@ -148,7 +153,7 @@ export class ManagementDashboardComponent implements OnInit {
       this.cdr.detectChanges();
       this.getAverageQuotes(null, null);
   }
-
+ 
   getPaymentConf() {
       this.service.getPayConfAwaited().subscribe(
           (res) => {
@@ -297,25 +302,45 @@ export class ManagementDashboardComponent implements OnInit {
   }
 
   pendingKycCount(subs) {
-      if (subs.value == "Bank As Customer") {
+    this.isAll=true;
+    if (subs.value == "Bank As Customer") {
           this.subscriberType = "Bank";
           this.bankType = "Customer";
       } else if (subs.value == "Bank as UnderWriter") {
           this.subscriberType = "Bank";
           this.bankType = "Underwriter";
       } else if (subs.value == "Referrer") {
-          this.subscriberType = "Bank";
-          this.bankType = null;
+          this.subscriberType = "Referrer";
+          this.bankType = "";
       }
       else {
           this.subscriberType = subs.value;
-          this.bankType = null;
+          this.bankType = "";        
       }
-      this.service.getPendingKycCount(this.subscriberType, this.bankType).subscribe((res) => {
-          this.pendingKycDrop = res;
-      })
-
+      if(subs.value=="All"){
+        this.isAll=false;
+      }
+    //   this.service.getPendingKycCount(this.subscriberType, this.bankType).subscribe((res) => {
+    //       this.pendingKycDrop = res;
+    //   })
+    this.getPendingRequests();
   }
+
+  getPendingRequests() {    
+    this.service.getPendingRequests(localStorage.getItem('role'),this.subscriberType,this.bankType).subscribe((res) => {
+        this.payAwaitedCount =res.paymentApproval
+        this.paymentApprovalCount=res.grantPayment
+        this.assignRmCOunt=res.assignRm
+        this.grantRmPending=res.grantRM
+        this.grantUserCount=res.grantUser
+        this.pendingKycApprovalCount=res.kycApproval
+        this.grantKycCount=res.grantKyc
+        this.pendingKycDrop=res.kycPendingUser
+        this.subsExpiryCount=res.subPlanExpiring30Days
+        this.paymenPending=res.paymentPendingUser      
+    })
+}
+
   getCustRevenue(dateFrom, dateTo) {
       this.service.getCustRevenue(dateFrom, dateTo).subscribe((res) => {
 
@@ -653,4 +678,224 @@ export class ManagementDashboardComponent implements OnInit {
         this.reloadStat(this.startDate,this.endDate);
     }   
   }
+  showKYCApproval(status){
+      const data={
+        "userId":null,
+        "emailId":null,
+        "mobileNo":null,
+        "companyName":null,
+        "country":null
+      }
+   if(status=='kyc'){
+      if(this.bankType == "Underwriter"){
+      localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('bankSearch', JSON.stringify(data));
+        this.router.navigate(['app', 'bank', 'bank-list']);
+      }     
+      else if(this.bankType == "" || this.bankType == 'Customer' ){
+          
+        localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('customerSearch' , JSON.stringify(data))
+      this.router.navigate(['app', 'customer', 'customer-list']);
+      }
+      if(this.bankType == "" )
+      localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+      if( this.bankType == 'Customer')
+      localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+      if(this.bankType == "Underwriter" )
+      localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
+      if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
+      localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+   } 
+   
+   if(status=='payment-approval'){
+    //    if(this.payAwaitedCount)
+    console.log(this.bankType)
+    if(this.bankType == "Underwriter"){
+        if(this.bankType == 'Underwriter' )
+        localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
+    localStorage.setItem('PaymentApproval', 'PaymentPending');
+    localStorage.setItem('fromDashBoard', 'yes');
+    localStorage.setItem('bankSearch', JSON.stringify(data));
+    this.router.navigate(['app', 'bank', 'bank-list']);
+    }
+    if(this.bankType == "" || this.bankType == 'Customer' ){
+      if(this.bankType == "" )
+      localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+      if( this.bankType == 'Customer')
+      localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');
+        localStorage.setItem('PaymentApproval', 'PaymentPending');
+        localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('customerSearch', JSON.stringify(data));
+        this.router.navigate(['app', 'customer', 'customer-list']);
+    }
+   
+   }
+   if(status=='employeeGrant'){
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+    localStorage.setItem('fromDashBoard', 'yes');
+    this.router.navigate(['app', 'masters', 'employeeGrant']);
+}
+}
+
+if(status=="kyc-pending-user")
+
+{
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+    localStorage.setItem('fromDashBoard', 'yes');
+    localStorage.setItem('PaymentApproval', 'Not Uploaded');
+    localStorage.setItem('customerSearch', JSON.stringify(data));    
+    if( this.bankType == ''){
+        localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+        this.router.navigate(['app', 'customer', 'customer-list']);
+    }
+  
+    if( this.bankType == 'Customer'){        
+        localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+    this.router.navigate(['app', 'customer', 'customer-list']);
+    }
+   
+  
+    if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+        localStorage.setItem('referrerSearch', JSON.stringify(data));
+        localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+        this.router.navigate(['app', 'referrer', 'referrer-list']);
+    }
+
+    if(this.bankType == "Underwriter" ){        
+localStorage.setItem('bankSearch', JSON.stringify(data));
+        this.router.navigate(['app', 'bank', 'bank-list']);
+    }
+
+}
+}
+if(status=='grant'){
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+    if( this.bankType == '')
+    localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+    if( this.bankType == 'Customer')
+    localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+    if(this.bankType == "Underwriter" )
+    localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
+    if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
+    localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+
+    this.router.navigate(['app', 'grantkyc']);
+}
+}
+if(status=='grant-payment'){
+   
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+        if( this.bankType == '')
+        localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+        if( this.bankType == 'Customer')
+        localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+        if(this.bankType == "Underwriter" )
+        localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
+        if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
+        localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+    
+        this.router.navigate(['app', 'payment-approval']);
+}
+}
+if(status=='assign-rm'){
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+   
+            localStorage.setItem('fromDashBoard', 'yes');
+            if(this.bankType == "Underwriter" )
+            localStorage.setItem('fromDashBoardStatus', 'BA');
+            if( this.bankType == 'Customer')
+            localStorage.setItem('fromDashBoardStatus', 'BC');               
+            
+            if( this.bankType == ''){
+                if(this.subscriberType=='Customer')
+                localStorage.setItem('fromDashBoardStatus', 'CU');
+                if(this.subscriberType=='Referrer')
+                localStorage.setItem('fromDashBoardStatus', 'RE');
+            }           
+
+            this.router.navigate(['app', 'assignRm']);
+
+    }
+
+
+}
+if(status=='grant-rm'){
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+    localStorage.setItem('fromDashBoard', 'yes');
+    if(this.bankType == "Underwriter" )
+    localStorage.setItem('fromDashBoardStatus', 'BA');
+    if( this.bankType == 'Customer')
+    localStorage.setItem('fromDashBoardStatus', 'BC');               
+    
+    if( this.bankType == ''){
+        if(this.subscriberType=='Customer')
+        localStorage.setItem('fromDashBoardStatus', 'CU');
+        if(this.subscriberType=='Referrer')
+        localStorage.setItem('fromDashBoardStatus', 'RE');
+    }     
+    this.router.navigate(['app', 'grant-rm']);
+}
+}
+if(status=='sub-expiry'){
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+
+   
+
+    if(this.bankType == "Underwriter" ){    
+        localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('PaymentApproval', 'subExpiry');    
+        localStorage.setItem('bankSearch', JSON.stringify(data));
+                this.router.navigate(['app', 'bank', 'bank-list']);
+            }else{
+                localStorage.setItem('fromDashBoard', 'yes');
+                localStorage.setItem('PaymentApproval', 'subExpiry');  
+                localStorage.setItem('customerSearch', JSON.stringify(data));
+
+                if( this.bankType == '')
+                localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+                if( this.bankType == 'Customer')
+                localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+
+                this.router.navigate(['app','customer', 'customer-list']);
+
+            }
+}
+}
+if(status=='pay-pending-user'){
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+    if(this.bankType == "Underwriter" ){        
+        localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('PaymentApproval', 'PaymentPendingUser');    
+        localStorage.setItem('bankSearch', JSON.stringify(data));
+                this.router.navigate(['app', 'bank', 'bank-list']);
+            }else{
+        localStorage.setItem('customerSearch', JSON.stringify(data));
+        localStorage.setItem('fromDashBoard', 'yes');
+        localStorage.setItem('PaymentApproval', 'PaymentPendingUser');    
+        if( this.bankType == '')
+        localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+        if( this.bankType == 'Customer')
+        localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+        this.router.navigate(['app','customer', 'customer-list']);
+            }
+}
+}
+}
 }

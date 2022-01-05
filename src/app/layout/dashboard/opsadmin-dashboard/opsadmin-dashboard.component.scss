@@ -44,7 +44,11 @@
     position: relative;
 
 }
-
+.cursors{
+  cursor: pointer;
+}
+.context-menu {
+ cursor: context-menu;}
 .maindashstats{
      box-shadow: 0px 0px 30px 0px rgba(75,102,171,0.2);
     background-color: #fff;

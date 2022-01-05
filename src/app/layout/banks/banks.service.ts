@@ -17,7 +17,14 @@ export class BanksService {
   }
 
 
-  getTransactionList(page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
+  getTransactionList(page: number, size: number, sortBy: any, direction: any, fileterObj: any,status: string): Observable<any> {
+    var str=[];
+    if(status){
+      str= status.split(' ');
+    }else{
+      str=[];
+    }
+   
     const reqData = {
       'page': page,
       'size': size,
@@ -29,6 +36,7 @@ export class BanksService {
       'bankName': fileterObj.companyName,
       'country': fileterObj.country,
       'txtStatus': fileterObj.txtStatus,
+      'subscriberType': str[0],
       'role': fileterObj.role,
     };
     return this.httpClient.post(URLS.getBankSearchListUrl, reqData, { headers: this.headers }).pipe(
@@ -113,7 +121,22 @@ export class BanksService {
       })
     );
   }
+  viewFieldData(id) {
 
+    return this.httpClient.post(URLS.getViewFieldData , id, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  
+  saveFieldData(reqData) {
+    return this.httpClient.post(URLS.postSaveFieldData, reqData, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
   kycStatusUpdate(reqData) {
     return this.httpClient.post(URLS.postMakerKycStatusUpdate, reqData, { headers: this.headers }).pipe(
       map((res) => {

@@ -17,8 +17,14 @@ export class PaymentApprovalService {
   }
 
 
-  getWireTransferList(page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
+  getWireTransferList(page: number, size: number, sortBy: any, direction: any, fileterObj: any,status): Observable<any> {
     // console.log("getWireTransferList fileterObj---",fileterObj)
+    var str=[];
+    if(status){
+      str= status.split(' ');
+    }else{
+      str=[];
+    }
     const reqData = {
       'page': page,
       'size': size,
@@ -26,7 +32,10 @@ export class PaymentApprovalService {
       'direction': direction,
       'userType':fileterObj.userType,
       'status':fileterObj.status,
-      'country':fileterObj.country
+      'country':fileterObj.country,    
+      'subscriberType': str[0],
+      'bankType' : str[1]
+      
     };
     return this.httpClient.post(URLS.postWireTranferList, reqData, { headers: this.headers }).pipe(
       map((res) => {

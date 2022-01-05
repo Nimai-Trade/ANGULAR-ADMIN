@@ -61,6 +61,15 @@ export class DashboardService {
     }
     return this.httpClient.post(URLS.getPaymentPending, param);
   }
+  getPendingRequests(role,subscriberType, bankType): Observable<any> {
+    const param = {
+      "role":role,
+      'subscriberType': subscriberType,
+      'bankType': bankType
+    }
+    return this.httpClient.post(URLS.getPendingRequests, param);
+  }
+
 
   getCustRevenue(dateFrom, dateTo): Observable<any> {
     const req = {

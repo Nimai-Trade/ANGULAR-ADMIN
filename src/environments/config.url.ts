@@ -80,8 +80,8 @@ URLS.getSubscriptionDetailsByIdUrl = environment.BASE_API_URL + 'api/subscriptio
 URLS.getSaveSubscriptionDetails = environment.BASE_API_URL + 'api/subscription/save';
 URLS.getActionSubscriptionDetails = environment.BASE_API_URL + 'api/subscription/action';
 
-
-
+URLS.postSaveFieldData = environment.BASE_API_URL + 'api/bank/saveFieldData';
+URLS.getViewFieldData = environment.BASE_API_URL + 'api/bank/viewFieldData';
 URLS.postKycStatusUpdate = environment.BASE_API_URL + 'api/bank/kycStatusUpdate';
 URLS.viewMakerApprovedKycByKycIdUrl = environment.BASE_API_URL + 'api/bank/viewMakerApprovedKycByKycId';
 URLS.postMakerKycStatusUpdate = environment.BASE_API_URL + 'api/bank/makerKycStatusUpdate';
@@ -129,6 +129,8 @@ URLS.getGrantKycCount = `${environment.BASE_API_URL}api/dashboard/approvals/gran
 URLS.getPendingKyc = `${environment.BASE_API_URL}api/dashboard/approvals/pendingKyc`;
 URLS.getSubsExpiry = `${environment.BASE_API_URL}api/dashboard/approvals/subsExpiry`;
 URLS.getPaymentPending = `${environment.BASE_API_URL}api/dashboard/approvals/paymentPending`;
+URLS.getPendingRequests = `${environment.BASE_API_URL}api/dashboard/approvals/pendingRequests`;
+ // 
 URLS.getGrantSubscriptionCount = `${environment.BASE_API_URL}api/dashboard/approvalsEx/subscription`;
 URLS.getGrantVasCount = `${environment.BASE_API_URL}api/dashboard/approvalsEx/vas`;
 URLS.getGrantDiscountCouponsCount = `${environment.BASE_API_URL}api/dashboard/approvalsEx/discountCoupon`;

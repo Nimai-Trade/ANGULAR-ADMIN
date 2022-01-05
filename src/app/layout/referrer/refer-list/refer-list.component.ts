@@ -40,6 +40,7 @@ export class ReferListComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("test")
     this.referForm.controls['userId'].patchValue(localStorage.getItem('referrerUserId'));
     this.referForm.controls['type'].patchValue(localStorage.getItem('referrerType'));
     this.setPagerConfig();
