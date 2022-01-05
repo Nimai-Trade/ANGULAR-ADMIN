@@ -706,6 +706,14 @@ export class ManagementDashboardComponent implements OnInit {
       localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
       if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
       localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+
+      if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+        localStorage.setItem('referrerSearch', JSON.stringify(data));
+        localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+        this.router.navigate(['app', 'referrer', 'referrer-list']);
+    }
+
+
    } 
    
    if(status=='payment-approval'){
@@ -729,7 +737,12 @@ export class ManagementDashboardComponent implements OnInit {
         localStorage.setItem('customerSearch', JSON.stringify(data));
         this.router.navigate(['app', 'customer', 'customer-list']);
     }
-   
+    
+    if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+        localStorage.setItem('referrerSearch', JSON.stringify(data));
+        localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+        this.router.navigate(['app', 'referrer', 'referrer-list']);
+    }
    }
    if(status=='employeeGrant'){
     if(this.bankType==undefined){
@@ -874,6 +887,11 @@ if(status=='sub-expiry'){
                 this.router.navigate(['app','customer', 'customer-list']);
 
             }
+            if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+                localStorage.setItem('referrerSearch', JSON.stringify(data));
+                localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+                this.router.navigate(['app', 'referrer', 'referrer-list']);
+            }
 }
 }
 if(status=='pay-pending-user'){
@@ -895,6 +913,11 @@ if(status=='pay-pending-user'){
         localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
         this.router.navigate(['app','customer', 'customer-list']);
             }
+}
+if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+    localStorage.setItem('referrerSearch', JSON.stringify(data));
+    localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+    this.router.navigate(['app', 'referrer', 'referrer-list']);
 }
 }
 }
