@@ -18,7 +18,7 @@ export class PaymentPlanDetailsComponent implements OnInit {
   myRights : any;
   reqData:any;
   vasLists: any[]=[];
-  showBtn: boolean;
+  showBtn: boolean=false;
   vasIds: any="";
 
   showSubsidiary:boolean=true;
@@ -50,6 +50,13 @@ for(var i=0;i<this.paymentData.length;i++){
     if(this.paymentData[i].vasList[j].vasStatus=="Active"){
       this.vasIds= this.vasIds+ this.paymentData[i].vasList[j].vasId+"-";
     }   
+
+    if(this.paymentData[i].vasList[j].vasStatus === 'Active' && this.paymentData[i].vasList[j].vasPlanPaymentMode === 'Wire'
+     && this.paymentData[i].vasList[j].vasPaymentStatus === 'Pending'
+     && this.paymentData[i].paymentStatus=='Approved'  && this.paymentData[i].isSplanWithVasFlag==0)
+     {
+      this.showBtn=true;
+     }
     
     }
 }

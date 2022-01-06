@@ -128,15 +128,18 @@
                 </td>
               </tr>
             </table>
+
+
+          
             </ng-container>
-              <tr *ngIf="item.vasStatus === 'Active' && item.vasPlanPaymentMode === 'Wire' && item.vasPaymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
-                <td colspan="2" style="text-align: right;">
-                  <button  class="btn btn-info" id="btnapprove"
-                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
-                  <button   class="btn btn-info" id="btnreject" 
-                    (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
-                </td>
-              </tr>
+            <tr *ngIf=" myRights.includes('PAYMENT_MARK_DONE') && showBtn">
+              <td colspan="2" style="text-align: right;">
+                <button  class="btn btn-info" id="btnapprove"
+                  (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
+                <button   class="btn btn-info" id="btnreject" 
+                  (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
+              </td>
+            </tr>
 
               <tr>
                 <th colspan="2">Payment Details</th>
@@ -198,7 +201,7 @@
                  
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"
-                    (click)="paymentAction('Approved', item,'vasAction')">Approve4</button>&nbsp;&nbsp;
+                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
                   <button   class="btn btn-info" id="btnreject" 
                     (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
                 </td>
