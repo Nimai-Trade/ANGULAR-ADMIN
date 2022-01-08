@@ -44,7 +44,9 @@ export class PaymentPlanDetailsComponent implements OnInit {
 
 for(var i=0;i<this.paymentData.length;i++){
   for(var j=0;j<this.paymentData[i].vasList.length;j++){
-   if(this.paymentData[i].isMultipleVasApplied=="1")
+  //  if(this.paymentData[i].isMultipleVasApplied=="1")
+  if(this.paymentData[i].vasList[j].vasStatus=="Active")
+
     this.vasLists.push(this.paymentData[i].vasList[j])
    
     if(this.paymentData[i].vasList[j].vasStatus=="Active"){

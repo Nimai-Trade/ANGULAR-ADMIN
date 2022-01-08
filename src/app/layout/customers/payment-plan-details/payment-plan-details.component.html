@@ -187,7 +187,7 @@
                 </td>
               </tr>
 
-              <tr *ngIf="!item.vasList && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+              <tr *ngIf="item.vasList==null && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
                  
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"
