@@ -162,6 +162,8 @@ pendingKycCount(subs) {
 
 
 if(status=="payment-approval"){
+  if(this.paymentApprovalCount ==0 || !this.isAll)  
+  return
   if(this.bankType == "Underwriter"){
     if(this.bankType == 'Underwriter' )
     localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
@@ -184,6 +186,8 @@ if(this.bankType == "" || this.bankType == 'Customer' ){
 
 
     if(status=='kyc'){
+      if(this.pendingKycApprovalCount ==0 || !this.isAll)  
+      return
       if(this.bankType == "Underwriter"){
       localStorage.setItem('fromDashBoard', 'yes');
         localStorage.setItem('bankSearch', JSON.stringify(data));
@@ -206,11 +210,15 @@ if(this.bankType == "" || this.bankType == 'Customer' ){
    } 
  
  if(status=='employeeGrant'){
+  if(this.grantUserCount ==0 || !this.isAll)  
+  return
   localStorage.setItem('fromDashBoard', 'yes');
 
   this.router.navigate(['app', 'masters', 'employeeGrant']);
 }
 if(status=='grant'){
+  if(this.grantKycCount ==0 || !this.isAll)  
+  return
   if(this.bankType == "" )
   localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
   if( this.bankType == 'Customer')
@@ -225,6 +233,8 @@ if(status=='grant-payment'){
   this.router.navigate(['app', 'payment-approval']);
 }
 if(status=='assign-rm'){
+  if(this.assignRmCOunt ==0 || !this.isAll)  
+  return
   if(this.bankType==undefined){
       console.log(this.bankType)
 }else{
@@ -249,6 +259,8 @@ if(status=='assign-rm'){
 
 }
 if(status=='grant-rm'){
+  if(this.grantRmPending ==0 || !this.isAll)  
+  return
   if(this.bankType==undefined){
       console.log(this.bankType)
 }else{

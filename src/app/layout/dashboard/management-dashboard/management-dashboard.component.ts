@@ -317,7 +317,7 @@ export class ManagementDashboardComponent implements OnInit {
           this.subscriberType = subs.value;
           this.bankType = "";        
       }
-      if(subs.value=="All"){
+      if(subs.value=="All" ){
         this.isAll=false;
       }
     //   this.service.getPendingKycCount(this.subscriberType, this.bankType).subscribe((res) => {
@@ -679,6 +679,8 @@ export class ManagementDashboardComponent implements OnInit {
     }   
   }
   showKYCApproval(status){
+
+
       const data={
         "userId":null,
         "emailId":null,
@@ -687,6 +689,8 @@ export class ManagementDashboardComponent implements OnInit {
         "country":null
       }
    if(status=='kyc'){
+    if(this.pendingKycApprovalCount ==0 || !this.isAll)  
+    return
       if(this.bankType == "Underwriter"){
       localStorage.setItem('fromDashBoard', 'yes');
         localStorage.setItem('bankSearch', JSON.stringify(data));
@@ -717,8 +721,8 @@ export class ManagementDashboardComponent implements OnInit {
    } 
    
    if(status=='payment-approval'){
-    //    if(this.payAwaitedCount)
-    console.log(this.bankType)
+    if(this.payAwaitedCount ==0 || !this.isAll)  
+    return
     if(this.bankType == "Underwriter"){
         if(this.bankType == 'Underwriter' )
         localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
@@ -745,6 +749,8 @@ export class ManagementDashboardComponent implements OnInit {
     }
    }
    if(status=='employeeGrant'){
+    if(this.grantUserCount ==0 || !this.isAll)  
+    return
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
@@ -754,8 +760,10 @@ export class ManagementDashboardComponent implements OnInit {
 }
 
 if(status=="kyc-pending-user")
-
 {
+    if(this.pendingKycDrop ==0 || !this.isAll)  
+    return
+
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
@@ -787,6 +795,10 @@ localStorage.setItem('bankSearch', JSON.stringify(data));
 }
 }
 if(status=='grant'){
+
+    if(this.grantKycCount ==0 || !this.isAll)  
+    return
+
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
@@ -803,6 +815,8 @@ if(status=='grant'){
 }
 }
 if(status=='grant-payment'){
+    if(this.paymentApprovalCount ==0 || !this.isAll)  
+    return
    
     if(this.bankType==undefined){
         console.log(this.bankType)
@@ -820,6 +834,8 @@ if(status=='grant-payment'){
 }
 }
 if(status=='assign-rm'){
+    if(this.assignRmCOunt ==0 || !this.isAll)  
+    return
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
@@ -844,6 +860,8 @@ if(status=='assign-rm'){
 
 }
 if(status=='grant-rm'){
+    if(this.grantRmPending ==0 || !this.isAll)  
+    return
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
@@ -863,6 +881,8 @@ if(status=='grant-rm'){
 }
 }
 if(status=='sub-expiry'){
+    if(this.subsExpiryCount ==0 || !this.isAll)  
+    return
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
@@ -895,6 +915,8 @@ if(status=='sub-expiry'){
 }
 }
 if(status=='pay-pending-user'){
+    if(this.paymenPending ==0 || !this.isAll)  
+    return
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{

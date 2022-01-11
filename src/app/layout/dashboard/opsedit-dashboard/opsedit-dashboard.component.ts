@@ -139,6 +139,8 @@ showKYCApproval(status){
       }
     }
 if(status=='kyc'){
+  if(this.pendingKycApprovalCount ==0 || !this.isAll)  
+  return
   if(this.bankType == "Underwriter"){
   localStorage.setItem('fromDashBoard', 'yes');
     localStorage.setItem('bankSearch', JSON.stringify(data));
@@ -155,12 +157,16 @@ if(status=='employeeGrant'){
 this.router.navigate(['app', 'masters', 'employeeGrant']);
 }
 if(status=='grant'){
+  if(this.grantKycCount ==0 || !this.isAll)  
+  return
 this.router.navigate(['app', 'grantkyc']);
 }
 if(status=='grant-payment'){
 this.router.navigate(['app', 'payment-approval']);
 }
 if(status=='assign-rm'){
+  if(this.assignRmCOunt ==0 || !this.isAll)  
+  return
   if(this.bankType==undefined){
       console.log(this.bankType)
 }else{
@@ -179,13 +185,11 @@ if(status=='assign-rm'){
           }           
 
           this.router.navigate(['app', 'assignRm']);
-
   }
-
-
-
 }
 if(status=='grant-rm'){
+  if(this.grantRmPending ==0 || !this.isAll)  
+  return
   if(this.bankType==undefined){
       console.log(this.bankType)
 }else{
