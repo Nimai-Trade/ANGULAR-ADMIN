@@ -195,7 +195,7 @@ console.log('kjkj')
           this.reqData = {
             'userId': element.userid,
             'status': status,
-            'vasid':element.planId,
+            'vasNUmber':element.vasNUmber.slice(0,-1), 
             'vasCheckerComment': this.result['data'],
             'comment':this.result['data']
           };

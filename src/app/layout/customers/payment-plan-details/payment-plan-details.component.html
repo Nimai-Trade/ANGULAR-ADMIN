@@ -70,64 +70,76 @@
                   <textarea matInput readonly="true" class="comment" value={{item.checkerComment}}></textarea>
                 </td> 
             </tr>
+           
+            <ng-container *ngFor="let items of vasLists; let i = index;">
+           
+                  <table class="table noneborder" style="width: 489%;
+                  max-width: 387%;">
+
+
               <tr>
                 <th>Vas Plan</th>
                 <td>
-                  <input matInput value={{item.vasPlan}} readonly="true">
+                  <input matInput value={{items.vasPlan}} readonly="true">
                 </td>
               </tr>
               
               <tr>
                 <td>Status</td>
                 <td>
-                  <input matInput value={{item.vasStatus}} readonly="true" placeholder="">
+                  <input matInput value={{items.vasStatus}} readonly="true" placeholder="">
                 </td>
               </tr>
 
               <tr>
                 <td>Benefits</td>
                 <td>
-                  <input matInput value={{item.vasBenefits}}  readonly="true" placeholder="">
+                  <input matInput value={{items.vasBenefits}}  readonly="true" placeholder="">
                 </td>
               </tr>
               <tr>
                 <td>VAS Plan Price </td>
                 <td>
-                  <input matInput value= {{item.vasAmount}} readonly="true" placeholder="">
+                  <input matInput value= {{items.vasAmount}} readonly="true" placeholder="">
                 </td>
               </tr>
-              <tr *ngIf="item.vasMakerComment">
+              <tr *ngIf="items.vasMakerComment">
                 <td>Maker Comment</td>
                 <td>
-                  <textarea matInput readonly="true" class="comment" value={{item.vasMakerComment}}></textarea>
+                  <textarea matInput readonly="true" class="comment" value={{items.vasMakerComment}}></textarea>
                 </td> 
             </tr>
-            <tr *ngIf="item.vasCheckerComment">
+            <tr *ngIf="items.vasCheckerComment">
                 <td>Checker Comment</td>
                 <td>
-                  <textarea matInput readonly="true" class="comment" value={{item.vasCheckerComment}}></textarea>
+                  <textarea matInput readonly="true" class="comment" value={{items.vasCheckerComment}}></textarea>
                 </td> 
             </tr>
               <tr>
                 <td>Payment Status</td>
                 <td>
-                  <input matInput value={{item.vasPaymentStatus}} readonly="true" placeholder="">
+                  <input matInput value={{items.vasPaymentStatus}} readonly="true" placeholder="">
                 </td>
               </tr>
-              <tr *ngIf="item.vasPlanPaymentMode">
+              <tr *ngIf="items.vasPlanPaymentMode">
                 <td>Payment Mode</td>
                 <td>
-                  <input matInput value={{item.vasPlanPaymentMode}} readonly="true" placeholder="">
+                  <input matInput value={{items.vasPlanPaymentMode}} readonly="true" placeholder="">
                 </td>
               </tr>
-              <tr *ngIf="item.vasStatus === 'Active' && item.vasPlanPaymentMode === 'Wire' && item.vasPaymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE') && item.isSplanWithVasFlag==0">
-                <td colspan="2" style="text-align: right;">
-                  <button  class="btn btn-info" id="btnapprove"
-                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
-                  <button   class="btn btn-info" id="btnreject" 
-                    (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
-                </td>
-              </tr>
+            </table>
+
+
+          
+            </ng-container>
+            <tr *ngIf=" myRights.includes('PAYMENT_MARK_DONE') && showBtn && item.status=='Active'">
+              <td colspan="2" style="text-align: right;">
+                <button  class="btn btn-info" id="btnapprove"
+                  (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
+                <button   class="btn btn-info" id="btnreject" 
+                  (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
+              </td>
+            </tr>
 
               <tr>
                 <th colspan="2">Payment Details</th>
@@ -175,13 +187,23 @@
                 </td>
               </tr>
 
-              <tr *ngIf="item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+              <tr *ngIf="item.vasList==null && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
                  
                 <td colspan="2" style="text-align: right;">
                   <button  class="btn btn-info" id="btnapprove"
                     (click)="paymentAction('Approved', item,'paymentAction')">Approve</button>&nbsp;&nbsp;
                   <button   class="btn btn-info" id="btnreject" 
                     (click)="paymentAction('Rejected', item,'paymentAction')">Reject</button>
+                </td>
+              </tr>
+
+              <tr *ngIf="item.vasList && item.status === 'Active' && item.paymentMode === 'Wire' && item.paymentStatus === 'Pending' && myRights.includes('PAYMENT_MARK_DONE')">
+                 
+                <td colspan="2" style="text-align: right;">
+                  <button  class="btn btn-info" id="btnapprove"
+                    (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
+                  <button   class="btn btn-info" id="btnreject" 
+                    (click)="paymentAction('Rejected', item,'vasAction')">Reject</button>
                 </td>
               </tr>
 

@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     paymenPending: any;
     pendingKycDrop: any;
 
-    subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter', 'Referrer']
+    subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank As UnderWriter', 'Referrer']
 
 
     userStatType: string[] = ['Customer', 'Bank As Customer', 'Bank As UnderWriter']
