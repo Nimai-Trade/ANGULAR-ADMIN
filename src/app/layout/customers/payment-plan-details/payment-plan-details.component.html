@@ -132,7 +132,7 @@
 
           
             </ng-container>
-            <tr *ngIf=" myRights.includes('PAYMENT_MARK_DONE') && showBtn">
+            <tr *ngIf=" myRights.includes('PAYMENT_MARK_DONE') && showBtn && item.status=='Active'">
               <td colspan="2" style="text-align: right;">
                 <button  class="btn btn-info" id="btnapprove"
                   (click)="paymentAction('Approved', item,'vasAction')">Approve</button>&nbsp;&nbsp;
