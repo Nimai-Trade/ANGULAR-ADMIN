@@ -10,11 +10,13 @@ import { MatRadioChange } from '@angular/material';
   styleUrls: ['./vas-plan-add.component.scss']
 })
 export class VasPlanAddComponent implements OnInit {
-
-  countryList: any;
+  countryList: any = [];
+  dropdownSettings = {};
   vasForm: any;
-  countryData: any = [];
+  country: any = [];
   selectedcountry: any=[];
+  disabledOther: boolean;
+  selectedItems: string[];
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<VasPlanAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
     this.vasForm = fb.group({
@@ -27,9 +29,18 @@ export class VasPlanAddComponent implements OnInit {
       description4: [],
       description5: [],
       pricing: [, Validators.required],
-      countryName: [, Validators.required],
+      country: [, Validators.required],
       countryCurrency: ['USD']
     });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'country',
+      textField: 'country',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      enableCheckAll:false,
+      autoPosition: false
+    };
   }
 
   ngOnInit() {
@@ -55,9 +66,14 @@ export class VasPlanAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+
+        let item = {country: "All", code: "All"}
+        this.countryList.push(item);
+        this.countryList.unshift(item);
+        
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryData.push(entry.country);
+          this.country.push(entry.country);
         }
       });
   }
@@ -122,5 +138,33 @@ export class VasPlanAddComponent implements OnInit {
        let filter = value.toLowerCase();
        return this.countryList.filter(option => option.country.toLowerCase().startsWith(filter));
      }
+
+
+
+
+     closeNone(){
+      this.vasForm.get('country').setValue('');
+      this.disabledOther=false
+    }
+  
+    onItemSelect(item: any){
+      console.log("Item---",item)
+      if(item=="All"){
+        this.disabledOther=true;  
+        this.selectedItems = [ 'All'];
+      }else{
+        this.disabledOther=false;
+      }
+    }
+    
+    onSelectAll(items: any) {
+      console.log(items);
+    }
+    onItemDeSelect(item: any) {
+      console.log(item);
+    }
+    
+  
+   
 
 }

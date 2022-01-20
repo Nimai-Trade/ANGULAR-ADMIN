@@ -86,7 +86,6 @@ export class EmployeeAddComponent implements OnInit {
       this.getCode();
     }
 
-    // this.countryList = [{ 'code': 'INDIA', 'country': 'INDIA' }, { 'code': 'USA', 'country': 'USA' }];
     this.getroleList();
   }
 
@@ -153,6 +152,7 @@ export class EmployeeAddComponent implements OnInit {
     this.sharedUtilService.showSnackBarMessage(res.message);
     this.closeDialog();
   }
+  
   closeNone(){
     this.employeeForm.get('country').setValue('');
     this.disabledOther=false
@@ -178,10 +178,7 @@ export class EmployeeAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
-      //  this.selectedcountry=res;
-       // let item = {country: "All", code: "All"}
-        // this.countryList.push(item);
-      //  this.countryList.unshift(item);
+     
         for (let entry of this.countryList) {
           this.country.push(entry.country);
           if(entry.country!="All")
@@ -191,7 +188,6 @@ export class EmployeeAddComponent implements OnInit {
         this.service.getEmployeeDetailsById(this.data.id).subscribe(
           (res) => {
             // this.getCountryList();
-
             this.employeeData = res;
             this.roleInfo = res['roleInfo'];
             if (this.roleInfo != null) {

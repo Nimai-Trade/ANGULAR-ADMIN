@@ -16,7 +16,8 @@ import { VasPlanViewComponent } from './vas-plan-view/vas-plan-view.component';
 import { SubscriptionViewComponent } from './subscription-view/subscription-view.component';
 import { SubscriptionAddComponent } from './subscription-add/subscription-add.component';
 import { SubscriptionActionComponent } from './subscription-action/subscription-action.component';
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 
 @NgModule({
   declarations: [SubscriptionListComponent, VasPlanListComponent, VasPlanAddComponent, VasPlanActionComponent, VasPlanViewComponent, SubscriptionViewComponent, SubscriptionAddComponent, SubscriptionActionComponent],
@@ -30,6 +31,8 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
     StatModule,
     SharedModule,
     DropDownListModule,
+    MultiSelectModule,
+    NgMultiSelectDropDownModule,
     FlexLayoutModule.withConfig({ addFlexToParent: false })
   ],
   providers: [SubscriptionService],

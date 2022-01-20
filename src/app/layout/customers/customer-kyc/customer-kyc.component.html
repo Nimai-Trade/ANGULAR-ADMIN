@@ -173,6 +173,20 @@
             <td> <input  formControlName="usedLCIssuance"  placeholder=""></td>
           </tr>
           <tr>
+            <td>Preferred Banks</td>
+            <!-- <td> <input  formControlName="preferredBanks"  placeholder=""></td> -->
+            <td>
+              <mat-select formControlName="preferredBanks" autocomplete="off" placeholder="" multiple [(ngModel)]="pbSelection" disableOptionCentering class="roleselct">
+                <mat-option *ngFor="let item of bankList" [value]="item.userid">{{item.bankName}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error
+                *ngIf="employeeForm.controls['empRole'].touched && employeeForm.controls['empRole'].hasError('required')">
+                Please select Role
+              </mat-error> -->
+            </td>
+          </tr>
+          <tr>
              
             <td></td>       
             <td>

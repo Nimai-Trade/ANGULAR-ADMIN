@@ -203,33 +203,11 @@
               <tr>
                 <td nowrap="">Region Allocated</td>
                 <td class="multiselectClass">
-                  <!-- <mat-select formControlName="country" class="roleselct" multiple disableOptionCentering>
-                    <mat-option *ngFor="let item of countryList" [value]="item.country">{{item.country}}
-                    </mat-option>
-                  </mat-select> -->
-
-                  <!-- <ejs-dropdownlist id='diacritics' [dataSource]='country' [allowFiltering]='true' [ignoreAccent]='true'
-                    placeholder='Select a value' filterBarPlaceholder='e.g: gul'>
-                  </ejs-dropdownlist> -->
-
-                  <!-- <ejs-multiselect  cssClass="custom"  (select)="onItemSelect($event)" formControlName="country" id='multiselectelement' #sample 
-                  [dataSource]='country' [showDropDownIcon]='true' [fields]='localFields' 
-                  [placeholder]='localWaterMark' [hideSelectedItem] = 'false' 
-                  [value]='country' autocomplete="disabled"> 
-                  </ejs-multiselect>
-                  <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
-                  (click)="closeNone()">&times;</button> -->
                   <ng-multiselect-dropdown-angular7 autocomplete="disabled" [placeholder]="'Select Country'" [data]="countryList" formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
                   (onDeSelect)="onItemDeSelect($event)">
                   </ng-multiselect-dropdown-angular7>
                   <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
                   (click)="closeNone()">&times;</button> 
-                  <!-- <mat-select formControlName="country"  class="roleselct" [multiple]="true">
-                    <mat-select-search [formControl]="bankMultiFilterCtrl"></mat-select-search>
-                    <mat-option *ngFor="let bank of filteredBanksMulti | async" [value]="bank">
-                      {{bank.name}}
-                    </mat-option>
-                  </mat-select> -->
                   <mat-error *ngIf="employeeForm.controls['country'].touched && employeeForm.controls['country'].hasError('required')">
                     Please select Region Allocated
                   </mat-error>
@@ -245,7 +223,6 @@
                 </ejs-dropdownlist>  -->
 
                   <mat-select formControlName="empRole" autocomplete="off" placeholder="" multiple [(ngModel)]="roleSelection" disableOptionCentering class="roleselct">
-                    <!-- <mat-option [value]="">Select</mat-option> -->
                     <mat-option *ngFor="let item of roleList" [value]="item.roleId">{{item.roleShortName}}
                     </mat-option>
                   </mat-select>

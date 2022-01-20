@@ -32,8 +32,9 @@ export class AddcouponComponent implements OnInit {
   employeeData: any;
   statusList: any;
   loading = false;
-  countryList: any;
-  country: any = [];
+  countryList: any = [];
+  dropdownSettings = {};
+    country: any = [];
   planList:any;
   roleList: any;
   countrySelection: any = [];
@@ -55,6 +56,8 @@ export class AddcouponComponent implements OnInit {
   uploadedFile: File[] = [];
   couponDetails:any;
   selectedcountry: any=[];
+  disabledOther: boolean;
+  selectedItems: string[];
   constructor(private fb: FormBuilder, private service: DiscountMgmtService, public dialogRef: MatDialogRef<AddcouponComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
    
   }
@@ -74,9 +77,17 @@ export class AddcouponComponent implements OnInit {
       discountPercentage:['',Validators.required],
       maxDiscount:[''],
       details:this.fb.array([this.addcouponDetails()]),
-     // myfile: ['']
-     
+    
     });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'country',
+      textField: 'country',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      enableCheckAll:false,
+      autoPosition: false
+    };
     this.statusList = [{ 'code': 'ACTIVE', 'name': 'ACTIVE' }, { 'code': 'INACTIVE', 'name': 'INACTIVE' }];
     if (this.data.id) {
       this.loadCouponDetails();
@@ -375,6 +386,9 @@ calculateAmount(value){
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        let item = {country: "All", code: "All"}
+        this.countryList.push(item);
+        this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
           this.country.push(entry.country);
@@ -402,6 +416,11 @@ calculateAmount(value){
     }
     
   }
+  
+  closeNone(){
+    this.couponForm.get('country').setValue('');
+    this.disabledOther=false
+  }
   onKey(value) { 
     this.selectedcountry = this.search(value);    
      }
@@ -410,5 +429,22 @@ calculateAmount(value){
        return this.countryList.filter(option => option.country.toLowerCase().startsWith(filter));
      }
    
+  onItemSelect(item: any){
+    console.log("Item---",item)
+    if(item=="All"){
+      this.disabledOther=true;  
+      this.selectedItems = [ 'All'];
+    }else{
+      this.disabledOther=false;
+    }
+  }
+  
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  onItemDeSelect(item: any) {
+    console.log(item);
+  }
+  
 
 }

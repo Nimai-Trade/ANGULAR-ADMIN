@@ -56,6 +56,137 @@ input.mat-input-element {
   }
  
 
+  td .e-multiselect{
+    padding: 4px 0px;
+}
+
+td .e-multiselect .e-multiselect{
+    width: 100%;
+    padding: 0 6px;
+}
+ 
+::ng-deep .multiselectClass .e-multiselect{
+    padding: 4px 0px 0 !important;
+    height: auto;
+}
+
+::ng-deep .multiselectClass .e-multiselect .e-multiselect{  
+    box-shadow: none;
+    padding: 0px 0px 0 !important;
+}
+
+::ng-deep .multiselectClass .e-multi-select-wrapper {
+    padding: 0 3px 0 6px;
+}
+
+::ng-deep .multiselectClass .e-multi-select-wrapper .e-chips-collection{
+    padding-top: 8px;
+}
+// ::ng-deep .multiselect-item-checkbox input[type=checkbox] + div {
+//     display: none;
+// }
+
+::ng-deep .dropdown-list{
+    // margin-top: -64%!important;
+    position: fixed!important;
+    width: 400px!important;
+    height: 200px!important;
+    overflow: hidden!important;
+}
+.closeBtn{
+        
+    left: 8px;
+    margin-left: 167px;
+    top: -10px;
+    padding-left: 3px;
+    padding-right: 2px;
+    bottom: 0px;
+    margin-bottom: 2px;
+    margin-top: 4px;
+    padding-top: 5px;
+    background: border-box;
+}
+.closeNone {
+    color:gray;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    z-index: 9;
+    margin-left: 82%;
+    border: gray;
+    
+}
+
+::ng-deep .multiselect-dropdown .dropdown-btn .selected-item a{
+    position: fixed;
+    display: contents;
+    margin-top: 0px!important;
+}
+::ng-deep .multiselect-dropdown .dropdown-btn{
+    border: none!important;
+    box-shadow: inset 0 0 12px rgba(43, 43, 43, 0.14901960784313725)!important;
+}
+
+@media (max-width: 767px) { 
+    ::ng-deep .dropdown-list {
+    position: fixed !important;
+    width: 170px !important;
+    height: 200px !important;
+    overflow: hidden !important;
+}
+}
+@media (max-width: 767px) { 
+    ::ng-deep .mat-select-panel {
+        transform-origin: 50% bottom 0px;
+        font-size: 11px;
+        opacity: 1;
+        min-width: calc(38% + 64px) !important;
+        transform: scaleY(1);
+}
+}
+
+
+@media (max-width: 767px) { 
+    ::ng-deep .mat-dialog-container{
+         margin:0;
+         width: 100%;
+         max-width:100%;    
+     }
+ 
+     ::ng-deep .cdk-overlay-pane{
+         width:100% !important;
+         max-width:100% !important;
+        
+     }
+    ::ng-deep .mat-select-panel {
+        margin-left: 50%!important;
+    }
+     ::ng-deep .popupcontent input:read-only{
+         width:160px;
+     }
+     .countryCode_mobile,.mobNumber_mobile{
+        width: 100%!important;
+     }
+ }
+.select_extension{
+    padding: 6px;
+    font-size: 15px;
+    border-radius: 15px;
+    background-color: #fffcfc;
+}
+::placeholder {
+    color: gray !important;
+    opacity: 1; /* Firefox */
+  } 
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: gray !important;
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: gray !important;
+  }
+ 
+
  .inputSearch{
     border-right-width: 0px;
     border-left-width: 0px;

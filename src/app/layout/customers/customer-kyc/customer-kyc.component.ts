@@ -24,6 +24,9 @@ export class CustomerKycComponent implements OnInit {
   empCode:any;
   filedId: string;
   isCustomer: any;
+  bankList: Object;
+  preferredBank: any[]=[];
+  pbSelection: any[]=[];
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
@@ -31,7 +34,8 @@ export class CustomerKycComponent implements OnInit {
     "importVolume":[''],
     "exportVolume":[''],
     "yearlyLCVolume":[''],
-    "usedLCIssuance":['']
+    "usedLCIssuance":[''],
+    "preferredBanks":[''],
     });
   }
  
@@ -41,6 +45,32 @@ export class CustomerKycComponent implements OnInit {
     this.myRights = this.rightList.split(',');
     this.empCode = localStorage.getItem('nimaiId');
     this.loadKycDetails();
+    this.loadBankList();
+   
+  }
+
+  loadViewPreferredBank() {
+   const data= {
+      "custUserId": this.userId
+    }
+this.service.viewPreferredBank(data).subscribe((res)=>{
+              this.preferredBank = JSON.parse(JSON.stringify(res));
+                
+                  for (const record of JSON.parse(JSON.stringify(res))) {
+                    this.pbSelection.push(record.userid);
+                  }
+              
+            
+})
+
+  }
+  loadBankList() {
+
+this.service.bankList().subscribe((res)=>{
+  console.log(res)
+  this.bankList = res; 
+})
+
   }
 
 
@@ -76,7 +106,7 @@ export class CustomerKycComponent implements OnInit {
     //console.log(this.kycData);
       });
       if(this.isCustomer){
-     
+        this.loadViewPreferredBank();
       const data={
         "userId":this.data.id
       }
@@ -89,7 +119,8 @@ export class CustomerKycComponent implements OnInit {
             importVolume:data.importVolume,
             exportVolume: data.exportVolume,
             yearlyLCVolume: data.yearlyLCVolume,
-           usedLCIssuance :data.usedLCIssuance
+           usedLCIssuance :data.usedLCIssuance,
+           preferredBanks:this.pbSelection
           });
      
     });
@@ -192,12 +223,20 @@ export class CustomerKycComponent implements OnInit {
     "exportVolume":this.kycForm.get('exportVolume').value,  
     "yearlyLCVolume":this.kycForm.get('yearlyLCVolume').value,    
     "usedLCIssuance":this.kycForm.get('usedLCIssuance').value,   
+    "preferredBanks":this.kycForm.get('preferredBanks').value,
     "id":this.filedId  
   }
   this.service.saveFieldData(data).subscribe(
     (res) => {
       this.financialAction();
     });
+    const param={
+      "custUserId": this.userId,
+      "banks": this.kycForm.get('preferredBanks').value
+    }
+this.service.savePreferredBank(param).subscribe((res)=>{
+
+})
 
   }
 
