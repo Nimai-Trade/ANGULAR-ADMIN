@@ -1,8 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
+import { MultiSelectComponent, DropDownListComponent } from '@syncfusion/ej2-angular-dropdowns';
+
 import { MatRadioChange } from '@angular/material';
 @Component({
   selector: 'app-subscription-add',
@@ -10,15 +12,20 @@ import { MatRadioChange } from '@angular/material';
   styleUrls: ['./subscription-add.component.scss']
 })
 export class SubscriptionAddComponent implements OnInit {
-
-  countryList: any;
-  subscriptionForm: any;
+ 
+  countryList: any = [];
+  dropdownSettings = {};
+    subscriptionForm: any;
   statusList: any;
   monthList: any;
   rmList: any;
   subscriptionData: any;
   countryData: any = [];
+ 
   selectedcountry: any=[];
+  disabledOther: boolean;
+  selectedItems: string[];
+  country: any;
 
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
@@ -27,7 +34,7 @@ export class SubscriptionAddComponent implements OnInit {
       createdBy:[],
       subscriptionPlanId: [],
       customerType: ['', Validators.required],
-      countryName: ['', Validators.required],
+      country: ['', Validators.required],
       planName: ['', Validators.required],
       customerSupport: ['', Validators.required],
       remark: [],
@@ -39,6 +46,15 @@ export class SubscriptionAddComponent implements OnInit {
       // status: ['', Validators.required],
       countryCurrency: ['USD']
     });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'country',
+      textField: 'country',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      enableCheckAll:false,
+      autoPosition: false
+    };
   }
 
   ngOnInit() {
@@ -73,12 +89,22 @@ export class SubscriptionAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
+        let item = {country: "All", code: "All"}
+        this.countryList.push(item);
+        this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryData.push(entry.country);
+          this.country.push(entry.country);
         }
+
+     
+
       });
   }
+
+
+
+
 
   onSubmitPlan() {
     if (this.data.id) {           
@@ -130,6 +156,8 @@ export class SubscriptionAddComponent implements OnInit {
         this.countryList = res;
         this.selectedcountry=res;
         for (let entry of this.countryList) {
+          this.country.push(entry.country);
+
           this.countryData.push(entry.country);
         }
     this.service.getSubscriptionDetailsById(this.data.id).subscribe(
@@ -153,6 +181,27 @@ export class SubscriptionAddComponent implements OnInit {
 
 
 
+  closeNone(){
+    this.subscriptionForm.get('countryName').setValue('');
+    this.disabledOther=false
+  }
+
+  onItemSelect(item: any){
+    console.log("Item---",item)
+    if(item=="All"){
+      this.disabledOther=true;  
+      this.selectedItems = [ 'All'];
+    }else{
+      this.disabledOther=false;
+    }
+  }
+  
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  onItemDeSelect(item: any) {
+    console.log(item);
+  }
   
  onKey(value) { 
   this.selectedcountry = this.search(value);

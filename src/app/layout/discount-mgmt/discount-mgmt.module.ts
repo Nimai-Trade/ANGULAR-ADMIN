@@ -13,8 +13,9 @@ import { ListcouponComponent } from './listcoupon/listcoupon.component';
 import { DiscountMgmtService } from './discount-mgmt.service';
 import { DiscountMgmtActionComponent } from './discount-mgmt-action/discount-mgmt-action.component';
 import { PreviewcouponComponent } from './previewcoupon/previewcoupon.component'
-import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 import { TimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +30,8 @@ import { TimePickerModule } from '@syncfusion/ej2-angular-calendars';
     SharedModule,
     DropDownListModule,
     TimePickerModule,
+    MultiSelectModule,
+    NgMultiSelectDropDownModule,
     FlexLayoutModule.withConfig({ addFlexToParent: false })
   ],
   providers: [DiscountMgmtService],

@@ -14,6 +14,7 @@ import { SharedUtilService } from 'src/app/shared/services/shared-util';
 })
 export class BankKycComponent implements OnInit {
   kycData: FormArray;
+  ratingForm:any;
   kycForm: any;
   resData: any;
   result = '';
@@ -22,10 +23,15 @@ export class BankKycComponent implements OnInit {
   message:any;
   userId:any;
   empCode:any;
+  ranking: any
+  ratingList: { code: string; name: string; }[];
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<BankKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
     });
+    this.ratingForm=this.fb.group({
+      rating:['']
+    })
   }
 
 
@@ -34,18 +40,40 @@ export class BankKycComponent implements OnInit {
     this.myRights = this.rightList.split(',');
     this.empCode = localStorage.getItem('nimaiId');
     this.loadKycDetails();
+    this.ratingList = [{ 'code': 'aa', 'name': 'AA' }, { 'code': 'aaa', 'name': 'AAA' }];
+
+   // this.loadRank();
   }
+  loadRank() {
+  const data=
+    {
+      "bankUserid": this.data.id
+    }
 
-
+   this.service.viewBankRating(data).subscribe((res)=>{
+    this.ranking=JSON.parse(JSON.stringify(res)).data.rating;
+   })
+  }
   closeDialog() {
     return this.dialogRef.close({ result: true });
   }
-
 
   loadKycDetails() {
     this.userId=this.data.id
     this.service.kycDetail(this.data.id).subscribe(
       (res) => {
+        const data=
+        {
+          "bankUserid": this.data.id
+        }    
+       this.service.viewBankRating(data).subscribe((res)=>{
+        this.ranking=JSON.parse(JSON.stringify(res)).data.rating;
+       // this.ratingForm.controls['rating'].patchValue(this.ranking);
+        this.ratingForm.patchValue({
+          rating: this.ranking,
+        })
+       })
+       console.log(this.ranking)
         this.resData = res;
         this.kycData = this.kycForm.get('kycData') as FormArray;
         this.resData.forEach(element => {
@@ -60,8 +88,11 @@ export class BankKycComponent implements OnInit {
             reason: [element.reason],
             userid: [element.userid],
             makerComment:[element.reason],
-            checkerComment:[element.checkerComment]
+            checkerComment:[element.checkerComment],
+            rating:[this.ranking]
           });
+
+
           this.kycData.push(aaaa);
         });
 
@@ -69,7 +100,18 @@ export class BankKycComponent implements OnInit {
       });
   }
 
+  saveRating(){
+  console.log(this.ratingForm.controls['rating'].value)
+    const data=
+    {
+      "bankUserid": this.data.id,
+	        "rating": this.ratingForm.controls['rating'].value
+    }
 
+   this.service.saveBankRating(data).subscribe((res)=>{
+    //this.ranking=res;
+   })
+  }
 
   kycAction(status, item) {
     console.log('status ' + status + ' id ' + item.controls['kycid'].value);

@@ -70,6 +70,8 @@
                       <textarea readonly="true" formControlName="checkerComment"></textarea>
                     </td> 
                 </tr>
+             
+
                   <tr *ngIf="item.controls['kycStatus'].value === 'Pending' && myRights.includes('KYC_APPROVE')">
                     <td>Comments</td>
                     <td>
@@ -96,8 +98,37 @@
             </div>
           </div>
         </div>
+
       </ng-container>
+
     </div>
+    <div class="popupcontent">
+      <form [formGroup]="ratingForm">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <table class="table noneborder">
+            <tbody>
+      <tr>
+      <td>Rank</td>
+      <td>
+        <!-- <input matInput formControlName="rating"  placeholder=""> -->
+        <mat-select  formControlName="rating" placeholder="" disableOptionCentering class="roleselct">
+          <mat-option *ngFor="let item of ratingList" [value]="item.code">{{item.name}}
+          </mat-option>
+          <!-- <mat-option [value]="aa">aa</mat-option>
+          <mat-option [value]="aaa">aaa</mat-option> -->
+
+        </mat-select>
+      </td>
+    </tr>
+
+    <tr><td><button  style="width: 100px;" mat-raised-button color="primary" (click)="saveRating()">save</button>
+    </td></tr>
+    </tbody>
+    </table>
+        </div></div>
+      </form>
+      </div>
 <!-- 
     <div class="popupcontent">
       <div class="tab-content" id="tab1" style="overflow-y: auto;">

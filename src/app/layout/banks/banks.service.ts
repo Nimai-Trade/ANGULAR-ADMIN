@@ -114,6 +114,40 @@ export class BanksService {
     );
   }
 
+
+bankList(){
+  return this.httpClient.get(URLS.getBankListUrl, { headers: this.headers }).pipe(
+    map((res) => {
+      return res;
+    })
+  );
+}
+iewPreferredBank
+
+viewPreferredBank(data){
+  return this.httpClient.post(URLS.getViewPreferredBankUrl,data, { headers: this.headers }).pipe(
+    map((res) => {
+      return res;
+    })
+  );
+}
+
+
+
+viewBankRating(id) {
+  return this.httpClient.post(URLS.getRatingUrl , id, { headers: this.headers }).pipe(
+    map((res) => {
+      return res;
+    })
+  );
+}
+saveBankRating(id) {
+  return this.httpClient.post(URLS.saveRatingUrl , id, { headers: this.headers }).pipe(
+    map((res) => {
+      return res;
+    })
+  );
+}
   kycDetail(id) {
     return this.httpClient.get(URLS.getCustomerKycDetailsUrl + id, { headers: this.headers }).pipe(
       map((res) => {
@@ -137,6 +171,15 @@ export class BanksService {
       })
     );
   }
+
+  savePreferredBank(reqData) {
+    return this.httpClient.post(URLS.postSavePreferredBank, reqData, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
   kycStatusUpdate(reqData) {
     return this.httpClient.post(URLS.postMakerKycStatusUpdate, reqData, { headers: this.headers }).pipe(
       map((res) => {
