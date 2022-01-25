@@ -74,6 +74,7 @@ URLS.getRatingUrl = environment.BASE_API_URL + 'api/bank/viewBankRating';
 URLS.getBankListUrl = environment.BASE_API_URL + 'api/bank/bankList';
 URLS.getViewPreferredBankUrl = environment.BASE_API_URL + 'api/bank/viewPreferredBank';
 
+URLS.postSavePreferredBank = environment.BASE_API_URL + 'api/bank/savePreferredBank';
 
 
 URLS.getCustomerKycDetailsUrl = environment.BASE_API_URL + 'api/bank/kyc/';

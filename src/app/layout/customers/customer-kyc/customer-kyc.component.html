@@ -172,19 +172,30 @@
             <td>Banks used currently for LC issuance</td>
             <td> <input  formControlName="usedLCIssuance"  placeholder=""></td>
           </tr>
+          <br>
           <tr>
-            <td>Preferred Banks</td>
+            <td><b> Preferred Banks </b></td>
             <!-- <td> <input  formControlName="preferredBanks"  placeholder=""></td> -->
             <td>
               <mat-select formControlName="preferredBanks" autocomplete="off" placeholder="" multiple [(ngModel)]="pbSelection" disableOptionCentering class="roleselct">
-                <mat-option *ngFor="let item of bankList" [value]="item.userid">{{item.bankName}}
+                <ng-container  *ngFor="let item of bankList">
+                <mat-option  *ngIf="item.bankName" [value]="item.userid">{{item.bankName}}
                 </mat-option>
+                </ng-container>
               </mat-select>
-              <!-- <mat-error
-                *ngIf="employeeForm.controls['empRole'].touched && employeeForm.controls['empRole'].hasError('required')">
-                Please select Role
-              </mat-error> -->
-            </td>
+              </td>
+              <!-- <td class="multiselectClass">
+                <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
+                 formControlName="preferredBanks" [(ngModel)]="selectedItems" [settings]="dropdownSettings" 
+                 [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                (onDeSelect)="onItemDeSelect($event)">
+                </ng-multiselect-dropdown-angular7>
+                <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
+                (click)="closeNone()">&times;</button> 
+                <mat-error *ngIf="kycForm.controls['preferredBanks'].touched && kycForm.controls['preferredBanks'].hasError('required')">
+                  Please select country
+                </mat-error>
+              </td> -->
           </tr>
           <tr>
              

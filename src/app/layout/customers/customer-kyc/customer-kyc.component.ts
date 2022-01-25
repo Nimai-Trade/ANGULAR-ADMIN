@@ -27,6 +27,12 @@ export class CustomerKycComponent implements OnInit {
   bankList: Object;
   preferredBank: any[]=[];
   pbSelection: any[]=[];
+  countryList: any = [];
+  selectedcountry: any=[];
+  dropdownSettings = {};
+  preferredBanks: any = [];
+  disabledOther: boolean;
+  selectedItems: string[];
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
@@ -37,6 +43,15 @@ export class CustomerKycComponent implements OnInit {
     "usedLCIssuance":[''],
     "preferredBanks":[''],
     });
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'bankName',
+      textField: 'bankName',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      enableCheckAll:false,
+      autoPosition: false
+    };
   }
  
 
@@ -59,7 +74,10 @@ this.service.viewPreferredBank(data).subscribe((res)=>{
                   for (const record of JSON.parse(JSON.stringify(res))) {
                     this.pbSelection.push(record.userid);
                   }
-              
+                  this.kycForm.patchValue({                  
+                   preferredBanks:this.pbSelection
+                  });
+                  this.loadBankList()
             
 })
 
@@ -67,9 +85,19 @@ this.service.viewPreferredBank(data).subscribe((res)=>{
   loadBankList() {
 
 this.service.bankList().subscribe((res)=>{
-  console.log(res)
   this.bankList = res; 
-})
+  this.countryList=res;
+  // let item = {bankName: "All", userid: "All"}
+  // this.countryList.push(item);
+  // this.countryList.unshift(item);
+//   this.selectedcountry=res;
+//   for (let entry of this.countryList) {
+//     if(entry.bankName)
+//     this.preferredBanks.push(entry.bankName);
+//   }
+//   console.log(this.preferredBanks)
+
+ })
 
   }
 
@@ -131,23 +159,7 @@ this.service.bankList().subscribe((res)=>{
   financialAction() {
     
     this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
-    // console.log("userId",this.userId)
-    // let message;
-  
-    //   message = 'you have successfully saved financial data';
-
-    // const dialogData = new ConfirmDialogModel('Financial', message);
-    // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-    //   width: '45%',
-    //   height: '30%',
-    //   data: dialogData
-    // });
-
-    // dialogRef.afterClosed().subscribe(dialogResult => {
-    //   this.result = dialogResult;
-     
-     
-    // });
+    
 
   }
 
@@ -228,16 +240,47 @@ this.service.bankList().subscribe((res)=>{
   }
   this.service.saveFieldData(data).subscribe(
     (res) => {
-      this.financialAction();
+      this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
     });
+  if(this.kycForm.get('preferredBanks').value){
     const param={
       "custUserId": this.userId,
       "banks": this.kycForm.get('preferredBanks').value
     }
 this.service.savePreferredBank(param).subscribe((res)=>{
+  this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
 
 })
-
+  }
   }
 
+  closeNone(){
+    this.kycForm.get('preferredBanks').setValue('');
+    this.disabledOther=false
+  }
+  onKey(value) { 
+    this.selectedcountry = this.search(value);    
+     }
+     search(value: string) { 
+       let filter = value.toLowerCase();
+       return this.countryList.filter(option => option.bankName.toLowerCase().startsWith(filter));
+     }
+   
+  onItemSelect(item: any){
+    console.log("Item---",item)
+    if(item=="All"){
+      this.disabledOther=true;  
+      this.selectedItems = [ 'All'];
+    }else{
+      this.disabledOther=false;
+    }
+  }
+  
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+  onItemDeSelect(item: any) {
+    console.log(item);
+  }
+  
 }

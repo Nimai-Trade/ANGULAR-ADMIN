@@ -87,7 +87,9 @@
                                                     </div> -->
                                                 </div>
                                                 <div class="inputDiv recaptcha_div"  >                                               
-                                                    <re-captcha  (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
+                                                    <!-- <re-captcha  (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s"> -->
+                                                        <re-captcha  (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lfrwh0eAAAAALlUm2vw27WezzotDDKK5Rq6pAsb">
+
                                                     </re-captcha>
                                                     <mat-error *ngIf="loginForm.controls['recaptchaReactive'].touched && loginForm.controls['recaptchaReactive'].hasError('required')"
                                                         style="background-color: transparent !important;">
@@ -136,7 +138,7 @@
                                                       
                                                     </div>
                                                     <div class="inputDiv recaptcha_div">                                                      
-                                                        <re-captcha (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lda-jIaAAAAAMNrtvrHcHMCMAb7OvJK9ZfSXJ5s">
+                                                        <re-captcha (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6Lfrwh0eAAAAALlUm2vw27WezzotDDKK5Rq6pAsb">
                                                         </re-captcha>
                                                         <mat-error *ngIf="forgPassSubmitted && forgotPasswordForm.controls['recaptchaReactive'].hasError('required')"
                                                             style="background-color: transparent !important;">
