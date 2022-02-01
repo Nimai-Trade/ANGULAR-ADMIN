@@ -133,42 +133,42 @@
       </ng-container>
     </div>
 
-    <div *ngIf="isCustomer" class="popupcontent">
+    <div  class="popupcontent">
       <div class="tab-content" id="tab1" style="overflow-y: auto;">
         <div class="tab-pane active" id="pill1">
 
     <table class="table noneborder">
       <tbody>
 
-        <tr>
+        <tr *ngIf="isCustomer">
           <th>Financials</th>
         </tr>
-        <tr>
-          <td>Customer turnover</td>
+        <tr *ngIf="isCustomer">
+          <td>Customer turnover (USD)</td>
           <td>
             <input matInput formControlName="custTurnover" placeholder="">
           </td>
         </tr>
-        <tr>
+        <tr *ngIf="isCustomer">
           <td>Import Volume</td>
           <td>
             <input  formControlName="importVolume"  placeholder="">
           </td>
         </tr>
      
-          <tr>
+          <tr *ngIf="isCustomer">
             <td>Export Volume</td>
             <td>
               <input matInput formControlName="exportVolume" placeholder="">
             </td>
           </tr>
-              <tr>
+              <tr *ngIf="isCustomer">
             <td>Estimated yearly LC Volume</td>
             <td>
               <input  formControlName="yearlyLCVolume"  placeholder="">
             </td>
           </tr>
-          <tr>
+          <tr *ngIf="isCustomer">
             <td>Banks used currently for LC issuance</td>
             <td> <input  formControlName="usedLCIssuance"  placeholder=""></td>
           </tr>

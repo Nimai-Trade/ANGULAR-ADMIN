@@ -133,7 +133,7 @@ this.service.bankList().subscribe((res)=>{
 
     //console.log(this.kycData);
       });
-      if(this.isCustomer){
+      if(this.isCustomer || this.userId.startsWith('BC')){
         this.loadViewPreferredBank();
       const data={
         "userId":this.data.id

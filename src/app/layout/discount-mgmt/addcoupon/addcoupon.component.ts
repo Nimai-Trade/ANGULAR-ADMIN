@@ -67,7 +67,7 @@ export class AddcouponComponent implements OnInit {
       status: ['ACTIVE', Validators.required],
       discountType:['',Validators.required],
       amount: ['',Validators.required],
-      countryName: ['', Validators.required],
+      country: ['', Validators.required],
       subscriptionPlan:['',Validators.required],
       couponFor:['',Validators.required],
       startDate:['',Validators.required],
@@ -109,7 +109,7 @@ export class AddcouponComponent implements OnInit {
     this.couponDetails=Array.prototype.map.call(item.value, s => s.couponCode).toString(); // "A,B,C"Array.prototype.map.call(arrayObjects, s => s.name).toString(); // "A,B,C"
     //console.log("this.couponDetails---->",this.couponDetails)
     let filename="personalizedCoupon"
-    this.pCountry=this.couponForm.get("countryName").value
+    this.pCountry=this.couponForm.get("country").value
     if(this.couponForm.get("couponFor").value =='Bank As Customer'){
       this.subsType='Bank';
       this.bankType='Customer'; 
@@ -291,7 +291,7 @@ calculateAmount(value){
   }
   getPlan(){
     let data = {
-      "country": this.couponForm.get("countryName").value,
+      "country": this.couponForm.get("country").value,
       "customerType": this.couponForm.get("couponFor").value
   };     
   this.service.getplanName(data).subscribe(
