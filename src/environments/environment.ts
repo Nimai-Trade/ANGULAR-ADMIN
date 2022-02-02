@@ -6,13 +6,13 @@ export const environment = {
   production: false,
 
 //DEV SERVER
-  BASE_API_URL: 'http://136.232.244.190:8081/nimaiAdminApi/'
+  //BASE_API_URL: 'http://136.232.244.190:8081/nimaiAdminApi/'
   //BASE_API_URL: 'http://localhost:8089/'
  //PROD SERVER
 //BASE_API_URL: 'https://prod.360tf.trade/nimaiAdminApiUat/'
 //  
  //UAT SERVER
-//BASE_API_URL: 'https://uat.360tf.trade/nimaiAdminApiUat/'
+BASE_API_URL: 'https://uat.360tf.trade/nimaiAdminApiUat/'
 
 //https://preprod.360tf.trade/nimai_admin/#/login
 //BASE_API_URL: 'https://preprod.360tf.trade/nimaiAdminApiUat/'

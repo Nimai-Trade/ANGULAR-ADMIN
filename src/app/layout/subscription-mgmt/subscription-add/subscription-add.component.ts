@@ -25,7 +25,7 @@ export class SubscriptionAddComponent implements OnInit {
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
-  country: any;
+  countryName: any;
 
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
@@ -34,7 +34,7 @@ export class SubscriptionAddComponent implements OnInit {
       createdBy:[],
       subscriptionPlanId: [],
       customerType: ['', Validators.required],
-      country: ['', Validators.required],
+      countryName: ['', Validators.required],
       planName: ['', Validators.required],
       customerSupport: ['', Validators.required],
       remark: [],
@@ -94,7 +94,7 @@ export class SubscriptionAddComponent implements OnInit {
         this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.country.push(entry.country);
+          this.countryName.push(entry.country);
         }
 
      
@@ -156,7 +156,7 @@ export class SubscriptionAddComponent implements OnInit {
         this.countryList = res;
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.country.push(entry.country);
+          this.countryName.push(entry.country);
 
           this.countryData.push(entry.country);
         }
@@ -175,7 +175,7 @@ export class SubscriptionAddComponent implements OnInit {
   onChangeType(country) {
    
     //this.subscriptionForm.get('country').setValue(this.countryVal);
-    console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
+    // console.log(this.subscriptionForm['controls'].countryName +' >> Country Type << ' + country);    
    // this.loadSubsriptionList();
   }
 

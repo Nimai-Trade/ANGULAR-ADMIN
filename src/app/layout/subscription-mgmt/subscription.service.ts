@@ -98,6 +98,7 @@ export class SubscriptionService {
     };
     return this.httpClient.post(URLS.getSubscriptionListUrl, reqData, { headers: this.headers }).pipe(
       map((res) => {
+        console.log(res)
         return res;
       })
     );

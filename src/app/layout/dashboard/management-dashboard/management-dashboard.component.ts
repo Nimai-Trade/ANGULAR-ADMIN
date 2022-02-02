@@ -90,10 +90,8 @@ export class ManagementDashboardComponent implements OnInit {
   newUserBank: any;
   activeUserDate: any;
   activeUserBank: any;
-
   revDateFrom:any;
   revDateTo:any;
-
   public startDate:any;
   endDate:any;
 
@@ -120,7 +118,6 @@ export class ManagementDashboardComponent implements OnInit {
   ngOnInit(): void {
       this.cdr.detectChanges();
       this.subscriberType="All";
-      this.getPendingRequests();
     // this.getPaymentConf();
     // this.getPaymentApp();
     // this.getAssignRmCount();
@@ -129,6 +126,9 @@ export class ManagementDashboardComponent implements OnInit {
     // this.getKycApprovalPending();
     // this.getGrantKyc();
  //    this.getPendingKyc();
+      // this.getSubsExpiry();
+     // this.getPaymentPending();
+     this.getPendingRequests();
      this.getSubscripGrant();
       this.getVasGrant();
       this.getDiscountGrant();
@@ -136,11 +136,9 @@ export class ManagementDashboardComponent implements OnInit {
       this.getOverAllBnkAsUw();
       this.getOverAllBnkAsCust();
       this.getOverAllRef();
-     // this.getSubsExpiry();
       this.getOverAllCustRejectedTran();
       this.getOverAllCustExpiredTran();
       this.getCountryList();
-     // this.getPaymentPending();
       this.getCustRevenue(null, null);
       
   }

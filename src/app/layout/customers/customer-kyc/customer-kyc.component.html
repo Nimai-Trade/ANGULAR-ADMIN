@@ -144,32 +144,32 @@
           <th>Financials</th>
         </tr>
         <tr *ngIf="isCustomer">
-          <td>Customer turnover (USD)</td>
+          <td>Customer turnover <br> (USD million)</td>
           <td>
             <input matInput formControlName="custTurnover" placeholder="">
           </td>
         </tr>
         <tr *ngIf="isCustomer">
-          <td>Import Volume</td>
+          <td>Import Volume <br>(USD million)</td>
           <td>
             <input  formControlName="importVolume"  placeholder="">
           </td>
         </tr>
      
           <tr *ngIf="isCustomer">
-            <td>Export Volume</td>
+            <td>Export Volume <br>(USD million)</td>
             <td>
               <input matInput formControlName="exportVolume" placeholder="">
             </td>
           </tr>
               <tr *ngIf="isCustomer">
-            <td>Estimated yearly LC Volume</td>
+            <td>Estimated yearly LC Volume <br>(USD million)</td>
             <td>
               <input  formControlName="yearlyLCVolume"  placeholder="">
             </td>
           </tr>
           <tr *ngIf="isCustomer">
-            <td>Banks used currently for LC issuance</td>
+            <td>Banks used currently for LC issuance </td>
             <td> <input  formControlName="usedLCIssuance"  placeholder=""></td>
           </tr>
           <br>

@@ -38,7 +38,7 @@
                   </tr>
               <tr>
                 <td nowrap="">Country</td>
-                <!-- <td>                 
+                <td>                 
                   <mat-select formControlName="countryName" class="roleselct" disableOptionCentering>
                     <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Name"> 
                     <mat-option [value]="">Select</mat-option>
@@ -50,9 +50,9 @@
                     *ngIf="vasForm.controls['countryName'].touched && vasForm.controls['countryName'].hasError('required')">
                     Please select Country
                   </mat-error>
-                </td> -->
+                </td>
 
-                <td class="multiselectClass">
+                <!-- <td class="multiselectClass">
                   <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
                    formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther"
                     (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
@@ -63,7 +63,7 @@
                   <mat-error *ngIf="vasForm.controls['country'].touched && vasForm.controls['country'].hasError('required')">
                     Please select country
                   </mat-error>
-                </td>
+                </td> -->
 
               </tr>
 
