@@ -34,7 +34,7 @@ export class AddcouponComponent implements OnInit {
   loading = false;
   countryList: any = [];
   dropdownSettings = {};
-  countryName: any = [];
+  country: any = [];
   planList:any;
   roleList: any;
   countrySelection: any = [];
@@ -291,9 +291,10 @@ calculateAmount(value){
   }
   getPlan(){
     let data = {
-      "country": this.couponForm.get("country").value,
+      "discountCountry": this.couponForm.get("country").value,
       "customerType": this.couponForm.get("couponFor").value
-  };     
+  }
+  console.log(data)
   this.service.getplanName(data).subscribe(
       (res) => {
         this.planList = res;
@@ -391,7 +392,7 @@ calculateAmount(value){
         this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryName.push(entry.country);
+          this.country.push(entry.country);
         }
       });
   }
@@ -418,7 +419,7 @@ calculateAmount(value){
   }
   
   closeNone(){
-    this.couponForm.get('countryName').setValue('');
+    this.couponForm.get('country').setValue('');
     this.disabledOther=false
   }
   onKey(value) { 

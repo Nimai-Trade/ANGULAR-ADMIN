@@ -17,29 +17,29 @@
           <table class="table noneborder" >
               <tr>
                   <td nowrap="">Country</td>
-                  <!-- <td class="multiselectClass">
+                  <td class="multiselectClass">
                     <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
-                     formControlName="countryName" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                     formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
                     (onDeSelect)="onItemDeSelect($event)">
                     </ng-multiselect-dropdown-angular7>
                     <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
                     (click)="closeNone()">&times;</button> 
-                    <mat-error *ngIf="couponForm.controls['countryName'].touched && couponForm.controls['countryName'].hasError('required')">
+                    <mat-error *ngIf="couponForm.controls['country'].touched && couponForm.controls['country'].hasError('required')">
                       Please select country
                     </mat-error>
-                  </td> -->
-                  <td>
-                    <mat-select formControlName="country" class="roleselct" (selectionChange)="getPlan()" disableOptionCentering>                     
+                  </td>
+                  <!-- <td> -->
+                    <!-- <mat-select formControlName="country" class="roleselct" (selectionChange)="getPlan()" disableOptionCentering>                     
                       <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Name" autofocus>                 
                       <mat-option value="">Select Country</mat-option>    
                       <mat-option *ngFor="let item of selectedcountry" [value]="item.country">{{item.country}}
                       </mat-option>
-                    </mat-select>
+                    </mat-select> -->
                     <!-- <mat-error
                       *ngIf="couponForm.controls['country'].touched && couponForm.controls['country'].hasError('required')">
                       Please select Country
                     </mat-error> -->
-                  </td>
+                  <!-- </td> -->
                 </tr>
                 <tr>
                   <td>Coupon For</td>
