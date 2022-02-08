@@ -122,7 +122,7 @@ bankList(){
     })
   );
 }
-iewPreferredBank
+
 
 viewPreferredBank(data){
   return this.httpClient.post(URLS.getViewPreferredBankUrl,data, { headers: this.headers }).pipe(

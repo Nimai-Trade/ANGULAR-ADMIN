@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ConfirmDialogModel, ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { ShowImageComponent } from 'src/app/shared/show-image/show-image.component';
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-customer-kyc',
@@ -30,7 +31,7 @@ export class CustomerKycComponent implements OnInit {
   countryList: any = [];
   selectedcountry: any=[];
   dropdownSettings = {};
-  preferredBanks: any = [];
+  preferredBanks: any  = [];
   disabledOther: boolean;
   selectedItems: string[];
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
@@ -45,58 +46,77 @@ export class CustomerKycComponent implements OnInit {
     });
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'bankName',
+      idField: 'userid',
       textField: 'bankName',
-      itemsShowLimit: 3,
+      itemsShowLimit: 1,
       allowSearchFilter: true,
       enableCheckAll:false,
       autoPosition: false
     };
+    this.loadBankList();
   }
  
 
   ngOnInit() {
     this.rightList = localStorage.getItem('userRight');
     this.myRights = this.rightList.split(',');
-    this.empCode = localStorage.getItem('nimaiId');
-    this.loadKycDetails();
-    this.loadBankList();
+    this.empCode = localStorage.getItem('nimaiId'); 
+
+   
+      this.loadKycDetails();   
    
   }
 
+
+  
+
   loadViewPreferredBank() {
+    
    const data= {
       "custUserId": this.userId
     }
 this.service.viewPreferredBank(data).subscribe((res)=>{
               this.preferredBank = JSON.parse(JSON.stringify(res));
-                
+              console.log('ffff ')
+                if(this.preferredBank.length){
                   for (const record of JSON.parse(JSON.stringify(res))) {
-                    this.pbSelection.push(record.userid);
+                    var name={
+                      userid:record.userid,
+                      bankName:record.bankName
+                    }
+                    this.pbSelection.push(name);
                   }
                   this.kycForm.patchValue({                  
                    preferredBanks:this.pbSelection
                   });
-                  this.loadBankList()
+                }else{
+                  this.loadBankList();
+                  
+                }
+
             
 })
 
   }
   loadBankList() {
 
-this.service.bankList().subscribe((res)=>{
-  this.bankList = res; 
-  this.countryList=res;
-  // let item = {bankName: "All", userid: "All"}
-  // this.countryList.push(item);
-  // this.countryList.unshift(item);
-//   this.selectedcountry=res;
-//   for (let entry of this.countryList) {
-//     if(entry.bankName)
-//     this.preferredBanks.push(entry.bankName);
-//   }
-//   console.log(this.preferredBanks)
 
+this.service.bankList().subscribe((res)=>{
+ // this.bankList = res; 
+  this.countryList=res;
+  let item = {bankName: "All", userid: "All"}
+  //this.countryList.push(item);
+ // this.countryList.unshift(item);
+  this.selectedcountry=res;
+  for (var entry of this.countryList) {   
+    var d={
+      userid:entry.userid,
+      bankName:entry.bankName
+    }
+
+     if(entry.bankName)
+      this.preferredBanks.push(d);
+  }
  })
 
   }
@@ -108,6 +128,8 @@ this.service.bankList().subscribe((res)=>{
 
 
   loadKycDetails() {
+
+
     this.userId=this.data.id
   this.isCustomer=this.userId.startsWith('CU');
     this.service.kycDetail(this.data.id).subscribe(
@@ -131,7 +153,6 @@ this.service.bankList().subscribe((res)=>{
           this.kycData.push(aaaa);
         });
 
-    //console.log(this.kycData);
       });
       if(this.isCustomer || this.userId.startsWith('BC')){
         this.loadViewPreferredBank();
@@ -164,7 +185,6 @@ this.service.bankList().subscribe((res)=>{
   }
 
   kycAction(status, item) {
-    console.log("userId",this.userId)
     let message;
     if(status=='Approved'){
       message = 'Are you sure you want to ' + 'Approve' + ' the KYC Document?';
@@ -227,7 +247,10 @@ this.service.bankList().subscribe((res)=>{
            
 
   saveFinancial(status){
-
+this.pbSelection=[];
+for(let data of this.kycForm.get('preferredBanks').value){
+   this.pbSelection.push(data.userid)
+}
    const data= {
       "userId": this.userId,
     "custTurnover":this.kycForm.get('custTurnover').value,
@@ -235,7 +258,7 @@ this.service.bankList().subscribe((res)=>{
     "exportVolume":this.kycForm.get('exportVolume').value,  
     "yearlyLCVolume":this.kycForm.get('yearlyLCVolume').value,    
     "usedLCIssuance":this.kycForm.get('usedLCIssuance').value,   
-    "preferredBanks":this.kycForm.get('preferredBanks').value,
+    //"preferredBanks":this.kycForm.get('preferredBanks').value,
     "id":this.filedId  
   }
   this.service.saveFieldData(data).subscribe(
@@ -245,8 +268,10 @@ this.service.bankList().subscribe((res)=>{
   if(this.kycForm.get('preferredBanks').value){
     const param={
       "custUserId": this.userId,
-      "banks": this.kycForm.get('preferredBanks').value
+      "banks": this.pbSelection
     }
+    console.log(param)
+
 this.service.savePreferredBank(param).subscribe((res)=>{
   this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
 

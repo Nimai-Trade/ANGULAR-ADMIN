@@ -19,12 +19,12 @@
                   <td nowrap="">Country</td>
                   <td class="multiselectClass">
                     <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
-                     formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
-                    (onDeSelect)="onItemDeSelect($event)">
+                     formControlName="countryName" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event);getPlan()" (onSelectAll)="onSelectAll($event)"
+                    (onDeSelect)="onItemDeSelect($event);getPlan()"  (selectionChange)="getPlan()">
                     </ng-multiselect-dropdown-angular7>
                     <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
                     (click)="closeNone()">&times;</button> 
-                    <mat-error *ngIf="couponForm.controls['country'].touched && couponForm.controls['country'].hasError('required')">
+                    <mat-error *ngIf="couponForm.controls['countryName'].touched && couponForm.controls['countryName'].hasError('required')">
                       Please select country
                     </mat-error>
                   </td>
@@ -44,7 +44,8 @@
                 <tr>
                   <td>Coupon For</td>
                   <td>
-                    <mat-select formControlName="couponFor" placeholder="Coupon For" disableOptionCentering class="roleselct" (selectionChange)="getPlan()" >
+                    <mat-select formControlName="couponFor" placeholder="Coupon For" disableOptionCentering class="roleselct"
+                     (selectionChange)="getPlan()" >
                       <mat-option value="">Select</mat-option>
                       <mat-option  value="Bank As Customer">Bank as a Customer</mat-option>
                       <mat-option  value="CUSTOMER">Customer</mat-option>

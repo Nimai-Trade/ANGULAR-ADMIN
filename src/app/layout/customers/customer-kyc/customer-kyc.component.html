@@ -176,13 +176,32 @@
           <tr>
             <td><b> Preferred Banks </b></td>
             <!-- <td> <input  formControlName="preferredBanks"  placeholder=""></td> -->
-            <td>
+            <!-- <td>
               <mat-select formControlName="preferredBanks" autocomplete="off" placeholder="" multiple [(ngModel)]="pbSelection" disableOptionCentering class="roleselct">
                 <ng-container  *ngFor="let item of bankList">
                 <mat-option  *ngIf="item.bankName" [value]="item.userid">{{item.bankName}}
                 </mat-option>
                 </ng-container>
               </mat-select>
+              </td> -->
+              <td class="multiselectClass">
+              <!-- <div class="inputDiv multiselect-dropdown">
+                <ng-multiselect-dropdown-angular7 [data]="countryArray" formControlName="preferredBanks" 
+                [(ngModel)]="intCntTemp" [settings]="dropdownSetting" (onSelect)="onItemSelect($event)" 
+                (onSelectAll)="onSelectAll($event)" (onDeSelect)="onItemDeSelect($event)"></ng-multiselect-dropdown-angular7>
+                <label class="dropdownlabel">Issuance Countries Interested</label>              </div>
+
+             -->
+                <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
+                 formControlName="preferredBanks" [(ngModel)]="selectedItems" [settings]="dropdownSettings" 
+                 [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                (onDeSelect)="onItemDeSelect($event)">
+                </ng-multiselect-dropdown-angular7>
+                <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
+                (click)="closeNone()">&times;</button> 
+                <!-- <mat-error *ngIf="kycForm.controls['preferredBanks'].touched && kycForm.controls['preferredBanks'].hasError('required')">
+                  Please select preferred Banks
+                </mat-error> -->
               </td>
               <!-- <td class="multiselectClass">
                 <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
@@ -196,6 +215,10 @@
                   Please select country
                 </mat-error>
               </td> -->
+
+
+<td></td>
+
           </tr>
           <tr>
              
