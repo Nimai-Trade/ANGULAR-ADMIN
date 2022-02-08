@@ -44,24 +44,26 @@ export class PaymentPlanDetailsComponent implements OnInit {
 
 for(var i=0;i<this.paymentData.length;i++){
   if(this.paymentData[i].status=="Active"){
-
+    this.vasLists=[]
   for(var j=0;j<this.paymentData[i].vasList.length;j++){
   if(this.paymentData[i].vasList[j].vasStatus=="Active")
     this.vasLists.push(this.paymentData[i].vasList[j])
-   
+   console.log(this.vasLists)
     if(this.paymentData[i].vasList[j].vasStatus=="Active"){
       this.vasIds= this.vasIds+ this.paymentData[i].vasList[j].vasId+"-";
     }   
 
     if(this.paymentData[i].vasList[j].vasStatus === 'Active' && this.paymentData[i].vasList[j].vasPlanPaymentMode === 'Wire'
-     && this.paymentData[i].vasList[j].vasPaymentStatus === 'Pending'
+     && this.paymentData[i].vasList[j].vasPaymentStatus === 'Pending' 
      && this.paymentData[i].paymentStatus=='Approved'  && this.paymentData[i].isSplanWithVasFlag==0)
      {
       this.showBtn=true;
+     }else{
+       this.showBtn=false;
      }
    }
     }
-  
+
 }
 
       
@@ -122,13 +124,14 @@ for(var i=0;i<this.paymentData.length;i++){
             'comment':this.result['data']
           };
         }
-        
+        console.log(this.reqData)
         this.service.updatePaymentStatus(this.reqData).subscribe(
           (res) => {
            
             this.sharedUtilService.showSnackBarMessage(res['message']);
             // item.get('paymentStatus').setValue('Maker '+status);
-            this.loadPaymentDetail();
+            // this.loadPaymentDetail();
+            this.ngOnInit();
           }, (error) => {
            // console.log("res---",error)
             this.sharedUtilService.showSnackBarMessage(error.error.message);

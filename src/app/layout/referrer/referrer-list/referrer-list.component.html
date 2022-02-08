@@ -74,12 +74,24 @@
                         Not Uploaded
                       </div> -->
 
-                      <div fxLayout="row" class="tableData" *ngIf="element.kyc !== null">
+                      <!-- <td mat-cell *matCellDef="let element" class="myCell" style="width: 170px!important;">
+                        <div fxLayout="row" class="tableData"  *ngIf="element.kyc !== 'Not Uploaded'">
+                          <a (click)="showKyc(element.userid)" class="backbtn pull-right" id="backbtn">
+                            {{element.kyc}}</a>
+                        </div>
+                        <div fxLayout="row" style="padding-left: 30; pointer-events: none;"
+                          *ngIf="element.kyc === null || element.kyc === 'Not Uploaded' || element.kyc === ''">
+                          <a class="backbtn pull-right" id="backbtn">
+                            Not Uploaded</a>
+                        </div>
+                      </td> -->
+
+                      <div fxLayout="row" class="tableData" *ngIf="element.kyc !== 'Not Uploaded'">
                         <a (click)="showKyc(element.userid)" class="backbtn pull-right" id="backbtn">
                           {{element.kyc}}</a>
                       </div>
                       <div fxLayout="row" style="padding-left: 30; cursor: pointer;"
-                        *ngIf="element.kyc === null || element.kyc === ''">
+                        *ngIf="element.kyc === null || element.kyc === 'Not Uploaded' || element.kyc === ''">
                         <a class="backbtn pull-right" id="backbtn">
                           Not Uploaded</a>
                       </div>

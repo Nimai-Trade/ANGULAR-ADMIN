@@ -61,6 +61,7 @@ export class SubscriptionAddComponent implements OnInit {
     this.rmList = [{ 'code': 'YES', 'name': 'YES' }, { 'code': 'NO', 'name': 'NO' }];
     this.statusList = [{ 'code': 'Active', 'name': 'Active' }, { 'code': 'Inactive', 'name': 'Inactive' }];
     this.monthList = [{ 'code': '1', 'name': '1' }, { 'code': '2', 'name': '2' }, { 'code': '3', 'name': '3' }, { 'code': '4', 'name': '4' }, { 'code': '5', 'name': '5' }, { 'code': '6', 'name': '6' }, { 'code': '7', 'name': '7' }, { 'code': '8', 'name': '8' }, { 'code': '9', 'name': '9' }, { 'code': '10', 'name': '10' }, { 'code': '11', 'name': '11' }, { 'code': '12', 'name': '12' }];
+   console.log(this.data.id)
     if (this.data.id) {           
       // this.subscriptionForm.controls['modifiedBy'].setValue(localStorage.getItem('nimaiId'));
       this.getSubscriptionDetailsById();
@@ -85,6 +86,7 @@ export class SubscriptionAddComponent implements OnInit {
   closeDialog() {
     return this.dialogRef.close({ result: true });
   }
+  
   getCountryList() {
     this.service.getCountryList().subscribe(
       (res) => {
@@ -96,10 +98,11 @@ export class SubscriptionAddComponent implements OnInit {
         for (let entry of this.countryList) {
           this.country.push(entry.country);
         }
-
      
 
       });
+      console.log(this.country)
+
   }
 
 

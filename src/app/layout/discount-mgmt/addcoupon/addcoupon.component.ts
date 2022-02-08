@@ -34,7 +34,7 @@ export class AddcouponComponent implements OnInit {
   loading = false;
   countryList: any = [];
   dropdownSettings = {};
-    country: any = [];
+  countryName: any = [];
   planList:any;
   roleList: any;
   countrySelection: any = [];
@@ -67,7 +67,7 @@ export class AddcouponComponent implements OnInit {
       status: ['ACTIVE', Validators.required],
       discountType:['',Validators.required],
       amount: ['',Validators.required],
-      country: ['', Validators.required],
+      countryName: ['', Validators.required],
       subscriptionPlan:['',Validators.required],
       couponFor:['',Validators.required],
       startDate:['',Validators.required],
@@ -109,7 +109,7 @@ export class AddcouponComponent implements OnInit {
     this.couponDetails=Array.prototype.map.call(item.value, s => s.couponCode).toString(); // "A,B,C"Array.prototype.map.call(arrayObjects, s => s.name).toString(); // "A,B,C"
     //console.log("this.couponDetails---->",this.couponDetails)
     let filename="personalizedCoupon"
-    this.pCountry=this.couponForm.get("country").value
+    this.pCountry=this.couponForm.get("countryName").value
     if(this.couponForm.get("couponFor").value =='Bank As Customer'){
       this.subsType='Bank';
       this.bankType='Customer'; 
@@ -121,7 +121,7 @@ export class AddcouponComponent implements OnInit {
       this.bankType='';
     }
   let data = {
-    "country": this.pCountry,
+    "countryName": this.pCountry,
     "customerType": this.subsType,
     "bankType": this.bankType,
     "filename":filename,
@@ -291,9 +291,10 @@ calculateAmount(value){
   }
   getPlan(){
     let data = {
-      "country": this.couponForm.get("country").value,
+      "discountCountry": this.couponForm.get("countryName").value,
       "customerType": this.couponForm.get("couponFor").value
-  };     
+  }
+  console.log(data)
   this.service.getplanName(data).subscribe(
       (res) => {
         this.planList = res;
@@ -391,8 +392,9 @@ calculateAmount(value){
         this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.country.push(entry.country);
+          this.countryName.push(entry.country);
         }
+
       });
   }
 
@@ -418,7 +420,7 @@ calculateAmount(value){
   }
   
   closeNone(){
-    this.couponForm.get('country').setValue('');
+    this.couponForm.get('countryName').setValue('');
     this.disabledOther=false
   }
   onKey(value) { 

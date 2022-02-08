@@ -177,8 +177,7 @@ export class EmployeeAddComponent implements OnInit {
   loadEmployeeDetails() {
     this.service.getCountryList().subscribe(
       (res) => {
-        this.countryList = res;
-     
+        this.countryList = res;     
         for (let entry of this.countryList) {
           this.country.push(entry.country);
           if(entry.country!="All")

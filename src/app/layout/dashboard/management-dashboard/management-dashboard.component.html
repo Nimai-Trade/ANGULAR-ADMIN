@@ -134,15 +134,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
-                        <mat-label></mat-label>
-                        <mat-select placeholder="All" (selectionChange)="pendingKycCount($event)"
-                           disableOptionCentering class="roleselect">
-                           <mat-option *ngFor="let subs of subsType" [value]="subs">
-                              {{subs}}
-                           </mat-option>
-                        </mat-select>
-                     </ul> -->
+                  
                      <span (click)="showKYCApproval('kyc-pending-user')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
                      [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{pendingKycDrop}}</span>
                      <h3 class="text" style="height: 32px;">KYC Pending Users</h3>
@@ -150,16 +142,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3">
                   <div class="maindash">
-                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
-                        <mat-label></mat-label>
-                        <mat-select placeholder="All" (selectionChange)="subsCount($event)"
-                           disableOptionCentering class="roleselect">
-                           <mat-option *ngFor="let subs of subsType" [value]="subs">
-                              {{subs}}
-                           </mat-option>
-                        </mat-select>
-
-                     </ul> -->
+                   
                      <span (click)="showKYCApproval('sub-expiry')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
                      [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{subsExpiryCount}}</span>
                      <h3 class="text">Subscription expiring in next 30 days</h3>
@@ -167,15 +150,7 @@
                </div>
                <div class="col-lg-15 col-md-3 col-sm-3 ">
                   <div class="maindash">
-                     <!-- <ul class="list-unstyled list-inline pull-right" style="margin-top: -3px;">
-                        <mat-select placeholder="All" (selectionChange)="payPendingCount($event)" disableOptionCentering
-                           class="roleselect">
-                           <mat-option *ngFor="let subs of subsType" [value]="subs">
-                              {{subs}}
-                           </mat-option>
-                        </mat-select>
-
-                     </ul> -->
+                    
                      <span (click)="showKYCApproval('pay-pending-user')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
                      [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{paymenPending}}</span>
                      <h3 class="text" style="height: 32px;">Payment Pending User</h3>

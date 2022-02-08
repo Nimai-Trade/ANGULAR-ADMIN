@@ -13,9 +13,10 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { PaymentPlanDetailsComponent } from './payment-plan-details/payment-plan-details.component';
 import { CustomerKycComponent } from './customer-kyc/customer-kyc.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown-angular7';
 
 @NgModule({
-  declarations: [CustomerSearchComponent, CustomerListComponent, CustomerDetailsComponent, PaymentPlanDetailsComponent, CustomerKycComponent],
+  declarations: [CustomerSearchComponent, CustomerKycComponent,CustomerListComponent, CustomerDetailsComponent, PaymentPlanDetailsComponent, CustomerKycComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
@@ -25,9 +26,10 @@ import { CustomerKycComponent } from './customer-kyc/customer-kyc.component';
     ReactiveFormsModule,
     StatModule,
     SharedModule,
+    NgMultiSelectDropDownModule,
     FlexLayoutModule.withConfig({ addFlexToParent: false })
   ],
   providers: [CustomerService],
-  entryComponents: [CustomerSearchComponent, CustomerDetailsComponent, PaymentPlanDetailsComponent, CustomerKycComponent]
+  entryComponents: [CustomerKycComponent,CustomerSearchComponent, CustomerDetailsComponent, PaymentPlanDetailsComponent, CustomerKycComponent]
 })
 export class CustomerModule { }

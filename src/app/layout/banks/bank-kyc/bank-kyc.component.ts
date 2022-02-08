@@ -99,7 +99,11 @@ export class BankKycComponent implements OnInit {
         console.log(this.kycData);
       });
   }
-
+  financialAction() {
+    
+    this.sharedUtilService.showSnackBarMessage('you have successfully saved Rank');
+  
+  }
   saveRating(){
   console.log(this.ratingForm.controls['rating'].value)
     const data=
@@ -109,8 +113,8 @@ export class BankKycComponent implements OnInit {
     }
 
    this.service.saveBankRating(data).subscribe((res)=>{
-    //this.ranking=res;
-   })
+    this.financialAction();
+     })
   }
 
   kycAction(status, item) {

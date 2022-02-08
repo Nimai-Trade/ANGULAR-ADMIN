@@ -122,7 +122,7 @@ bankList(){
     })
   );
 }
-iewPreferredBank
+
 
 viewPreferredBank(data){
   return this.httpClient.post(URLS.getViewPreferredBankUrl,data, { headers: this.headers }).pipe(
@@ -142,6 +142,8 @@ viewBankRating(id) {
   );
 }
 saveBankRating(id) {
+  console.log(id)
+  console.log(URLS.saveRatingUrl)
   return this.httpClient.post(URLS.saveRatingUrl , id, { headers: this.headers }).pipe(
     map((res) => {
       return res;
