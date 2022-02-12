@@ -11,6 +11,7 @@ export class SubscriptionViewComponent implements OnInit {
 
   
   subscriptionData: any;
+  subsidiary: string;
 
   constructor(private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionViewComponent>, @Inject(MAT_DIALOG_DATA) public data) {
 
@@ -18,6 +19,11 @@ export class SubscriptionViewComponent implements OnInit {
 
   ngOnInit() {
       this.getSubscriptionDetailsById();
+      if(localStorage.getItem('customerType')=="BANK"){
+        this.subsidiary="Additional Users";
+      }else{
+        this.subsidiary="Subsidiaries";
+      }
   }
 
   closeDialog() {

@@ -108,7 +108,8 @@
                 <td nowrap="">Discount Percentage</td>
                 <td>
                   <!-- <input  autocomplete="off" (keyup)="calculateAmount($event.target.value)" formControlName="discountPercentage" matInput placeholder="" required/> -->
-                  <input  (input)="limitDecimalPlaces($event, 2)" autocomplete="off" formControlName="discountPercentage" matInput placeholder="" required/>
+                  <input  (input)="limitDecimalPlaces($event, 2)" autocomplete="off" formControlName="discountPercentage" matInput
+                  onKeyPress="if(this.value.length==20) return false;" placeholder="" required/>
                   <mat-error
                     *ngIf="couponForm.controls['discountPercentage'].touched && couponForm.controls['discountPercentage'].hasError('required')">
                     Please enter Discount Percentage
@@ -164,7 +165,7 @@
                   Please select End Date
                 </mat-error>
                 <mat-error *ngIf="dateError">
-                    End date should be grater then start date.
+                    End date should be greater then start date.
                 </mat-error>
               </td>
             </tr> 
@@ -183,7 +184,9 @@
               <tr *ngFor="let item of couponForm.get('details')['controls']; let i = index;"  [formGroupName]="i">
                 <td>
                     Quantity :
-                    <input type="number" formControlName="quantity" autocomplete="off"  min="0" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" required>
+                    <input type="number" formControlName="quantity" autocomplete="off"  maxlength="5" 
+                      onkeydown="if(event.key==='.'){event.preventDefault();}" onKeyPress="if(this.value.length==10) return false;"
+                       oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');" required>
                     <mat-error
                     *ngIf="item.controls.quantity.status==='INVALID' && couponSubmit">
                     Please enter quantity
@@ -191,7 +194,7 @@
                 </td>
                 <td>
                     Coupon Code:
-                    <input matInput formControlName="couponCode" autocomplete="off" maxlength="15" required>
+                    <input matInput type="" formControlName="couponCode" autocomplete="off"   maxlength="15" required>
                     <mat-error
                     *ngIf="item.controls.couponCode.status==='INVALID' && couponSubmit">
                     Please enter Coupon Code

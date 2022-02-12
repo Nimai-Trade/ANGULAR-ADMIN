@@ -25,7 +25,7 @@ export class SubscriptionAddComponent implements OnInit {
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
-  country: any;
+  country: any=[];
 
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
