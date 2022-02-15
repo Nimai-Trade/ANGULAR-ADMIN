@@ -158,6 +158,14 @@
                           <td><input matInput value={{transactionData.applicant}} readonly="true">
                           </td>
                         </tr>
+                        <tr *ngIf="transactionData.applicantContactPersonEmail">
+                          <td style="width: 50%;">Email Id</td>
+                          <td><input matInput value={{transactionData.applicantContactPersonEmail}} readonly="true"></td>
+                        </tr>
+                        <tr *ngIf="transactionData.applicantContactPerson">
+                          <td style="width: 50%;">Contact Person</td>
+                          <td><input matInput value={{transactionData.applicantContactPerson}} readonly="true"></td>
+                        </tr>
                         <tr>
                           <td>Country</td>
                           <td><input matInput value={{transactionData.applicantCountry}} readonly="true">
@@ -177,6 +185,14 @@
                         <tr>
                           <td style="width: 50%;">Bank</td>
                           <td><input matInput value={{transactionData.beneficiaryBank}} readonly="true"></td>
+                        </tr>
+                        <tr *ngIf="transactionData.beneContactPersonEmail">
+                          <td style="width: 50%;">Email Id</td>
+                          <td><input matInput value={{transactionData.beneContactPersonEmail}} readonly="true"></td>
+                        </tr>
+                        <tr *ngIf="transactionData.beneContactPerson"> 
+                          <td style="width: 50%;">Contact Person</td>
+                          <td><input matInput value={{transactionData.beneContactPerson}} readonly="true"></td>
                         </tr>
                         <tr>
                           <td>Swift Code</td>

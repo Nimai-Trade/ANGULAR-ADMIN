@@ -25,8 +25,8 @@ export class SubscriptionAddComponent implements OnInit {
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
-  country: any=[];
-
+  countryName: any=[];
+  pbSelection: any[]=[];
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
     this.subscriptionForm = fb.group({  
@@ -34,7 +34,7 @@ export class SubscriptionAddComponent implements OnInit {
       createdBy:[],
       subscriptionPlanId: [],
       customerType: ['', Validators.required],
-      country: ['', Validators.required],
+      countryName: ['', Validators.required],
       planName: ['', Validators.required],
       customerSupport: ['', Validators.required],
       remark: [],
@@ -91,17 +91,15 @@ export class SubscriptionAddComponent implements OnInit {
     this.service.getCountryList().subscribe(
       (res) => {
         this.countryList = res;
-        let item = {country: "All", code: "All"}
+        let item = {country: "All"}
         this.countryList.push(item);
         this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.country.push(entry.country);
+          this.countryName.push(entry.country);
         }
-     
 
       });
-      console.log(this.country)
 
   }
 
@@ -159,7 +157,7 @@ export class SubscriptionAddComponent implements OnInit {
         this.countryList = res;
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.country.push(entry.country);
+          this.countryName.push(entry.country);
 
           this.countryData.push(entry.country);
         }
@@ -171,6 +169,18 @@ export class SubscriptionAddComponent implements OnInit {
             this.subscriptionForm.controls[name].patchValue(res[name]);
           }
         });
+
+        for (const record of JSON.parse(JSON.stringify(res)).countryList) {
+          var name={
+            country:record.country          
+          }
+          this.pbSelection.push(name);
+        }
+        this.subscriptionForm.patchValue({                  
+         country:this.pbSelection
+        });
+
+
       });
     });
   }

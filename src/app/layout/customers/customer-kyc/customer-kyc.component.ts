@@ -265,18 +265,16 @@ for(let data of this.kycForm.get('preferredBanks').value){
     (res) => {
       this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
     });
-  if(this.kycForm.get('preferredBanks').value){
-    const param={
-      "custUserId": this.userId,
-      "banks": this.pbSelection
-    }
-    console.log(param)
-
-this.service.savePreferredBank(param).subscribe((res)=>{
-  this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
-
-})
-  }
+// recent edit 
+//   if(this.kycForm.get('preferredBanks').value){
+//     const param={
+//       "custUserId": this.userId,
+//       "banks": this.pbSelection
+//     }
+// this.service.savePreferredBank(param).subscribe((res)=>{
+//   this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
+// })
+//   }
   }
 
   closeNone(){

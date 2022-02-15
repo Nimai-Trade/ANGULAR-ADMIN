@@ -42,9 +42,10 @@
                 <!-- <td> -->
 
                 
-                  <td class="multiselectClass">
+                  <!-- <td class="multiselectClass">
                     <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
-                     formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                     formControlName="country" [(ngModel)]="selectedItems" [settings]="dropdownSettings" [disabled]="disabledOther" 
+                     (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
                     (onDeSelect)="onItemDeSelect($event)">
                     </ng-multiselect-dropdown-angular7>
                     <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
@@ -52,13 +53,14 @@
                     <mat-error *ngIf="subscriptionForm.controls['country'].touched && subscriptionForm.controls['country'].hasError('required')">
                       Please select country
                     </mat-error>
-                  </td>
+                  </td> -->
 
-                  <!-- recent <mat-select formControlName="countryName"  class="roleselct" disableOptionCentering>
+                  <!-- recent edit -->
+                   <mat-select formControlName="countryName"  class="roleselct" disableOptionCentering>
                     <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Name"> 
                    <mat-option [value]="">Select</mat-option>
                    <mat-option *ngFor="let item of selectedcountry" [value]="item.country">{{item.country}}</mat-option>
-                 </mat-select> -->
+                 </mat-select>
 
 
 
