@@ -1,11 +1,11 @@
 import { environment } from './environment';
 export const URLS = Object();
- URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
+//  URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink = 'https://preprod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
 //URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink='http://Nimai-Prd-LB-1296056161.ap-south-1.elb.amazonaws.com/nimaiEmail/sendAdminSetPasswordLink/';
-//URLS.sendActivationLink = 'https://prod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
+URLS.sendActivationLink = 'https://prod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
 //URLS.sendActivationLink = 'http://203.115.123.93:8080/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink = 'http://nimai-pilot-lb-468660897.me-south-1.elb.amazonaws.com/nimaiEmail/sendAdminSetPasswordLink';

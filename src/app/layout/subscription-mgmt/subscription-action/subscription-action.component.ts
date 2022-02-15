@@ -126,6 +126,7 @@ export class SubscriptionActionComponent implements OnInit {
       this.setPagerConfig(this.pagerConfig.pageIndex, this.pagerConfig.pageSize, this.pagerConfig.sortBy, this.pagerConfig.direction, totalCount);
       res.content.forEach(item => {
         //console.log(item);
+        localStorage.setItem('customerType',item.customerType)
         this.vasList.push(item);
       });
       this.dataSource = new MatTableDataSource(this.vasList);

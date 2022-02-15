@@ -34,7 +34,7 @@ export class AddcouponComponent implements OnInit {
   loading = false;
   countryList: any = [];
   dropdownSettings = {};
-  countryName: any = [];
+  country: any = [];
   planList:any;
   roleList: any;
   countrySelection: any = [];
@@ -58,16 +58,19 @@ export class AddcouponComponent implements OnInit {
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
+  CurrentDate: string;
   constructor(private fb: FormBuilder, private service: DiscountMgmtService, public dialogRef: MatDialogRef<AddcouponComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
    
   }
   ngOnInit() {
+    this.CurrentDate=  formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
     this.flag=0;
     this.couponForm = this.fb.group({
       status: ['ACTIVE', Validators.required],
       discountType:['',Validators.required],
       amount: ['',Validators.required],
-      countryName: ['', Validators.required],
+      country: ['', Validators.required],
       subscriptionPlan:['',Validators.required],
       couponFor:['',Validators.required],
       startDate:['',Validators.required],
@@ -109,7 +112,7 @@ export class AddcouponComponent implements OnInit {
     this.couponDetails=Array.prototype.map.call(item.value, s => s.couponCode).toString(); // "A,B,C"Array.prototype.map.call(arrayObjects, s => s.name).toString(); // "A,B,C"
     //console.log("this.couponDetails---->",this.couponDetails)
     let filename="personalizedCoupon"
-    this.pCountry=this.couponForm.get("countryName").value
+    this.pCountry=this.couponForm.get("country").value
     if(this.couponForm.get("couponFor").value =='Bank As Customer'){
       this.subsType='Bank';
       this.bankType='Customer'; 
@@ -121,7 +124,7 @@ export class AddcouponComponent implements OnInit {
       this.bankType='';
     }
   let data = {
-    "countryName": this.pCountry,
+    "country": this.pCountry,
     "customerType": this.subsType,
     "bankType": this.bankType,
     "filename":filename,
@@ -291,7 +294,9 @@ calculateAmount(value){
   }
   getPlan(){
     let data = {
-      "discountCountry": this.couponForm.get("countryName").value,
+
+      //discountCountry recent edit
+      "country": this.couponForm.get("country").value,
       "customerType": this.couponForm.get("couponFor").value
   }
   console.log(data)
@@ -392,7 +397,7 @@ calculateAmount(value){
         this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryName.push(entry.country);
+          this.country.push(entry.country);
         }
 
       });
@@ -420,7 +425,7 @@ calculateAmount(value){
   }
   
   closeNone(){
-    this.couponForm.get('countryName').setValue('');
+    this.couponForm.get('country').setValue('');
     this.disabledOther=false
   }
   onKey(value) { 
