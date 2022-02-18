@@ -296,7 +296,7 @@ calculateAmount(value){
     let data = {
 
       //discountCountry recent edit
-      "country": this.couponForm.get("country").value,
+      "discountCountry": this.couponForm.get("country").value,
       "customerType": this.couponForm.get("couponFor").value
   }
   console.log(data)

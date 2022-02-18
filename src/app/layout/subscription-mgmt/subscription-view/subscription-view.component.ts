@@ -11,7 +11,7 @@ export class SubscriptionViewComponent implements OnInit {
 
   
   subscriptionData: any;
-  subsidiary: string;
+  subsidiary: string="";
 
   constructor(private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionViewComponent>, @Inject(MAT_DIALOG_DATA) public data) {
 
@@ -21,9 +21,14 @@ export class SubscriptionViewComponent implements OnInit {
       this.getSubscriptionDetailsById();
       if(localStorage.getItem('customerType')=="BANK"){
         this.subsidiary="Additional Users";
-      }else{
-        this.subsidiary="Subsidiaries";
       }
+      else if ( localStorage.getItem('customerType')== 'CUSTOMER'){
+        this.subsidiary="Subsidiaries";
+      }else{
+        this.subsidiary="";
+      }
+       
+
   }
 
   closeDialog() {
@@ -34,6 +39,17 @@ export class SubscriptionViewComponent implements OnInit {
     this.service.getSubscriptionDetailsById(this.data.id).subscribe(
       (res) => {
         this.subscriptionData = res;
+        console.log(this.subscriptionData.customerType)
+
+        if(this.subscriptionData.customerType=="BANK"){
+          this.subsidiary="Additional Users";
+        }
+        else if ( this.subscriptionData.customerType== 'CUSTOMER'){
+          this.subsidiary="Subsidiaries";
+        }else{
+          this.subsidiary="";
+        }
+
       });
   }
 

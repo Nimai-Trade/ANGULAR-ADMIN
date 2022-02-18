@@ -75,7 +75,11 @@
 .sidebar .sidebar-wrapper{
   width: 260px!important;
 }
-
+.logo{
+  position: relative;
+  z-index: 4;
+  transform: translate(0%, 28%);
+}
 .sidebar .nav .caret{
   right: -14px!important;
 }

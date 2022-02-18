@@ -128,7 +128,7 @@ this.service.bankList().subscribe((res)=>{
 
 
   loadKycDetails() {
-
+console.log('jkj')
 
     this.userId=this.data.id
   this.isCustomer=this.userId.startsWith('CU');
@@ -155,6 +155,7 @@ this.service.bankList().subscribe((res)=>{
 
       });
       if(this.isCustomer || this.userId.startsWith('BC')){
+        console.log('ooo')
         this.loadViewPreferredBank();
       const data={
         "userId":this.data.id
@@ -266,15 +267,15 @@ for(let data of this.kycForm.get('preferredBanks').value){
       this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
     });
 // recent edit 
-//   if(this.kycForm.get('preferredBanks').value){
-//     const param={
-//       "custUserId": this.userId,
-//       "banks": this.pbSelection
-//     }
-// this.service.savePreferredBank(param).subscribe((res)=>{
-//   this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
-// })
-//   }
+  if(this.kycForm.get('preferredBanks').value){
+    const param={
+      "custUserId": this.userId,
+      "banks": this.pbSelection
+    }
+this.service.savePreferredBank(param).subscribe((res)=>{
+  this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
+})
+  }
   }
 
   closeNone(){

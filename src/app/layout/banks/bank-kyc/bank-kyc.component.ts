@@ -40,7 +40,12 @@ export class BankKycComponent implements OnInit {
     this.myRights = this.rightList.split(',');
     this.empCode = localStorage.getItem('nimaiId');
     this.loadKycDetails();
-    this.ratingList = [{ 'code': 'aa', 'name': 'AA' }, { 'code': 'aaa', 'name': 'AAA' }];
+    this.ratingList = [{ 'code': 'AAA', 'name': 'AAA' }, { 'code': 'AA+', 'name': 'AA+' },
+    { 'code': 'AA', 'name': 'AA' }, { 'code': 'AA-', 'name': 'AA-' },
+    { 'code': 'A+', 'name': 'A+' }, { 'code': 'A-', 'name': 'A-' },
+    { 'code': 'BBB+', 'name': 'BBB+' }, { 'code': 'BBB', 'name': 'BBB' },
+    { 'code': 'BBB-', 'name': 'BBB-' }, { 'code': 'BB+', 'name': 'BB+' },
+    { 'code': 'BB', 'name': 'BB' }, { 'code': 'BB-', 'name': 'BB-' }];
 
    // this.loadRank();
   }

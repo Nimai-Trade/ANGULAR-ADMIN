@@ -20,7 +20,11 @@
   text-align: center;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5294117647058824);
 }
-
+.logo{
+  position: relative;
+  z-index: 4;
+  transform: translate(0%, 28%);
+}
 .loginbody h2 small{
   color: #fff;
 }

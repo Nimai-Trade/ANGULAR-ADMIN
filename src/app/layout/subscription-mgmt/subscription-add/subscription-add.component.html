@@ -39,7 +39,6 @@
 
               <tr>
                 <td nowrap="">Country</td>
-                <!-- <td> -->
 
                 
                   <!-- <td class="multiselectClass">
@@ -56,20 +55,18 @@
                   </td> -->
 
                   <!-- recent edit -->
+                  <td>
                    <mat-select formControlName="countryName"  class="roleselct" disableOptionCentering>
                     <input (keyup)="onKey($event.target.value)" class="inputSearch" placeholder="Enter Country Name"> 
                    <mat-option [value]="">Select</mat-option>
                    <mat-option *ngFor="let item of selectedcountry" [value]="item.country">{{item.country}}</mat-option>
                  </mat-select>
-
-
-
              
-                  <!-- <mat-error
+                 <mat-error
                     *ngIf="subscriptionForm.controls['countryName'].touched && subscriptionForm.controls['countryName'].hasError('required')">
                     Please select Country
                   </mat-error>
-                </td> -->
+                </td> 
               </tr>
 
               <tr>
