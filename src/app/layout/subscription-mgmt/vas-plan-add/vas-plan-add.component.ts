@@ -13,7 +13,7 @@ export class VasPlanAddComponent implements OnInit {
   countryList: any = [];
   dropdownSettings = {};
   vasForm: any;
-  countryName: any = [];
+  country: any = [];
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
@@ -29,7 +29,7 @@ export class VasPlanAddComponent implements OnInit {
       description4: [],
       description5: [],
       pricing: [, Validators.required],
-      countryName: [, Validators.required],
+      country: [, Validators.required],
       countryCurrency: ['USD']
     });
     this.dropdownSettings = {
@@ -73,7 +73,7 @@ export class VasPlanAddComponent implements OnInit {
         
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryName.push(entry.country);
+          this.country.push(entry.country);
         }
       });
   }
@@ -143,7 +143,7 @@ export class VasPlanAddComponent implements OnInit {
 
 
      closeNone(){
-      this.vasForm.get('countryName').setValue('');
+      this.vasForm.get('country').setValue('');
       this.disabledOther=false
     }
   

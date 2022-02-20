@@ -25,7 +25,7 @@ export class SubscriptionAddComponent implements OnInit {
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
-  countryName: any=[];
+  country: any=[];
   pbSelection: any[]=[];
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<SubscriptionAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
@@ -34,7 +34,7 @@ export class SubscriptionAddComponent implements OnInit {
       createdBy:[],
       subscriptionPlanId: [],
       customerType: ['', Validators.required],
-      countryName: ['', Validators.required],
+      country: ['', Validators.required],
       planName: ['', Validators.required],
       customerSupport: ['', Validators.required],
       remark: [],
@@ -96,7 +96,7 @@ export class SubscriptionAddComponent implements OnInit {
         this.countryList.unshift(item);
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryName.push(entry.country);
+          this.country.push(entry.country);
         }
 
       });
@@ -157,7 +157,7 @@ export class SubscriptionAddComponent implements OnInit {
         this.countryList = res;
         this.selectedcountry=res;
         for (let entry of this.countryList) {
-          this.countryName.push(entry.country);
+          this.country.push(entry.country);
 
           this.countryData.push(entry.country);
         }
@@ -188,14 +188,14 @@ export class SubscriptionAddComponent implements OnInit {
   onChangeType(country) {
    
     //this.subscriptionForm.get('country').setValue(this.countryVal);
-  //  console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
+    console.log(this.subscriptionForm['controls'].country +' >> Country Type << ' + country);    
    // this.loadSubsriptionList();
   }
 
 
 
   closeNone(){
-    this.subscriptionForm.get('countryName').setValue('');
+    this.subscriptionForm.get('country').setValue('');
     this.disabledOther=false
   }
 
