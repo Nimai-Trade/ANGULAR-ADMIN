@@ -85,7 +85,8 @@
               <tr>
                 <td>Credits</td>
                 <td>
-                  <input formControlName="credits" matInput placeholder="" autocomplete="off" required  onKeyPress="if(this.value.length==30) return false;" type="number"  min="0" oninput="this.value = 
+                  <input formControlName="credits" matInput placeholder="" autocomplete="off" maxlength="4" required 
+                   onKeyPress="if(this.value.length==4) return false;" type="number"  min="0" oninput="this.value = 
                   !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
                   <mat-error
                     *ngIf="subscriptionForm.controls['credits'].touched && subscriptionForm.controls['credits'].hasError('required')">
@@ -98,11 +99,12 @@
                 <td *ngIf="subscriptionForm.controls['customerType'].value == 'CUSTOMER'">Subsidiaries</td>
                 <td *ngIf="subscriptionForm.controls['customerType'].value == 'BANK'">Additional user </td>
                 <td>
-                  <input formControlName="subsidiaries" matInput placeholder="" autocomplete="off" required
-                    maxlength="50">
+                  <input formControlName="subsidiaries" matInput placeholder="" oninput="this.value = 
+                  !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" autocomplete="off" required
+                    maxlength="4">
                   <mat-error
                     *ngIf="subscriptionForm.controls['subsidiaries'].touched && subscriptionForm.controls['subsidiaries'].hasError('required')">
-                    Please enter Additional Users
+                    Please enter Subsidiaries
                   </mat-error>
                 </td>
               </tr>

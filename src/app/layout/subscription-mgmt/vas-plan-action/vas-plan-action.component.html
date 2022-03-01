@@ -144,7 +144,7 @@
                           </button>
                         </div> 
                         <button mat-button class="action-btn"
-                          (click)="ActiveInactiveDialog(element.status, element.vasid, element.countryName)">
+                          (click)="ActiveInactiveDialog(element.status, element.vasid, element.countryName,element)">
                           <mat-icon *ngIf="element.status === 'Inactive'" [ngStyle]="{'color':'red'}"
                             matTooltip="Inactive">
                             block</mat-icon>

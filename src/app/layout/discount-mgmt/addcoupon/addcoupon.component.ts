@@ -160,11 +160,13 @@ export class AddcouponComponent implements OnInit {
     }
   }
   limitDecimalPlaces(e, count) {
-   // console.log("111")
+    
+    console.log(e)
     if (e.target.value.indexOf('.') == -1) { return; }
     if ((e.target.value.length - e.target.value.indexOf('.')) > count) {
       e.target.value = parseFloat(e.target.value).toFixed(count);
     }
+    if(e.data=='-'){return;}
   }  
   checkAmount(event) {
     if(event>this.planValue){

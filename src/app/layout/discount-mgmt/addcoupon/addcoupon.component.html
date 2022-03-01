@@ -92,7 +92,7 @@
             <tr *ngIf="!showPecentage">
               <td nowrap="">Amount</td>
               <td>
-                <input formControlName="amount" (keyup)="checkAmount($event.target.value)"  (input)="limitDecimalPlaces($event, 2)"
+                <input type="number" formControlName="amount" (keyup)="checkAmount($event.target.value)"  (input)="limitDecimalPlaces($event, 2)"
                  matInput placeholder="" maxlength="30" required autocomplete="off" style="width:90%!important"/> USD
                 <!-- <input formControlName="amount" matInput placeholder="" maxlength="50" required autocomplete="off"/> -->
                 <mat-error

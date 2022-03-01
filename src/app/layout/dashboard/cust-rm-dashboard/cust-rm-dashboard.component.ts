@@ -82,7 +82,7 @@ export class CustRmDashboardComponent implements OnInit {
     this.service.getTransExpiry('Customer').subscribe((res) => this.expTransactions = res);
   }
   getPayPendingCount() {
-    this.service.getPayPending('Customer').subscribe((res) => this.paymentPending = res);
+    this.service.getPayPendingRM('Customer').subscribe((res) => this.paymentPending = res);
   }
   getKycPendingCount() {
     this.service.getCustKycPending('Customer').subscribe((res) => this.kycPending = res);

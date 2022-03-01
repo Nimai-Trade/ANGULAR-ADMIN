@@ -17,6 +17,7 @@ export class VasPlanAddComponent implements OnInit {
   selectedcountry: any=[];
   disabledOther: boolean;
   selectedItems: string[];
+  pbSelection: any[]=[];
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<VasPlanAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
     this.vasForm = fb.group({
@@ -129,6 +130,18 @@ export class VasPlanAddComponent implements OnInit {
             this.vasForm.controls[name].patchValue(res[name]);
           }
         });
+
+        for (const record of JSON.parse(JSON.stringify(res)).countryList) {
+          var name={
+            country:record.country          
+          }
+          this.pbSelection.push(name);
+        }
+        this.vasForm.patchValue({                  
+         country:this.pbSelection
+        });
+
+
       });
   }
   onKey(value) { 
@@ -148,7 +161,6 @@ export class VasPlanAddComponent implements OnInit {
     }
   
     onItemSelect(item: any){
-      console.log("Item---",item)
       if(item=="All"){
         this.disabledOther=true;  
         this.selectedItems = [ 'All'];

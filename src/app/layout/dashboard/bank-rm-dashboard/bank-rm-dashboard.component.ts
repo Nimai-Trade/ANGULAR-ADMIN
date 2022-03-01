@@ -285,7 +285,7 @@ drawAvgQuoteBarChart(data_country) {
     );
   }
   getPayPending(){
-    this.service.getPayPending('Bank').subscribe((res) =>
+    this.service.getPayPendingRM('Bank').subscribe((res) =>
     this.payPending = res
   );
   }

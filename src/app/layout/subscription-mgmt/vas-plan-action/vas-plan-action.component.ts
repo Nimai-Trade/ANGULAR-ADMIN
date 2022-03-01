@@ -189,7 +189,7 @@ export class VasPlanActionComponent implements OnInit {
     });
   }
 
-   ActiveInactiveDialog(status, vasId, country): void {
+   ActiveInactiveDialog(status, vasId, country,data): void {
     const message = 'Are you sure you want to ' + (status === 'Active' ? 'inactive' : 'active') + ' record ?';
     const dialogData = new ConfirmDialogModel('Confirm Action', message);
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -211,7 +211,8 @@ export class VasPlanActionComponent implements OnInit {
         const reqData = {
           'vasid': vasId,
           'status': updateStatus,
-          'countryName':country
+          'countryName':country,
+          'customerType':data.customerType
         };
         this.service.updateVasStatus(reqData).subscribe(
           (res) => {

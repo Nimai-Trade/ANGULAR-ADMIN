@@ -307,12 +307,25 @@ export class DashboardService {
   }
   getPayPending(subscriberType):Observable<any>{
     const req={
+  
       'subscriberType':subscriberType
     }
     return this.httpClient.post(URLS.getCustPayPending,req).pipe((res) => {
       return res;
     }) 
   }
+
+  getPayPendingRM(subscriberType):Observable<any>{
+  
+    const req={
+    'companyName':localStorage.getItem('nimaiId'),
+      'subscriberType':subscriberType
+    }
+    return this.httpClient.post(URLS.getCustPayPending,req).pipe((res) => {
+      return res;
+    }) 
+  }
+
   getCustKycPending(subscriberType):Observable<any>{
     const req={
       'subscriberType':subscriberType
