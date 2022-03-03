@@ -139,7 +139,7 @@
                         <mat-option [value]="relationshipManager"
                           *ngFor="let relationshipManager of customerRmList[element.countryName] ">
                           <mat-option [value]="relationshipManager"
-                            *ngFor="let relationshipManager of rmList[element.countryName] "></mat-option>
+                            *ngFor="let relationshipManager of rmList[element.countryName || element.countryName] "></mat-option>
                           {{ relationshipManager.value }} ({{relationshipManager.code}})
                         </mat-option>
                       </mat-select>

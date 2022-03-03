@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { MatRadioChange } from '@angular/material';
+import { strictEqual } from 'assert';
 @Component({
   selector: 'app-vas-plan-add',
   templateUrl: './vas-plan-add.component.html',
@@ -18,6 +19,8 @@ export class VasPlanAddComponent implements OnInit {
   disabledOther: boolean;
   selectedItems: string[];
   pbSelection: any[]=[];
+  Selection: any[]=[];
+  test: any;
   constructor(private fb: FormBuilder, private service: SubscriptionService, public dialogRef: MatDialogRef<VasPlanAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
 
     this.vasForm = fb.group({
@@ -84,7 +87,34 @@ export class VasPlanAddComponent implements OnInit {
   }
 
   onSubmitPlan() {
+    // if(this.pbSelection){
+    //   this.vasForm.get('countryList').setValue(this.Selection)
+    // }
+    // this.test=this.vasForm.get('country').value
+    // console.log(this.test)
+    // for(const record of this.test){
+    //       if(record){  
+    //     this.Selection.push(record.country)
+    //     }else{
+         
+    //     }
+    //   }
+  //   console.log(this.vasForm.get('country').value)
+  //   this.test=this.vasForm.get('country').value
+    
+  //   for(const record of this.test){
+  //     if(record){  
+  //   this.Selection.push(record.country)
+  //   }else{
+     
+  //   }
+  // }
+  
+  //   this.vasForm.get('country').setValue(this.Selection)
+    console.log(this.vasForm.get('country').value)
+  
     if (this.vasForm.valid) {
+      console.log(this.vasForm.value)
       this.service.saveVasDetails(this.vasForm.value).subscribe((res) => this.onSuccess(res));
     } else {
       this.validateAllFormFields(this.vasForm);
@@ -131,17 +161,26 @@ export class VasPlanAddComponent implements OnInit {
           }
         });
 
-        for (const record of JSON.parse(JSON.stringify(res)).countryList) {
-          var name={
-            country:record.country          
-          }
-          this.pbSelection.push(name);
+
+        // for (const record of JSON.parse(JSON.stringify(res)).countryList) {
+        //   var name={
+        //     country:record.country          
+        //   }
+        //   this.pbSelection.push(name);
+        // }
+        // console.log(this.pbSelection)
+        // this.vasForm.patchValue({                  
+        //  country:this.pbSelection
+        // });
+
+        var str=JSON.parse(JSON.stringify(res)).countryName
+        var str1=str.split(',');
+        for (const record of str1) {       
+          this.pbSelection.push(record);
         }
-        this.vasForm.patchValue({                  
+        this.vasForm.patchValue({      
          country:this.pbSelection
         });
-
-
       });
   }
   onKey(value) { 
@@ -161,6 +200,7 @@ export class VasPlanAddComponent implements OnInit {
     }
   
     onItemSelect(item: any){
+      console.log(item)
       if(item=="All"){
         this.disabledOther=true;  
         this.selectedItems = [ 'All'];

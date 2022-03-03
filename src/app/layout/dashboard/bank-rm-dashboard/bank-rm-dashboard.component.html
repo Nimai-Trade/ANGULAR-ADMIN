@@ -17,7 +17,8 @@
                      <!-- <input type="text" class="datepicker" placeholder="Start Date">  -->
                      <mat-form-field>
                         <mat-label>{{befDate}}</mat-label>
-                        <input autocomplete="off" readonly matInput  [matDatepicker]="pickerFrom" (dateChange)="changeTranStart($event)">
+                        <input autocomplete="off" readonly matInput  [matDatepicker]="pickerFrom" 
+                        (dateChange)="changeTranStart($event)" style="height: 29px;">
                         <mat-datepicker-toggle matSuffix [for]="pickerFrom">
                         </mat-datepicker-toggle>
                         <mat-datepicker #pickerFrom>
@@ -28,8 +29,9 @@
                   <li>
                      <!-- <input type="text" class="datepicker" placeholder="Start Date">  -->
                      <mat-form-field>
-                        <mat-label>{{currDate}}</mat-label>
-                        <input autocomplete="off" readonly matInput  [matDatepicker]="pickerTo" (dateChange)="changeTranEnd($event)">
+                        <mat-label style="top: 17px !important;">{{currDate}}</mat-label>
+                        <input autocomplete="off" readonly matInput  [matDatepicker]="pickerTo" 
+                        (dateChange)="changeTranEnd($event)"  style="height: 29px;">
                         <mat-datepicker-toggle matSuffix [for]="pickerTo">
                         </mat-datepicker-toggle>
                         <mat-datepicker #pickerTo>
@@ -75,7 +77,8 @@
                      <!-- <input type="text" class="datepicker" placeholder="Start Date">  -->
                      <mat-form-field>
                         <mat-label>{{befDate}}</mat-label>
-                        <input autocomplete="off" readonly matInput  [matDatepicker]="startDate" (dateChange)="changeStartDate( $event)">
+                        <input autocomplete="off" readonly matInput  [matDatepicker]="startDate" style="padding-top: 5px;padding-bottom: 3px;"
+                         (dateChange)="changeStartDate( $event)">
                         <mat-datepicker-toggle matSuffix [for]="startDate">
                         </mat-datepicker-toggle>
                         <mat-datepicker #startDate>
@@ -87,7 +90,8 @@
                      <!-- <input type="text" class="datepicker" placeholder="Start Date">  -->
                      <mat-form-field>
                         <mat-label>{{currDate}}</mat-label>
-                        <input autocomplete="off" readonly matInput  [matDatepicker]="endDate" (dateChange)="changeEndDate($event)">
+                        <input autocomplete="off" readonly matInput  [matDatepicker]="endDate" style="padding-top: 5px;padding-bottom: 3px;"
+                         (dateChange)="changeEndDate($event)">
                         <mat-datepicker-toggle matSuffix [for]="endDate">
                         </mat-datepicker-toggle>
                         <mat-datepicker #endDate>

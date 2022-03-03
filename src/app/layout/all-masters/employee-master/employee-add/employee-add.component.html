@@ -67,14 +67,17 @@
               <tr>
                 <td>Email ID</td>
                 <td>
-                  <!-- <input formControlName="empEmail" matInput placeholder="" autocomplete="disabled" required maxlength="50"> -->
-                  <input formControlName="empEmail" [readonly]="data && data.id ? true : false" type="email" oninput="this.value = this.value.toLowerCase()" (keydown.space)="$event.preventDefault()" maxlength="50" autocomplete="off">
+                  <!-- <input formControlName="empEmail" matInput placeholder="" autocomplete="disabled" required maxlength="50"> 
+                  [readonly]="data && data.id ? true : false"-->
+                  <input  formControlName="empEmail"  type="email"  [readonly]="data && data.id ? true : false" (click)="validateEmail($event.target.value)"
+                  oninput="this.value = this.value.toLowerCase()" (keydown.space)="$event.preventDefault()" 
+                  maxlength="50" autocomplete="off" email>
                   <mat-error
                     *ngIf="submitted && employeeForm.controls['empEmail'].hasError('required')">
                     Please enter Email ID
                   </mat-error>
                   <mat-error
-                    *ngIf="submitted && employeeForm.controls['empEmail'].hasError('pattern')">
+                    *ngIf="!checkEmail || (submitted && employeeForm.controls['empEmail'].hasError('pattern'))">
                     Enter valid Email ID
                   </mat-error>
                 </td>

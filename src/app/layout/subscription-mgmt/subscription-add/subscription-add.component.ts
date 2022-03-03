@@ -170,15 +170,24 @@ export class SubscriptionAddComponent implements OnInit {
           }
         });
 
-        for (const record of JSON.parse(JSON.stringify(res)).countryList) {
-          var name={
-            country:record.country          
-          }
-          this.pbSelection.push(name);
+        var str=JSON.parse(JSON.stringify(res)).countryName
+        var str1=str.split(',');
+        for (const record of str1) {       
+          this.pbSelection.push(record);
         }
         this.subscriptionForm.patchValue({                  
-         country:this.pbSelection
-        });
+           country:this.pbSelection
+          });
+
+        // for (const record of JSON.parse(JSON.stringify(res)).countryList) {
+        //   var name={
+        //     country:record.country          
+        //   }
+        //   this.pbSelection.push(name);
+        // }
+        // this.subscriptionForm.patchValue({                  
+        //  country:this.pbSelection
+        // });
 
 
       });

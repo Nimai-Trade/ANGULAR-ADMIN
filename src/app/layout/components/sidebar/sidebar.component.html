@@ -82,7 +82,13 @@
                                 <i class="fas fa-university"></i>
                                 <p> Banks </p>
                             </a>
-                        </li>   
+                        </li> 
+                        <!-- <li [routerLinkActive]="['active']" *ngIf='myRights.includes("BANKS")'>
+                            <a [routerLink]="['/app/customer']">
+                                <i class="fas fa-university"></i>
+                                <p> Bank As Customer </p>
+                            </a>
+                        </li>    -->
                         <li [routerLinkActive]="['active']" *ngIf='myRights.includes("REFERRER")'>
                             <a [routerLink]="['/app/referrer']">
                                 <i class="fas fa-people-arrows"></i>

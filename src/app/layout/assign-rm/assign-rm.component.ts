@@ -199,7 +199,7 @@ export class AssignRmComponent implements OnInit {
       (res) => {
         console.log("Rm List----",res);
         this.rmList = res;
-      //  console.log(this.rmList['BANK_RM']);
+        console.log(this.rmList['BANK_RM']);
         this.bankRmList = this.rmList['BANK_RM'] !== undefined ? this.rmList['BANK_RM'] : '';
         this.customerRmList = this.rmList['CUSTOMER_RM'] !== undefined ? this.rmList['CUSTOMER_RM'] : '';
         this.loadAssignRmList();

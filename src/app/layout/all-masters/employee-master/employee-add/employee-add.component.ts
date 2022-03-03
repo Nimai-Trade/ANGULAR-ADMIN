@@ -30,6 +30,7 @@ export class EmployeeAddComponent implements OnInit {
   public value1: [];
   mobNumberPattern = '/^[6-9]\d{9}$/';
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,7}$';
+ //emailPattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$/;
   localWaterMark: any;
   localFields: any;
   roleInfo: any[];
@@ -38,6 +39,7 @@ export class EmployeeAddComponent implements OnInit {
   isOptionNone: boolean=false;
   items: any;
   selectedcountry: any=[];
+  checkEmail: boolean=true;
   constructor(private fb: FormBuilder, private service: AllMasterService, public dialogRef: MatDialogRef<EmployeeAddComponent>, @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog, public sharedUtilService: SharedUtilService) {
     this.employeeForm = fb.group({
       empId: [],
@@ -109,10 +111,19 @@ export class EmployeeAddComponent implements OnInit {
       this.submitted = false;
     } else {
       this.validateAllFormFields(this.employeeForm);
-
+      this.validateEmail(this.employeeForm.get('empEmail').value)
+      this.submitted = true;
+      console.log(this.submitted)
     }
   }
 
+  validateEmail(email) {
+  
+    const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    this.checkEmail=  regularExpression.test(String(email).toLowerCase());
+    console.log(this.checkEmail)
+    return regularExpression.test(String(email).toLowerCase());
+   }
 
   validateAllFormFields(employeeForm: FormGroup) {
     Object.keys(employeeForm.controls).forEach(field => {

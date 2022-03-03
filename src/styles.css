@@ -379,7 +379,7 @@ span.mat-button-wrapper {
   font-weight: 400;
 }
 .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-  top: 12px !important;
+  top: 17px !important;
   left: 3px !important;
   font-size: 15px !important;
   font-family: 'Roboto';

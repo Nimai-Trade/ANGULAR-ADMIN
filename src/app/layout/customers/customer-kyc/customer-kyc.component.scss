@@ -155,7 +155,15 @@ td .e-multiselect{
 
 
  
- 
+
+
+::ng-deep .dropdown-list .item2{
+   max-height: 130px !important;
+}
+::ng-deep .dropdown-list .item1{
+   max-height: 130px !important;
+}
+
 
  @media (max-width: 767px) {     
    .reject-btn{
