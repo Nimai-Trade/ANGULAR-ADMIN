@@ -68,9 +68,14 @@
                         </tr>
                         <tr>
                           <td>Product</td>
+
                           <td>
-                            <input matInput value={{transactionData.requirement}} readonly="true">
+                            <input matInput value={{requirement}} readonly="true">
                           </td>
+
+
+
+                          
                         </tr>
                         <tr>
                           <td>Amount</td>
@@ -217,12 +222,12 @@
                        
                         <tr>
                           <td>Charges are on</td>
-                          <td class="td-padding"><input matInput value={{transactionData.chargesAreOn}} readonly="true">
+                          <td style="width: 50%;"><input matInput value={{transactionData.chargesAreOn}} readonly="true">
                           </td>
                         </tr>
                         <tr >
                           <td>Validity</td>
-                          <td class="td-padding"><input matInput value="{{transactionData.validity | date : 'dd-MM-y'}}" readonly="true">
+                          <td style="width: 50%;"><input matInput value="{{transactionData.validity | date : 'dd-MM-y'}}" readonly="true">
                           </td>
                         </tr>
                       

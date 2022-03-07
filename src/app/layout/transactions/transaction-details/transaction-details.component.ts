@@ -11,6 +11,7 @@ import { ViewChild } from '@angular/core'
 export class TransactionDetailsComponent implements OnInit {
   @ViewChild('divToScroll') divToScroll: ElementRef;
   transactionData: any;
+  requirement: string;
 
   constructor(private service: TransactionService,private dialog: MatDialog, public dialogRef: MatDialogRef<TransactionDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data) { }
 
@@ -27,6 +28,25 @@ export class TransactionDetailsComponent implements OnInit {
       (res) => {
         this.transactionData = res;
         console.log(this.transactionData);
+if(this.transactionData.requirement=='ConfirmAndDiscount')
+this.requirement='Confirmation and Discounting';
+else if(this.transactionData.requirement=='BankGuarantee')
+this.requirement='Bank Guarantee';
+else if(this.transactionData.requirement=='Refinance')
+this.requirement='Refinancing';
+else if(this.transactionData.requirement=='Banker')
+this.requirement='Bankers Acceptance';
+else if(this.transactionData.requirement=='Confirmation')
+this.requirement='Confirmation';
+else
+this.requirement='Discounting';
+        // <td *ngIf="transactionData.requirement=='Banker'"><input matInput value={{transactionData.requirement}} readonly="true"></td>
+        // <td *ngIf="transactionData.requirement=='ConfirmAndDiscount'"><input matInput value={{transactionData.requirement}} readonly="true"></td>
+        // <td *ngIf="transactionData.requirement=='Refinance'"><input matInput value={{transactionData.requirement}} readonly="true"></td>
+        // <td *ngIf="transactionData.requirement=='BankGuarantee'"><input matInput value={{transactionData.requirement}} readonly="true"></td>
+   
+
+
       });
   }
   search(data){
