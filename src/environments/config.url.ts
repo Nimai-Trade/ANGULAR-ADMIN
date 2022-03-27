@@ -1,6 +1,6 @@
 import { environment } from './environment';
 export const URLS = Object();
- URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
+URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink = 'https://preprod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
 //URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
@@ -178,6 +178,8 @@ URLS.getCustPayPending = `${environment.BASE_API_URL}api/dashboard/customer/paym
 URLS.getCustKycPending = `${environment.BASE_API_URL}api/dashboard/customer/kycPending`;
 URLS.getSubscriptionExp = `${environment.BASE_API_URL}api/dashboard/customer/subscriptionExpiry`;
 URLS.getReferrerCount = `${environment.BASE_API_URL}api/dashboard/customer/referrer`;
+URLS.getOverallReferrerCounts = `${environment.BASE_API_URL}api/dashboard/overall/referrer`;
+
 //
 URLS.getBankTrxnStat = `${environment.BASE_API_URL}api/dashboard/bank/transactionStats`;
 URLS.getBankAvgQuotesStat = `${environment.BASE_API_URL}api/dashboard/bank/avgQuotes`;

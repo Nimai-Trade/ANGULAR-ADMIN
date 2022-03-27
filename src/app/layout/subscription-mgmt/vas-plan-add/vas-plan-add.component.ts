@@ -111,7 +111,6 @@ export class VasPlanAddComponent implements OnInit {
   // }
   
   //   this.vasForm.get('country').setValue(this.Selection)
-    console.log(this.vasForm.get('country').value)
   
     if (this.vasForm.valid) {
       console.log(this.vasForm.value)
@@ -179,7 +178,7 @@ export class VasPlanAddComponent implements OnInit {
           this.pbSelection.push(record);
         }
         this.vasForm.patchValue({      
-         country:this.pbSelection
+          country:this.pbSelection
         });
       });
   }

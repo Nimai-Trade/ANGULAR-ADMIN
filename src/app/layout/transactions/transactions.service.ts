@@ -18,6 +18,23 @@ export class TransactionService {
 
 
   getTransactionList(page: number, size: number, sortBy: any, direction: any, fileterObj: any): Observable<any> {
+
+    var role="";
+    var country="";
+    if(localStorage.getItem('role')=='Management'){
+      country=fileterObj.country
+      role=""
+    }else if(localStorage.getItem('role')=='Customer RM'){
+      country=""
+      role="Customer RM"
+    }else if(localStorage.getItem('role')=='Bank RM'){
+      country=""
+      role="Bank RM"
+    }else{
+      country=fileterObj.country
+      role=""
+    }
+
     const reqData = {
       'page': page,
       'size': size,
@@ -27,11 +44,12 @@ export class TransactionService {
       'emailId': fileterObj.emailId,
       'mobileNo': fileterObj.mobileNo,
       'companyName': fileterObj.companyName,
-      'country': fileterObj.country,
+      'country': country,
       'txtStatus': fileterObj.txtStatus,
       'goodsType': fileterObj.goodsType,
       'dateFrom':fileterObj.dateFrom,
-      'dateTo':fileterObj.dateTo
+      'dateTo':fileterObj.dateTo,
+      'role':role
     };
     return this.httpClient.post(URLS.getTransactionSearchListUrl, reqData, { headers: this.headers }).pipe(
       map((res) => {

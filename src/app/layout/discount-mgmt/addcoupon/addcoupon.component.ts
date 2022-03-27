@@ -124,7 +124,7 @@ export class AddcouponComponent implements OnInit {
       this.bankType='';
     }
   let data = {
-    "countryName": this.pCountry,
+    "country": this.pCountry,
     "customerType": this.subsType,
     "bankType": this.bankType,
     "filename":filename,
@@ -297,7 +297,8 @@ calculateAmount(value){
   getPlan(){
     let data = {
 
-      //discountCountry recent edit
+      //discountCountry -dev recent edit
+      //country-prod
       "discountCountry": this.couponForm.get("countryName").value,
       "customerType": this.couponForm.get("couponFor").value
   }

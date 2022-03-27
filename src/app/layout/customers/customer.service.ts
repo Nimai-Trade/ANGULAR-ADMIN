@@ -18,17 +18,29 @@ export class CustomerService {
 
 
   getTransactionList(page: number, size: number, sortBy: any, direction: any, fileterObj: any,status: string): Observable<any> {
-    var str=[];
-    console.log(localStorage.getItem('role'))
-    if(localStorage.getItem('role')=='Bank RM'){
-      str[0]= 'BANK';
-      str[1]='CUSTOMER';
-    }else{
-      // str[0]= '';
-      // str[1]='';
-    }
-    
    
+    var str=[];
+    if(status){
+      str= status.split(' ');
+    }else{
+      str=[];
+    }
+
+    // if(localStorage.getItem('role')=='Management'){
+    //   str[0]= 'CUSTOMER';
+    //   str[1]='';
+    // }else if(localStorage.getItem('role')=='Customer RM'){
+    //   str[0]= 'CUSTOMER';
+    //   str[1]='';
+    // }else if(localStorage.getItem('role')=='Bank RM'){
+    //   str[0]= 'BANK';
+    //   str[1]='CUSTOMER';
+    // }else{
+    //   str[0]= '';
+    //   str[1]='';
+    // }
+
+    console.log(str[1])
     const reqData = {
       'page': page,
       'size': size,

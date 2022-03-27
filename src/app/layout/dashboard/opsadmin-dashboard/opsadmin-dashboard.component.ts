@@ -141,7 +141,10 @@ getOverAllBnkAsCust() {
   })
 }
 getOverAllRef() {
-  this.service.getOverAllReferrer("Referrer").subscribe((res) => {
+  console.log('refffffff')
+  this.service.getOverallReferrer("Referrer").subscribe((res) => {
+    console.log(res)
+
       this.overAllRefCount = res;
   })
 }

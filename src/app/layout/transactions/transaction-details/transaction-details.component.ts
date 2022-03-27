@@ -35,7 +35,7 @@ this.requirement='Bank Guarantee';
 else if(this.transactionData.requirement=='Refinance')
 this.requirement='Refinancing';
 else if(this.transactionData.requirement=='Banker')
-this.requirement='Bankers Acceptance';
+this.requirement="Banker's Acceptance";
 else if(this.transactionData.requirement=='Confirmation')
 this.requirement='Confirmation';
 else

@@ -80,7 +80,7 @@
                         <tr>
                           <td>Amount</td>
                           <td>
-                            <input matInput value={{transactionData.amount}} readonly="true">
+                            <input matInput value="{{transactionData.amount |number}}" readonly="true">
                           </td>
                         </tr>
                         <tr>
@@ -127,30 +127,53 @@
                             <input matInput value={{transactionData.goods}} readonly="true">
                           </td>
                         </tr>
-                    </table>
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
+                
+                  
+                        <tr *ngIf="transactionData.requirement != 'Refinance'">
                           <th colspan="2">Tenor of Deferred Payment</th>
                         </tr>
-                        <tr>
+                        <tr *ngIf="transactionData.requirement != 'Refinance'">
                           <td style="width: 50%;">Usance (Days)</td>
                           <td>
                             <input matInput value={{transactionData.usansce}} readonly="true">
                           </td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="transactionData.requirement != 'Refinance'">
                           <td>Claim period </td>
                           <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
                           </td>
                         </tr>
-                        <!-- <tr>
-                          <td>Remarks</td>
-                          <td><input matInput value={{transactionData.remarks}} readonly="true">
+                     
+
+                
+                        <tr *ngIf="transactionData.requirement == 'Refinance'">
+                          <th colspan="2">Tenor of Deferred Payment</th>
+                        </tr>
+                        <tr *ngIf="transactionData.requirement == 'Refinance'">
+                          <td>Orignal Usance (Tenor) of LC</td>
+                          <td>
+                            <input matInput value={{transactionData.usansce}} readonly="true">
                           </td>
-                        </tr> -->
-                      </tbody>
-                    </table>
+                        </tr>
+                        <tr *ngIf="transactionData.requirement == 'Refinance'">
+                          <td>Period for which refinancing is required</td>
+                          <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
+                          </td>
+                        </tr>
+                        <tr *ngIf="transactionData.requirement == 'Refinance'">
+                          <td>LC Maturity Date</td>
+                          <td><input matInput value={{transactionData.lCMaturityDate}} readonly="true">
+                      </tr>
+                    
+                      <tr *ngIf="transactionData.requirement == 'Refinance'">
+                          <td>Multiple Maturity Date</td>    
+                          <!-- <td><input matInput value={{transactionData.tenorFile}} readonly="true">                            -->
+                          <td class="labeltext" *ngIf="transactionData.tenorFile" style="cursor: pointer;color: blue;" (click)="showProForma(transactionData.tenorFile)">View</td>
+                          <!-- <td *ngIf="isUploadNoDoc">No such file attached</td> -->
+                       </tr>
+                    
+                      </table>
+
                   </div>
                   <div class="col-md-12">
                     <table class="table table-bordered">
@@ -186,6 +209,10 @@
                         <tr>
                           <td>Beneficiary </td>
                           <td><input matInput value={{transactionData.beneficiary}} readonly="true"></td>
+                        </tr>
+                        <tr>
+                          <td style="width: 50%;">Country</td>
+                          <td><input matInput value={{transactionData.beneficiaryBankCountry}} readonly="true"></td>
                         </tr>
                         <tr>
                           <td style="width: 50%;">Bank</td>

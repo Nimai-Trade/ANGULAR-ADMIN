@@ -11,7 +11,8 @@
                   <li>                    
                      <mat-form-field>
                         <mat-label>{{befDate}}</mat-label>
-                        <input autocomplete="off" readonly matInput  [matDatepicker]="pickerFrom" (dateChange)="changeTranStart($event)">
+                        <input autocomplete="off" readonly matInput  [matDatepicker]="pickerFrom"
+                         (dateChange)="changeTranStart($event)">
                         <mat-datepicker-toggle matSuffix [for]="pickerFrom">
                         </mat-datepicker-toggle>
                         <mat-datepicker #pickerFrom>

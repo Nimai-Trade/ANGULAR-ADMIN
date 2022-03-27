@@ -1,11 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { BanksService } from '../../banks/banks.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { ConfirmDialogModel, ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { ShowImageComponent } from 'src/app/shared/show-image/show-image.component';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
+import * as $ from 'src/assets/js/jquery.min';
+
+import * as xlsx from 'xlsx';
+
 
 @Component({
   selector: 'app-customer-kyc',
@@ -13,7 +17,9 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
   styleUrls: ['./customer-kyc.component.scss']
 })
 export class CustomerKycComponent implements OnInit {
-
+  @ViewChild('epltable') epltable: ElementRef;
+  @ViewChild('myInput')
+  myInputVariable: ElementRef;
   kycData: FormArray;
   kycForm: any;
   resData: any;
@@ -24,6 +30,8 @@ export class CustomerKycComponent implements OnInit {
   showLink:boolean=false;
   empCode:any;
   filedId: string;
+  uploadedFile: File[] = [];
+
   isCustomer: any;
   bankList: Object;
   preferredBank: any[]=[];
@@ -34,6 +42,8 @@ export class CustomerKycComponent implements OnInit {
   preferredBanks: any  = [];
   disabledOther: boolean;
   selectedItems: string[];
+  filename: any;
+  imageSrc: string="";
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
@@ -43,6 +53,7 @@ export class CustomerKycComponent implements OnInit {
     "yearlyLCVolume":[''],
     "usedLCIssuance":[''],
     "preferredBanks":[''],
+    "prebanks":new FormControl(''),
     });
     this.dropdownSettings = {
       singleSelection: false,
@@ -80,11 +91,16 @@ this.service.viewPreferredBank(data).subscribe((res)=>{
               console.log('ffff ')
                 if(this.preferredBank.length){
                   for (const record of JSON.parse(JSON.stringify(res))) {
+
+                    if(!record.userid){
+                      $('#prebanks').val(record.bankName)
+                    }else{
                     var name={
                       userid:record.userid,
                       bankName:record.bankName
                     }
                     this.pbSelection.push(name);
+                  }
                   }
                   this.kycForm.patchValue({                  
                    preferredBanks:this.pbSelection
@@ -170,9 +186,9 @@ console.log('jkj')
             exportVolume: data.exportVolume,
             yearlyLCVolume: data.yearlyLCVolume,
            usedLCIssuance :data.usedLCIssuance,
-           preferredBanks:this.pbSelection
+           preferredBanks:this.pbSelection,
           });
-     
+         
     });
   }
   }
@@ -266,8 +282,28 @@ for(let data of this.kycForm.get('preferredBanks').value){
     (res) => {
       this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
     });
+
+// if($('#prebanks').val())
+// {
+//   const param={
+//     "custUserId": this.userId,
+//     "banks": $('#prebanks').val()
+//   }
+// this.service.savePreferredBank(param).subscribe((res)=>{
+// this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
+// })
+// }
 // recent edit 
+
+if($('#prebanks').val())
+ {
+  this.pbSelection.push(this.imageSrc)
+ }
+
   if(this.kycForm.get('preferredBanks').value){
+    
+
+console.log($('#prebanks').val())
     const param={
       "custUserId": this.userId,
       "banks": this.pbSelection
@@ -307,4 +343,73 @@ this.service.savePreferredBank(param).subscribe((res)=>{
     console.log(item);
   }
   
+  exportToExcel() {
+    console.log($('#prebanks').val())
+    const ws: xlsx.WorkSheet =   
+    xlsx.utils.table_to_sheet(this.epltable.nativeElement);
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+    xlsx.writeFile(wb, 'epltable.xlsx');
+   }
+  
+ 
+
+
+ 
+handleFileInputSA(e) {    
+  var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+  var sizeInMb = file.size/1024;
+  var sizeLimit= 1024*20;
+  
+this.filename=file.name;
+console.log(this.filename)
+//this.kycData.get('prebanks').setValue(this.filename);
+
+    var reader = new FileReader();
+        reader.onload = this._handleReaderLoaded.bind(this);
+        reader.readAsDataURL(file);
+  
+}
+_handleReaderLoaded(e) {
+  let reader = e.target;
+  this.imageSrc =this.filename +" |" + reader.result;
+  console.log(this.imageSrc)
+$('#prebanks').val(this.imageSrc)
+ // this.kycForm.get('prebanks').setValue(this.imageSrc);
+  console.log($('#prebanks').val())
+}
+
+
+
+
+
+selectFile(e) {
+
+  this.kycForm.get('prebanks').setValue(this.imageSrc);
+    // $("#moreImageUploadLinkType").show();
+    if(e.target.files.length==1)
+    { 
+   
+    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    var sizeInMb = file.size/1024;
+    var sizeLimit= 1024*20;
+  
+    this.filename=file.name;  
+    
+     var reader = new FileReader();
+       reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsDataURL(file);  
+     // this.invalidFileMsg1=""   
+  
+  } 
+    else{
+    //  this.invalidFileMsg="You are not allowed to upload more one file";
+      $('#prebanks').val("");   
+     
+      return
+  }
+  console.log($('#prebanks').val)
+  }
+
+
 }

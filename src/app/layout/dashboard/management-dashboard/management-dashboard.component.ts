@@ -235,11 +235,17 @@ export class ManagementDashboardComponent implements OnInit {
           this.bankAsCustCount = res;
       })
   }
+//   getOverAllRef() {
+//       this.service.getOverAllReferrer("Referrer").subscribe((res) => {
+//           this.overAllRefCount = res;
+//       })
+//   }
+
   getOverAllRef() {
-      this.service.getOverAllReferrer("Referrer").subscribe((res) => {
-          this.overAllRefCount = res;
-      })
+    this.service.getOverallReferrer('Referrer').subscribe((res) => this.overAllRefCount = res);
   }
+
+
   getOverAllCustRejectedTran() {
       this.service.getCustomerTranStatCount("Rejected").subscribe((res) => {
           this.overAllCustRejTransc = res;

@@ -155,12 +155,12 @@ export class DashboardService {
     }
     return this.httpClient.post(URLS.getOverAllCustomersCount, param);
   }
-  getOverAllReferrer(subscriberType): Observable<any> {
-    const param = {
-      'subscriberType': subscriberType
-    }
-    return this.httpClient.post(URLS.getOverAllReferrerCount, param);
-  }
+  // getOverAllReferrer(subscriberType): Observable<any> {
+  //   const param = {
+  //     'subscriberType': subscriberType
+  //   }
+  //   return this.httpClient.post(URLS.getOverAllReferrerCounts, param);
+  // }
   getOverAllBank(subscriberType, bankType): Observable<any> {
     const request = {
       'subscriberType': subscriberType,
@@ -343,14 +343,27 @@ export class DashboardService {
       return res;
     }) 
   }
-  getReferrer(subscriberType):Observable<any>{
+  getReferrer(subscriberType,dateFrom, dateTo):Observable<any>{
     const req={
-      'subscriberType':subscriberType
+      'subscriberType':subscriberType,
+      'dateFrom':dateFrom,
+      'dateTo' :dateTo
     }
     return this.httpClient.post(URLS.getReferrerCount,req).pipe((res) => {
       return res;
     }) 
   }
+
+  getOverallReferrer(subscriberType):Observable<any>{
+    const req={
+      'subscriberType':subscriberType
+    }
+    return this.httpClient.post(URLS.getOverallReferrerCounts,req).pipe((res) => {
+      return res;
+    }) 
+  }
+
+
   getCustTransactionalStat(subscriberType,dateFrom, dateTo): Observable<any> {
     const param = {
       'subscriberType': subscriberType,

@@ -175,7 +175,7 @@
           <br>
          <!-- recent edit -->
           <tr>
-            <td><b> Preferred Banks </b></td>
+            <td><b>360tf Preferred Banks </b></td>
            
               <td class="multiselectClass">
              
@@ -188,8 +188,18 @@
                 (click)="closeNone()">&times;</button> 
                
               </td>
-        <td></td>
+       
           </tr>
+
+        <tr>
+          <td>Other Preferred Bank  </td>
+          <!-- <td><input type="text"  id="prebanks"></td> -->
+          <button (click)="exportToExcel()" class="btn btn-info">Download</button> 
+       
+          <input  #myInput  (change)="handleFileInputSA($event);selectFile($event);" type="file"                                             
+          placeholder="No file" class="filestyle" name="prebanks" id="prebanks" data-icon="false"/>
+
+        </tr>
 
           <tr>
              
@@ -236,4 +246,28 @@
         </div>
      </div>
   </div>
+</div>
+
+
+
+<div [hidden]="true" class="col-md-12 table-responsive" #epltable>
+  <div style="padding-bottom: 10px;padding-top: 10px;">
+   <div class="row">
+    <div class="col-sm-12">
+     <!-- <button (click)="exportToExcel()" class="btn btn-success">Download</button>  -->
+    </div>
+   </div>
+  </div>
+  <table class="table table-bordered">
+   <thead class="thead-dark">
+   <tr>
+    <th>Bank Name</th>
+    <th>Country</th>
+    <th>Contact Person Name</th>
+    <th>Contact Person Mobile No.</th>
+
+   </tr>
+  </thead>
+  
+ </table>
 </div>

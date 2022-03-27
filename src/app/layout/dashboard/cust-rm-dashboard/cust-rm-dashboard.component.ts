@@ -51,12 +51,20 @@ export class CustRmDashboardComponent implements OnInit {
     this.getCustRejectedTrCount('Rejected', null, null);
     this.getCustExpiredTrCount('Expired', null, null);
     this.getAllCustomersCount('Customer', null, null);
+    this.getReferrerCount(null,null);
+
     this.getActiveCustomerTransCount();
     this.getTransEXpiryCount();
     this.getPayPendingCount();
     this.getKycPendingCount();
     this.getSubsExpCount();
-    this.getReferrerCount();
+
+    //if(localStorage.getItem('role')== "Bank RM" || localStorage.getItem('role')== "Customer RM"){
+    //this.getReferrerCount();
+  // }else{
+  //   this.getOverallReferrerCount();
+  // }
+
   }
 
   getAllTrCount(subscriberType, bankType, dateFrom, dateTo) {
@@ -75,6 +83,15 @@ export class CustRmDashboardComponent implements OnInit {
   getAllCustomersCount(subscriberType, dateFrom, dateTo) {
     this.service.getAllCustomers(subscriberType, dateFrom, dateTo).subscribe((res) => this.allCustomers = res);
   }
+
+  getReferrerCount(dateFrom, dateTo) {
+    this.service.getReferrer('Referrer',dateFrom, dateTo).subscribe((res) => this.referrerCount = res);
+  }
+  getOverallReferrerCount() {
+    this.service.getOverallReferrer('Referrer').subscribe((res) => this.referrerCount = res);
+  }
+
+
   getActiveCustomerTransCount() {
     this.service.getActiveCustomerTrans().subscribe((res) => this.activeTrxns = res);
   }
@@ -90,9 +107,7 @@ export class CustRmDashboardComponent implements OnInit {
   getSubsExpCount() {
     this.service.getCustSubscriptionExpiry('Customer',null).subscribe((res) => this.subsExp = res);
   }
-  getReferrerCount() {
-    this.service.getReferrer('Referrer').subscribe((res) => this.referrerCount = res);
-  }
+ 
 
   getAllCustTransationStat(dateFrom, dateTo) {
     this.service.getCustTransactionalStat('Customer', dateFrom, dateTo).subscribe((res) => {
@@ -208,6 +223,7 @@ drawBarChartTranCompStat(data_country) {
     this.getCustRejectedTrCount('Rejected', strtDate, endDate);
     this.getCustExpiredTrCount('Expired', strtDate, endDate);
     this.getAllCustomersCount('Customer', strtDate, endDate);
+    this.getReferrerCount(strtDate, endDate);
   }
   changeTranStart(event: MatDatepickerInputEvent<Date>) {
     let formatedDate = formatDate(new Date(event.target.value), 'yyyy-MM-dd', 'en');

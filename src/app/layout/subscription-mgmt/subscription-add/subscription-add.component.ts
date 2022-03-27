@@ -176,7 +176,7 @@ export class SubscriptionAddComponent implements OnInit {
           this.pbSelection.push(record);
         }
         this.subscriptionForm.patchValue({                  
-           country:this.pbSelection
+          country:this.pbSelection
           });
 
         // for (const record of JSON.parse(JSON.stringify(res)).countryList) {
