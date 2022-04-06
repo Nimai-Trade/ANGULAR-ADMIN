@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
@@ -114,6 +114,13 @@ export class BanksService {
     );
   }
 
+  viewUploadedUrl(data){
+    return this.httpClient.post(URLS.getviewUploadedUrl,data, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
 
 bankList(){
   return this.httpClient.get(URLS.getBankListUrl, { headers: this.headers }).pipe(
@@ -175,12 +182,38 @@ saveBankRating(id) {
   }
 
   savePreferredBank(reqData) {
+    
     return this.httpClient.post(URLS.postSavePreferredBank, reqData, { headers: this.headers }).pipe(
       map((res) => {
         return res;
       })
     );
   }
+
+
+  upload(userid, file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+    const req = new HttpRequest('POST', `${URLS.postSaveUploadedPreferredBank}`+userid, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.httpClient.request(req);
+  }
+  
+  saveUploadedPreferredBank(userid,file) {
+    console.log(file)
+    const fd: FormData = new FormData();
+    fd.append('file', file[0], file[0].name);
+    return this.httpClient.post(URLS.postSaveUploadedPreferredBank+userid, fd, { headers: {'Content-Type': 'multipart/form-data'} }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+
 
   kycStatusUpdate(reqData) {
     return this.httpClient.post(URLS.postMakerKycStatusUpdate, reqData, { headers: this.headers }).pipe(

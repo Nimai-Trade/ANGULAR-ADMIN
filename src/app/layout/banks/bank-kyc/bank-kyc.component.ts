@@ -25,12 +25,14 @@ export class BankKycComponent implements OnInit {
   empCode:any;
   ranking: any
   ratingList: { code: string; name: string; }[];
+  agency: { code: string; name: string; }[];
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<BankKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
     });
     this.ratingForm=this.fb.group({
-      rating:['']
+      rating:[''],
+      subRate:['']
     })
   }
 
@@ -40,15 +42,41 @@ export class BankKycComponent implements OnInit {
     this.myRights = this.rightList.split(',');
     this.empCode = localStorage.getItem('nimaiId');
     this.loadKycDetails();
-    this.ratingList = [{ 'code': 'AAA', 'name': 'AAA' }, { 'code': 'AA+', 'name': 'AA+' },
-    { 'code': 'AA', 'name': 'AA' }, { 'code': 'AA-', 'name': 'AA-' },
-    { 'code': 'A+', 'name': 'A+' }, { 'code': 'A-', 'name': 'A-' },
-    { 'code': 'BBB+', 'name': 'BBB+' }, { 'code': 'BBB', 'name': 'BBB' },
-    { 'code': 'BBB-', 'name': 'BBB-' }, { 'code': 'BB+', 'name': 'BB+' },
-    { 'code': 'BB', 'name': 'BB' }, { 'code': 'BB-', 'name': 'BB-' }];
-
+    // this.ratingList1 = [{ 'code': 'AAA', 'name': 'AAA' }, { 'code': 'AA+', 'name': 'AA+' },
+    // { 'code': 'AA', 'name': 'AA' }, { 'code': 'AA-', 'name': 'AA-' },
+    // { 'code': 'A+', 'name': 'A+' }, { 'code': 'A-', 'name': 'A-' },
+    // { 'code': 'BBB+', 'name': 'BBB+' }, { 'code': 'BBB', 'name': 'BBB' },
+    // { 'code': 'BBB-', 'name': 'BBB-' }, { 'code': 'BB+', 'name': 'BB+' },
+    // { 'code': 'BB', 'name': 'BB' }, { 'code': 'BB-', 'name': 'BB-' }];
+    this.agency = [{ 'code': 'agency1', 'name': 'Agency 1' }, { 'code': 'agency2', 'name': 'Agency 2' },
+    { 'code': 'agency3', 'name': 'Agency 3' }];
+    // this.ratingList = [{ 'code': 'AAA', 'name': 'AAA' }, { 'code': 'AA+', 'name': 'AA+' },
+    // { 'code': 'AA', 'name': 'AA' }, { 'code': 'AA-', 'name': 'AA-' },
+    // { 'code': 'A+', 'name': 'A+' }, { 'code': 'A-', 'name': 'A-' },
+    // { 'code': 'BBB+', 'name': 'BBB+' }, { 'code': 'BBB', 'name': 'BBB' },
+    // { 'code': 'BBB-', 'name': 'BBB-' }, { 'code': 'BB+', 'name': 'BB+' },
+    // { 'code': 'BB', 'name': 'BB' }, { 'code': 'BB-', 'name': 'BB-' }];
    // this.loadRank();
   }
+
+  onChangeType(){
+ let event= this.ratingForm.get('rating').value
+ console.log(event)
+this.ratingList=[];
+    if(event=='agency1'){
+    this.ratingList = [{ 'code': 'A', 'name': 'A' } ,{ 'code': 'AA', 'name': 'AA' }, { 'code': 'AAA', 'name': 'AAA' }];
+    }else if(event=='agency2')
+    {
+    this.ratingList = [{ 'code': 'a', 'name': 'a' } ,{ 'code': 'aa', 'name': 'aa' }, { 'code': 'aaa', 'name': 'aaa' }];
+    }else if(event=='agency3'){
+    this.ratingList = [{ 'code': '1', 'name': '1' } ,{ 'code': '2', 'name': '2' }, { 'code': '3', 'name': '3' }];
+    }else{
+console.log(event)
+  }
+}
+
+
+
   loadRank() {
   const data=
     {
@@ -114,7 +142,7 @@ export class BankKycComponent implements OnInit {
     const data=
     {
       "bankUserid": this.data.id,
-	        "rating": this.ratingForm.controls['rating'].value
+	        "rating": this.ratingForm.controls['rating'].value +" : "+this.ratingForm.controls['subRate'].value
     }
 
    this.service.saveBankRating(data).subscribe((res)=>{

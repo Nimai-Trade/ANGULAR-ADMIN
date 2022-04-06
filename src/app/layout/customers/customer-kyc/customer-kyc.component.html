@@ -191,18 +191,24 @@
        
           </tr>
 
+
+
         <tr>
           <td>Other Preferred Bank  </td>
-          <!-- <td><input type="text"  id="prebanks"></td> -->
-          <button (click)="exportToExcel()" class="btn btn-info">Download</button> 
-       
-          <input  #myInput  (change)="handleFileInputSA($event);selectFile($event);" type="file"                                             
+          <!-- <td><input type="text"  id="prebanks"></td>   uploadexcel($event)6 <button (click)="exportToExcel()" class="btn btn-info">Download</button>-->
+        <td>    <input  #myInput  (change)="selectFile($event);" type="file" multiple="multiple"                                    
           placeholder="No file" class="filestyle" name="prebanks" id="prebanks" data-icon="false"/>
-
+          <a style="cursor: pointer" (click)="exportexcel()">
+            <mat-icon> cloud_download</mat-icon>
+          </a>
+        </td> 
         </tr>
 
-          <tr>
-             
+<tr class="bk" *ngFor="let data of bankDetails">
+{{data.bankName}} , {{data.country}}
+</tr>
+
+          <tr>             
             <td></td>       
             <td>
 
@@ -213,6 +219,7 @@
 
       </tbody>
     </table>
+   
         </div>
         </div>
         </div>
@@ -250,7 +257,7 @@
 
 
 
-<div [hidden]="true" class="col-md-12 table-responsive" #epltable>
+<div [hidden]="true" class="col-md-12 table-responsive" #epltable id="excel-table">
   <div style="padding-bottom: 10px;padding-top: 10px;">
    <div class="row">
     <div class="col-sm-12">
@@ -267,6 +274,13 @@
     <th>Contact Person Mobile No.</th>
 
    </tr>
+   <tr *ngFor="let sup of bankDetails">
+     
+    <td>{{ sup.bankName }}</td>  
+    <td>{{ sup.country }}</td> 
+    <td>{{ sup.contactPersonName }}</td> 
+    <td>{{ sup.contactPersonContactNo }}</td> 
+ </tr>
   </thead>
   
  </table>

@@ -7,6 +7,7 @@ import { SharedUtilService } from 'src/app/shared/services/shared-util';
 import { ShowImageComponent } from 'src/app/shared/show-image/show-image.component';
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import * as $ from 'src/assets/js/jquery.min';
+import * as XLSX from 'xlsx';
 
 import * as xlsx from 'xlsx';
 
@@ -26,12 +27,14 @@ export class CustomerKycComponent implements OnInit {
   result = '';
   rightList : any;
   myRights : any;
+  fileName= 'ExcelSheet.xlsx'; 
   userId:any;
   showLink:boolean=false;
   empCode:any;
   filedId: string;
   uploadedFile: File[] = [];
-
+  selectedFiles?: FileList;
+  currentFile?: File;
   isCustomer: any;
   bankList: Object;
   preferredBank: any[]=[];
@@ -44,6 +47,7 @@ export class CustomerKycComponent implements OnInit {
   selectedItems: string[];
   filename: any;
   imageSrc: string="";
+  bankDetails: Object;
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
@@ -135,6 +139,7 @@ this.service.bankList().subscribe((res)=>{
   }
  })
 
+ 
   }
 
 
@@ -174,8 +179,17 @@ console.log('jkj')
         console.log('ooo')
         this.loadViewPreferredBank();
       const data={
-        "userId":this.data.id
+        "custUserId":this.data.id
       }
+
+      this.service.viewUploadedUrl(data).subscribe((res)=>{
+        console.log(res)
+        this.bankDetails=res;
+        // this.kycForm.patchValue({
+        //   prebanks:
+        // })
+      })
+
       this.service.viewFieldData(data).subscribe(
         (res) => {
           let data = JSON.parse(JSON.stringify(res)).data;
@@ -378,38 +392,96 @@ $('#prebanks').val(this.imageSrc)
  // this.kycForm.get('prebanks').setValue(this.imageSrc);
   console.log($('#prebanks').val())
 }
+selectFile(e: any) {
+  // if (e.target.files.length > 0) 
+  // {
+  //   this.uploadedFile.push(<File>e.target.files[0]);
+  
+  // }
+  //   const 666666666666666666666    files = e.target.files.item(0)
+
+  //     const file={
+  //   file: files
+  // }
+  this.selectedFiles = e.target.files;
+ // if (this.selectedFiles) {
+    const file: File | null = this.selectedFiles.item(0);
+
+   // if (file) {
+      this.currentFile = file;
+
+      this.service.upload(this.userId,this.currentFile).subscribe(
+        (event: any) => {
 
 
+// console.log(this.uploadedFile)
+// this.service.upload(this.userId,e.target.files).subscribe((res)=>{
+//this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
+})
 
-
-
-selectFile(e) {
-
-  this.kycForm.get('prebanks').setValue(this.imageSrc);
-    // $("#moreImageUploadLinkType").show();
-    if(e.target.files.length==1)
-    { 
+  
+  // $("#moreImageUploadLinkType").show();
+  //   if(e.target.files.length==1)
+  //   { 
    
-    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    var sizeInMb = file.size/1024;
-    var sizeLimit= 1024*20;
+  //   var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+  //   var sizeInMb = file.size/1024;
+  //   var sizeLimit= 1024*20;
   
-    this.filename=file.name;  
+  //   this.filename=file.name;  
     
-     var reader = new FileReader();
-       reader.onload = this._handleReaderLoaded.bind(this);
-      reader.readAsDataURL(file);  
-     // this.invalidFileMsg1=""   
+  //    var reader = new FileReader();
+  //      reader.onload = this._handleReaderLoaded.bind(this);
+  //     reader.readAsDataURL(file);  
+  //    // this.invalidFileMsg1=""   
   
-  } 
-    else{
-    //  this.invalidFileMsg="You are not allowed to upload more one file";
-      $('#prebanks').val("");   
+  // } 
+  //   else{
+  //   //  this.invalidFileMsg="You are not allowed to upload more one file";
+  //     $('#prebanks').val("");   
      
-      return
+  //     return
+  // }
+  // console.log($('#prebanks').val)
   }
-  console.log($('#prebanks').val)
+uploadexcel(event:any){
+  const target: DataTransfer = <DataTransfer>(event.target);
+  if (target.files.length !== 1) {
+    throw new Error('Cannot use multiple files');
   }
+  const reader: FileReader = new FileReader();
+  reader.readAsBinaryString(target.files[0]);
+  reader.onload = (e: any) => {
+    /* create workbook */
+    const binarystr: string = e.target.result;
+    const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+    console.log(binarystr);
+    /* selected the first sheet */
+    const wsname: string = wb.SheetNames[0];
+    const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+    console.log(wsname);
+    /* save data */
+    const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
+    console.log(data); // Data will be logged in array format containing objects
+  };
+}
+exportexcel(): void 
+    {
+       /* table id is passed over here */   
+       let element = document.getElementById('excel-table'); 
+       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+       /* generate workbook and add the worksheet */
+       const wb: XLSX.WorkBook = XLSX.utils.book_new();
+       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+       /* save to file */
+       XLSX.writeFile(wb, this.fileName);
+			
+    }
+
+
+
 
 
 }

@@ -1,9 +1,9 @@
 import { environment } from './environment';
 export const URLS = Object();
-URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
+//URLS.sendActivationLink = 'http://136.232.244.190:8081/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink = 'https://preprod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
-//URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
+URLS.sendActivationLink = 'https://uat.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 //URLS.sendActivationLink='http://Nimai-Prd-LB-1296056161.ap-south-1.elb.amazonaws.com/nimaiEmail/sendAdminSetPasswordLink/';
 //URLS.sendActivationLink = 'https://prod.360tf.trade/nimaiEmail/sendAdminSetPasswordLink';
 
@@ -72,9 +72,13 @@ URLS.saveRatingUrl = environment.BASE_API_URL + 'api/bank/saveBankRating';
 URLS.getRatingUrl = environment.BASE_API_URL + 'api/bank/viewBankRating';
 
 URLS.getBankListUrl = environment.BASE_API_URL + 'api/bank/bankList';
+URLS.getviewUploadedUrl = environment.BASE_API_URL + 'api/bank/viewUploadedPreferredBank';
+
 URLS.getViewPreferredBankUrl = environment.BASE_API_URL + 'api/bank/viewPreferredBank';
 
 URLS.postSavePreferredBank = environment.BASE_API_URL + 'api/bank/savePreferredBank';
+
+URLS.postSaveUploadedPreferredBank = environment.BASE_API_URL + 'api/bank/saveUploadedPreferredBank/';
 
 
 URLS.getCustomerKycDetailsUrl = environment.BASE_API_URL + 'api/bank/kyc/';

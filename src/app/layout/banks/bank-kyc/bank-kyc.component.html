@@ -114,11 +114,13 @@
       <tr>
       <td><b> Rank </b></td>
       <td>
-      
-        <mat-select  formControlName="rating" placeholder="" disableOptionCentering class="roleselct">
-          <mat-option *ngFor="let item of ratingList" [value]="item.code">{{item.name}}
+        <mat-select (selectionChange)="onChangeType()" formControlName="rating" placeholder="" disableOptionCentering class="roleselct">
+          <mat-option *ngFor="let item of agency" [value]="item.code">{{item.name}}
           </mat-option>
-       
+         </mat-select>
+        <mat-select  formControlName="subRate" placeholder="" disableOptionCentering class="roleselct">
+          <mat-option *ngFor="let item of ratingList" [value]="item.code">{{item.name}}
+          </mat-option>       
         </mat-select>
       </td>
     </tr>
@@ -129,10 +131,6 @@
         </div></div>
       </form>
       </div>
-
-        
-
-
   </mat-dialog-content>
 
 </mat-card>
