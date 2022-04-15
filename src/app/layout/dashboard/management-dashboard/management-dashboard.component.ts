@@ -778,24 +778,19 @@ if(status=="kyc-pending-user")
         localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
         this.router.navigate(['app', 'customer', 'customer-list']);
     }
-  
     if( this.bankType == 'Customer'){        
         localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
     this.router.navigate(['app', 'customer', 'customer-list']);
-    }
-   
-  
+    }  
     if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
         localStorage.setItem('referrerSearch', JSON.stringify(data));
         localStorage.setItem('fromDashBoardStatus', 'REFERRER');
         this.router.navigate(['app', 'referrer', 'referrer-list']);
     }
-
     if(this.bankType == "Underwriter" ){        
 localStorage.setItem('bankSearch', JSON.stringify(data));
         this.router.navigate(['app', 'bank', 'bank-list']);
     }
-
 }
 }
 if(status=='grant'){
@@ -890,9 +885,6 @@ if(status=='sub-expiry'){
     if(this.bankType==undefined){
         console.log(this.bankType)
 }else{
-
-   
-
     if(this.bankType == "Underwriter" ){    
         localStorage.setItem('fromDashBoard', 'yes');
         localStorage.setItem('PaymentApproval', 'subExpiry');    
