@@ -112,18 +112,19 @@
               <!-- recent edit -->
 
       <tr>
-      <td><b> Rank </b></td>
+      <td><b> Rating </b></td>
       <td>
-        <mat-select (selectionChange)="onChangeType()" formControlName="rating" placeholder="" disableOptionCentering class="roleselct">
-          <mat-option *ngFor="let item of agency" [value]="item.code">{{item.name}}
+        <mat-select (selectionChange)="onChangeType($event)" [(ngModel)]='rating' formControlName="rating" placeholder="Rating Agency" disableOptionCentering class="roleselct">
+          <mat-option *ngFor="let item of agencys" [value]="item">{{item}}
           </mat-option>
          </mat-select>
-        <mat-select  formControlName="subRate" placeholder="" disableOptionCentering class="roleselct">
-          <mat-option *ngFor="let item of ratingList" [value]="item.code">{{item.name}}
+        <mat-select  formControlName="subRate"  [(ngModel)]='subRate' placeholder="Rating Scale" disableOptionCentering class="roleselct">
+          <mat-option *ngFor="let item of ratingLists" [value]="item.scale">{{item.scale}}
           </mat-option>       
         </mat-select>
       </td>
     </tr>
+    <tr><td></td><td><span *ngIf="errMsg" style="color: red;">Kindly select Rating Scale</span></td></tr>
      <tr><td><button  style="width: 100px;" mat-raised-button color="primary" (click)="saveRating()">save</button>
     </td></tr>
     </tbody>

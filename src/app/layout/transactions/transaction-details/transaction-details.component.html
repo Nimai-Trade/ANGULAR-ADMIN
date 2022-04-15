@@ -80,7 +80,7 @@
                         <tr>
                           <td>Amount</td>
                           <td>
-                            <input matInput value="{{transactionData.amount |number}}" readonly="true">
+                            <input matInput value="{{transactionData.amount |number:'1.2-2'}}" readonly="true">
                           </td>
                         </tr>
                         <tr>
@@ -138,12 +138,21 @@
                             <input matInput value={{transactionData.usansce}} readonly="true">
                           </td>
                         </tr>
-                        <tr *ngIf="transactionData.requirement != 'Refinance'">
+                        <!-- <tr *ngIf="transactionData.requirement != 'Refinance'">
                           <td>Claim period </td>
                           <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
                           </td>
+                        </tr> -->
+                        <tr *ngIf="transactionData.requirement =='BankGuarantee'">
+                          <td >Claim period </td>
+                          <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
+                          </td>
                         </tr>
-                     
+                        <tr *ngIf="transactionData.requirement !='BankGuarantee'">
+                          <td>Payments terms to seller as per LC </td>
+                          <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
+                          </td>
+                        </tr>
 
                 
                         <tr *ngIf="transactionData.requirement == 'Refinance'">

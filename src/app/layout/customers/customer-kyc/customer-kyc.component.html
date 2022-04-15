@@ -90,43 +90,14 @@
                     </td>
                   </tr>
 
-
                 
 
-                  <!-- <tr>
-                  <td>Country</td>
-                  <td>
-                    <input matInput value={{item.subscriptionAmount}} readonly="true" placeholder="">
-                  </td>
-                </tr>
+<!-- lkjkl -->
 
-                <tr>
-                  <td>Document</td>
-                  <td>
-                    <input matInput value={{item.mobileNumber}} readonly="true" placeholder="">
-                  </td>
-                </tr>
 
-                <tr>
-                  <td>Current Status</td>
-                  <td>
-                    <input matInput value={{item.kycStatus}} readonly="true" placeholder="">
-                  </td>
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td>
-                    <a href="#" class="btn btn-info" id="btnapprove">Approve</a>&nbsp;&nbsp;
-                    <a href="#" class="btn btn-info" id="btnreject">Reject</a>
-                  </td>
-                </tr> -->
 
                 </tbody>
               </table>
-
-              
-
             </div>
           </div>
         </div>
@@ -134,96 +105,112 @@
     </div>
 
     <div  class="popupcontent">
-      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+      <div class="tab-content" id="tab1" >
         <div class="tab-pane active" id="pill1">
 
     <table class="table noneborder">
       <tbody>
 
-        <tr *ngIf="isCustomer">
-          <th>Financials</th>
-        </tr>
-        <tr *ngIf="isCustomer">
-          <td>Customer turnover <br> (USD million)</td>
-          <td>
-            <input matInput formControlName="custTurnover" placeholder="">
-          </td>
-        </tr>
-        <tr *ngIf="isCustomer">
-          <td>Import Volume <br>(USD million)</td>
-          <td>
-            <input  formControlName="importVolume"  placeholder="">
-          </td>
-        </tr>
-     
-          <tr *ngIf="isCustomer">
-            <td>Export Volume <br>(USD million)</td>
-            <td>
-              <input matInput formControlName="exportVolume" placeholder="">
-            </td>
-          </tr>
-              <tr *ngIf="isCustomer">
-            <td>Estimated yearly LC Volume <br>(USD million)</td>
-            <td>
-              <input  formControlName="yearlyLCVolume"  placeholder="">
-            </td>
-          </tr>
-          <tr *ngIf="isCustomer">
-            <td>Banks used currently for LC issuance </td>
-            <td> <input  formControlName="usedLCIssuance"  placeholder=""></td>
-          </tr>
-          <br>
-         <!-- recent edit -->
-          <tr>
-            <td><b>360tf Preferred Banks </b></td>
-           
-              <td class="multiselectClass">
-             
-                <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
-                 formControlName="preferredBanks" [(ngModel)]="selectedItems" [settings]="dropdownSettings" 
-                 [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
-                (onDeSelect)="onItemDeSelect($event)">
-                </ng-multiselect-dropdown-angular7>
-                <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
-                (click)="closeNone()">&times;</button> 
+       <tr *ngIf="isCustomer">
+                    <th>Financials</th>
+                  </tr>
+                  <tr *ngIf="isCustomer">
+                    <td>Customer turnover <br> (USD million)</td>
+                    <td>
+                      <input matInput formControlName="custTurnover" placeholder="">
+                    </td>
+                  </tr>
+                  <tr *ngIf="isCustomer">
+                    <td>Import Volume <br>(USD million)</td>
+                    <td>
+                      <input  formControlName="importVolume"  placeholder="">
+                    </td>
+                  </tr>
                
-              </td>
-       
-          </tr>
+                    <tr *ngIf="isCustomer">
+                      <td>Export Volume <br>(USD million)</td>
+                      <td>
+                        <input matInput formControlName="exportVolume" placeholder="">
+                      </td>
+                    </tr>
+                        <tr *ngIf="isCustomer">
+                      <td>Estimated yearly LC Volume <br>(USD million)</td>
+                      <td>
+                        <input matInput formControlName="yearlyLCVolume"  placeholder="">
+                      </td>
+                    </tr>
+                    <tr *ngIf="isCustomer">
+                      <td>Banks used currently for LC issuance </td>
+                      <td> <input matInput formControlName="usedLCIssuance"  placeholder=""></td>
+                    </tr>
+                
+                    <tr>
+                      <td><b>360tf Preferred Banks </b></td>
+                     
+                        <td class="multiselectClass">                       
+                          <ng-multiselect-dropdown-angular7 autocomplete="disabled"  [data]="countryList"
+                           formControlName="preferredBanks" [(ngModel)]="selectedItems" [settings]="dropdownSettings" 
+                           [disabled]="disabledOther" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                          (onDeSelect)="onItemDeSelect($event)">
+                          </ng-multiselect-dropdown-angular7>
+                          <button type="button" *ngIf="disabledOther" class="closeNone closeBtn"      
+                          (click)="closeNone()">&times;</button>                          
+                        </td>                 
+                    </tr>
 
+                    <tr>
+                      <td> <b> Other Preferred Bank </b>                       
+                    </td>
+                    <td><input  #myInput  (change)="selectFile($event);" type="file" multiple="multiple"                                    
+                      placeholder="No file" class="filestyle" name="prebanks" id="prebanks" data-icon="false"/>                     
+                    </td> 
+                    </tr>
+                    <td></td>
+                    <td>  <span (click)="exportexcel()" style="cursor: pointer;color: blue;margin-left: 17px;"> <u> Download Sample Excel</u></span></td>
+                     <tr>
+                       
+                     </tr>
+                
+                    <tr>
 
-
-        <tr>
-          <td>Other Preferred Bank  </td>
-          <!-- <td><input type="text"  id="prebanks"></td>   uploadexcel($event)6 <button (click)="exportToExcel()" class="btn btn-info">Download</button>-->
-        <td>    <input  #myInput  (change)="selectFile($event);" type="file" multiple="multiple"                                    
-          placeholder="No file" class="filestyle" name="prebanks" id="prebanks" data-icon="false"/>
-          <a style="cursor: pointer" (click)="exportexcel()">
-            <mat-icon> cloud_download</mat-icon>
-          </a>
-        </td> 
-        </tr>
-
-<tr class="bk" *ngFor="let data of bankDetails">
-{{data.bankName}} , {{data.country}}
-</tr>
-
-          <tr>             
-            <td></td>       
-            <td>
-
-              <button  class="btn btn-info" (click)="saveFinancial('save')">Save</button>&nbsp;&nbsp;
-              <button  class="btn btn-info" (click)="closeDialog()">Cancel</button>
-            </td>
-          </tr>
+                      <table class="tables">
+                        <thead class="thead-dark">
+                        <tr >
+                        <th class="ths">Bank Name</th>
+                        <th class="ths">Country</th>
+                        <th class="ths">Contact Person Name</th>
+                        <th class="ths">Contact Person Mobile No.</th>
+                        <th class="ths">Email ID</th>
+                        </tr>
+                        <tr *ngFor="let sup of bankDetails">
+                          
+                        <td class="tds">{{ sup.bankName }}</td>  
+                        <td class="tds">{{ sup.country }}</td> 
+                        <td class="tds">{{ sup.contactPersonName }}</td> 
+                        <td class="tds">{{ sup.contactPersonContactNo }}</td> 
+                        <td class="tds">{{sup.contactPersonEmailId}}</td>
+                      </tr>
+                      <br>
+                      <tr>
+                        <td> <button  class="btns btn-info " (click)="saveFinancial('save')">Save</button></td>
+                   <td> <button  class="btns btn-info" (click)="closeDialog()" >Cancel</button></td>
+                       
+                        
+                      </tr>
+                      </thead>
+                      
+                      </table>
+                      </tr>
+                    
+                     
 
       </tbody>
-    </table>
+    </table>  
    
         </div>
         </div>
-        </div>
-
+        </div> 
+       
   </mat-dialog-content>
 
 </mat-card>
@@ -272,7 +259,7 @@
     <th>Country</th>
     <th>Contact Person Name</th>
     <th>Contact Person Mobile No.</th>
-
+    <th>Email ID</th>
    </tr>
    <tr *ngFor="let sup of bankDetails">
      
@@ -280,6 +267,7 @@
     <td>{{ sup.country }}</td> 
     <td>{{ sup.contactPersonName }}</td> 
     <td>{{ sup.contactPersonContactNo }}</td> 
+    <td>{{sup.contactPersonEmailId}}</td>
  </tr>
   </thead>
   

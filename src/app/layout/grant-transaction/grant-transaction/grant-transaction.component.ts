@@ -91,7 +91,7 @@ export class GrantTransactionComponent implements OnInit {
       direction: direction || 'desc',
       totalItems: totalItems || 0
     };
-    console.log(this.pagerConfig)
+    console.log(sortBy)
   }
    getCountryList() {
     this.service.getCountryList().subscribe(

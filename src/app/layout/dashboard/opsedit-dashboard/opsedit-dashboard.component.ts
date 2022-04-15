@@ -35,7 +35,7 @@ export class OpseditDashboardComponent implements OnInit {
   pendingKycApprovalCount: any;
   grantKycCount: any;
   grantUserCount: any;
-  subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Refferer']
+  subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Referrer']
   isAll: boolean;
 
   constructor(private formBuilder: FormBuilder,private router: Router, private service: DashboardService, public dialog: MatDialog, private cdr: ChangeDetectorRef, public sharedUtilService: SharedUtilService) { }

@@ -164,6 +164,23 @@ saveBankRating(id) {
       })
     );
   }
+
+  getMasterRating(id) {
+    return this.httpClient.post(URLS.getMasterRating ,id, { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  getAgency(id) {
+    return this.httpClient.post(URLS.getAgency , { headers: this.headers }).pipe(
+      map((res) => {
+        return res;
+      })
+    );
+  }
+  
+
   viewFieldData(id) {
 
     return this.httpClient.post(URLS.getViewFieldData , id, { headers: this.headers }).pipe(

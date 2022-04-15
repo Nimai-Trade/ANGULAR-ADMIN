@@ -24,8 +24,12 @@ export class BankKycComponent implements OnInit {
   userId:any;
   empCode:any;
   ranking: any
-  ratingList: { code: string; name: string; }[];
-  agency: { code: string; name: string; }[];
+
+  errMsg: boolean;
+  rating: string;
+  subRate: string;
+  agencys: Object;
+  ratingLists: Object;
   constructor(private fb: FormBuilder, private service: BanksService, private dialog: MatDialog, public dialogRef: MatDialogRef<BankKycComponent>, @Inject(MAT_DIALOG_DATA) public data, public sharedUtilService: SharedUtilService) {
     this.kycForm = fb.group({
       kycData: this.fb.array([]),
@@ -42,56 +46,34 @@ export class BankKycComponent implements OnInit {
     this.myRights = this.rightList.split(',');
     this.empCode = localStorage.getItem('nimaiId');
     this.loadKycDetails();
-    // this.ratingList1 = [{ 'code': 'AAA', 'name': 'AAA' }, { 'code': 'AA+', 'name': 'AA+' },
-    // { 'code': 'AA', 'name': 'AA' }, { 'code': 'AA-', 'name': 'AA-' },
-    // { 'code': 'A+', 'name': 'A+' }, { 'code': 'A-', 'name': 'A-' },
-    // { 'code': 'BBB+', 'name': 'BBB+' }, { 'code': 'BBB', 'name': 'BBB' },
-    // { 'code': 'BBB-', 'name': 'BBB-' }, { 'code': 'BB+', 'name': 'BB+' },
-    // { 'code': 'BB', 'name': 'BB' }, { 'code': 'BB-', 'name': 'BB-' }];
-    this.agency = [{ 'code': 'agency1', 'name': 'Agency 1' }, { 'code': 'agency2', 'name': 'Agency 2' },
-    { 'code': 'agency3', 'name': 'Agency 3' }];
-    // this.ratingList = [{ 'code': 'AAA', 'name': 'AAA' }, { 'code': 'AA+', 'name': 'AA+' },
-    // { 'code': 'AA', 'name': 'AA' }, { 'code': 'AA-', 'name': 'AA-' },
-    // { 'code': 'A+', 'name': 'A+' }, { 'code': 'A-', 'name': 'A-' },
-    // { 'code': 'BBB+', 'name': 'BBB+' }, { 'code': 'BBB', 'name': 'BBB' },
-    // { 'code': 'BBB-', 'name': 'BBB-' }, { 'code': 'BB+', 'name': 'BB+' },
-    // { 'code': 'BB', 'name': 'BB' }, { 'code': 'BB-', 'name': 'BB-' }];
-   // this.loadRank();
+
+
   }
 
-  onChangeType(){
- let event= this.ratingForm.get('rating').value
- console.log(event)
-this.ratingList=[];
-    if(event=='agency1'){
-    this.ratingList = [{ 'code': 'A', 'name': 'A' } ,{ 'code': 'AA', 'name': 'AA' }, { 'code': 'AAA', 'name': 'AAA' }];
-    }else if(event=='agency2')
-    {
-    this.ratingList = [{ 'code': 'a', 'name': 'a' } ,{ 'code': 'aa', 'name': 'aa' }, { 'code': 'aaa', 'name': 'aaa' }];
-    }else if(event=='agency3'){
-    this.ratingList = [{ 'code': '1', 'name': '1' } ,{ 'code': '2', 'name': '2' }, { 'code': '3', 'name': '3' }];
-    }else{
-console.log(event)
+  onChangeType(e:any){
+   const data= {
+      "agency":this.ratingForm.get('rating').value
   }
+  
+    this.service.getMasterRating(data).subscribe(
+      (res) => {
+this.ratingLists=res
+      })
 }
 
 
-
-  loadRank() {
-  const data=
-    {
-      "bankUserid": this.data.id
-    }
-
-   this.service.viewBankRating(data).subscribe((res)=>{
-    this.ranking=JSON.parse(JSON.stringify(res)).data.rating;
-   })
-  }
   closeDialog() {
     return this.dialogRef.close({ result: true });
   }
 
   loadKycDetails() {
+
+    this.service.getAgency(this.data.id).subscribe(
+      (res) => {
+       this.agencys=res
+      })   
+
+  
     this.userId=this.data.id
     this.service.kycDetail(this.data.id).subscribe(
       (res) => {
@@ -99,14 +81,35 @@ console.log(event)
         {
           "bankUserid": this.data.id
         }    
+        var str="";
        this.service.viewBankRating(data).subscribe((res)=>{
         this.ranking=JSON.parse(JSON.stringify(res)).data.rating;
+         str=this.ranking.split(" : ",2)
+
+
+        var rate="";
+        if(this.ratingForm.get('rating').value){
+          rate=this.ratingForm.get('rating').value
+        }else{
+        rate=str[0]
+        }
+        console.log(this.ratingForm.get('rating').value)
+              const datas= {
+                "agency":rate
+            }
+            
+              this.service.getMasterRating(datas).subscribe(
+                (res) => {
+          this.ratingLists=res
+                })
+
        // this.ratingForm.controls['rating'].patchValue(this.ranking);
         this.ratingForm.patchValue({
-          rating: this.ranking,
+          rating: str[0],
+          subRate: str[1],
         })
        })
-       console.log(this.ranking)
+     //  this.onChangeType();
         this.resData = res;
         this.kycData = this.kycForm.get('kycData') as FormArray;
         this.resData.forEach(element => {
@@ -122,14 +125,20 @@ console.log(event)
             userid: [element.userid],
             makerComment:[element.reason],
             checkerComment:[element.checkerComment],
-            rating:[this.ranking]
+           // rating:[this.ranking]
+          //  rating: str[0],
+          //  subRate: str[1]
           });
 
 
           this.kycData.push(aaaa);
+          // this.ratingForm.patchValue({
+          //   rating: str[0],
+          //   subRate: str[1],
+          // })
         });
-
         console.log(this.kycData);
+        console.log(this.ratingForm.value);
       });
   }
   financialAction() {
@@ -138,7 +147,17 @@ console.log(event)
   
   }
   saveRating(){
-  console.log(this.ratingForm.controls['rating'].value)
+  console.log(this.ratingForm.get('rating').value)
+  console.log(this.ratingForm.get('subRate').value)
+  if(!this.ratingForm.get('rating').value){
+this.errMsg=true;
+return
+  }
+  if(!this.ratingForm.get('subRate').value){
+    this.errMsg=true;
+    return
+  }
+  this.errMsg=false;
     const data=
     {
       "bankUserid": this.data.id,

@@ -118,11 +118,18 @@
                             <input matInput value={{transactionData.usansce}} readonly="true">
                           </td>
                         </tr>
-                        <tr>
-                          <td>Claim period </td>
+                        <tr *ngIf="transactionData.requirement =='BankGuarantee'">
+                          <td >Claim period </td>
                           <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
                           </td>
                         </tr>
+                        <tr *ngIf="transactionData.requirement !='BankGuarantee'">
+                          <td>Payments terms to seller as per LC </td>
+                          <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
+                          </td>
+                        </tr>
+                      
+
                         <tr>
                           <td>Remarks</td>
                           <td><input matInput value={{transactionData.remarks}} readonly="true">

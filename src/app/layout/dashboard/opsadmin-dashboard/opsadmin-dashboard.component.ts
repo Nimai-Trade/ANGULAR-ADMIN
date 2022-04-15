@@ -44,7 +44,7 @@ export class OpsadminDashboardComponent implements OnInit {
   @ViewChild(MatSort, /* TODO: add static flag */ null) sort: MatSort;
     displayColumns: string[] = ['countryName', 'totalCustomers', 'totalUnderwriters', 'totalTrxn', 'cumulativeLcValue'];
 
-    subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Refferer']
+    subsType: string[] = ['All', 'Customer', 'Bank As Customer', 'Bank as UnderWriter','Referrer']
   isAll: boolean=false;
   userStatType: string[] = ['Customer', 'Bank As Customer', 'Bank As UnderWriter']
   dashboardData: any;
@@ -232,7 +232,7 @@ pendingKycCount(subs) {
         this.subscriberType = "Bank";
         this.bankType = "Underwriter";
     } else if (subs.value == "Referrer") {
-        this.subscriberType = "Bank";
+        this.subscriberType = "Referrer";
         this.bankType = "";
     }
     else {
@@ -411,6 +411,97 @@ if(status=='grant-rm'){
   this.router.navigate(['app', 'grant-rm']);
 }
 }
+if(status=="kyc-pending-user")
+{
+    if(this.pendingKycDrop ==0 || !this.isAll)  
+    return
+
+    if(this.bankType==undefined){
+        console.log(this.bankType)
+}else{
+    localStorage.setItem('fromDashBoard', 'yes');
+    localStorage.setItem('PaymentApproval', 'Not Uploaded');
+    localStorage.setItem('customerSearch', JSON.stringify(data));    
+    if( this.bankType == ''){
+        localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+        this.router.navigate(['app', 'customer', 'customer-list']);
+    }
+    if( this.bankType == 'Customer'){        
+        localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+    this.router.navigate(['app', 'customer', 'customer-list']);
+    }  
+    if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+        localStorage.setItem('referrerSearch', JSON.stringify(data));
+        localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+        this.router.navigate(['app', 'referrer', 'referrer-list']);
+    }
+    if(this.bankType == "Underwriter" ){        
+localStorage.setItem('bankSearch', JSON.stringify(data));
+        this.router.navigate(['app', 'bank', 'bank-list']);
+    }
+}
+}
+if(status=='sub-expiry'){
+  if(this.subsExpiryCount ==0 || !this.isAll)  
+  return
+  if(this.bankType==undefined){
+      console.log(this.bankType)
+}else{
+  if(this.bankType == "Underwriter" ){    
+      localStorage.setItem('fromDashBoard', 'yes');
+      localStorage.setItem('PaymentApproval', 'subExpiry');    
+      localStorage.setItem('bankSearch', JSON.stringify(data));
+              this.router.navigate(['app', 'bank', 'bank-list']);
+          }else{
+              localStorage.setItem('fromDashBoard', 'yes');
+              localStorage.setItem('PaymentApproval', 'subExpiry');  
+              localStorage.setItem('customerSearch', JSON.stringify(data));
+
+              if( this.bankType == '')
+              localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+              if( this.bankType == 'Customer')
+              localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+
+              this.router.navigate(['app','customer', 'customer-list']);
+
+          }
+          if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+              localStorage.setItem('referrerSearch', JSON.stringify(data));
+              localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+              this.router.navigate(['app', 'referrer', 'referrer-list']);
+          }
+}
+}
+if(status=='pay-pending-user'){
+  if(this.paymenPending ==0 || !this.isAll)  
+  return
+  if(this.bankType==undefined){
+      console.log(this.bankType)
+}else{
+  if(this.bankType == "Underwriter" ){        
+      localStorage.setItem('fromDashBoard', 'yes');
+      localStorage.setItem('PaymentApproval', 'PaymentPendingUser');    
+      localStorage.setItem('bankSearch', JSON.stringify(data));
+              this.router.navigate(['app', 'bank', 'bank-list']);
+          }else{
+      localStorage.setItem('customerSearch', JSON.stringify(data));
+      localStorage.setItem('fromDashBoard', 'yes');
+      localStorage.setItem('PaymentApproval', 'PaymentPendingUser');    
+      if( this.bankType == '')
+      localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+      if( this.bankType == 'Customer')
+      localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+      this.router.navigate(['app','customer', 'customer-list']);
+          }
+}
+if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+  localStorage.setItem('referrerSearch', JSON.stringify(data));
+  localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+  this.router.navigate(['app', 'referrer', 'referrer-list']);
+}
+}
+
+
 }
 
 

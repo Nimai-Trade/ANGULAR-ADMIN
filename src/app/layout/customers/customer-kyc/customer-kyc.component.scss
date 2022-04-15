@@ -60,8 +60,9 @@ td .e-multiselect{
  
  ::ng-deep .dropdown-list{
     // margin-top: -64%!important;
+    top: 240px;
     position: fixed!important;
-    width: 400px!important;
+    width: 283px!important;
     height: 200px!important;
     overflow: hidden!important;
  }
@@ -210,14 +211,14 @@ td .e-multiselect{
  //     display: none;
  // }
  
- ::ng-deep .dropdown-list{
-    // margin-top: -64%!important;
-    position: fixed!important;
-    width: 400px!important;
-    height: 200px!important;
-    overflow: hidden!important;
-    bottom: 40px !important;
- }
+//  ::ng-deep .dropdown-list{
+//     // margin-top: -64%!important;
+//     position: fixed!important;
+//     width: 400px!important;
+//     height: 200px!important;
+//     overflow: hidden!important;
+//     bottom: 40px !important;
+//  }
  .closeBtn{
         
     left: 8px;
@@ -312,7 +313,12 @@ td .e-multiselect{
     color: gray !important;
   }
  
- 
+ .btns{
+   padding-bottom: 4px;
+   padding-right: 7px;
+   padding-left: 7px;
+   padding-top: 4px;
+ }
  .inputSearch{
     border-right-width: 0px;
     border-left-width: 0px;
@@ -324,4 +330,17 @@ td .e-multiselect{
     border-color: #e4d0d0;
     font-size: 129%;
     padding-bottom: 7px;
+ }
+
+ .tables {
+   font-family: arial, sans-serif;
+   border-collapse: collapse;
+   width: 102%;
+   position: absolute;
+ }
+ 
+ .tds, .ths {
+   border: 1px solid #dddddd !important;
+   text-align: left !important;
+   padding: 8px !important;
  }

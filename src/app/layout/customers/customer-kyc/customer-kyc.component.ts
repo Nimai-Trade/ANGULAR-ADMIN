@@ -92,7 +92,6 @@ export class CustomerKycComponent implements OnInit {
     }
 this.service.viewPreferredBank(data).subscribe((res)=>{
               this.preferredBank = JSON.parse(JSON.stringify(res));
-              console.log('ffff ')
                 if(this.preferredBank.length){
                   for (const record of JSON.parse(JSON.stringify(res))) {
 
@@ -149,8 +148,6 @@ this.service.bankList().subscribe((res)=>{
 
 
   loadKycDetails() {
-console.log('jkj')
-
     this.userId=this.data.id
   this.isCustomer=this.userId.startsWith('CU');
     this.service.kycDetail(this.data.id).subscribe(
@@ -176,18 +173,14 @@ console.log('jkj')
 
       });
       if(this.isCustomer || this.userId.startsWith('BC')){
-        console.log('ooo')
         this.loadViewPreferredBank();
       const data={
         "custUserId":this.data.id
       }
 
       this.service.viewUploadedUrl(data).subscribe((res)=>{
-        console.log(res)
         this.bankDetails=res;
-        // this.kycForm.patchValue({
-        //   prebanks:
-        // })
+        
       })
 
       this.service.viewFieldData(data).subscribe(
@@ -210,7 +203,7 @@ console.log('jkj')
 
   financialAction() {
     
-    this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
+    this.sharedUtilService.showSnackBarMessage('Records has been updated succefully!');
     
 
   }
@@ -277,11 +270,15 @@ console.log('jkj')
   }
            
 
-  saveFinancial(status){
-this.pbSelection=[];
-for(let data of this.kycForm.get('preferredBanks').value){
-   this.pbSelection.push(data.userid)
-}
+  saveFinancial(status){ 
+    const datas={
+      "custUserId":this.userId
+    }
+
+    this.service.viewUploadedUrl(datas).subscribe((res)=>{
+      this.bankDetails=res;      
+    })
+
    const data= {
       "userId": this.userId,
     "custTurnover":this.kycForm.get('custTurnover').value,
@@ -294,9 +291,13 @@ for(let data of this.kycForm.get('preferredBanks').value){
   }
   this.service.saveFieldData(data).subscribe(
     (res) => {
-      this.sharedUtilService.showSnackBarMessage('you have successfully saved financial data');
+      this.sharedUtilService.showSnackBarMessage('Records has been updated succefully!');
+     
     });
-
+    this.pbSelection=[];
+    for(let data of this.kycForm.get('preferredBanks').value){
+       this.pbSelection.push(data.userid)
+    }
 // if($('#prebanks').val())
 // {
 //   const param={
@@ -316,14 +317,12 @@ if($('#prebanks').val())
 
   if(this.kycForm.get('preferredBanks').value){
     
-
-console.log($('#prebanks').val())
     const param={
       "custUserId": this.userId,
       "banks": this.pbSelection
     }
 this.service.savePreferredBank(param).subscribe((res)=>{
-  this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
+  this.sharedUtilService.showSnackBarMessage('Records has been updated succefully!');
 })
   }
   }
@@ -341,7 +340,6 @@ this.service.savePreferredBank(param).subscribe((res)=>{
      }
    
   onItemSelect(item: any){
-    console.log("Item---",item)
     if(item=="All"){
       this.disabledOther=true;  
       this.selectedItems = [ 'All'];
@@ -358,7 +356,6 @@ this.service.savePreferredBank(param).subscribe((res)=>{
   }
   
   exportToExcel() {
-    console.log($('#prebanks').val())
     const ws: xlsx.WorkSheet =   
     xlsx.utils.table_to_sheet(this.epltable.nativeElement);
     const wb: xlsx.WorkBook = xlsx.utils.book_new();
@@ -376,7 +373,6 @@ handleFileInputSA(e) {
   var sizeLimit= 1024*20;
   
 this.filename=file.name;
-console.log(this.filename)
 //this.kycData.get('prebanks').setValue(this.filename);
 
     var reader = new FileReader();
@@ -387,22 +383,11 @@ console.log(this.filename)
 _handleReaderLoaded(e) {
   let reader = e.target;
   this.imageSrc =this.filename +" |" + reader.result;
-  console.log(this.imageSrc)
 $('#prebanks').val(this.imageSrc)
  // this.kycForm.get('prebanks').setValue(this.imageSrc);
-  console.log($('#prebanks').val())
 }
 selectFile(e: any) {
-  // if (e.target.files.length > 0) 
-  // {
-  //   this.uploadedFile.push(<File>e.target.files[0]);
   
-  // }
-  //   const 666666666666666666666    files = e.target.files.item(0)
-
-  //     const file={
-  //   file: files
-  // }
   this.selectedFiles = e.target.files;
  // if (this.selectedFiles) {
     const file: File | null = this.selectedFiles.item(0);
@@ -411,12 +396,13 @@ selectFile(e: any) {
       this.currentFile = file;
 
       this.service.upload(this.userId,this.currentFile).subscribe(
-        (event: any) => {
+        (res: any) => {
+if(res.body.message){
+  $('#prebanks').val(""); 
+  this.sharedUtilService.showSnackBarMessage(res.body.message);
+return
+}
 
-
-// console.log(this.uploadedFile)
-// this.service.upload(this.userId,e.target.files).subscribe((res)=>{
-//this.sharedUtilService.showSnackBarMessage('Preferred banks assigned succefully!');
 })
 
   
@@ -455,14 +441,12 @@ uploadexcel(event:any){
     /* create workbook */
     const binarystr: string = e.target.result;
     const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
-    console.log(binarystr);
     /* selected the first sheet */
     const wsname: string = wb.SheetNames[0];
     const ws: XLSX.WorkSheet = wb.Sheets[wsname];
-    console.log(wsname);
     /* save data */
     const data = XLSX.utils.sheet_to_json(ws); // to get 2d array pass 2nd parameter as object {header: 1}
-    console.log(data); // Data will be logged in array format containing objects
+     // Data will be logged in array format containing objects
   };
 }
 exportexcel(): void 
@@ -473,7 +457,7 @@ exportexcel(): void
 
        /* generate workbook and add the worksheet */
        const wb: XLSX.WorkBook = XLSX.utils.book_new();
-       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+       XLSX.utils.book_append_sheet(wb, ws, 'PreferredBanks');
 
        /* save to file */
        XLSX.writeFile(wb, this.fileName);
