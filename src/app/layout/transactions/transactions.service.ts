@@ -41,7 +41,7 @@ export class TransactionService {
       'sortBy': sortBy,
       'direction': direction,
       'userId': fileterObj.userId,
-      'emailId': fileterObj.emailId,
+      'emailId': null,
       'mobileNo': fileterObj.mobileNo,
       'companyName': fileterObj.companyName,
       'country': country,

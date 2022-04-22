@@ -36,7 +36,7 @@ export const APP_DATE_FORMATS = {
   ]
 })
 export class ReportComponent implements OnInit {
-  reportNames: string[] = ['Customer Trxn Report', 'Bank Transaction Report',
+  reportNames: string[] = ['Customer Trxn Report', 'Quoted Transaction Report',
     'Payment & Subscription Report',
     'Trxn Expiry Report', 'New User Status Report', 'User Subscription Renewal',
     'Discount Coupon Report', 'Product Requirement Report', 'Referrer Report', 'Customer RM Performance Report',

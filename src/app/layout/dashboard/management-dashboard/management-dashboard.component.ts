@@ -809,7 +809,6 @@ if(status=='grant'){
     localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
     if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
     localStorage.setItem('fromDashBoardStatus', 'REFERRER');
-
     this.router.navigate(['app', 'grantkyc']);
 }
 }

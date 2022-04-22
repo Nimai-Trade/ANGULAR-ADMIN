@@ -318,8 +318,9 @@ if(this.bankType == "" || this.bankType == 'Customer' ){
 
 
     if(status=='kyc'){
+      
       if(this.pendingKycApprovalCount ==0 || !this.isAll)  
-      return
+   return
       if(this.bankType == "Underwriter"){
       localStorage.setItem('fromDashBoard', 'yes');
         localStorage.setItem('bankSearch', JSON.stringify(data));
@@ -337,8 +338,35 @@ if(this.bankType == "" || this.bankType == 'Customer' ){
       localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
       if(this.bankType == "Underwriter" )
       localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
-      if(this.bankType=="Referrer")
+      if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
       localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+
+      if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+        localStorage.setItem('referrerSearch', JSON.stringify(data));
+        localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+        this.router.navigate(['app', 'referrer', 'referrer-list']);
+    }
+      // if(this.pendingKycApprovalCount ==0 || !this.isAll)  
+      // return
+      // if(this.bankType == "Underwriter"){
+      // localStorage.setItem('fromDashBoard', 'yes');
+      //   localStorage.setItem('bankSearch', JSON.stringify(data));
+      //   this.router.navigate(['app', 'bank', 'bank-list']);
+      // }     
+      // else if(this.bankType == "" || this.bankType == 'Customer' ){
+          
+      //   localStorage.setItem('fromDashBoard', 'yes');
+      //   localStorage.setItem('customerSearch' , JSON.stringify(data))
+      // this.router.navigate(['app', 'customer', 'customer-list']);
+      // }
+      // if(this.bankType == "" )
+      // localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+      // if( this.bankType == 'Customer')
+      // localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+      // if(this.bankType == "Underwriter" )
+      // localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
+      // if(this.bankType=="Referrer")
+      // localStorage.setItem('fromDashBoardStatus', 'REFERRER');
    } 
  
  if(status=='employeeGrant'){
@@ -357,7 +385,12 @@ if(status=='grant'){
   localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
   if(this.bankType == "Underwriter" )
   localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
-  if(this.bankType=="Referrer")
+  // if(this.bankType=="Referrer")
+  // localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+  // this.router.navigate(['app', 'grantkyc']);
+
+
+  if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
   localStorage.setItem('fromDashBoardStatus', 'REFERRER');
   this.router.navigate(['app', 'grantkyc']);
 }
