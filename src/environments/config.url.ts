@@ -54,6 +54,8 @@ URLS.getTransactionMobileNumberSearchUrl = environment.BASE_API_URL + 'api/trans
 URLS.getTransactionCompanyNameSearchUrl = environment.BASE_API_URL + 'api/transaction/companyNameSearch/';
 URLS.getTransactionCountrySearchUrl = environment.BASE_API_URL + 'api/transaction/countrySearch/';
 URLS.getTransactionSearchListUrl = environment.BASE_API_URL + 'api/transaction/list';
+URLS.getSecTransactionSearchListUrl = environment.BASE_API_URL + 'api/transaction/secondaryTrlist';
+
 URLS.getTransactionDetailsUrl = environment.BASE_API_URL + 'api/transaction/details/';
 URLS.getQuotationListUrl = environment.BASE_API_URL + 'api/transaction/quotesList';
 URLS.getQuotationDetailsUrl = environment.BASE_API_URL + 'api/transaction/quotes/';

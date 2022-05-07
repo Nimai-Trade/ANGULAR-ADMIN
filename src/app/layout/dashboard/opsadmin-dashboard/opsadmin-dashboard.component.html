@@ -23,7 +23,7 @@
         <div class="row">
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('confirmAwaited')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                    <span (click)="showKYCApproval('payment-approval')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
                      [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{payAwaitedCount}}</span>
                     <h3 class="text">Payment Approval</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -34,7 +34,7 @@
               </div>
               <div class="col-lg-15 col-md-3 col-sm-3 ">
                  <div class="maindash">
-                    <span (click)="showKYCApproval('payment-approval')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
+                    <span (click)="showKYCApproval('grant-payment')" [ngClass]="isAll ? 'cursors' : 'context-menu' " style="padding-left: 30;" 
                      [attr.title]="isAll ? null : 'Kindly click on option from dropdown to get drill down'"  data-toggle="tooltip">{{paymentApprovalCount}}</span>
                     <h3>Grant Payment </h3>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

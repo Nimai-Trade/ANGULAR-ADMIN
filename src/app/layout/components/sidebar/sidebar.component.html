@@ -65,12 +65,35 @@
                                 <p> Dashboard </p>
                             </a>
                         </li>  
-                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("TRANSACTIONS")'>
-                            <a [routerLink]="['/app/transactions']">
-                                <i class="fa fa-exchange"></i>
-                                <p> Transactions </p>
-                            </a>
-                        </li> 
+                       
+                            <li>
+                                <a data-toggle="collapse" href="#accountPages1" [attr.aria-expanded]="areaExpandedacc" >
+                                    <i class="fa fa-users"></i>
+                                    <p>Transactions
+                                        <b class="caret"></b>
+                                    </p>
+                                </a>
+                                <div class="collapse" id="accountPages1" [ngClass]="accountPages">
+                                    <ul class="nav">
+                                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("TRANSACTIONS")'>
+                                            <a [routerLink]="['/app/transactions']">
+                                                <i class="fa fa-exchange"></i>
+                                                <p> primary Transactions </p>
+                                            </a>
+                                        </li> 
+                                        <li [routerLinkActive]="['active']" *ngIf='myRights.includes("TRANSACTIONS")'>
+                                            <a [routerLink]="['/app/secondary-transaction/secondary-transaction-search']">
+                                                <i class="fa fa-exchange"></i>
+                                                <p>Secondary Transactions</p>
+                                            </a>
+                                        </li>
+                                      
+                                    </ul>
+                                </div>
+                            </li>
+
+                     
+                 
                         <li [routerLinkActive]="['active']" *ngIf='myRights.includes("CUSTOMERS")'>
                             <a [routerLink]="['/app/customer']">
                                 <i class="fas fa-users"></i>

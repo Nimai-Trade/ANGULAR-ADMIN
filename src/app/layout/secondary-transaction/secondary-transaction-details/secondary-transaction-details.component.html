@@ -43,15 +43,13 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td style="width: 50%;" *ngIf="transactionData.requirement != 'BillAvalisation'">LC Issuing Bank</td>
-                          <td style="width: 50%;" *ngIf="transactionData.requirement == 'BillAvalisation'" >Avalising Bank</td>
+                          <td style="width: 50%;">LC Issuing Bank</td>
                           <td>
                             <input matInput value={{transactionData.issuingBank}} readonly="true">
                           </td>
                         </tr>
                         <tr>
-                          <td *ngIf="transactionData.requirement != 'BillAvalisation'">Branch </td>
-                          <td *ngIf="transactionData.requirement == 'BillAvalisation'">Avalising Branch </td>
+                          <td>Branch </td>
                           <td>
                             <input matInput value={{transactionData.branch}} readonly="true">
                           </td>
@@ -86,8 +84,7 @@
                           </td>
                         </tr>
                         <tr>
-                          <td *ngIf="transactionData.requirement != 'BillAvalisation'">Issuing Date</td>
-                          <td *ngIf="transactionData.requirement == 'BillAvalisation'">Bill Issuing Date</td>
+                          <td>Issuing Date</td>
                           <td>
                             <!-- {{transactionData.issuingDate | "dd-MM-y HH:mm:ss z"}} -->
                             <input matInput value="{{transactionData.issuingDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
@@ -99,7 +96,7 @@
                             <input matInput value="{{transactionData.lastShipmentDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
                           </td>
                         </tr>
-                        <tr *ngIf="transactionData.requirement != 'Refinance' && transactionData.requirement !='BankGuarantee' && transactionData.requirement !='BillAvalisation'">
+                        <tr *ngIf="transactionData.requirement != 'Refinance' && transactionData.requirement !='BankGuarantee'">
                           <td>Negotiation Date</td>
                           <td>
                             <input matInput value="{{transactionData.negotiationDate | date : 'dd-MM-y HH:mm:ss z'}}" readonly="true">
@@ -132,7 +129,7 @@
                         </tr>
                 
                   
-                        <tr *ngIf="transactionData.requirement != 'Refinance' && transactionData.requirement != 'BillAvalisation'">
+                        <tr *ngIf="transactionData.requirement != 'Refinance'">
                           <th colspan="2">Tenor of Deferred Payment</th>
                         </tr>
                         <tr *ngIf="transactionData.requirement != 'Refinance'">
@@ -151,7 +148,7 @@
                           <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
                           </td>
                         </tr>
-                        <tr *ngIf="transactionData.requirement !='BankGuarantee' && transactionData.requirement !='BillAvalisation'">
+                        <tr *ngIf="transactionData.requirement !='BankGuarantee'">
                           <td>Payments terms to seller as per LC </td>
                           <td><input matInput value={{transactionData.paymentTerms}} readonly="true">
                           </td>
@@ -176,15 +173,7 @@
                           <td>LC Maturity Date</td>
                           <td><input matInput value={{transactionData.lCMaturityDate}} readonly="true">
                       </tr>
-                      <tr *ngIf="transactionData.requirement == 'BillAvalisation'">
-                        <td>Bill Maturity Date</td>
-                        <td><input matInput value={{transactionData.maturityDate}} readonly="true">
-                    </tr>
-                      <tr *ngIf="transactionData.requirement =='BillAvalisation'">
-                        <td >Types of Bill</td>
-                        <td><input matInput value={{transactionData.billType}} readonly="true">
-                    </tr>
-                   
+                    
                       <tr *ngIf="transactionData.requirement == 'Refinance'">
                           <td>Multiple Maturity Date</td>    
                           <!-- <td><input matInput value={{transactionData.tenorFile}} readonly="true">                            -->

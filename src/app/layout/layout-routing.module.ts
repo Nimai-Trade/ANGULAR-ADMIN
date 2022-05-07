@@ -33,6 +33,10 @@ const routes: Routes = [
                 loadChildren: './transactions/transaction.module#TransactionModule'
             },
             {
+                path: 'secondary-transaction',
+                loadChildren: './secondary-transaction/transaction.module#TransactionModule'
+            },
+            {
                 path: 'customer',
                 loadChildren: './customers/customer.module#CustomerModule'
             },

@@ -1,0 +1,120 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="blue">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Secondary Transactions</h4>
+            <!-- <form> -->
+            <div class="row" [formGroup]="transactionSearchForm">
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="searchTerm" [matAutocomplete]="auto" (keydown.space)="$event.preventDefault()">
+                  <label> User ID</label>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let userId of userIdSearch" [value]="userId" [disabled]="userId === 'No Record Found'">
+                      {{ userId }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="emailSearchTerm" [matAutocomplete]="auto1" (keydown.space)="$event.preventDefault()">
+                  <label>Email ID</label>
+                  <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option *ngFor="let emailId of emalSearch" [value]="emailId" [disabled]="emailId === 'No Record Found'">
+                      {{ emailId }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="mobileSearchTerm" [matAutocomplete]="auto2" (keydown.space)="$event.preventDefault()">
+                  <label>Registered Mobile No.</label>
+                  <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option *ngFor="let mobileNo of mobileSearch" [value]="mobileNo" [disabled]="mobileNo === 'No Record Found'">
+                      {{ mobileNo }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="companyNameSearchTerm" [matAutocomplete]="auto3">
+                  <label>Company Name</label>
+                  <mat-autocomplete #auto3="matAutocomplete">
+                    <mat-option *ngFor="let companyName of companyNameSearch" [value]="companyName" [disabled]="companyName === 'No Record Found'">
+                      {{ companyName }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [formControl]="countrySearchTerm" [matAutocomplete]="auto4">
+                  <label>Country</label>
+                  <mat-autocomplete #auto4="matAutocomplete">
+                    <mat-option *ngFor="let counry of countrySearch" [value]="counry" [disabled]="counry === 'No Record Found'">
+                      {{ counry }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput formControlName="goodsType" autocomplete="off">
+                  <label>Requirement</label>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="inputDiv">
+                  <!-- <label>LC Issuing a range</label> -->
+                  <ejs-daterangepicker placeholder='LC Issuing Range' format='dd-MM-yyyy' matInput id='daterangepicker' formControlName="startDate" [startDate]='start'
+                    [endDate]='end'></ejs-daterangepicker>
+
+                </div>
+              </div>
+
+              <!-- <div class="col-md-3">
+                <div class="inputDiv">
+                  <mat-form-field class="example-form-field" appearance="fill">
+                    <mat-label>First campaign</mat-label>
+                    <mat-date-range-input
+                      [formGroup]="campaignOne"
+                      [rangePicker]="campaignOnePicker"
+                      [comparisonStart]="campaignTwo.value.start"
+                      [comparisonEnd]="campaignTwo.value.end">
+                      <input matStartDate placeholder="Start date" formControlName="start">
+                      <input matEndDate placeholder="End date" formControlName="end">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                  </mat-form-field>
+                </div>
+              </div> -->
+
+              <!-- <div class="col-md-3">
+                <div class="inputDiv">
+                  <input matInput [min]="myDate" matInput formControlName="trxnTo"
+                    (ngModelChange)="updateMyDate($event)" [matDatepicker]="trxnTo" (click)="trxnTo.open()" readonly />
+                  <label>To</label>
+                  <mat-datepicker-toggle matSuffix [for]="trxnTo"></mat-datepicker-toggle>
+                  <mat-datepicker #trxnTo></mat-datepicker>
+                </div>
+              </div> -->
+            </div>
+            <a (click)="searchTrasaction();" class="btn btn-info pull-right">Search</a>
+            <div class="clearfix"></div>
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

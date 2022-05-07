@@ -1,0 +1,247 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
+  <div fxLayout="column" fxFlex="10%">
+    <a href="javascript:void(0);" (click)="closeDialog()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </a>
+  </div>
+  <div fxLayout="column" fxFlex="90%">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+  </div>
+</div>
+
+<mat-card>
+  <mat-dialog-content>
+    <div class="popupcontent">
+      <div class="tab-content" id="tab1" style="overflow-y: auto;">
+        <div class="tab-pane active" id="pill1">
+          <div class="graydiv">
+            <table class="table">
+              <tr>
+                <th>Transaction ID</th>
+                <th>{{quatationData.transactionId}}</th>
+                <th colspan="2"></th>
+              </tr>
+              <tr>
+                <th>Requirement</th>
+                <td>{{quatationData.requirementType}}</td>
+                <th>Amount</th>
+                <td>{{quatationData.amount}}</td>
+              </tr>
+              <tr>
+                <th>IB</th>
+                <td>{{quatationData.ib}}</td>
+                <th>Tenor</th>
+                <td>{{quatationData.tanor}} Days</td>
+              </tr>
+            </table>
+          </div>
+          <small>The currency of quote : <strong>{{quatationData.currency}} </strong></small>
+          <div class="form-group"></div>
+          <table class="table">
+            <tbody>
+              <tr
+                *ngIf="quatationData.requirementType === 'Confirmation' ||  quatationData.requirementType === 'ConfirmAndDiscount'">
+                <td>Confirmation Commission p.a.</td>
+                <td>
+                  <input type="text" value={{quatationData.confirmationCharges}} readonly="true" placeholder="">
+                  <span class="pull-right percent">%</span>
+                </td>
+              </tr>
+              <tr
+              *ngIf="quatationData.requirementType === 'BankGuarantee'">
+              <td>BG Commission p.a.</td>
+              <td>
+                <input type="text" value={{quatationData.confirmationCharges}} readonly="true" placeholder="">
+                <span class="pull-right percent">%</span>
+              </td>
+            </tr>
+              <tr
+                *ngIf="quatationData.confChgsIssuanceToNegot === 'YES' && quatationData.requirementType === 'Confirmation' || quatationData.requirementType === 'ConfirmAndDiscount'">
+                <td>Confirmation charges applicable from date of issuance till Negotiation date </td>
+                <td>
+                  <input type="text" value={{quatationData.confChgsIssuanceToNegot}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr
+                *ngIf="quatationData.confChgsIssuanceToMatur === 'YES' && quatationData.requirementType === 'Confirmation' || quatationData.requirementType === 'ConfirmAndDiscount'">
+                <td>Confirmation charges applicable from date of issuance till date of maturity</td>
+                <td>
+                  <input type="text" value={{quatationData.confChgsIssuanceToMatur}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr
+              *ngIf="quatationData.confChgsIssuanceToexp === 'yes' && quatationData.requirementType === 'BankGuarantee' ">
+              <td>Commission charges applicable from date of issuance till expiry date </td>
+              <td>
+                <input type="text" value={{quatationData.confChgsIssuanceToexp}} readonly="true" placeholder="">
+              </td>
+            </tr>
+
+            <tr
+              *ngIf="quatationData.confChgsIssuanceToClaimExp === 'yes' && quatationData.requirementType === 'BankGuarantee'">
+              <td>Commission charges applicable from date of issuance till claim expiry date</td>
+              <td>
+                <input type="text" value={{quatationData.confChgsIssuanceToClaimExp}} readonly="true" placeholder="">
+              </td>
+            </tr>
+
+              <tr *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Refinance' || quatationData.requirementType === 'Banker'">
+                <td>Applicable Benchmark (if any)</td>
+                <td>
+                  <input type="text" value={{quatationData.applicableBenchmark}} readonly="true" placeholder="">
+                  <span class="pull-right percent">%</span>
+                </td>
+              </tr>
+
+              <tr *ngIf="(quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Refinance' || quatationData.requirementType === 'Banker') && quatationData.commentsBenchmark">
+                <td>
+                    <textarea rows="5"
+                    placeholder="Comments for applicable benchmark (optional), e.g. 6 months Libor, 1 month Euribor" value={{quatationData.commentsBenchmark}}  readonly="true"></textarea>
+                </td>
+                <td>
+                 
+                </td>
+              </tr>
+
+              <!-- <tr *ngIf="quatationData.requirementType === 'Discounting'">
+                <td>Comments for Benchmark (Text Field)</td>
+                <td>
+                  <input type="text" value={{quatationData.commentsBenchmark}} readonly="true" placeholder="">
+                </td>
+              </tr> -->
+
+              <tr
+                *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount'">
+                <td>Discounting charges p.a. (Spread over benchmark)</td>
+                <td>
+                  <input type="text" value={{quatationData.discountingChargesPA}} readonly="true" placeholder="">
+                  <span class="pull-right percent">%</span>
+                </td>
+              </tr>
+
+              <tr *ngIf="quatationData.requirementType === 'Refinance'">
+                <td>Refinancing charges p.a. (Spread over benchmark)</td>
+                <td>
+                  <input type="text" value={{quatationData.refinancingCharges}} readonly="true" placeholder="">
+                  <span class="pull-right percent">%</span>
+                </td>
+              </tr>
+
+              <tr *ngIf="quatationData.requirementType === 'Banker'">
+                <td>Banker's Acceptance charges p.a. (Spread over benchmark)</td>
+                <td>
+                  <input type="text" value={{quatationData.bankerAcceptCharges}} readonly="true" placeholder="">
+                  <span class="pull-right percent">%</span>
+                </td>
+              </tr>
+
+              <tr
+                *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Banker'">
+                <th colspan="2">Negotiation Charges p.a.</th>
+                <!-- <td>
+                   <input matInput value={{quatationData.NegotiationChargesPA}} readonly="true" placeholder="">
+                   <span class="pull-right percent">%</span>
+                  </td> -->
+              </tr>
+
+              <tr
+                *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Banker'">
+                <td>Negotiation Charges (Fixed)</td>
+                <td>
+                  <input type="text" value={{quatationData.negotiationChargesFixed}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr
+                *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Banker'">
+                <td>Negotiation Charges (%)</td>
+                <td>
+                  <input type="text" value={{quatationData.negotiationChargesPerct}} readonly="true" placeholder="">
+                  <span class="pull-right percent">%</span>
+                </td>
+              </tr>
+
+              <!-- <tr *ngIf="quatationData.requirementType === 'Discounting' || quatationData.requirementType === 'ConfirmAndDiscount' || quatationData.requirementType === 'Refinance'|| quatationData.requirementType === 'Banker'">
+                <td>Document Handling Charges (If any)</td>
+                <td>
+                  <input type="text" value={{quatationData.docHandlingCharges}} readonly="true" placeholder="">
+                </td>
+              </tr> -->
+
+              <tr *ngIf="quatationData.otherCharges">
+                <td>Other Charges (If any)</td>
+                <td>
+                  <input type="text" value={{quatationData.otherCharges}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr *ngIf="quatationData.specifyTypeOfCharges">
+                <!-- <td>Specify the type of charge (Swift, P&T, etc) (Text Field)</td> -->
+                <td>
+                    <textarea type="text" value={{quatationData.specifyTypeOfCharges}} readonly="true"
+                    placeholder="Specify the type charge (Swift, P&T, etc)" rows="5"></textarea>
+                </td>
+                <td></td>
+              </tr>
+
+              <tr *ngIf="quatationData.totalQuoteValue">
+                <th>Total Quote</th>
+                <td>
+                  <input type="text" value={{quatationData.totalQuoteValue}} readonly="true" placeholder="">
+                </td>
+              </tr>
+              <tr *ngIf="quatationData.minimumTransactionCharges">
+                <td>Minimum Transaction Charges (If any)</td>
+                <td>
+                  <input type="text" value={{quatationData.minimumTransactionCharges}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr *ngIf="quatationData.validityDate">
+                <td>Validity</td>
+                <td>
+                  <input type="text" value="{{quatationData.validityDate | date : 'dd-MM-y'}}" readonly="true"
+                    placeholder="">
+                </td>
+              </tr>
+
+              <tr *ngIf="quatationData.termCondition">
+                <td colspan="2">Other terms & Conditions
+                  <textarea
+                    placeholder="e.g. Discounting commission applicable from the date of discounting until the maturity date of the bill(s)."
+                    value={{quatationData.termCondition}}  readonly="true" rows="3"></textarea>
+                </td>
+              </tr>
+
+              <tr *ngIf="quatationData.quotationStatus">
+                <td>Quote Status</td>
+                <td>
+                  <input type="text" value={{quatationData.quotationStatus}} readonly="true" placeholder="">
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2"><b>Disclaimer: </b>The applicable benchmark will be applicable as of transaction
+                  date, actual quote
+                  from the bank may differ to that extent.</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+</mat-card>
+
+<!-- <mat-dialog-actions fxLayoutAlign="center">
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="50%">
+      <button (click)="closeDialog()" style="width: 100px;" mat-raised-button color="primary">Close
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions> -->

@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="pophead">
   <div fxLayout="column" fxFlex="10%">
-    <a href="javascript:void(0);" (click)="closeDialog()">
+    <a href="javascript:void(0);"  (click)="closeDialog()">
       <mat-icon style="color: white;">close</mat-icon>
     </a>
   </div>
@@ -22,6 +22,14 @@
                   <input matInput value={{customerData.userid}} readonly="true">
                 </td>
               </tr>
+
+              <tr *ngIf="customerData.parentUserId">
+                <th>Parent User ID</th>
+                <td>
+                  <a href="javascript:void(0);" style="color: blue;" (click)="openPopup(customerData.parentUserId)">{{customerData.parentUserId}}</a>
+                </td>
+              </tr>
+
               <tr>
                 <th colspan="2">Personal Details</th>
               </tr>
@@ -296,6 +304,99 @@
 
   </mat-dialog-content>
 </mat-card>
+
+
+
+
+<h3>Please click on the below button open popup</h3>
+<hr />
+<!-- <button
+style="margin: 50px; padding: 10px"
+type="button"
+class="btn btn-primary"
+(click)="openPopup()">Show Data
+</button> -->
+<div
+class="modal"
+tabindex="-1"
+role="dialog"
+[ngStyle]="{'display':displayStyle}">
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" style="color: white;padding-bottom: 5px;"> <b>Parent Details</b> 
+      <button type="button" style="margin-top: -8px;font-size: 30px;font-weight: 400;color: white;" 
+      class="close" (click)="closePopup()">
+        &times;
+      </button>
+    </h4>
+	</div>
+	<div class="modal-body">
+    <table class="table noneborder">
+      <tbody>
+    <tr>
+      <td>First Name</td>
+      <td>
+        <input matInput value={{customerPop.firstName}} readonly="true" placeholder="">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Last Name</td>
+      <td>
+        <input matInput value={{customerPop.lastName}} readonly="true" placeholder="">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Email </td>
+      <td>
+        <input matInput value={{customerPop.emailAddress}} readonly="true" placeholder="">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Mobile No.</td>
+      <td>
+        <input matInput value={{customerPop.mobileNumber}} readonly="true" placeholder="">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Landline No.</td>
+      <td>
+        <input matInput value={{customerPop.landline}} readonly="true" placeholder="">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Country</td>
+      <td>
+        <input matInput value={{customerPop.countryName}} readonly="true" placeholder="">
+      </td>
+    </tr>
+    <tr>
+      <td>Company Name</td>
+      <td>
+        <input matInput value={{customerPop.companyName}} readonly="true" placeholder="">
+      </td>
+    </tr>
+
+</tbody>
+  </table>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn" style="background-color: #00bcd4;"
+				(click)="closePopup()">
+		Close
+		</button>
+	</div>
+	</div>
+</div>
+</div>
+
+
 
 <!-- <mat-dialog-actions fxLayoutAlign="center">
   <div fxLayout="row">

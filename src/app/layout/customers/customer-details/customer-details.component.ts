@@ -16,6 +16,7 @@ show:boolean=false;
   result = '';
   rightList : any;
   myRights : any;
+  customerPop: any="";
   
   constructor(private service: CustomerService, public sharedUtilService: SharedUtilService, private dialog: MatDialog, public dialogRef: MatDialogRef<CustomerDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data) { }
 
@@ -23,6 +24,26 @@ show:boolean=false;
     this.loadCustomerDetail();
     this.rightList = localStorage.getItem('userRight');
     this.myRights = this.rightList.split(',');
+  }
+
+  displayStyle = "none";
+  
+  openPopup(data) {
+console.log(data)
+
+    this.displayStyle = "block";
+
+    this.service.loadCustomerDetail(data).subscribe(
+      (res) => {
+        this.customerPop = res;
+      
+        console.log(this.customerData);
+      });
+
+
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 
   closeDialog() {

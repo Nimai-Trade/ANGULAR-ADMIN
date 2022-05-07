@@ -6,6 +6,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './main-layout/layout.component';
+import { SecondaryTransactionSearchComponent } from './secondary-transaction/secondary-transaction-search/secondary-transaction-search.component';
+import { SecondaryTransactionListComponent } from './secondary-transaction/secondary-transaction-list/secondary-transaction-list.component';
+import { SecondaryTransactionDetailsComponent } from './secondary-transaction/secondary-transaction-details/secondary-transaction-details.component';
+import { SecondaryTransactionQuotesComponent } from './secondary-transaction/secondary-transaction-quotes/secondary-transaction-quotes.component';
+import { SecondaryQuotesDetailsComponent } from './secondary-transaction/secondary-quotes-details/secondary-quotes-details.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -23,6 +28,11 @@ import { LayoutComponent } from './main-layout/layout.component';
         LayoutComponent,
         TopnavComponent,
         SidebarComponent,
+        // SecondaryTransactionSearchComponent,
+        // SecondaryTransactionListComponent,
+        // SecondaryTransactionDetailsComponent,
+        // SecondaryTransactionQuotesComponent,
+        // SecondaryQuotesDetailsComponent,
         
     ],
    

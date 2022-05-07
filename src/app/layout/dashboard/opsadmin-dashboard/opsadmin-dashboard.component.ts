@@ -247,8 +247,8 @@ pendingKycCount(subs) {
   
   getPendingRequests() {    
   this.service.getPendingRequests(localStorage.getItem('role'),this.subscriberType,this.bankType).subscribe((res) => {
-      this.payAwaitedCount =res.paymentPendingUser
-      this.paymentApprovalCount=res.paymentApproval
+      this.payAwaitedCount =res.paymentApproval
+      this.paymentApprovalCount=res.grantPayment
       this.assignRmCOunt=res.assignRm
       this.grantRmPending=res.grantRM
       this.grantUserCount=res.grantUser
@@ -294,9 +294,10 @@ pendingKycCount(subs) {
 
 
 if(status=="payment-approval"){
-  if(this.paymentApprovalCount ==0 || !this.isAll)  
-  return
-  if(this.bankType == "Underwriter"){
+ 
+if(this.payAwaitedCount ==0 || !this.isAll)  
+return
+if(this.bankType == "Underwriter"){
     if(this.bankType == 'Underwriter' )
     localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
 localStorage.setItem('PaymentApproval', 'PaymentPending');
@@ -313,6 +314,12 @@ if(this.bankType == "" || this.bankType == 'Customer' ){
     localStorage.setItem('fromDashBoard', 'yes');
     localStorage.setItem('customerSearch', JSON.stringify(data));
     this.router.navigate(['app', 'customer', 'customer-list']);
+}
+
+if(this.bankType=="Referrer" || this.subscriberType=="Referrer"){
+    localStorage.setItem('referrerSearch', JSON.stringify(data));
+    localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+    this.router.navigate(['app', 'referrer', 'referrer-list']);
 }
 }
 
@@ -395,7 +402,23 @@ if(status=='grant'){
   this.router.navigate(['app', 'grantkyc']);
 }
 if(status=='grant-payment'){
-  this.router.navigate(['app', 'payment-approval']);
+  if(this.paymentApprovalCount ==0 || !this.isAll)  
+  return
+ 
+  if(this.bankType==undefined){
+      console.log(this.bankType)
+}else{
+      if( this.bankType == '')
+      localStorage.setItem('fromDashBoardStatus', 'CUSTOMER');
+      if( this.bankType == 'Customer')
+      localStorage.setItem('fromDashBoardStatus', 'BANK CUSTOMER');      
+      if(this.bankType == "Underwriter" )
+      localStorage.setItem('fromDashBoardStatus', 'BANK UNDERWRITER');
+      if(this.bankType=="Referrer" || this.subscriberType=="Referrer")
+      localStorage.setItem('fromDashBoardStatus', 'REFERRER');
+  
+      this.router.navigate(['app', 'payment-approval']);
+}
 }
 if(status=='assign-rm'){
   if(this.assignRmCOunt ==0 || !this.isAll)  
